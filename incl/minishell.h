@@ -138,5 +138,6 @@ t_shell	init_shell_data(char **envp);
 char	**copy_env(char **envp);
 char	**create_env_cpy(void);
 char	**ft_split_paths(const char *s, char c);
+void	get_paths(t_shell *data);
 
 #endif

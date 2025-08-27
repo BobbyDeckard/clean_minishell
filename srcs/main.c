@@ -14,6 +14,19 @@
 
 int	main(int ac, char **av, char **envp)
 {
+	t_shell data;
+
+	if (ac != 1)
+		return (1);
+	(void) av;
+	data = init_shell_data(envp);
+	return (clean_data(data));
+}
+
+/* Complete main
+ *
+int	main(int ac, char **av, char **envp)
+{
 	t_shell	data;
 	char	*command;
 	char	*prompt;
@@ -39,3 +52,4 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(data));
 }
+*/

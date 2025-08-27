@@ -24,14 +24,24 @@ endif
 
 # SOURCES
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
-SRCS_FILES = main.c
+SRCS_FILES = main.c \
+			 $(UTLS) \
+			 $(PARS)
 SRCS_PATH = srcs/
 OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
-
-
+UTLS = $(addprefix general_utils/, $(UTLS_FILES))
+UTLS_FILES = cleanup.c \
+			 errors.c
+PARS = $(addprefix parsing/, $(PARS_FILES))
+PARS_FILES = create_env_cpy.c \
+			 env_cpy.c \
+			 env_errors.c \
+			 ft_split_paths.c \
+			 paths.c \
+			 shell_data.c
 
 # INCLUDES
 HEADERS = incl/minishell.h

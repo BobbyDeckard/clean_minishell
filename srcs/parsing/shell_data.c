@@ -42,7 +42,7 @@ t_shell	init_shell_data(char **envp)
 
 	data.envp = copy_env(envp);
 	data.paths = NULL;
-	get_paths(&data))
+	get_paths(&data);
 	data.exit_status = 0;
 	data.state = INTERACTIVE;
 	return (data);
