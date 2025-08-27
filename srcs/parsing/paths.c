@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:21:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 21:29:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:37:37 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	get_paths(t_shell *data)
 	paths = ft_split_paths(all_paths, ':');
 	if (!paths)
 		get_paths_error(*data);
-	return (paths);
+	data->paths = paths;
 }

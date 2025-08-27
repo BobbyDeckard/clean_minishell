@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 18:20:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/27 21:32:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include "../libft/libft.h"
 
 /* ENUMS */
 typedef enum e_node_type
@@ -118,6 +119,24 @@ typedef struct s_ast
 extern volatile sig_atomic_t g_signal_received;
 
 /* FUNCTIONS */
+
+/* MacOS compilation solution */
 extern void	rl_replace_line(const char *str, int i);
+
+/* Cleaning functions */
+void	clean_ast(t_ast *ast);
+void	clean_exit(t_ast *node, int status);
+void	cleanup(t_ast *node);
+int		clean_data(t_shell data);
+
+/* Error handling functions */
+void	getcwd_error(char **envp);
+void	malloc_error(t_ast *node);
+
+/* Parsing functions */
+t_shell	init_shell_data(char **envp);
+char	**copy_env(char **envp);
+char	**create_env_cpy(void);
+char	**ft_split_paths(const char *s, char c);
 
 #endif
