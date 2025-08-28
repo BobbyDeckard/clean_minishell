@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 21:05:50 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:14:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static void	create__(char **envp)
 {

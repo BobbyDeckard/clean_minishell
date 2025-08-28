@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:21:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 21:37:37 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:15:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static void	get_paths_error(t_shell data)
 {

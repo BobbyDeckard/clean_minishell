@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:38:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 21:38:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:15:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static unsigned int	get_len(const char *s, unsigned int i, char c)
 {
