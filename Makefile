@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/08/28 10:40:47 by imeulema         ###   ########.fr        #
+#    Updated: 2025/08/28 11:30:58 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,20 @@ OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
 PARS = $(addprefix parsing/, $(PARS_FILES))
-PARS_FILES = create_env_cpy.c \
+PARS_FILES = parse_command.c \
+			 $(DATA) \
+			 $(TKNS)
+DARA = $(addprefix data/, $(DATA_FILES))
+DATA_FILES = create_env_cpy.c \
 			 env_cpy.c \
 			 env_errors.c \
 			 ft_split_paths.c \
 			 paths.c \
 			 shell_data.c
+TKNS = $(addprefix tokens/, $(TKNS_FILES))
+TKNS_FILES = token_types.c \
+			 token_types2.c \
+			 tokens.c
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = cleanup.c \
 			 errors.c \

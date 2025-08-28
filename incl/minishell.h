@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:00:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:28:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,13 @@ char	**create_env_cpy(void);
 char	**ft_split_paths(const char *s, char c);
 void	get_paths(t_shell *data);
 void	get_trunc_cwd(char cwd[128], t_shell data);
+int		is_command_char(char c);
+int		is_env_var(char c);
+int		is_logical_operator(char c);
+int		is_parenthesis(char c);
+int		is_quote(char c);
+int		is_redirection(char c);
+int		is_special_character(char c);
 
 /* Signal handling functions */
 void	init_execution_signals(char *command, t_shell data);
