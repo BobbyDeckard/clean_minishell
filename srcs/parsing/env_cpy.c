@@ -60,7 +60,7 @@ static char **init_env_cpy(char **envp, int entries)
 	int		len;
 	int		i;
 
-	env_cpy = (char **) malloc(entries + 1 * sizeof(char *));
+	env_cpy = (char **) malloc((entries + 1) * sizeof(char *));
 	if (!env_cpy)
 		malloc_error(NULL);
 	i = -1;

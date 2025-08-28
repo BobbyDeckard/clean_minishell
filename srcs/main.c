@@ -12,6 +12,17 @@
 
 #include "../incl/minishell.h"
 
+void	print_data(t_shell data)
+{
+	int	i = -1;
+
+	while (data.envp[++i])
+		printf("data.envp[%d]: %s\n", i, data.envp[i]);
+	i = -1;
+	while (data.paths[++i])
+		printf("data.paths[%d]: %s\n", i, data.paths[i]);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_shell data;
@@ -20,6 +31,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	(void) av;
 	data = init_shell_data(envp);
+	print_data(data);
 	return (clean_data(data));
 }
 
