@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/08/27 17:42:57 by imeulema         ###   ########.fr        #
+#    Updated: 2025/08/28 10:40:47 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,16 +25,14 @@ endif
 # SOURCES
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
+			 $(PARS) \
 			 $(UTLS) \
-			 $(PARS)
+			 $(SIGS)
 SRCS_PATH = srcs/
 OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
-UTLS = $(addprefix general_utils/, $(UTLS_FILES))
-UTLS_FILES = cleanup.c \
-			 errors.c
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = create_env_cpy.c \
 			 env_cpy.c \
@@ -42,6 +40,12 @@ PARS_FILES = create_env_cpy.c \
 			 ft_split_paths.c \
 			 paths.c \
 			 shell_data.c
+UTLS = $(addprefix general_utils/, $(UTLS_FILES))
+UTLS_FILES = cleanup.c \
+			 errors.c \
+			 trunc_cwd.c
+SIGS = $(addprefix signals/, $(SIGS_FILES))
+SIGS_FILES = init.c
 
 # INCLUDES
 HEADERS = incl/minishell.h

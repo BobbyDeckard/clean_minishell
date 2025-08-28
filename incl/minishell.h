@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 21:32:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 10:00:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,9 @@ char	**copy_env(char **envp);
 char	**create_env_cpy(void);
 char	**ft_split_paths(const char *s, char c);
 void	get_paths(t_shell *data);
+void	get_trunc_cwd(char cwd[128], t_shell data);
+
+/* Signal handling functions */
+void	init_interactive_signals(t_shell data);
 
 #endif
