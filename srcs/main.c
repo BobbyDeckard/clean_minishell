@@ -31,7 +31,6 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	(void) av;
 	data = init_shell_data(envp);
-	print_data(data);
 	return (clean_data(data));
 }
 
