@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 10:00:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:00:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	malloc_error(t_ast *node);
 
 /* Parsing functions */
 t_shell	init_shell_data(char **envp);
+t_ast	*parse_command(char *command, t_shell *data);
 char	**copy_env(char **envp);
 char	**create_env_cpy(void);
 char	**ft_split_paths(const char *s, char c);
@@ -142,6 +143,7 @@ void	get_paths(t_shell *data);
 void	get_trunc_cwd(char cwd[128], t_shell data);
 
 /* Signal handling functions */
+void	init_execution_signals(char *command, t_shell data);
 void	init_interactive_signals(t_shell data);
 
 #endif

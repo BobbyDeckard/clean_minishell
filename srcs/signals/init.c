@@ -6,13 +6,46 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 09:35:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 10:05:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 10:49:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
 volatile sig_atomic_t	g_signal_received = 0;
+
+static void	signal_handler_execution(int signum)
+{
+	g_signal_received = signum;
+	if (signum == SIGINT)
+		write(STDOUT_FILENO, "\n", 1);
+}
+
+void	init_execution_signals(char *command, t_shell data)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = signal_handler_execution;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+	{
+		perror("sigaction SIGINT");
+		clean_data(data);
+		free(command);
+		exit(1);
+	}
+	sa.sa_handler = signal_handler_execution;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	{
+		perror("sigaction SIGQUIT");
+		clean_data(data);
+		free(command);
+		exit(1);
+	}
+}
 
 static void	signal_handler_interactive(int signum)
 {

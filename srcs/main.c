@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 10:32:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/28 11:02:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,35 @@ void	print_data(t_shell data)
 	while (data.paths[++i])
 		printf("data.paths[%d]: %s\n", i, data.paths[i]);
 }
+
+static t_shell	process_command(char *command, t_shell data)
+{
+	t_ast	*ast;
+	
+	add_history(command);
+	data.state = EXECUTING;
+	init_execution_signals(command, data);
+	ast = parse_command(command, &data);
+	if (ast)
+	{
+		ast->data = data;	// do we want a pointer on data ?
+		data.exit_status = exec_ast(ast);
+		clean_ast(ast);
+	}
+	if (g_signal_received == SIGINT)
+	{
+		data.exit_status = 130;
+		g_signal_received = 0;
+	}
+	else if (g_signal_received == SIGQUIT)
+	{
+		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+		data.exit_status = 131;
+		g_signal_received = 0;
+	}
+	return (data);
+}
+
 /*
 int	main(int ac, char **av, char **envp)
 {
@@ -55,8 +84,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		}
 		else if (*command)
-			printf("%s\n", command);
-//			data = process_command(data, command);
+			data = process_command(command, data);
 		free(command);
 	}
 	return (clean_data(data));
