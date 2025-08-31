@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 12:49:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:04:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void	expander(t_token **token_list, t_shell *data);
 void	free_tokens(t_token **token_list);
 void	get_paths(t_shell *data);
 void	get_trunc_cwd(char cwd[128], t_shell data);
+int		count_tokens(t_token **token_list);
 int		ft_wordlen(char *content);
 int		is_command_char(char c);
 int		is_env_var(char c);
@@ -154,6 +155,7 @@ int		is_parenthesis(char c);
 int		is_quote(char c);
 int		is_redirection(char c);
 int		is_special_character(char c);
+int		valid_parentheses(t_shell *data, t_token **token_list);
 
 /* Signal handling functions */
 void	init_execution_signals(char *command, t_shell data);

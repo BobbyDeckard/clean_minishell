@@ -6,11 +6,26 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 08:35:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:24:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/31 13:56:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	count_tokens(t_token **token_list)
+{
+	t_token	*current;
+	int		i;
+
+	i = 0;
+	current = *token_list;
+	while (current)
+	{
+		current = current->next;
+		i++;
+	}
+	return (i);
+}
 
 int	ft_wordlen(char *content)
 {
