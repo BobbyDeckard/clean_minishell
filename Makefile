@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/08/28 11:30:58 by imeulema         ###   ########.fr        #
+#    Updated: 2025/08/31 13:06:12 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
+# PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parse_command.c \
 			 $(DATA) \
@@ -45,13 +46,19 @@ DATA_FILES = create_env_cpy.c \
 			 paths.c \
 			 shell_data.c
 TKNS = $(addprefix tokens/, $(TKNS_FILES))
-TKNS_FILES = token_types.c \
+TKNS_FILES = expander.c \
+			 token_types.c \
 			 token_types2.c \
-			 tokens.c
+			 tokenize.c \
+			 tokenize2.c \
+			 tokens.c \
+			 tokens_utils.c
+# GENERAL UTILS
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = cleanup.c \
 			 errors.c \
 			 trunc_cwd.c
+# SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
 SIGS_FILES = init.c
 
