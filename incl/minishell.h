@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:28:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:49:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_shell
 {
 	char	**envp;
 	char	**paths;
+	char	*cmd;
 	int		exit_status;
 	int		state;
 }	t_shell;
@@ -131,16 +132,21 @@ int		clean_data(t_shell data);
 
 /* Error handling functions */
 void	getcwd_error(char **envp);
-void	malloc_error(t_ast *node);
+void	malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* Parsing functions */
+t_token	**tokenize_command(t_shell *data, char *command);
+t_token	*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token);
 t_shell	init_shell_data(char **envp);
 t_ast	*parse_command(char *command, t_shell *data);
 char	**copy_env(char **envp);
 char	**create_env_cpy(void);
 char	**ft_split_paths(const char *s, char c);
+void	expander(t_token **token_list, t_shell *data);
+void	free_tokens(t_token **token_list);
 void	get_paths(t_shell *data);
 void	get_trunc_cwd(char cwd[128], t_shell data);
+int		ft_wordlen(char *content);
 int		is_command_char(char c);
 int		is_env_var(char c);
 int		is_logical_operator(char c);

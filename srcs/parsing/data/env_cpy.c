@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:38:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:14:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:09:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char **init_env_cpy(char **envp, int entries)
 
 	env_cpy = (char **) malloc((entries + 1) * sizeof(char *));
 	if (!env_cpy)
-		malloc_error(NULL);
+		malloc_error(NULL, NULL, NULL);
 	i = -1;
 	while (envp[++i])
 	{

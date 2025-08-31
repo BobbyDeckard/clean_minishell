@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:02:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:08:20 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static t_shell	process_command(char *command, t_shell data)
 	
 	add_history(command);
 	data.state = EXECUTING;
+	data.cmd = command;
 	init_execution_signals(command, data);
 	ast = parse_command(command, &data);
 	if (ast)

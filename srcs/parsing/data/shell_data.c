@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:36:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:15:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:07:41 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	clean_data(t_shell data)
 {
 	int	i;
 
+	if (data.cmd)
+		free(data.cmd);
 	if (data.envp)
 	{
 		i = -1;
@@ -42,6 +44,7 @@ t_shell	init_shell_data(char **envp)
 
 	data.envp = copy_env(envp);
 	data.paths = NULL;
+	data.cmd = NULL;
 	get_paths(&data);
 	data.exit_status = 0;
 	data.state = INTERACTIVE;

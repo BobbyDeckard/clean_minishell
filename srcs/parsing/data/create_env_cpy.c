@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:14:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/30 09:09:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	create__(char **envp)
 		free(envp[1]);
 		free(envp[0]);
 		free(envp);
-		malloc_error(NULL);
+		malloc_error(NULL, NULL, NULL);
 	}
 	ft_strlcat(envp[2], "_=/usr/bin/env", 15);
 }
@@ -32,7 +32,7 @@ static void	create_shlvl(char **envp)
 	{
 		free(envp[0]);
 		free(envp);
-		malloc_error(NULL);
+		malloc_error(NULL, NULL, NULL);
 	}
 	ft_strlcat(envp[1], "SHLVL=1", 8);
 }
@@ -51,7 +51,7 @@ static void	create_pwd(char **envp)
 	{
 		free(envp);
 		free(cwd);
-		malloc_error(NULL);
+		malloc_error(NULL, NULL, NULL);
 	}
 	ft_strlcat(envp[0], "PWD=", len);
 	ft_strlcat(envp[0], cwd, len);
@@ -65,7 +65,7 @@ char	**create_env_cpy(void)
 
 	envp = (char **) malloc(4 * sizeof(char *));
 	if (!envp)
-		malloc_error(NULL);
+		malloc_error(NULL, NULL, NULL);
 	create_pwd(envp);
 	create_shlvl(envp);
 	create__(envp);

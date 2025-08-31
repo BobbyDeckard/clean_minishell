@@ -6,11 +6,57 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:20:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:53:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+static void	link_token(t_token *token, t_token **token_list)
+{
+	t_token	*current;
+
+	if (!token || !token_list)
+		return ;
+	if (!*token_list)
+	{
+		*token_list = token;
+		return ;
+	}
+	current = *token_list;
+	while (current->next)
+		current = current->next;
+	current->next = token;
+	token->previous = current;
+}
+
+static t_token	*create_token(t_shell *data, t_token **tl)
+{
+	t_token	*new;
+
+	new = (t_token *) malloc(sizeof(t_token));
+	if (!new)
+		malloc_error(NULL, data, tl);
+	new->type = 0;
+	new->content = NULL;
+	new->needs_expansion = 0;
+	new->next = NULL;
+	new->previous = NULL;
+	return (new);
+}
+
+static t_token	**extract_token(char **command, t_token_type type, t_shell *data, t_token **token_list)
+{
+	t_token	*new_token;
+
+	if (!command || type == DEFAULT)
+		return (NULL);
+	new_token = create_token(data, token_list);
+	new_token = handle_token_type(data, token_list, command, type, new_token);
+	if (new_token)
+		link_token(new_token, token_list);
+	return (token_list);
+}
 
 static t_token_type	get_token_type(char c)
 {
@@ -39,22 +85,17 @@ t_token	**tokenize_command(t_shell *data, char *command)
 
 	token_list = (t_token **) malloc(sizeof(t_token *));
 	if (!token_list)
-		return (NULL);
+		malloc_error(NULL, data, NULL);
 	*token_list = NULL;
 	while (*command)
 	{
 		type = get_token_type(*command);
 		printf("tokenize_command: type for %s is %d\n", command, type);
 		if (type == DEFAULT)
-		{
-			command++;
 			continue ;
-		}
-		result = extract_token(&command, type, token_list);
-		if (!result)
-			return (free(token_list), NULL);	// wtf kind of error handling is that
-		token_list = result;
+		result = extract_token(&command, type, data, token_list);	// how does that work ? ooooh giving the address of a local variable can modify it from another function, makes sense
+		token_list = result;	// what if extract_token returns NULL ?
 	}
-	mark_tokens_for_expansion(token_list, data->envp);
+	expander(token_list, data);
 	return (token_list);
 }
