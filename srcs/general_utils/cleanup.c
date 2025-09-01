@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/27 20:44:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:27:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,16 @@ void	clean_exit(t_ast *node, int status)
 {
 	cleanup(node->root);
 	exit(status);
+}
+
+void	free_str_array(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }

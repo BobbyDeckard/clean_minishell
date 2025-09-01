@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 13:49:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/01 12:19:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_ast	*parse_command(char *command, t_shell *data)
 		ft_putstr_fd(" syntax error in command\n", STDERR_FILENO);
 		return (NULL);
 	}
+	data->tokens = token_list;
 	ast = create_ast(token_list, data);
 	if (!ast)
 	{

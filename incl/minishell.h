@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 14:04:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:21:15 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,13 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
-	char	**envp;
-	char	**paths;
-	char	*cmd;
-	int		exit_status;
-	int		state;
+	struct s_ast	*root;
+	t_token			**tokens;
+	char			**envp;
+	char			**paths;
+	char			*cmd;
+	int				exit_status;
+	int				state;
 }	t_shell;
 
 typedef struct s_ast
@@ -125,40 +127,56 @@ extern volatile sig_atomic_t g_signal_received;
 extern void	rl_replace_line(const char *str, int i);
 
 /* Cleaning functions */
-void	clean_ast(t_ast *ast);
-void	clean_exit(t_ast *node, int status);
-void	cleanup(t_ast *node);
-int		clean_data(t_shell data);
+void		clean_ast(t_ast *ast);
+void		clean_exit(t_ast *node, int status);
+void		cleanup(t_ast *node);
+void		free_str_array(char **arr);
+int			clean_data(t_shell data);
 
 /* Error handling functions */
-void	getcwd_error(char **envp);
-void	malloc_error(t_ast *node, t_shell *data, t_token **tl);
+void		getcwd_error(char **envp);
+void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
+
+/* General utils functions */
+char		*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data);
 
 /* Parsing functions */
-t_token	**tokenize_command(t_shell *data, char *command);
-t_token	*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token);
-t_shell	init_shell_data(char **envp);
-t_ast	*parse_command(char *command, t_shell *data);
-char	**copy_env(char **envp);
-char	**create_env_cpy(void);
-char	**ft_split_paths(const char *s, char c);
-void	expander(t_token **token_list, t_shell *data);
-void	free_tokens(t_token **token_list);
-void	get_paths(t_shell *data);
-void	get_trunc_cwd(char cwd[128], t_shell data);
-int		count_tokens(t_token **token_list);
-int		ft_wordlen(char *content);
-int		is_command_char(char c);
-int		is_env_var(char c);
-int		is_logical_operator(char c);
-int		is_parenthesis(char c);
-int		is_quote(char c);
-int		is_redirection(char c);
-int		is_special_character(char c);
-int		valid_parentheses(t_shell *data, t_token **token_list);
+t_node_type	convert_types(t_token_type type);
+t_token		**tokenize_command(t_shell *data, char *command);
+t_token		*get_token_at_index(t_token **tokens, int index);
+t_token		*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token);
+t_shell		init_shell_data(char **envp);
+t_ast		*create_ast(t_token **token_list, t_shell *data);
+t_ast		*create_ast_node(t_node_type type, t_shell data);
+t_ast		*create_cmd_node(char **args, t_token **tokens, t_shell *data);
+t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right, t_shell *data);
+t_ast		*create_subshell_node(t_ast *child, t_shell *data);
+t_ast		*parse_command(char *command, t_shell *data);
+t_ast		*parse_command_line(t_token **tokens, int start, int end, t_shell *data);
+t_ast		*parse_simple_command(t_token **tokens, int start, int end, t_shell *data);
+char		**copy_env(char **envp);
+char		**create_env_cpy(void);
+char		**ft_split_paths(const char *s, char c);
+void		expander(t_token **token_list, t_shell *data);
+void		free_tokens(t_token **token_list);
+void		get_paths(t_shell *data);
+void		get_trunc_cwd(char cwd[128], t_shell data);
+int			count_tokens(t_token **token_list);
+int			find_lowest_precedence_op(t_token **tokens, int i, int end);
+int			find_matching_parentheses(t_token **tokens, int open_pos, int end);
+int			ft_wordlen(char *content);
+int			is_command_char(char c);
+int			is_env_var(char c);
+int			is_logical_operator(char c);
+int			is_parenthesis(char c);
+int			is_quote(char c);
+int			is_redirection(char c);
+int			is_redir_token(t_token *token);
+int			is_special_character(char c);
+int			valid_parentheses(t_shell *data, t_token **token_list);
 
 /* Signal handling functions */
-void	init_execution_signals(char *command, t_shell data);
-void	init_interactive_signals(t_shell data);
+void		init_execution_signals(char *command, t_shell data);
+void		init_interactive_signals(t_shell data);
 
 #endif

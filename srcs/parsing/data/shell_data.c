@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:36:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:07:41 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:08:23 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_shell	init_shell_data(char **envp)
 {
 	t_shell	data;
 
+	data.tokens = NULL;
 	data.envp = copy_env(envp);
 	data.paths = NULL;
 	data.cmd = NULL;

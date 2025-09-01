@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_cmd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
+/*   Updated: 2025/09/01 14:07:24 by imeulema         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../incl/minishell.h"
+
+t_ast	**extract_redirs_body(t_ast **redirs, t_shell *data, int start, int end, int count);
+int		count_redirs(t_token **tokens, int start, int end);
+
+static	t_ast	**sf_alloc_redirs(t_shell *data, t_ast *node, int start, int end, int count)
+{
+	t_ast	**redirs;
+
+	redirs = (t_ast **) malloc(++count * sizeof(t_ast *));
+	if (!redirs)
+	{
+		free_str_array(node->cmd.args);
+		free(node);
+		malloc_error(NULL, data, data->tokens);
+	}
+	return (redirs);
+}
+
+static t_ast	**extract_redirs(t_token **tokens, int start, int end, t_shell *data, t_ast *node)
+{
+	t_ast	**redirs;
+	int		count;
+
+	count = count_redirs(tokens, start, end);
+	if (!count)
+		return (NULL);
+	redirs = sf_alloc_redirs(data, node, start, end, count);
+	redirs = extract_redirs_body(redirs, data, start, end, count);
+	if (!redirs)
+	{
+		free_str_array(node->cmd.args);
+		free(node);
+		malloc_error(NULL, data, tokens);
+	}
+	return (redirs);
+}
+
+static int	count_args(t_token **tokens, int start, int end)
+{
+	t_token	*current;
+	int		count;
+	int		i;
+
+	count = 0;
+	i = start - 1;
+	while (++i <= end)
+	{
+		current = get_token_at_index(tokens, i);
+		if (!current)
+			break ;
+		else if (current->type == WORD)
+			count++;
+		else if (is_redir_token(current))
+			i++;
+	}
+	return (count);
+}
+
+static char	**extract_args(t_token **tokens, int start, int end, t_shell *data)
+{
+	t_token	*current;
+	char	**args;
+	int		count;
+	int		i;
+	int		j;
+
+	count = count_args(tokens, start, end);
+	args = (char **) malloc((count + 1) * sizeof(char *));
+	if (!args)
+		malloc_error(NULL, data, tokens);
+	i = start - 1;
+	j = -1;
+	while (++i <= end && ++j < count)
+	{
+		current = get_token_at_index(tokens, i);
+		if (!current)
+			break ;
+		if (current->type == WORD)
+			args[j] = sf_strdup(current->content, tokens, args, data);
+		else if (is_redir_token(current))
+			i++;
+	}
+	args[j] = NULL;
+	return (args);
+}
+
+t_ast	*parse_simple_command(t_token **tokens, int start, int end, t_shell *data)
+{
+	t_ast	**redirs;
+	t_ast	*node;
+	char	**args;
+
+	args = extract_args(tokens, start, end, data);
+	if (!args)
+		return (NULL);
+	node = create_cmd_node(args, tokens, data);
+	redirs = extract_redirs(tokens, start, end, data, node);
+	if (redirs)
+		node->children = redirs;
+	return (node);
+}
