@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/08/31 14:18:50 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/01 14:24:02 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,18 @@ OBJS_PATH = objs/
 # PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parse_command.c \
+			 $(AST) \
 			 $(DATA) \
 			 $(SNTX) \
 			 $(TKNS)
-DARA = $(addprefix data/, $(DATA_FILES))
+AST = $(addprefix ast/, $(AST_FILES))
+AST_FILES = ast.c \
+			ast_utils.c \
+			ast_utils2.c \
+			ast_utils3.c \
+			simple_cmd.c \
+			simple_cmd2.c
+DATA = $(addprefix data/, $(DATA_FILES))
 DATA_FILES = create_env_cpy.c \
 			 env_cpy.c \
 			 env_errors.c \
