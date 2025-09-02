@@ -43,7 +43,8 @@ static t_ast	**free_redirs(t_ast **redirs, int i)
 	return (NULL);
 }
 
-static	t_ast	*redir_node_helper(t_shell *data, t_token *current, t_token *target)
+static	t_ast	*redir_node_helper(t_shell *data, t_token *current,
+t_token *target)
 {
 	t_node_type	type;
 	t_ast		*node;

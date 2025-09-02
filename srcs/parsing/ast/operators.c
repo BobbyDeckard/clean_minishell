@@ -21,7 +21,8 @@ static int	get_operator_precedence(t_token_type type)
 	return (3);
 }
 
-static void	check_lowest_precedence(t_token *current, int *res, int *low_prec, int i)
+static void	check_lowest_precedence(t_token *current, int *res, int *low_prec,
+int i)
 {
 	int	cur_prec;
 
@@ -53,27 +54,34 @@ int	find_lowest_precedence_op(t_token **tokens, int i, int end)
 			paren_lvl++;
 		else if (current->type == PAREN_CLOSE)
 			paren_lvl--;
-		if (!paren_lvl && (current->type == PIPE || current->type == AND || current->type == OR))
+		if (!paren_lvl && (current->type == PIPE || current->type == AND
+				|| current->type == OR))
 			check_lowest_precedence(current, &res, &low_prec, i);
 		i++;
 	}
 	return (res);
 }
 
-t_ast	*parse_operator(t_token **tokens, int start, int end, int op_pos, t_shell *data)
+t_ast	*parse_operator(t_shell *data, int start, int end, int op_pos)
 {
 	t_node_type	type;
-	t_token			*current;
-	t_ast			*right;
-	t_ast			*left;
-	t_ast			*node;
+	t_token		*current;
+	t_ast		*right;
+	t_ast		*left;
+	t_ast		*node;
 
-	current = get_token_at_index(tokens, op_pos);
+	current = get_token_at_index(data->tokens, op_pos);
 	if (!current)
-		return (parse_command(tokens, start, end, data));
+		return (parse_command(data->tokens, start, end, data));
 	type = convert_types(current->type);
-	left = parse_command_line(tokens, start, op_pos - 1, data);
-	right = parse_command_line(tokens, op_pos + 1, end, data);
+	left = parse_command_line(data->tokens, start, op_pos - 1, data);
+	right = parse_command_line(data->tokens, op_pos + 1, end, data);
 	node = create_operator_node(type, left, right, data);
+	if (!node)
+	{
+		clean_ast(left);
+		clean_ast(right);
+		malloc_error(data->root, data, data->tokens);
+	}
 	return (node);
 }

@@ -42,7 +42,7 @@ t_shell *data)
 	op_pos = find_lowest_precedence_op(tokens, start, end);
 	if (op_pos == -1)
 		return (create_subshell(tokens, start, end, data));
-	return (parse_operator(tokens, start, end, op_pos, data));
+	return (parse_operator(data, start, end, op_pos));
 }
 
 t_ast	*create_ast(t_token **token_list, t_shell *data)
@@ -52,6 +52,5 @@ t_ast	*create_ast(t_token **token_list, t_shell *data)
 
 	tokens = count_tokens(token_list);
 	root = parse_command_line(token_list, 0, --tokens, data);
-//	set_root_node(root, root);
 	return (root);
 }

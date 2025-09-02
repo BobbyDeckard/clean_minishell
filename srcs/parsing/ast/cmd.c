@@ -12,20 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-static	t_ast	**sf_alloc_redirs(t_shell *data, t_ast *node, int start, int end, int count)
-{
-	t_ast	**redirs;
-
-	redirs = (t_ast **) malloc(++count * sizeof(t_ast *));
-	if (!redirs)
-	{
-		free_str_array(node->cmd.args);
-		free(node);
-		malloc_error(NULL, data, data->tokens);
-	}
-	return (redirs);
-}
-
 static int	count_args(t_token **tokens, int start, int end)
 {
 	t_token	*current;

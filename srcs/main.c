@@ -31,7 +31,7 @@ static t_shell	process_command(char *command, t_shell data)
 	data.state = EXECUTING;
 	data.cmd = command;
 	init_execution_signals(command, data);
-	ast = parse_command(command, &data);
+	ast = parse(command, &data);
 	if (ast)
 	{
 		ast->data = data;	// do we want a pointer on data ?
