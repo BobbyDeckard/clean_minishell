@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:08:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:10:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static t_shell	process_command(char *command, t_shell data)
 	ast = parse(command, &data);
 	if (ast)
 	{
-		ast->data = data;	// do we want a pointer on data ?
-		data.exit_status = exec_ast(ast);
+		print_tree(ast);
+//		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 	}
 	if (g_signal_received == SIGINT)

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 14:21:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:10:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* General utils functions */
 char		*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data);
+void		print_tree(t_ast *ast);
 
 /* Parsing functions */
 t_node_type	convert_types(t_token_type type);
@@ -151,6 +152,7 @@ t_token		*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *t
 t_token		*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *token);
 t_token		*tokenize_special_character(t_shell *data, t_token **tl, char **command, t_token *token);
 t_token		*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *token);
+t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
 t_ast		*create_cmd_node(char **args, t_token **tokens, t_shell *data);
@@ -168,6 +170,7 @@ void		env_cpy_malloc_error(char **env_cpy, int i);
 void		expander(t_token **token_list, t_shell *data);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
+void		get_trunc_cwd(char cwd[256], t_shell data);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
 int			count_tokens(t_token **token_list);
