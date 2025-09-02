@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:10:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:35:16 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* General utils functions */
 char		*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data);
+void		print_token_list(t_token **token_list);
 void		print_tree(t_ast *ast);
 
 /* Parsing functions */

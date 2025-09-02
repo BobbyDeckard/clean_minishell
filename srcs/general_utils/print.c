@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:12:16 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:35:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,26 @@ void	print_tree(t_ast *ast)
 		i = -1;
 		while (ast->children[++i])
 			print_tree(ast->children[i]);
+	}
+}
+
+void	print_token_list(t_token **token_list)
+{
+	t_token	*current;
+	int		token_count;
+
+	token_count = 0;
+	if (!token_list || !*token_list)
+	{
+		printf("No tokens to display\n");
+		return ;
+	}
+	printf("--- Token List ---\n");
+	current = *token_list;
+	while (current)
+	{
+		printf("Token %d --> Type: %d, Content: '%s'\n",
+			token_count++, current->type, current->content);
+		current = current->next;
 	}
 }
