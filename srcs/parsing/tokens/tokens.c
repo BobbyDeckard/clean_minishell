@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 12:53:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:46:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_token	**extract_token(char **command, t_token_type type, t_shell *data,
 {
 	t_token	*new_token;
 
-	if (!command || type == DEFAULT)
+	if (!command || !*command || type == DEFAULT)
 		return (NULL);
 	new_token = create_token(data, token_list);
 	new_token = handle_token_type(data, token_list, command, type, new_token);
@@ -90,10 +90,12 @@ t_token	**tokenize_command(t_shell *data, char *command)
 	while (*command)
 	{
 		type = get_token_type(*command);
-		printf("tokenize_command: type for %s is %d\n", command, type);
 		if (type == DEFAULT)
+		{
+			command++;
 			continue ;
-		result = extract_token(&command, type, data, token_list);	// how does that work ? ooooh giving the address of a local variable can modify it from another function, makes sense
+		}
+		result = extract_token(&command, type, data, token_list);
 		token_list = result;	// what if extract_token returns NULL ?
 	}
 	expander(token_list, data);

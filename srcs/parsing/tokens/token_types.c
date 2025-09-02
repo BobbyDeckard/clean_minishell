@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:16:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:27:01 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:53:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_command_char(char c)
 {
 	if (ft_isalnum(c))
 		return (1);
-	else if (c == ' ' || c == '-' || c == '.')
+	else if (c == '_' || c == '-' || c == '.')
 		return (1);
 	else if (c == '/' || c == '=' || c == '+' || c == ':')
 		return (1);

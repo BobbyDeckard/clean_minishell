@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 12:19:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:35:29 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_ast	*parse(char *command, t_shell *data)
 		return (NULL);
 	}
 	data->tokens = token_list;
+	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	if (!ast)
 	{
