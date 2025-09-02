@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/01 14:24:02 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/02 17:12:51 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJS_PATH = objs/
 # SOURCES SUBDIRECTORIES
 # PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
-PARS_FILES = parse_command.c \
+PARS_FILES = parsing.c \
 			 $(AST) \
 			 $(DATA) \
 			 $(SNTX) \
@@ -43,10 +43,11 @@ PARS_FILES = parse_command.c \
 AST = $(addprefix ast/, $(AST_FILES))
 AST_FILES = ast.c \
 			ast_utils.c \
-			ast_utils2.c \
-			ast_utils3.c \
-			simple_cmd.c \
-			simple_cmd2.c
+			cmd.c \
+			nodes.c \
+			operators.c \
+			parentheses.c \
+			redirs.c
 DATA = $(addprefix data/, $(DATA_FILES))
 DATA_FILES = create_env_cpy.c \
 			 env_cpy.c \
@@ -69,6 +70,8 @@ TKNS_FILES = expander.c \
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = cleanup.c \
 			 errors.c \
+			 print.c \
+			 safer_libft.c \
 			 trunc_cwd.c
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
