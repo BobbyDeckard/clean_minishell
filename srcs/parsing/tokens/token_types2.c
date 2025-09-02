@@ -12,14 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-t_token	*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token	*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token	*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token	*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *token);
-
-//	command used to be a double pointer so that it could be incremented without returning any length value, maybe add a "cmd_anchor" inside data ?
 t_token	*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token)
 {
 	if (type == WORD)

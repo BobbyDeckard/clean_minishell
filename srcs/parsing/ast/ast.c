@@ -6,33 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:43:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 14:19:06 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/01 20:23:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-int	matching_parentheses(t_token **tokens, int start, int end);
-
-static t_ast	*parse_operator(t_token **tokens, int start, int end, int op_pos, t_shell *data)
-{
-	t_node_type	type;
-	t_token			*current;
-	t_ast			*right;
-	t_ast			*left;
-	t_ast			*node;
-
-	current = get_token_at_index(tokens, op_pos);
-	if (!current)
-		return (parse_simple_command(tokens, start, end, data));
-	type = convert_types(current->type);
-	left = parse_command_line(tokens, start, op_pos - 1, data);
-	right = parse_command_line(tokens, op_pos + 1, end, data);
-	node = create_operator_node(type, left, right, data);
-	return (node);
-}
-
-static t_ast	*create_subshell(t_token **tokens, int start, int end, t_shell *data)
+static t_ast	*create_subshell(t_token **tokens, int start, int end,
+t_shell *data)
 {
 	t_token	*current;
 	int		closing;
@@ -42,12 +23,14 @@ static t_ast	*create_subshell(t_token **tokens, int start, int end, t_shell *dat
 	{
 		closing = find_matching_parentheses(tokens, start, end);
 		if (closing > start && closing <= end)
-			return (create_subshell_node(parse_command_line(tokens, ++start, --closing, data), data));
+			return (create_subshell_node(parse_command_line(tokens, ++start,
+						--closing, data), data));
 	}
-	return (parse_simple_command(tokens, start, end, data));
+	return (parse_command(tokens, start, end, data));
 }
 
-t_ast	*parse_command_line(t_token **tokens, int start, int end, t_shell *data)
+t_ast	*parse_command_line(t_token **tokens, int start, int end,
+t_shell *data)
 {
 	t_node_type	type;
 	int			op_pos;
@@ -62,19 +45,6 @@ t_ast	*parse_command_line(t_token **tokens, int start, int end, t_shell *data)
 	return (parse_operator(tokens, start, end, op_pos, data));
 }
 
-void	set_root_node(t_ast *ast, t_ast *root)
-{
-	int	i;
-
-	ast->root = root;
-	if (ast->children)
-	{
-		i = -1;
-		while (ast->children[++i])
-			set_root_node(ast->children[i], root);
-	}
-}
-
 t_ast	*create_ast(t_token **token_list, t_shell *data)
 {
 	t_ast	*root;
@@ -82,6 +52,6 @@ t_ast	*create_ast(t_token **token_list, t_shell *data)
 
 	tokens = count_tokens(token_list);
 	root = parse_command_line(token_list, 0, --tokens, data);
-	set_root_node(root, root);
+//	set_root_node(root, root);
 	return (root);
 }

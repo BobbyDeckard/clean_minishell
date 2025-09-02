@@ -12,9 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-void	env_cpy_malloc_error(char **env_cpy, int i);
-void	set_shlvl_malloc_error(char **env_cpy, int i);
-
 static int	count_digits(int lvl)
 {
 	int	dig;

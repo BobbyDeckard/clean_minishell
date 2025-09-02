@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_command.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,9 +13,7 @@
 #include "../../incl/minishell.h"
 #include <unistd.h>
 
-int	valid_syntax(t_shell *data, t_token **token_list);
-
-t_ast	*parse_command(char *command, t_shell *data)
+t_ast	*parse(char *command, t_shell *data)
 {
 	t_token	**token_list;
 	t_ast	*ast;
