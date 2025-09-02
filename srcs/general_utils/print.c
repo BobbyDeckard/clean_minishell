@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:35:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:57:54 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	print_token_list(t_token **token_list)
 			token_count++, current->type, current->content);
 		current = current->next;
 	}
+	printf("\n");
 }

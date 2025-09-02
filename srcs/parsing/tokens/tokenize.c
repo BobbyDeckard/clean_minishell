@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:50:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:57:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ t_token	*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *tok
 
 	token->type = WORD;
 	len = ft_wordlen(*command);
-	printf("Tokenizing %s as a word with length %d\n", *command, len);
 	token->content = (char *) malloc(++len * sizeof(char));
 	if (!token->content)
 	{
