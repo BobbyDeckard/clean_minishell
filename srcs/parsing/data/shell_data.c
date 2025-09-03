@@ -6,34 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:36:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 14:08:23 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:59:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-int	clean_data(t_shell data)
-{
-	int	i;
-
-	if (data.cmd)
-		free(data.cmd);
-	if (data.envp)
-	{
-		i = -1;
-		while (data.envp[++i])
-			free(data.envp[i]);
-		free(data.envp);
-	}
-	if (data.paths)
-	{
-		i = -1;
-		while (data.paths[++i])
-			free(data.paths[i]);
-		free(data.paths);
-	}
-	return (data.exit_status);
-}
 
 //	In case of error within the scope of this function,
 //	free everything that's been malloc'ed in this scope,
