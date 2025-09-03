@@ -6,11 +6,34 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:54:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:58:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+int	clean_data(t_shell data)
+{
+	int	i;
+
+	if (data.cmd)
+		free(data.cmd);
+	if (data.envp)
+	{
+		i = -1;
+		while (data.envp[++i])
+			free(data.envp[i]);
+		free(data.envp);
+	}
+	if (data.paths)
+	{
+		i = -1;
+		while (data.paths[++i])
+			free(data.paths[i]);
+		free(data.paths);
+	}
+	return (data.exit_status);
+}
 
 //	This function supposes non-malloc'ed variables are set to NULL
 //	and that cmd.path is malloc'ed (which I think to be the case, but need to verify).
@@ -38,11 +61,8 @@ void	clean_ast(t_ast *ast)
 
 void	cleanup(t_ast *node)
 {
-	printf("About to clean data\n");
 	clean_data(node->data);
-	printf("Data cleaned, about to clean ast\n");
 	clean_ast(node->root);
-	printf("Ast cleaned\n");
 }
 
 void	clean_exit(t_ast *node, int status)
