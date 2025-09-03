@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:43:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 20:23:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:00:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ t_ast	*create_ast(t_token **token_list, t_shell *data)
 
 	tokens = count_tokens(token_list);
 	root = parse_command_line(token_list, 0, --tokens, data);
+	set_root_node(root, root);
 	return (root);
 }
