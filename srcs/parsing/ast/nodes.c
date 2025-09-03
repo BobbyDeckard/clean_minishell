@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:17:06 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 20:18:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:52:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ t_ast	*create_subshell_node(t_ast *child, t_shell *data)
 		free(node);
 		return (NULL);
 	}
-	else if (!data->root)
-		data->root = node;
-	else
-		set_root_node(node, data->root);
+	data->root = node;
+	set_root_node(node, node);
 	node->children[0] = child;
 	node->children[1] = NULL;
 	return (node);
@@ -66,10 +64,8 @@ t_shell *data)
 		free(node);
 		return (NULL);
 	}
-	else if (!data->root)
-		data->root = node;
-	node->root = data->root;
-	node->data = *data;
+	data->root = node;
+	set_root_node(node, node);
 	node->children[0] = left;
 	node->children[1] = right;
 	node->children[2] = NULL;
@@ -86,10 +82,8 @@ t_ast	*create_cmd_node(char **args, t_token **tokens, t_shell *data)
 		free_str_array(args);
 		malloc_error(data->root, data, tokens);
 	}
-	else if (!data->root)
-		data->root = node;
-	else
-		set_root_node(node, data->root);
+	data->root = node;
+	set_root_node(node, node);
 	node->cmd.args = args;
 	return (node);
 }
@@ -101,10 +95,8 @@ t_ast	*create_redir_node(t_node_type type, char *file, t_shell *data)
 	node = create_ast_node(type);
 	if (!node)
 		return (NULL);
-	else if (!data->root)
-		data->root = node;
-	else
-		set_root_node(node, data->root);
+	data->root = node;
+	set_root_node(node, node);
 	node->file = file;
 	return (node);
 }
