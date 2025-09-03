@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:46:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:39:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	link_token(t_token *token, t_token **token_list)
 {
 	t_token	*current;
 
-	if (!token || !token_list)
-		return ;
 	if (!*token_list)
 	{
 		*token_list = token;
@@ -49,8 +47,6 @@ static t_token	**extract_token(char **command, t_token_type type, t_shell *data,
 {
 	t_token	*new_token;
 
-	if (!command || !*command || type == DEFAULT)
-		return (NULL);
 	new_token = create_token(data, token_list);
 	new_token = handle_token_type(data, token_list, command, type, new_token);
 	if (new_token)
@@ -81,7 +77,6 @@ t_token	**tokenize_command(t_shell *data, char *command)
 {
 	t_token_type	type;
 	t_token			**token_list;
-	t_token			**result;
 
 	token_list = (t_token **) malloc(sizeof(t_token *));
 	if (!token_list)
@@ -95,8 +90,7 @@ t_token	**tokenize_command(t_shell *data, char *command)
 			command++;
 			continue ;
 		}
-		result = extract_token(&command, type, data, token_list);
-		token_list = result;	// what if extract_token returns NULL ?
+		token_list = extract_token(&command, type, data, token_list);
 	}
 	expander(token_list, data);
 	return (token_list);

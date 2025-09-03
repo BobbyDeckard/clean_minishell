@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:35:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:30:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ t_ast	*parse(char *command, t_shell *data)
 	t_token	**token_list;
 	t_ast	*ast;
 
-	if (!command)
-		return (NULL);
 	token_list = tokenize_command(data, command);
 	if (!token_list)
 		return (NULL);	// check if tokenization errors should exit completely or not
@@ -33,11 +31,7 @@ t_ast	*parse(char *command, t_shell *data)
 	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	if (!ast)
-	{
-		free_tokens(token_list);
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);
-		return (NULL);
-	}
 	free_tokens(token_list);
 	return (ast);
 }

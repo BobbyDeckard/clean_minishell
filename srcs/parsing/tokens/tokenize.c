@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:57:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:38:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ t_token	*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *to
 		token->type = REDIR_IN;
 	if (is_redirection((*command)[1]))
 		define_double_redir(command, token, &len);
-	token->content = (char *) malloc(++len * sizeof(char));
+	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
 	{
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
 	i = -1;
-	while (is_redirection((*command)[++i]) && i < --len)
+	while (is_redirection((*command)[++i]) && i < len)
 		token->content[i] = (*command)[i];
 	token->content[i] = 0;
 	*command += len;

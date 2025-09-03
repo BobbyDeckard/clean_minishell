@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 10:27:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:45:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ t_token	*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token 
 		token->type = SEMICOLON;
 	if (is_logical_operator((*command)[1]))
 		define_bonus_operator(command, token, &len);
-	token->content = (char *) malloc(++len * sizeof(char));
+	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
 	{
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
 	i = -1;
-	while (is_logical_operator((*command)[++i]) && i < --len)
+	while (is_logical_operator((*command)[++i]) && i < len)
 		token->content[i] = (*command)[i];
 	token->content[i] = 0;
 	*command += len;
