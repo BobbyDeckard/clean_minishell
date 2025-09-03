@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:58:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 12:07:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	clean_ast(t_ast *ast)
 		i = -1;
 		while (ast->children[++i])
 			clean_ast(ast->children[i]);
+		free(ast->children);
 	}
 	if (ast->cmd.args)
 	{
