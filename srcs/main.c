@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:10:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:56:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	main(int ac, char **av, char **envp)
 		else if (*command)
 			data = process_command(command, data);
 		free(command);
+		data.cmd = NULL;
 	}
 	return (clean_data(data));
 }

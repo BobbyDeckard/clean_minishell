@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 11:27:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/03 11:54:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	clean_ast(t_ast *ast)
 
 void	cleanup(t_ast *node)
 {
+	printf("About to clean data\n");
 	clean_data(node->data);
+	printf("Data cleaned, about to clean ast\n");
 	clean_ast(node->root);
+	printf("Ast cleaned\n");
 }
 
 void	clean_exit(t_ast *node, int status)
