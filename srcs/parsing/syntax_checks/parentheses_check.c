@@ -17,7 +17,9 @@ static int	check_token(t_token **stack, t_token *current, int *top)
 	if (current->type == PAREN_OPEN)
 	{
 		if (current->next && current->next->type == PAREN_CLOSE)
-			return (ft_putstr_fd("Empty parentheses:", 2), 0);
+			return (0);
+//			return (ft_putstr_fd("Empty parentheses:", 2), 0);
+		stack[++(*top)] = current;
 	}
 	else if (current->type == PAREN_CLOSE)
 	{

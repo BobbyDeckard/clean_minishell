@@ -12,19 +12,27 @@
 
 #include "../../../incl/minishell.h"
 
-static int	valid_pipe_pos(t_token **token_list)
+static int	valid_operator(t_token **token_list)
 {
-	t_token	*first;
-	t_token	*last;
+	t_token	*current;
 
-	first = *token_list;
-	if (first->type == PIPE)
-		return (0);
-	last = first;
-	while (last->next)
-		last = last->next;
-	if (last->type == PIPE)
-		return (0);
+	current = *token_list;
+	while (current)
+	{
+		if (current->type == PIPE || current->type == AND
+			|| current->type == OR)
+		{
+			if (!current->previous || !current->next)
+				return (0);
+			else if (current->previous->type != WORD
+				&& current->previous->type != PAREN_CLOSE)
+				return (0);
+			else if (current->next->type != WORD
+				&& current->next->type != PAREN_OPEN)
+				return (0);
+		}
+		current = current->next;
+	}
 	return (1);
 }
 
@@ -37,7 +45,8 @@ static int	valid_redir_target(t_token **token_list)
 	while (current)
 	{
 		type = current->type;
-		if (type == REDIR_OUT || type == REDIR_IN || type == REDIR_APPEND || type == HEREDOC)
+		if (type == REDIR_OUT || type == REDIR_IN || type == REDIR_APPEND
+			|| type == HEREDOC)
 		{
 			if (!current->next || current->next->type != WORD)
 				return (0);
@@ -50,35 +59,36 @@ static int	valid_redir_target(t_token **token_list)
 static int	valid_quote_pairs(t_token **token_list)
 {
 	t_token	*current;
-	int		doubles;
-	int		singles;
+	int		in_double;
+	int		in_single;
 
-	doubles = 0;
-	singles = 0;
+	in_double = 0;
+	in_single = 0;
 	current = *token_list;
 	while (current)
 	{
-		if (current->type == SINGLE_QUOTE)
-			singles++;
-		else if (current->type == DOUBLE_QUOTE)
-			doubles++;
+		if (current->type == SINGLE_QUOTE && !in_double)
+			in_single = !in_single;
+		else if (current->type == DOUBLE_QUOTE && !in_single)
+			in_double = !in_double;
 		current = current->next;
 	}
-	if (singles % 2 || doubles % 2)
-		return (0);
-	return (1);
+	return (!in_single && !in_double);
 }
 
 int	valid_syntax(t_shell *data, t_token **token_list)
 {
 	if (!*token_list)
 		return (1);
-	else if (!valid_pipe_pos(token_list))
-		return (ft_putstr_fd("Invalid pipe position:", 2), 0);
+	else if (!valid_operator(token_list))
+		return (0);
+//		return (ft_putstr_fd("Invalid pipe position:", 2), 0);
 	else if (!valid_redir_target(token_list))
-		return (ft_putstr_fd("Invalid redir target:", 2), 0);
+		return (0);
+//		return (ft_putstr_fd("Invalid redir target:", 2), 0);
 	else if (!valid_quote_pairs(token_list))
-		return (ft_putstr_fd("Unmatched quotes:", 2), 0);
+		return (0);
+//		return (ft_putstr_fd("Unmatched quotes:", 2), 0);
 	else if (!valid_parentheses(data, token_list))
 		return (0);
 	return (1);

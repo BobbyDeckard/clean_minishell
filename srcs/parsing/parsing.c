@@ -24,7 +24,7 @@ t_ast	*parse(char *command, t_shell *data)
 	if (!valid_syntax(data, token_list))
 	{
 		free_tokens(token_list);
-		ft_putstr_fd(" syntax error in command\n", STDERR_FILENO);
+		ft_putstr_fd("Syntax error in command\n", STDERR_FILENO);
 		return (NULL);
 	}
 	data->tokens = token_list;
