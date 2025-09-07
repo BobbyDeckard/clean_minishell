@@ -1,0 +1,8 @@
+Parsing:
+-	Word parsing excludes some characters that should be included:
+	ex: echo "hello'" -> cmd.args = {"echo", "hello"} instead of {"echo", "hello'"}
+	=> will print
+		hello
+	instead of
+		hello'
+	
