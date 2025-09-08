@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:24:33 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 10:28:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:55:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@ t_token	*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_
 		new_token = tokenize_parenthesis(data, tl, command, new_token);
 	else if (type == SPECIAL_CHARACTER)
 		new_token = tokenize_special_character(data, tl, command, new_token);
+	else if (type == SPACE)
+		new_token = tokenize_space(command, new_token);
 	return (new_token);
+}
+
+int	is_space(char c)
+{
+	if (c == ' ')
+		return (1);
+	return (0);
 }
 
 int	is_special_character(char c)

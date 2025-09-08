@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 08:35:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 13:56:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:06:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	count_tokens(t_token **token_list)
 
 int	ft_wordlen(char *content)
 {
-	int	i;
+	char	c;
+	int		i;
 
 	i = 0;
-	while (is_command_char(content[i]))
-		i++;
+	c = content[i];
+	while (c && !is_space(c) && !is_quote(c) && !is_redirection(c) && !is_logical_operator(c) && !is_parenthesis(c) && !is_special_character(c) && !is_env_var(c) && is_command_char(c))
+		c = content[++i];
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 10:57:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:55:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef enum e_token_type
 {
 	DEFAULT,
 	WORD,
+	SPACE,
 	ASSIGNMENT,
 	QUOTE,
 	SINGLE_QUOTE,
@@ -152,6 +153,7 @@ t_token		*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token
 t_token		*tokenize_parenthesis(t_shell *data, t_token **tl, char **command, t_token *token);
 t_token		*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *token);
 t_token		*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *token);
+t_token		*tokenize_space(char **command, t_token *token);
 t_token		*tokenize_special_character(t_shell *data, t_token **tl, char **command, t_token *token);
 t_token		*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *token);
 t_shell		init_shell_data(char **envp);
@@ -186,6 +188,7 @@ int			is_logical_operator(char c);
 int			is_parenthesis(char c);
 int			is_redir_token(t_token *token);
 int			is_redirection(char c);
+int			is_space(char c);
 int			is_special_character(char c);
 int			is_quote(char c);
 int			matching_parentheses(t_token **tokens, int start, int end);

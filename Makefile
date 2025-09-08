@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/08 10:27:46 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/08 11:54:48 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ TKNS_FILES = expander.c \
 			 token_types2.c \
 			 tokenize.c \
 			 tokenize2.c \
+			 tokenize3.c \
 			 tokens.c \
 			 tokens_utils.c
 # GENERAL UTILS

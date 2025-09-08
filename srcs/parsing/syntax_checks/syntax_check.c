@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 10:58:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:59:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,12 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	if (!*token_list)
 		return (1);
 	else if (!valid_operator(token_list))
-		return (0);
-//		return (ft_putstr_fd("Invalid pipe position:", 2), 0);
+		return (printf("Invalid operator\n"), 0);
 	else if (!valid_redir_target(token_list))
-		return (0);
-//		return (ft_putstr_fd("Invalid redir target:", 2), 0);
+		return (printf("Invalid redir\n"), 0);
 	else if (!valid_quote_pairs(data, token_list))
-		return (0);
-//		return (ft_putstr_fd("Unmatched quotes:", 2), 0);
+		return (printf("Invalid quotes\n"), 0);
 	else if (!valid_parentheses(data, token_list))
-		return (0);
+		return (printf("Invalid parentheses\n"), 0);
 	return (1);
 }

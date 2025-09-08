@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 11:47:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:50:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static t_token_type	get_token_type(char c)
 		return (SPECIAL_CHARACTER);
 	else if (is_env_var(c))
 		return (ENV_VAR);
+	else if (is_space(c))
+		return (SPACE);
 	else if (is_command_char(c))
 		return (WORD);
 	return (DEFAULT);
