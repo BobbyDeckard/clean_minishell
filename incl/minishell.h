@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 10:39:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:57:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void		print_tree(t_ast *ast);
 /* Parsing functions */
 t_node_type	convert_types(t_token_type type);
 t_token		**tokenize_command(t_shell *data, char *command);
-t_token		*cat_word(t_shell *data, t_token *previous, t_token *current);
+t_token		*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next);
 t_token		*get_token_at_index(t_token **tokens, int index);
 t_token		*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token);
 t_token		*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token *token);

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 10:45:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:58:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static int	valid_quote_pairs(t_shell *data, t_token **token_list)
 		if (current->type == SINGLE_QUOTE && !in_double)
 			in_single = !in_single;
 		else if (current->type == SINGLE_QUOTE)
-			current = cat_word(data, current->previous, current);
+			current = cat_word(data, current, current->previous, current->next);
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
 		else if (current->type == DOUBLE_QUOTE)
-			current = cat_word(data, current->previous, current);
+			current = cat_word(data, current, current->previous, current->next);
 		current = current->next;
 	}
 	return (!in_single && !in_double);
