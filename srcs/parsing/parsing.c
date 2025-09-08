@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:30:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 15:48:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_ast	*parse(char *command, t_shell *data)
 	if (!valid_syntax(data, token_list))
 	{
 		free_tokens(token_list);
-		ft_putstr_fd("Syntax error in command\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: syntax error in command\n", STDERR_FILENO);
 		return (NULL);
 	}
 	data->tokens = token_list;
