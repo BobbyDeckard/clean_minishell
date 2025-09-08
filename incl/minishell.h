@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:13:41 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:07:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ int			clean_data(t_shell data);
 /* Error handling functions */
 void		getcwd_error(char **envp);
 void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
+
+/* Exec functions */
+int			exec_ast(t_ast *node);
 
 /* General utils functions */
 char		*sf_strdup(const char *s, t_token **tokens, char **args,
