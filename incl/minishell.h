@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 11:55:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:13:41 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct s_ast
 }	t_ast;
 
 /* GLOBAL VARIABLE */
-extern volatile sig_atomic_t g_signal_received;
+extern volatile sig_atomic_t	g_signal_received;
 
 /* FUNCTIONS */
 
@@ -139,33 +139,44 @@ void		getcwd_error(char **envp);
 void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* General utils functions */
-char		*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data);
+char		*sf_strdup(const char *s, t_token **tokens, char **args,
+				t_shell *data);
 void		print_token_list(t_token **token_list);
 void		print_tree(t_ast *ast);
 
 /* Parsing functions */
 t_node_type	convert_types(t_token_type type);
 t_token		**tokenize_command(t_shell *data, char *command);
-t_token		*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next);
+t_token		*cat_word(t_shell *data, t_token *current, t_token *prev,
+				t_token *next);
 t_token		*get_token_at_index(t_token **tokens, int index);
-t_token		*handle_token_type(t_shell *data, t_token **tl, char	**command, t_token_type type, t_token *new_token);
-t_token		*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token		*tokenize_parenthesis(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token		*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token		*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *token);
+t_token		*handle_token_type(t_shell *data, char	**command,
+				t_token_type type, t_token *new_token);
+t_token		*tokenize_operator(t_shell *data, t_token **tl, char **command,
+				t_token *token);
+t_token		*tokenize_parenthesis(t_shell *data, t_token **tl, char **command,
+				t_token *token);
+t_token		*tokenize_quote(t_shell *data, t_token **tl, char **command,
+				t_token *token);
+t_token		*tokenize_redir(t_shell *data, t_token **tl, char **command,
+				t_token *token);
 t_token		*tokenize_space(char **command, t_token *token);
-t_token		*tokenize_special_character(t_shell *data, t_token **tl, char **command, t_token *token);
-t_token		*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *token);
+t_token		*tokenize_special_character(t_shell *data, t_token **tl,
+				char **command, t_token *token);
+t_token		*tokenize_word(t_shell *data, t_token **tl, char **command,
+				t_token *token);
 t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
 t_ast		*create_cmd_node(char **args, t_token **tokens, t_shell *data);
-t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right, t_shell *data);
+t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
+				t_shell *data);
 t_ast		*create_redir_node(t_node_type type, char *file, t_shell *data);
 t_ast		*create_subshell_node(t_ast *child, t_shell *data);
 t_ast		*parse(char *command, t_shell *data);
 t_ast		*parse_command(t_token **tokens, int start, int end, t_shell *data);
-t_ast		*parse_command_line(t_token **tokens, int start, int end, t_shell *data);
+t_ast		*parse_command_line(t_token **tokens, int start, int end,
+				t_shell *data);
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 char		**copy_env(char **envp);
 char		**create_env_cpy(void);
