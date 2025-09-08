@@ -2,3 +2,4 @@ Parsing:
 -	Make sure spaces don't flag errors with special characters (beware of $ and redirs' specific behaviour)
 -	Concatenate the content of quotes ?
 -	Try again to have a correct way of handling AST building errors ? (i.e. freeing all malloc'ed nodes without cheating with exit() )
+-	Using strlcat instead of strlcpy on uninit'ed strings may be prone to errors ?
