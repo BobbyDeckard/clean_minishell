@@ -5,4 +5,9 @@ Parsing:
 		hello
 	instead of
 		hello'
-	
+	BUT open parentheses are considered an error, and unmatched quotes outside matching quotes open some sort of heredoc (don't need to implement it right ?)
+
+	SO if we are inside matching quotes, we should add the quote char as part of the word
+
+-	What happens to spaces inside words ? ex: echo hello there
+	=> especially if we have to concat special characters inside words, need to adjust to the presence/absence of a space character (or any other special characters I would say)
