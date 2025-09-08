@@ -1,17 +1,4 @@
 Parsing:
--	Word parsing excludes some characters that should be included:
-	ex: echo "hello'" -> cmd.args = {"echo", "hello"} instead of {"echo", "hello'"}
-	=> will print
-		hello
-	instead of
-		hello'
-	BUT open parentheses are considered an error, and unmatched quotes outside matching quotes open some sort of heredoc (don't need to implement it right ?)
-
-	SO if we are inside matching quotes, we should add the quote char as part of the word
-
--	What happens to spaces inside words ? ex: echo hello there
-	=> especially if we have to concat special characters inside words, need to adjust to the presence/absence of a space character (or any other special characters I would say)
-
-	=> Maybe do something where inside quotes we only have 1 "word" including spaces since it's the only place where we would concat special characters ?
-
-	BEWARE of $ 
+-	Make sure spaces don't flag errors with special characters (beware of $ and redirs' specific behaviour)
+-	Concatenate the content of quotes ?
+-	Try again to have a correct way of handling AST building errors ? (i.e. freeing all malloc'ed nodes without cheating with exit() )
