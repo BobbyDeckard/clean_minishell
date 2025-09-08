@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:06:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:11:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	exec_and_if(t_ast **children)
 int	exec_ast(t_ast *node)
 {
 	if (node->type == NODE_CMD)
-		return (exec_cmd(node));
+		return (run_cmd(node));
 	else if (node->type == NODE_AND_IF && node->children)
 		return (exec_and_if(node->children));
 	else if (node->type == NODE_OR_IF && node->children)

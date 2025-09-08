@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:17:06 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 12:07:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:11:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-t_ast	*create_ast_node(t_node_type type)
+t_ast	*create_ast_node(t_shell *data, t_node_type type)
 {
 	t_ast	*node;
 
@@ -20,6 +20,7 @@ t_ast	*create_ast_node(t_node_type type)
 	if (!node)
 		return (NULL);
 	node->type = type;
+	node->data = data;
 	node->file = NULL;
 	node->children = NULL;
 	node->root = NULL;
@@ -34,7 +35,7 @@ t_ast	*create_subshell_node(t_ast *child, t_shell *data)
 {
 	t_ast	*node;
 
-	node = create_ast_node(NODE_SUBSHELL);
+	node = create_ast_node(data, NODE_SUBSHELL);
 	if (!node)
 		return (NULL);
 	node->children = (t_ast **) malloc(2 * sizeof(t_ast *));
@@ -55,7 +56,7 @@ t_shell *data)
 {
 	t_ast	*node;
 
-	node = create_ast_node(type);
+	node = create_ast_node(data, type);
 	if (!node)
 		return (NULL);
 	node->children = (t_ast **) malloc(3 * sizeof(t_ast *));
@@ -76,7 +77,7 @@ t_ast	*create_cmd_node(char **args, t_token **tokens, t_shell *data)
 {
 	t_ast	*node;
 
-	node = create_ast_node(NODE_CMD);
+	node = create_ast_node(data, NODE_CMD);
 	if (!node)
 	{
 		free_str_array(args);
@@ -92,7 +93,7 @@ t_ast	*create_redir_node(t_node_type type, char *file, t_shell *data)
 {
 	t_ast	*node;
 
-	node = create_ast_node(type);
+	node = create_ast_node(data, type);
 	if (!node)
 		return (NULL);
 	data->root = node;

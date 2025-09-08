@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:16:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:09:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	clean_ast(t_ast *ast)
 
 void	cleanup(t_ast *node)
 {
-	clean_data(node->data);
+	clean_data(*node->data);
 	clean_ast(node->root);
 }
 

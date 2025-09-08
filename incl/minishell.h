@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:07:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:08:54 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ typedef struct s_ast
 	struct s_ast	**children;
 	struct s_ast	*root;
 	t_node_type		type;
-	t_shell			data;
+	t_shell			*data;
 	t_cmd			cmd;
 	char			*file;
 	int				exit_status;
