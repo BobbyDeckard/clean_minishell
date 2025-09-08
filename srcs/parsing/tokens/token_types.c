@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:16:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:40:51 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:47:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //	What happens if we have special characters inside of a string argument ?
 int	is_command_char(char c)
 {
-	if (ft_isalnum(c))
+	if (ft_isprint(c))
 		return (1);
 	else if (c == '_' || c == '-' || c == '.')
 		return (1);

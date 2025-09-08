@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:39:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 11:47:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ static t_token	**extract_token(char **command, t_token_type type, t_shell *data,
 
 static t_token_type	get_token_type(char c)
 {
-	if (is_command_char(c))
-		return (WORD);
-	else if (is_quote(c))
+	if (is_quote(c))
 		return (QUOTE);
 	else if (is_redirection(c))
 		return (REDIR);
@@ -70,6 +68,8 @@ static t_token_type	get_token_type(char c)
 		return (SPECIAL_CHARACTER);
 	else if (is_env_var(c))
 		return (ENV_VAR);
+	else if (is_command_char(c))
+		return (WORD);
 	return (DEFAULT);
 }
 
