@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 14:04:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 10:45:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	valid_redir_target(t_token **token_list)
 	return (1);
 }
 
-static int	valid_quote_pairs(t_token **token_list)
+static int	valid_quote_pairs(t_shell *data, t_token **token_list)
 {
 	t_token	*current;
 	int		in_double;
@@ -69,8 +69,12 @@ static int	valid_quote_pairs(t_token **token_list)
 	{
 		if (current->type == SINGLE_QUOTE && !in_double)
 			in_single = !in_single;
+		else if (current->type == SINGLE_QUOTE)
+			current = cat_word(data, current->previous, current);
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
+		else if (current->type == DOUBLE_QUOTE)
+			current = cat_word(data, current->previous, current);
 		current = current->next;
 	}
 	return (!in_single && !in_double);
@@ -86,7 +90,7 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	else if (!valid_redir_target(token_list))
 		return (0);
 //		return (ft_putstr_fd("Invalid redir target:", 2), 0);
-	else if (!valid_quote_pairs(token_list))
+	else if (!valid_quote_pairs(data, token_list))
 		return (0);
 //		return (ft_putstr_fd("Unmatched quotes:", 2), 0);
 	else if (!valid_parentheses(data, token_list))
