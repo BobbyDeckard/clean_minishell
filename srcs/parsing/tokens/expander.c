@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 08:52:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:35:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static int	word_contains_var(char *content)
 		else if (content[i] == '$' && !in_single_quotes)
 		{
 			if (content[i + 1] == '?' || ft_isalpha(content[i + 1]))
-			return (1);
+				return (1);
 		}
 	}
 	return (0);

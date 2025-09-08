@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 12:07:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:16:21 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	clean_data(t_shell data)
 }
 
 //	This function supposes non-malloc'ed variables are set to NULL
-//	and that cmd.path is malloc'ed (which I think to be the case, but need to verify).
+//	and that cmd.path is malloc'ed (which I think to be the case,
+//	but need to verify).
 void	clean_ast(t_ast *ast)
 {
 	int	i;

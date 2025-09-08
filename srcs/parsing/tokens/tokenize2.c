@@ -6,13 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:45:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:36:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static t_token	*set_as_unknown(t_shell *data, t_token **tl, char **command, t_token *token)
+static t_token	*set_as_unknown(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	token->type = UNKNOWN;
 	token->content = (char *) malloc(2 * sizeof(char));
@@ -26,7 +27,8 @@ static t_token	*set_as_unknown(t_shell *data, t_token **tl, char **command, t_to
 	return (token);
 }
 
-static t_token	*set_as_env_var(t_shell *data, t_token **tl, char **command, t_token *token)
+static t_token	*set_as_env_var(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	char	*str;
 	int		i;
@@ -42,7 +44,8 @@ static t_token	*set_as_env_var(t_shell *data, t_token **tl, char **command, t_to
 	return (token);
 }
 
-t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	if (**command != '$')
 		return (set_as_unknown(data, tl, command, token));
@@ -74,7 +77,8 @@ static void	define_bonus_operator(char **command, t_token *token, int *len)
 	*len = 2;
 }
 
-t_token	*tokenize_operator(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_operator(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	int	len;
 	int	i;

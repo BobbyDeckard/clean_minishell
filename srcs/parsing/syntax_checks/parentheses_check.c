@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:44:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/31 14:02:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:20:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	check_token(t_token **stack, t_token *current, int *top)
 	{
 		if (current->next && current->next->type == PAREN_CLOSE)
 			return (0);
-//			return (ft_putstr_fd("Empty parentheses:", 2), 0);
 		stack[++(*top)] = current;
 	}
 	else if (current->type == PAREN_CLOSE)

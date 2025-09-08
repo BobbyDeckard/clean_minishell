@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/03 11:38:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:39:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	define_double_redir(char **command, t_token *token, int *len)
 	*len = 2;
 }
 
-t_token	*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_redir(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	int	len;
 	int	i;
@@ -49,7 +50,8 @@ t_token	*tokenize_redir(t_shell *data, t_token **tl, char **command, t_token *to
 	return (token);
 }
 
-t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	int	len;
 
@@ -69,7 +71,8 @@ t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command, t_tok
 	return (token);
 }
 
-t_token	*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_quote(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	int	len;
 
@@ -89,7 +92,8 @@ t_token	*tokenize_quote(t_shell *data, t_token **tl, char **command, t_token *to
 	return (token);
 }
 
-t_token	*tokenize_word(t_shell *data, t_token **tl, char **command, t_token *token)
+t_token	*tokenize_word(t_shell *data, t_token **tl, char **command,
+t_token *token)
 {
 	int	len;
 

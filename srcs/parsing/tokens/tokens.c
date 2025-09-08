@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 11:50:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:40:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ static t_token	*create_token(t_shell *data, t_token **tl)
 	return (new);
 }
 
-static t_token	**extract_token(char **command, t_token_type type, t_shell *data, t_token **token_list)
+static t_token	**extract_token(char **command, t_token_type type,
+t_shell *data, t_token **token_list)
 {
 	t_token	*new_token;
 
 	new_token = create_token(data, token_list);
-	new_token = handle_token_type(data, token_list, command, type, new_token);
+	new_token = handle_token_type(data, command, type, new_token);
 	if (new_token)
 		link_token(new_token, token_list);
 	return (token_list);

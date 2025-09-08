@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:38:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:09:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:18:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	set_shlvl(char **env_cpy)
 	}
 }
 
-static char **init_env_cpy(char **envp, int entries)
+static char	**init_env_cpy(char **envp, int entries)
 {
 	char	**env_cpy;
 	int		len;
@@ -79,7 +79,7 @@ char	**copy_env(char **envp)
 	char	**env_cpy;
 	int		i;
 
-	if (!envp)		// pretty sure this shouldn't be happening and should therefore exit
+	if (!envp)
 		exit(1);
 	else if (!*envp)
 		return (create_env_cpy());

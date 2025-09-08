@@ -6,15 +6,17 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:57:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:16:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
+// REMOVE FILE FROM FINAL PROJECT
+
 static void	print_node_type(t_ast node)
 {
-	int type;
+	int	type;
 
 	type = node.type;
 	if (type == 0)
@@ -33,7 +35,6 @@ static void	print_node_type(t_ast node)
 		printf("Redir append node\n");
 	else if (type == 7)
 		printf("Heredoc node\n");
-
 }
 
 // imprime les enfants de la node actuelle

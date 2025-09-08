@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 09:35:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 10:49:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:17:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,3 @@ void	init_interactive_signals(t_shell data)
 		exit(1);
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:21:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 11:24:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 12:14:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data)
 	}
 	i = -1;
 	while (++i < len)
-			ptr[i] = s[i];
+		ptr[i] = s[i];
 	ptr[i] = 0;
 	return (ptr);
 }
