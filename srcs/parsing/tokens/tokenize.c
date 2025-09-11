@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:39:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:50:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_token *token)
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
-	ft_strlcat(token->content, *command, len);
+	ft_strlcpy(token->content, *command, len);
 	*command += --len;
 	return (token);
 }
@@ -87,7 +87,7 @@ t_token *token)
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
-	ft_strlcat(token->content, *command, len);
+	ft_strlcpy(token->content, *command, len);
 	*command += --len;
 	return (token);
 }
@@ -105,7 +105,7 @@ t_token *token)
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
-	ft_strlcat(token->content, *command, len);
+	ft_strlcpy(token->content, *command, len);
 	*command += --len;
 	return (token);
 }

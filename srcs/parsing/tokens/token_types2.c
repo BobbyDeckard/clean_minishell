@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:24:33 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:39:01 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:51:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_token *token)
 		token = tokenize_special_character(data, data->tokens, command, token);
 	else if (type == SPACE)
 		token = tokenize_space(command, token);
+	else if (type == ENV_VAR)
+		token = tokenize_env_var(data, data->tokens, command, token);
 	return (token);
 }
 
