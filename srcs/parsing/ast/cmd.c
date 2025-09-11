@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/02 17:57:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:05:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	count_args(t_token **tokens, int start, int end)
 		current = get_token_at_index(tokens, i);
 		if (!current)
 			break ;
-		else if (current->type == WORD)
+		else if (current->type == WORD || current->type == ENV_VAR)
 			count++;
 		else if (is_redir_token(current))
 			i++;
@@ -52,7 +52,7 @@ static char	**extract_args(t_token **tokens, int start, int end, t_shell *data)
 		current = get_token_at_index(tokens, i);
 		if (!current)
 			break ;
-		if (current->type == WORD)
+		if (current->type == WORD || current->type == ENV_VAR)
 			args[j++] = sf_strdup(current->content, tokens, args, data);
 		else if (is_redir_token(current))
 			i++;

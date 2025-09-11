@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:30:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:05:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_token_type	get_token_type(char c)
 	else if (is_special_character(c))
 		return (SPECIAL_CHARACTER);
 	else if (is_env_var(c))
-		return (printf("Env var detected\n"), ENV_VAR);
+		return (ENV_VAR);
 	else if (is_space(c))
 		return (SPACE);
 	else if (is_command_char(c))
@@ -88,17 +88,14 @@ t_token	**tokenize_command(t_shell *data, char *command)
 	int i = 0;
 	while (*command && i++ < 20)
 	{
-		printf("Tokenizing %s\n", command);
 		type = get_token_type(*command);
 		if (type == DEFAULT)
 		{
-			printf("Default type token encountered at %s\n", command);
 			command++;
 			continue ;
 		}
 		token_list = extract_token(&command, type, data, token_list);
 	}
-	printf("About to enter expander\n");
 	expander(token_list, data);
 	return (token_list);
 }

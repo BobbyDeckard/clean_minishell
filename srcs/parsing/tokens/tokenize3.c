@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 11:52:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:56:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:06:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_token	*tokenize_env_var(t_shell *data, t_token **tokens, char **command, t_tok
 
 	(*command)++;
 	token->type = ENV_VAR;
+	if (*command == '?')
+		tokenize_exit_status(data, tokens, command, token);
 	len = ft_wordlen(*command);
 	token->content = (char *) malloc(++len * sizeof(char));
 	if (!token->content)

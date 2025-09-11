@@ -6,12 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 20:19:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:18:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-#include <unistd.h>
 
 t_ast	*parse(char *command, t_shell *data)
 {

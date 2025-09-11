@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 13:33:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:35:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:07:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static int	needs_expansion(t_token *token)
 		return (0);
 	if (token->type == ENV_VAR || token->type == EXIT_STATUS)
 		return (1);
-	if (token->type == WORD && word_contains_var(token->content))
+	if (token->type == WORD && word_contains_var(token->content))	// maybe need to remove ? seems like it could wrongly detect an env var where there is none
 		return (1);
 	return (0);
 }

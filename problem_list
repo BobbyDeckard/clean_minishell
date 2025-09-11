@@ -3,3 +3,11 @@ Parsing:
 -	Concatenate the content of quotes ?
 -	Try again to have a correct way of handling AST building errors ? (i.e. freeing all malloc'ed nodes without cheating with exit() )
 -	Using strlcat instead of strlcpy on uninit'ed strings may be prone to errors ?
+
+-	AAAAAAAAAAAAAAAA
+	The current implementation of the expander does not work properly.
+	For example, cat file || echo $? should print 1 if cat file fails, but currently, $? would be expanded with atoi on the last exit_status in memory AT PARSING TIME, not on the call of echo 
+	I vaguely remember having it figured out but how??
+	BUT this need to be applied on every variable, otherwise a command like unset USER && echo $USER would still print USER
+	=> A solution could start by leaving the $ sign in the command arguments and applying an adaptation of the expander there
+	Then is it really useful to tokenize them as env_var or exit_status...?
