@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:01:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:02:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static t_token	*cat_both(t_shell *data, t_token *current, int len)
 	t_token	*prev;
 	char	*new;
 
-	printf("In cat_both\n");
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(NULL, data, data->tokens);
@@ -67,7 +66,6 @@ static t_token	*cat_both(t_shell *data, t_token *current, int len)
 	ft_strlcat(new, current->content, len);
 	ft_strlcat(new, next->content, len);
 	free(prev->content);
-	printf("\tnew content: %s\n", new);
 	prev->content = new;
 	prev->next = next->next;
 	next->next->previous = prev;
