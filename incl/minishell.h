@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:24:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 19:50:21 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exit_bltn(t_ast *node);
 void		get_cmd_path(t_cmd *cmd, char **paths);
 void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action, struct sigaction *old);
+void		handle_spaces(t_shell *data, t_token **tokens);
 void		heredoc_end(t_ast *node, struct sigaction *new_action, struct sigaction *old, int stdin_bu);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 11:52:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 11:55:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:00:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_token	*tokenize_space(char **command, t_token *token)
 
 	len = 1;
 	token->content = NULL;
+	token->type = SPACE;
 	*command += len;
 	return (token);
 }
