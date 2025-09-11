@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/08 11:54:48 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/11 17:16:46 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,36 @@ TKNS_FILES = expander.c \
 			 tokenize3.c \
 			 tokens.c \
 			 tokens_utils.c
+# EXECUTION
+EXEC = $(addprefix exec/, $(EXEC_FILES))
+EXEC_FILES = exec.c \
+			 $(BLTN) \
+			 $(HRDC) \
+			 $(PIPE) \
+			 $(RDRS) \
+			 $(XUTL)
+BLTN = $(addprefix builtins/, $(BLTN_FILES))
+BLTN_FILES = builtins.c \
+			 cd.c \
+			 exit.c \
+			 export.c \
+			 export_var.c \
+			 unset.c
+HRDC = $(addprefix heredoc/, $(HRDC_FILES))
+HRDC_FILES = heredoc.c \
+			 heredoc_sigs.c \
+			 heredoc_utils.c
+PIPE = $(addprefix pipe/, $(PIPE_FILES))
+PIPE_FILES = link_pipes.c \
+			 pipe.c \
+			 pipe_utils.c \
+			 pipe_utils2.c
+RDRS = $(addprefix redirs/, $(RDRS_FILES))
+RDRS_FILES = redirs.c \
+			 redirs_utils.c
+XUTL = $(addprefix utils/, $(XUTL_FILES))
+XUTL_FILES = cmd_path.c \
+			 utils.c
 # GENERAL UTILS
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = cleanup.c \
