@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   char_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 20:35:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:13:45 by imeulema         ###   ########.fr       */
+/*   Created: 2025/09/11 15:18:42 by imeulema          #+#    #+#             */
+/*   Updated: 2025/09/11 15:21:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-// Function can only be called from within child processes, hence the exit()
-void	dup2_error(void)
+int	char_arr_len(char **arr)
 {
-	perror("dup2");
-	exit(1);
+	int	i;
+
+	if (!arr)
+		return (-1);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
 }
 
-int	fork_error(void)
+void	free_char_array_size(char **arr, int i)
 {
-	perror("fork");
-	return (1);
+	while (--i >= 0)
+		free(arr[i]);
+	free(arr);
 }
 
-void	getcwd_error(char **envp)
+void	free_char_array(char **arr)
 {
-	perror("getcwd");
-	free(envp);
-	exit(1);
-}
+	int	i;
 
-void	malloc_error(t_ast *node, t_shell *data, t_token **tl)
-{
-	perror("malloc");
-	if (data)
-		clean_data(*data);
-	if (tl)
-		free_tokens(tl);
-	if (node)
-		clean_exit(node->root, 1);
+	if (!arr)
+		return ;
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr);
 }

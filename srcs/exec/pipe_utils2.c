@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   pipe_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 20:35:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:13:45 by imeulema         ###   ########.fr       */
+/*   Created: 2025/09/08 17:44:46 by imeulema          #+#    #+#             */
+/*   Updated: 2025/09/08 17:47:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-// Function can only be called from within child processes, hence the exit()
-void	dup2_error(void)
+int	count_nodes(t_ast **children)
 {
-	perror("dup2");
-	exit(1);
+	int	i;
+
+	i = 0;
+	while (children[i])
+		i++;
+	return (i);
 }
 
-int	fork_error(void)
+int	*init_pids(t_ast *root, int count)
 {
-	perror("fork");
-	return (1);
-}
+	int	*pids;
+	int	i;
 
-void	getcwd_error(char **envp)
-{
-	perror("getcwd");
-	free(envp);
-	exit(1);
-}
-
-void	malloc_error(t_ast *node, t_shell *data, t_token **tl)
-{
-	perror("malloc");
-	if (data)
-		clean_data(*data);
-	if (tl)
-		free_tokens(tl);
-	if (node)
-		clean_exit(node->root, 1);
+	pids = (int *) malloc(count * sizeof(int));
+	if (!pids)
+		malloc_error(root, root->data, NULL);
+	i = -1;
+	while (++i < count)
+		pids[i] = -1;
+	return (pids);
 }

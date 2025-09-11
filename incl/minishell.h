@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:08:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:05:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,9 @@ extern void	rl_replace_line(const char *str, int i);
 void		clean_ast(t_ast *ast);
 void		clean_exit(t_ast *node, int status);
 void		cleanup(t_ast *node);
-void		free_str_array(char **arr);
+void		free_char_array(char **arr);
+void		free_char_array_size(char **arr, int i);
+int			char_arr_len(char **arr);
 int			clean_data(t_shell data);
 
 /* Error handling functions */
@@ -139,7 +141,40 @@ void		getcwd_error(char **envp);
 void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* Exec functions */
+char		*copy_delimiter(t_ast *node);
+char		*copy_env_entry(t_ast *node, char **arr, int i, int j);
+void		close_pipes(int fd[2][2], int i, int count);
+void		close_redirs(t_cmd cmd);
+void		close_redirs_and_unlink_heredoc(t_ast *node);
+void		dup_fds(t_ast node);
+void		dup2_error(void);
+void		exec_cmd(t_ast *node, t_cmd cmd);
+void		exit_bltn(t_ast *node);
+void		get_cmd_path(t_cmd *cmd, char **paths);
+void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action, struct sigaction *old);
+void		heredoc_end(t_ast *node, struct sigaction *new_action, struct sigaction *old, int stdin_bu);
+void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
+void		make_heredoc(t_ast *node, t_cmd *cmd);
+void		unlink_heredoc(t_ast *node);
+int			*init_pids(t_ast *root, int count);
+int			assign_var(t_ast *node, int size);
+int			cd(t_ast *node);
+int			check_redirs(t_ast *node, t_cmd cmd);
+int			count_nodes(t_ast **children);
+int			create_var(t_ast *node, int size);
 int			exec_ast(t_ast *node);
+int			exec_builtin(t_ast *node);
+int			exec_pipe(t_ast **children);
+int			export_bltn(t_ast *node);
+int			fork_error(void);
+int			is_builtin(t_cmd cmd);
+int			make_fork(void);
+int			make_pipe(int fd[2]);
+int			make_redirs(t_ast *node);
+int			open_temp(t_ast *node, t_cmd *cmd);
+int			set_exit_status(t_ast *node, int status);
+int			unset(t_ast *node);
+int			waitpids(t_ast *root, int *pids, int cmd_count);
 
 /* General utils functions */
 char		*sf_strdup(const char *s, t_token **tokens, char **args,
@@ -182,7 +217,7 @@ t_ast		*parse_command_line(t_token **tokens, int start, int end,
 				t_shell *data);
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 char		**copy_env(char **envp);
-char		**create_env_cpy(void);
+char		**create_env_cpy(t_ast *ast);
 char		**ft_split_paths(const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		expander(t_token **token_list, t_shell *data);
@@ -212,5 +247,6 @@ int			valid_syntax(t_shell *data, t_token **token_list);
 /* Signal handling functions */
 void		init_execution_signals(char *command, t_shell data);
 void		init_interactive_signals(t_shell data);
+void		setup_child_signals(void);
 
 #endif

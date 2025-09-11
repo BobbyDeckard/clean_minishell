@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:09:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:28:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ static void	create_pwd(char **envp)
 	free(cwd);
 }
 
-char	**create_env_cpy(void)
+char	**create_env_cpy(t_ast *ast)
 {
 	char	**envp;
 	int		len;
 
 	envp = (char **) malloc(4 * sizeof(char *));
-	if (!envp)
+	if (!envp && !ast)
 		malloc_error(NULL, NULL, NULL);
+	else
+		malloc_error(ast, ast->data, NULL);
 	create_pwd(envp);
 	create_shlvl(envp);
 	create__(envp);

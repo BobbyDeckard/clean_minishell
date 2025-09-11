@@ -6,17 +6,18 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:11:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/08 16:57:54 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/minishell.h"
+#include "../../incl/minishell.h"
 
-static int	exec_cmd(t_ast *node, t_cmd cmd)
+// Using exit() is necessary since we're in a child process
+void	exec_cmd(t_ast *node, t_cmd cmd)
 {
-	get_cmd_path(&cmd, node->root->data->paths);	// need to have a pointer on data
+	get_cmd_path(&cmd, node->root->data->paths);
 	if (!cmd.path)
-		return (1);	// need to handle this
+		exit(1);
 	else if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
 }
@@ -33,7 +34,7 @@ static int	run_cmd(t_ast *node)
 		return (set_exit_status(node, 1));
 	pid = fork();
 	if (pid < 0)
-		return (fork_error(node));
+		return (fork_error());
 	else if (pid == 0)
 	{
 		dup_fds(*node);
@@ -43,7 +44,7 @@ static int	run_cmd(t_ast *node)
 	close_redirs(node->cmd);
 	waitpid(pid, &status, 0);
 	unlink_heredoc(node);
-	if (WEXITED(status))
+	if (WIFEXITED(status))
 		status = WEXITSTATUS(status);
 	return (set_exit_status(node, status));
 }

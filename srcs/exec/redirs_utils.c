@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   redirs_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 20:35:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:13:45 by imeulema         ###   ########.fr       */
+/*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
+/*   Updated: 2025/09/08 16:41:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+#include <unistd.h>
 
-// Function can only be called from within child processes, hence the exit()
-void	dup2_error(void)
+void	close_redirs(t_cmd cmd)
 {
-	perror("dup2");
-	exit(1);
+	if (cmd.fd_in != STDIN_FILENO && cmd.fd_in >= 0)
+		close(cmd.fd_in);
+	if (cmd.fd_out != STDOUT_FILENO && cmd.fd_out >= 0)
+		close(cmd.fd_out);
 }
 
-int	fork_error(void)
+int	check_redirs(t_ast *node, t_cmd cmd)
 {
-	perror("fork");
-	return (1);
-}
-
-void	getcwd_error(char **envp)
-{
-	perror("getcwd");
-	free(envp);
-	exit(1);
-}
-
-void	malloc_error(t_ast *node, t_shell *data, t_token **tl)
-{
-	perror("malloc");
-	if (data)
-		clean_data(*data);
-	if (tl)
-		free_tokens(tl);
-	if (node)
-		clean_exit(node->root, 1);
+	if (cmd.fd_in < 0 || cmd.fd_out < 0)
+	{
+		close_redirs(cmd);
+		unlink_heredoc(node);
+		return (1);
+	}
+	return (0);
 }
