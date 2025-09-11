@@ -6,11 +6,28 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 19:58:28 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:49:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+static int	follows_quote(t_token *current)
+{
+	t_token	*next;
+	t_token	*prev;
+	int		quote;
+
+	quote = 0;
+	next = current->next;
+	prev = current->previous;
+	if (next->type == SINGLE_QUOTE || next->type == DOUBLE_QUOTE)
+		quote++;
+	if (prev->type == SINGLE_QUOTE || prev->type == DOUBLE_QUOTE)
+		quote++;
+	printf("Counted %d quotes\n", quote);
+	return (quote);
+}
 
 static int	valid_operator(t_token **token_list)
 {
@@ -24,6 +41,11 @@ static int	valid_operator(t_token **token_list)
 		{
 			if (!current->previous || !current->next)
 				return (0);
+			else if (follows_quote(current))
+			{
+				current = current->next;
+				continue ;
+			}
 			else if (current->previous->type != WORD
 				&& current->previous->type != PAREN_CLOSE)
 				return (0);
@@ -87,6 +109,8 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	if (!*token_list)
 		return (1);
 	handle_spaces(data, token_list);
+	printf("Token list after spaces:\n");
+	print_token_list(token_list);
 	if (!valid_operator(token_list))
 		return (printf("Invalid operator\n"), 0);
 	else if (!valid_redir_target(token_list))
