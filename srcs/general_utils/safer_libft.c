@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:21:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:14:50 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:25:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data)
 	ptr = (char *) malloc((len + 1) * sizeof(char));
 	if (!ptr)
 	{
-		free_str_array(args);
+		free_char_array(args);
 		malloc_error(NULL, data, tokens);
 	}
 	i = -1;

@@ -6,11 +6,32 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:43:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 16:02:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:24:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	create_env(t_ast *node)
+{
+	char	**new;
+	int		len;
+
+	new = (char **) malloc(2 * sizeof(char *));
+	if (!new)
+		malloc_error(node, node->data, NULL);
+	len = ft_strlen(node->cmd.args[1]) + 1;
+	new[0] = (char *) malloc(len * sizeof(char));
+	if (!new[0])
+	{
+		free(new);
+		malloc_error(node, node->data, NULL);
+	}
+	ft_strlcpy(new[0], node->cmd.args[1], len);
+	new[1] = NULL;
+	node->data->envp = new;
+	return (0);
+}
 
 static char	**make_new_env(t_ast *node, int size)
 {

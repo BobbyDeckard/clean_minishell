@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:05:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:24:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ t_ast		*parse_command_line(t_token **tokens, int start, int end,
 				t_shell *data);
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 char		**copy_env(char **envp);
-char		**create_env_cpy(t_ast *ast);
+char		**create_env_cpy(void);
 char		**ft_split_paths(const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		expander(t_token **token_list, t_shell *data);
@@ -228,6 +228,7 @@ void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
 int			count_tokens(t_token **token_list);
 int			count_redirs(t_token **tokens, int start, int end);
+int			create_env(t_ast *node);
 int			find_lowest_precedence_op(t_token **tokens, int i, int end);
 int			find_matching_parentheses(t_token **tokens, int open_pos, int end);
 int			ft_wordlen(char *content);

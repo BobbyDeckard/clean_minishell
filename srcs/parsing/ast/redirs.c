@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/01 20:16:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:18:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 	redirs = (t_ast **) malloc(++count * sizeof(t_ast *));
 	if (!redirs)
 	{
-		free_str_array(args);
+		free_char_array(args);
 		malloc_error(data->root, data, tokens);
 	}
 	redirs = extract_redirs_body(redirs, data, sec);
 	if (!redirs)
 	{
-		free_str_array(args);
+		free_char_array(args);
 		malloc_error(data->root, data, tokens);
 	}
 	return (redirs);

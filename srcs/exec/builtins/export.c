@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 15:42:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 17:21:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	export_bltn(t_ast *node)
 
 	size = char_arr_len(node->data->envp);
 	if (node->cmd.args[1] && size == -1)
-		return (create_env_cpy(node), set_exit_status(node, 0));
+		return (create_env(node));
 	else if (size == -1)
 		return (set_exit_status(node, 1));	// à vérifier
 	else if (!node->cmd.args[1])
