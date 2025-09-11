@@ -1,1 +1,2 @@
 1.	Check semicolons, maybe as simple as defining them as the root node
+2.	Replace every justified malloc with a calloc
