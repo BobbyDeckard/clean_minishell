@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:39:11 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 20:37:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:55:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static t_token	*init_content(t_shell *data, t_token **tokens, t_token *current)
 	if (!current->content)
 		malloc_error(NULL, data, tokens);
 	ft_strlcpy(current->content, " ", 2);
-	printf("Set space node's content to : '%s'\n", current->content);
 	return (current->next);
 }
 
@@ -65,13 +64,11 @@ void	handle_spaces(t_shell *data, t_token **tokens)
 		{
 			in_single = !in_single;
 			current = current->next;
-			printf("in single: %d\n", in_single);
 		}
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 		{
 			in_double = !in_double;
 			current = current->next;
-			printf("in double: %d\n", in_double);
 		}
 		else if (current->type == SPACE && in_single)
 			current = init_content(data, tokens, current);

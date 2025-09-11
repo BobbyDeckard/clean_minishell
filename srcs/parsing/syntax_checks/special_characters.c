@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:20:28 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 21:01:48 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_token	*cat_prev(t_shell *data, t_token *cur, t_token *prev, int len)
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(NULL, data, data->tokens);
-	ft_strlcat(new, prev->content, len);
+	ft_strlcpy(new, prev->content, len);
 	ft_strlcat(new, cur->content, len);
 	free(prev->content);
 	prev->content = new;
@@ -39,7 +39,7 @@ int len)
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(NULL, data, data->tokens);
-	ft_strlcat(new, current->content, len);
+	ft_strlcpy(new, current->content, len);
 	ft_strlcat(new, next->content, len);
 	free(next->content);
 	next->content = new;
@@ -57,15 +57,17 @@ static t_token	*cat_both(t_shell *data, t_token *current, int len)
 	t_token	*prev;
 	char	*new;
 
+	printf("In cat_both\n");
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(NULL, data, data->tokens);
 	prev = current->previous;
 	next = current->next;
-	ft_strlcat(new, prev->content, len);
+	ft_strlcpy(new, prev->content, len);
 	ft_strlcat(new, current->content, len);
 	ft_strlcat(new, next->content, len);
 	free(prev->content);
+	printf("\tnew content: %s\n", new);
 	prev->content = new;
 	prev->next = next->next;
 	next->next->previous = prev;
@@ -81,6 +83,7 @@ t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 	char	*new;
 	int		len;
 
+	len = ft_strlen(current->content) + 1;
 	if ((!prev || prev->type != WORD) && (!next || next->type != WORD))
 	{
 		current->type = WORD;
@@ -88,17 +91,17 @@ t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 	}
 	else if (prev && prev->type == WORD && next && next->type == WORD)
 	{
-		len = ft_strlen(prev->content) + ft_strlen(next->content) + 2;
+		len += ft_strlen(prev->content) + ft_strlen(next->content);
 		return (cat_both(data, current, len));
 	}
 	else if (prev && prev->type == WORD)
 	{
-		len = ft_strlen(prev->content) + 2;
+		len += ft_strlen(prev->content);
 		return (cat_prev(data, current, prev, len));
 	}
 	else if (next && next->type == WORD)
 	{
-		len = ft_strlen(next->content) + 2;
+		len += ft_strlen(next->content);
 		return (cat_next(data, current, next, len));
 	}
 	return (current);

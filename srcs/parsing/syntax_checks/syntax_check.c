@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 20:49:43 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 20:53:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	valid_quote_pairs(t_shell *data, t_token **token_list)
 			in_double = !in_double;
 		else if (current->type == DOUBLE_QUOTE)
 			current = cat_word(data, current, current->previous, current->next);
-		else if (current->type == SPACE)
+		else if (current->content && (in_double || in_single))
 			current = cat_word(data, current, current->previous, current->next);
 		current = current->next;
 	}
@@ -111,12 +111,12 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	handle_spaces(data, token_list);
 	printf("Token list after spaces:\n");
 	print_token_list(token_list);
-	if (!valid_operator(token_list))
+	if (!valid_quote_pairs(data, token_list))
+		return (printf("Invalid quotes\n"), 0);
+	else if (!valid_operator(token_list))
 		return (printf("Invalid operator\n"), 0);
 	else if (!valid_redir_target(token_list))
 		return (printf("Invalid redir\n"), 0);
-	else if (!valid_quote_pairs(data, token_list))
-		return (printf("Invalid quotes\n"), 0);
 	else if (!valid_parentheses(data, token_list))
 		return (printf("Invalid parentheses\n"), 0);
 	return (1);
