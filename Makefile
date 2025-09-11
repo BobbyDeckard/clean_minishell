@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/11 17:16:46 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/11 17:28:40 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,8 @@ XUTL_FILES = cmd_path.c \
 			 utils.c
 # GENERAL UTILS
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
-UTLS_FILES = cleanup.c \
+UTLS_FILES = char_arr.c \
+			 cleanup.c \
 			 errors.c \
 			 print.c \
 			 safer_libft.c \
