@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:57:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 23:42:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	run_cmd(t_ast *node)
 	int	pid;
 
 	status = -1;
+	expander(node, &node->cmd);
 	if (is_builtin(node->cmd))
 		return (exec_builtin(node));
 	else if (make_redirs(node))

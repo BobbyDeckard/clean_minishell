@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 20:53:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 00:11:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	if (!*token_list)
 		return (1);
 	handle_spaces(data, token_list);
-	printf("Token list after spaces:\n");
-	print_token_list(token_list);
+	mark_for_expansion(data, token_list);
 	if (!valid_quote_pairs(data, token_list))
 		return (printf("Invalid quotes\n"), 0);
 	else if (!valid_operator(token_list))

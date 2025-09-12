@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:52:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 23:42:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cmd
 {
 	char	**args;
 	char	*path;
+	int		*exp;
 	int		fd_in;
 	int		fd_out;
 }	t_cmd;
@@ -150,10 +151,11 @@ void		dup_fds(t_ast node);
 void		dup2_error(void);
 void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exit_bltn(t_ast *node);
+void		expander(t_ast *node, t_cmd *cmd);
 void		get_cmd_path(t_cmd *cmd, char **paths);
-void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action, struct sigaction *old);
 void		handle_spaces(t_shell *data, t_token **tokens);
 void		heredoc_end(t_ast *node, struct sigaction *new_action, struct sigaction *old, int stdin_bu);
+void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action, struct sigaction *old);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
 void		unlink_heredoc(t_ast *node);
@@ -168,6 +170,7 @@ int			exec_builtin(t_ast *node);
 int			exec_pipe(t_ast **children);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
+int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
 int			make_fork(void);
 int			make_pipe(int fd[2]);
@@ -208,7 +211,7 @@ t_token		*tokenize_word(t_shell *data, t_token **tl, char **command,
 t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
-t_ast		*create_cmd_node(char **args, t_token **tokens, t_shell *data);
+t_ast		*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd);
 t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
 			t_shell *data);
 t_ast		*create_redir_node(t_node_type type, char *file, t_shell *data);
@@ -222,12 +225,15 @@ char		**copy_env(char **envp);
 char		**create_env_cpy(void);
 char		**ft_split_paths(const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
-void		expander(t_token **token_list, t_shell *data);
+//void		expander(t_token **token_list, t_shell *data);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell data);
+void		init_cmd(t_shell *data, t_cmd *cmd, int count);
+void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
+int			count_args(t_token **tokens, int start, int end);
 int			count_tokens(t_token **token_list);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);

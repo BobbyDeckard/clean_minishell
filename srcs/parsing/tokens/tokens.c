@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 22:05:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 00:08:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ t_token	**tokenize_command(t_shell *data, char *command)
 	if (!token_list)
 		malloc_error(NULL, data, NULL);
 	*token_list = NULL;
-	int i = 0;
-	while (*command && i++ < 20)
+	while (*command)
 	{
 		type = get_token_type(*command);
 		if (type == DEFAULT)
@@ -96,6 +95,6 @@ t_token	**tokenize_command(t_shell *data, char *command)
 		}
 		token_list = extract_token(&command, type, data, token_list);
 	}
-	expander(token_list, data);
+//	expander(token_list, data);
 	return (token_list);
 }

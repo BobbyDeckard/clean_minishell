@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/11 19:54:28 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/12 00:04:53 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ AST = $(addprefix ast/, $(AST_FILES))
 AST_FILES = ast.c \
 			ast_utils.c \
 			cmd.c \
+			cmd_utils.c \
 			nodes.c \
 			operators.c \
 			parentheses.c \
@@ -56,13 +57,13 @@ DATA_FILES = create_env_cpy.c \
 			 paths.c \
 			 shell_data.c
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
-SNTX_FILES = parentheses_check.c \
+SNTX_FILES = mark_expansion.c \
+			 parentheses_check.c \
 			 spaces.c \
 			 special_characters.c \
 			 syntax_check.c
 TKNS = $(addprefix tokens/, $(TKNS_FILES))
-TKNS_FILES = expander.c \
-			 token_types.c \
+TKNS_FILES = token_types.c \
 			 token_types2.c \
 			 tokenize.c \
 			 tokenize2.c \
@@ -72,6 +73,7 @@ TKNS_FILES = expander.c \
 # EXECUTION
 EXEC = $(addprefix exec/, $(EXEC_FILES))
 EXEC_FILES = exec.c \
+			 expander.c \
 			 $(BLTN) \
 			 $(HRDC) \
 			 $(PIPE) \

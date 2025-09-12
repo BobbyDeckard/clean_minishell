@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:17:06 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:17:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 22:39:16 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,19 +73,19 @@ t_shell *data)
 	return (node);
 }
 
-t_ast	*create_cmd_node(char **args, t_token **tokens, t_shell *data)
+t_ast	*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd)
 {
 	t_ast	*node;
 
 	node = create_ast_node(data, NODE_CMD);
 	if (!node)
 	{
-		free_char_array(args);
+		free_char_array(cmd.args);
 		malloc_error(data->root, data, tokens);
 	}
 	data->root = node;
 	set_root_node(node, node);
-	node->cmd.args = args;
+	node->cmd = cmd;
 	return (node);
 }
 

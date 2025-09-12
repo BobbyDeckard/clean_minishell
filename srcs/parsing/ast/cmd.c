@@ -6,34 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 22:05:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/11 23:38:23 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	count_args(t_token **tokens, int start, int end)
-{
-	t_token	*current;
-	int		count;
-	int		i;
-
-	count = 0;
-	i = start - 1;
-	while (++i <= end)
-	{
-		current = get_token_at_index(tokens, i);
-		if (!current)
-			break ;
-		else if (current->type == WORD || current->type == ENV_VAR)
-			count++;
-		else if (is_redir_token(current))
-			i++;
-	}
-	return (count);
-}
-
-static char	**extract_args(t_token **tokens, int start, int end, t_shell *data)
+/*
+static char	**extract_args(t_token **tokens, int st_nd[2], t_shell *data, t_cmd *cmd)
 {
 	t_token	*current;
 	char	**args;
@@ -41,18 +21,18 @@ static char	**extract_args(t_token **tokens, int start, int end, t_shell *data)
 	int		i;
 	int		j;
 
-	count = count_args(tokens, start, end);
+	count = count_args(tokens, st_nd[0], st_nd[1]);
 	args = (char **) malloc((count + 1) * sizeof(char *));
 	if (!args)
 		malloc_error(data->root, data, tokens);
-	i = start - 1;
+	i = st_nd[0] - 1;
 	j = 0;
-	while (++i <= end && j < count)
+	while (++i <= st_nd[1] && j < count)
 	{
 		current = get_token_at_index(tokens, i);
 		if (!current)
 			break ;
-		if (current->type == WORD || current->type == ENV_VAR)
+		if (is_arg(current->type))
 			args[j++] = sf_strdup(current->content, tokens, args, data);
 		else if (is_redir_token(current))
 			i++;
@@ -60,18 +40,60 @@ static char	**extract_args(t_token **tokens, int start, int end, t_shell *data)
 	args[j] = NULL;
 	return (args);
 }
+*/
+
+static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
+{
+	if (current->type == ENV_VAR && current->needs_expansion)
+	{
+		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args, data);
+		cmd->exp[j] = 1;
+	}
+	else if (current->type == EXIT_STATUS && current->needs_expansion)
+	{
+		cmd->args[j] = sf_strdup("EXIT_STATUS", data->tokens, cmd->args, data);
+		cmd->exp[j] = 2;
+	}
+	else
+	{
+		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args, data);
+		cmd->exp[j] = 0;
+	}
+}
+
+static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
+{
+	t_token	*current;
+	int		count;
+	int		i;
+	int		j;
+
+	count = count_args(data->tokens, start, end);
+	init_cmd(data, cmd, count + 1);
+	i = start - 1;
+	j = -1;
+	while (++i <= end && j < count)
+	{
+		current = get_token_at_index(data->tokens, i);
+		if (!current)
+			break ;
+		else if (is_arg(current->type) && ++j < count)
+			handle_arg(data, cmd, current, j);
+		else if (is_redir_token(current))
+			i++;
+	}
+	cmd->args[j] = NULL;
+}
 
 t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
 {
 	t_ast	**redirs;
 	t_ast	*node;
-	char	**args;
+	t_cmd	cmd;
 
-	args = extract_args(tokens, start, end, data);
-	if (!args)
-		return (NULL);
-	node = create_cmd_node(args, tokens, data);
-	redirs = extract_redirs(data, args, start, end);
+	parse_cmd(data, &cmd, start, end);
+	node = create_cmd_node(data, tokens, cmd);
+	redirs = extract_redirs(data, cmd.args, start, end);
 	if (redirs)
 		node->children = redirs;
 	return (node);
