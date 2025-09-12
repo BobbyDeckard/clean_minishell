@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 23:11:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:10:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	clean_ast(t_ast *ast)
 	if (ast->cmd.args)
 	{
 		i = -1;
-		while (ast->cmd.args[++i])
+		while (++i < ast->cmd.arg_count)
 		{
-			if (ast->cmd.exp[i] != 2)
+			if (ast->cmd.args[i])
 				free(ast->cmd.args[i]);
 		}
 		free(ast->cmd.args);

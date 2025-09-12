@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:38:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:18:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:21:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	count_digits(int lvl)
+int	count_digits(int lvl)
 {
 	int	dig;
 

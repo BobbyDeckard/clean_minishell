@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 23:42:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:21:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_cmd
 	char	**args;
 	char	*path;
 	int		*exp;
+	int		arg_count;
 	int		fd_in;
 	int		fd_out;
 }	t_cmd;
@@ -185,6 +186,7 @@ char		*sf_strdup(const char *s, t_token **tokens, char **args,
 			t_shell *data);
 void		print_token_list(t_token **token_list);
 void		print_tree(t_ast *ast);
+int			count_digits(int lvl);
 
 /* Parsing functions */
 t_node_type	convert_types(t_token_type type);
