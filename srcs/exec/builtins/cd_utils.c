@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:22:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 21:40:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:36:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	update_pwd(t_ast *node, int i)
 // called once again, then env will only print OLDPWD correctly set.
 void	update_oldpwd(t_ast *node, int i, char *oldpwd)
 {
-
+	
 }
