@@ -1,3 +1,10 @@
 1.	Check semicolons, maybe as simple as defining them as the root node
 2.	Replace every justified malloc with a calloc
 3.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
+4.	Check multiple redirs
+	=> peut-être les mettre en série dans children de cmd ? vu que c'est la dernière redir qui fait foi
+
+
+
+FIN
+Vérifier la fiche d'éval sur discord avec Pierre
