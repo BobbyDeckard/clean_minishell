@@ -18,7 +18,6 @@ t_shell *data)
 	t_token	*current;
 	int		closing;
 
-	printf("In create_subshell()\n");
 	current = get_token_at_index(tokens, start);
 	if (start < end && current && current->type == PAREN_OPEN)
 	{
@@ -36,7 +35,6 @@ t_shell *data)
 	t_node_type	type;
 	int			op_pos;
 
-	printf("In parse_command_line()\n");
 	if (start > end)
 		return (NULL);
 	if (matching_parentheses(tokens, start, end))
@@ -54,16 +52,6 @@ t_ast	*create_ast(t_token **token_list, t_shell *data)
 
 	tokens = count_tokens(token_list);
 	root = parse_command_line(token_list, 0, --tokens, data);
-	int	j = -1;
-	printf("Printing root->cmd.args from create_ast() before setting root\n");
-	while (root->cmd.args[++j])
-		printf("root->cmd.args[%d]: '%s'\n", j, root->cmd.args[j]);
-	printf("\n");
 	set_root_node(root, root);
-	j = -1;
-	printf("Printing root->cmd.args from create_ast() after setting root\n");
-	while (root->cmd.args[++j])
-		printf("root->cmd.args[%d]: '%s'\n", j, root->cmd.args[j]);
-	printf("\n");
 	return (root);
 }

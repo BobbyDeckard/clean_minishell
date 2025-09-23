@@ -35,7 +35,6 @@ static void	process_command(char *command, t_shell *data)
 	if (ast)
 	{
 		print_tree(ast);
-//		printf("Tree finished printing\n\n");
 //		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 	}

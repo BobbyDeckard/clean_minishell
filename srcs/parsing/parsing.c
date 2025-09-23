@@ -31,10 +31,6 @@ t_ast	*parse(char *command, t_shell *data)
 	ast = create_ast(token_list, data);
 	if (!ast)
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);
-	printf("Tree before freeing tokens:\n");
-	print_tree(ast);
 	free_tokens(token_list);
-	printf("Tree after freeing tokens:\n");
-	print_tree(ast);
 	return (ast);
 }

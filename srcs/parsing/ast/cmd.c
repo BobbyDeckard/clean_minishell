@@ -93,7 +93,6 @@ t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
 	t_ast	*node;
 	t_cmd	cmd;
 
-	printf("In parse_command()\n");
 	parse_cmd(data, &cmd, start, end);
 	node = create_cmd_node(data, tokens, cmd);
 	redirs = extract_redirs(data, cmd.args, start, end);
