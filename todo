@@ -19,6 +19,7 @@ FIX PIPES ????!??!???!!!! TT
 
 
 TO DO:
+O.	Fix unset
 O.	Replace every justified malloc with a calloc
 O.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
 O.	Check comments left in exec with norminette
