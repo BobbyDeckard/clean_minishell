@@ -71,7 +71,6 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 	int		j;
 
 	cmd->arg_count = count_args(data->tokens, start, end);
-	printf("In parse_cmd, counted %d arguments\n", cmd->arg_count);
 	init_cmd(data, cmd, cmd->arg_count + 1);
 	i = start - 1;
 	j = 0;
