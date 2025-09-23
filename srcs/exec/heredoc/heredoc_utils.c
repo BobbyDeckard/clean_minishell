@@ -78,7 +78,12 @@ char	*copy_delimiter(t_ast *node)
 
 void	unlink_heredoc(t_ast *node)
 {
-	if (node->children && node->children[0]->type == NODE_HEREDOC)
-		unlink(node->children[0]->file);
+	int	i;
+
+	if (!node->children)
+		return ;
+	i = -1;
+	while (node->children[++i] && node->children[i]->type == NODE_HEREDOC)
+		unlink(node->children[i]->file);
 }
 
