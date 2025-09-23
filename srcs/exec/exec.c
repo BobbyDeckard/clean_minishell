@@ -28,7 +28,7 @@ static int	run_cmd(t_ast *node)
 	int	pid;
 
 	status = -1;
-//	expander(node, &node->cmd);
+	expander(node, &node->cmd);
 	if (is_builtin(node->cmd))
 		return (exec_builtin(node));
 	else if (make_redirs(node))
