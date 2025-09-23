@@ -67,6 +67,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 
 	len = ft_strlen(node->file);
 	del = copy_delimiter(node);
+	free(node->file);
 	if (!open_temp(node, cmd))
 		return ;	// need to do better
 	stdin_backup = dup(STDIN_FILENO);

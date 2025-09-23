@@ -47,7 +47,7 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
-//	printf("Begining clean_ast()\n");
+//	printf("Beginning clean_ast()\n");
 	if (ast->children)
 	{
 		i = -1;
