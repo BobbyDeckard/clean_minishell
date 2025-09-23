@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:16:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 18:08:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 21:56:29 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	update_both(t_ast *node, int i, int j)
 	free(cwd);
 }
 
-static void	update_pwd(t_ast *node)
+static void	make_updates(t_ast *node, char *oldpwd)
 {
 	int	i;
 	int	j;
@@ -72,25 +72,31 @@ static void	update_pwd(t_ast *node)
 	}
 	if (node->root->data->envp[i] && node->root->data->envp[j])
 		update_both(node, i, j);
-	// shouldn't there be updates to each individually ?
+//	else if (node->root->data->envp[i])
+//		update_pwd(node, i);
+//	else if (node->root->data->envp[j])
+//		update_oldpwd(node, j, oldpwd);
 }
 
 int	cd(t_ast *node)
 {
+	char	*oldpwd;
 	char	*error;
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
+	oldpwd = getcwd(NULL, 0);
 	if (chdir(node->cmd.args[1]) < 0)
 	{
 		error = cd_error(node);
 		perror(error);
 		free(error);
+		free(oldpwd);
 		close_redirs(node->cmd);
 		unlink_heredoc(node);
 		return (set_exit_status(node, 1));
 	}
-	update_pwd(node);
+	make_updates(node, oldpwd);
 	close_redirs(node->cmd);
 	unlink_heredoc(node);
 	return (set_exit_status(node, 0));

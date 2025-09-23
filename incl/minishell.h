@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 18:41:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:22:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void		dup2_error(void);
 void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exit_bltn(t_ast *node);
 void		expander(t_ast *node, t_cmd *cmd);
-void		get_cmd_path(t_cmd *cmd, char **paths);
+void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
 void		handle_spaces(t_shell *data, t_token **tokens);
 void		heredoc_end(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old, int stdin_bu);
@@ -162,6 +162,8 @@ void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action,
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
 void		unlink_heredoc(t_ast *node);
+void		update_bltn(t_shell *data);
+void		update_error(t_shell *data, char *path, int i);
 int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size);
 int			cd(t_ast *node);
@@ -173,6 +175,7 @@ int			exec_builtin(t_ast *node);
 int			exec_pipe(t_ast **children);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
+int			has_equal(const char *str);
 int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
 int			make_fork(void);
@@ -184,6 +187,7 @@ int			unset(t_ast *node);
 int			waitpids(t_ast *root, int *pids, int cmd_count);
 
 /* General utils functions */
+char		*get_minipath(char *str);
 char		*sf_strdup(const char *s, t_token **tokens, char **args,
 				t_shell *data);
 void		print_node_type(t_node_type type);
@@ -236,6 +240,7 @@ void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
+void		init_minipath(t_shell *data, char **envp);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);

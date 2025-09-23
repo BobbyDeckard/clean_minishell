@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/12 18:44:08 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/23 23:22:42 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
+
 # PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parsing.c \
@@ -71,6 +72,7 @@ TKNS_FILES = token_types.c \
 			 tokenize3.c \
 			 tokens.c \
 			 tokens_utils.c
+
 # EXECUTION
 EXEC = $(addprefix exec/, $(EXEC_FILES))
 EXEC_FILES = exec.c \
@@ -82,6 +84,7 @@ EXEC_FILES = exec.c \
 			 $(XUTL)
 BLTN = $(addprefix builtins/, $(BLTN_FILES))
 BLTN_FILES = builtins.c \
+			 builtins_utils.c \
 			 cd.c \
 			 exit.c \
 			 export.c \
@@ -101,7 +104,9 @@ RDRS_FILES = redirs.c \
 			 redirs_utils.c
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \
+			 minipath.c \
 			 utils.c
+
 # GENERAL UTILS
 UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = char_arr.c \
@@ -110,6 +115,7 @@ UTLS_FILES = char_arr.c \
 			 print.c \
 			 safer_libft.c \
 			 trunc_cwd.c
+
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
 SIGS_FILES = children_signals.c \

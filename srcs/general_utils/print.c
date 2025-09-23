@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:16:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 22:18:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	print_node_info(t_ast *node)
 
 	print_node_type(node->type);
 	printf("Pointer address: %p\n", node);
+	printf("Address of data: %p\n", node->data);
 	if (node->root)
 	{
 		printf("Root: ");

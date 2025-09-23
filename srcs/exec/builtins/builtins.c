@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 16:03:19 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:24:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,19 @@ static int	env(t_ast *node)
 	char	**envp;
 	int		i;
 
+	// env does not print empty variables
+	// Maybe make it so that empty variables' strings do not contain the
+	// equal sign as long as they're not set.
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
+	update_bltn(node->data);
 	envp = node->data->envp;
+	printf("Address of data: %p\n", node->data);
 	i = -1;
 	while (envp[++i])
 	{
-		if (!ft_strncmp(envp[i], "_=", 2))
-		{
-			free(envp[i]);
-			envp[i] = (char *) malloc(15 * sizeof(char));
-			if (!envp[i])
-				malloc_error(node->root, node->data, NULL);
-			ft_strlcpy(envp[1], "_=usr/bin/env", 15);
-		}
+		if (!has_equal(envp[i]))
+			continue ;
 		ft_putstr_fd(envp[i], node->cmd.fd_out);
 		ft_putchar_fd('\n', node->cmd.fd_out);
 	}
@@ -53,6 +52,7 @@ static int	pwd(t_ast *node)
 		unlink_heredoc(node);
 		return (set_exit_status(node, 1));
 	}
+	update_bltn(node->data);
 	ft_putstr_fd(cwd, node->cmd.fd_out);
 	ft_putchar_fd('\n', node->cmd.fd_out),
 	free(cwd);
@@ -68,6 +68,7 @@ static int	echo(t_ast *node)
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
+	update_bltn(node->data);
 	flag = 0;
 	if (!ft_strncmp(node->cmd.args[1], "-n", node->cmd.fd_out))
 		flag++;

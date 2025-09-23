@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 23:42:19 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 22:40:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 // Using exit() is necessary since we're in a child process
 void	exec_cmd(t_ast *node, t_cmd cmd)
 {
-	get_cmd_path(&cmd, node->root->data->paths);
 	if (!cmd.path)
 		exit(1);
-	else if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
+	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
 }
 
@@ -33,6 +32,7 @@ static int	run_cmd(t_ast *node)
 		return (exec_builtin(node));
 	else if (make_redirs(node))
 		return (set_exit_status(node, 1));
+	get_cmd_path(node, &node->cmd, node->data->paths);
 	pid = fork();
 	if (pid < 0)
 		return (fork_error());
