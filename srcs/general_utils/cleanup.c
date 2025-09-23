@@ -80,6 +80,8 @@ void	clean_ast(t_ast *ast)
 		free(ast->cmd.path);
 //	else
 //		printf("Found no cmd.path\n");
+	if (ast->file)
+		free(ast->file);
 	free(ast);
 }
 
