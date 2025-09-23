@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:24:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:30:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av, char **envp)
 		return (1);
 	(void) av;
 	data = init_shell_data(envp);
-	init_minipath(&data, envp);
+//	init_minipath(&data, envp);
 	should_exit = 0;
 	int	i = 0;
 	while (!should_exit && i++ < 3)
