@@ -15,7 +15,6 @@
 static void	found_path(t_cmd *cmd, char *path)
 {
 	cmd->path = ft_strdup(path);
-	// Why not just set cmd->path = path ?
 	free(path);
 }
 
