@@ -54,6 +54,8 @@ t_token *target)
 	content = ft_strdup(target->content);
 	if (!content)
 		return (NULL);
+//	printf("About to call create_redir_node with content: '%s' and type ", content);
+	print_node_type(type);
 	node = create_redir_node(type, content, data);
 	if (!node)
 		free(content);
@@ -75,6 +77,9 @@ static t_ast	**extract_redirs_body(t_ast **redirs, t_shell *data, int sec[3])
 			break ;
 		else if (is_redir_token(current) && sec[0] + 1 <= sec[1])
 		{
+//			printf("Detected redir token of type ");
+//			print_token_type(current->type);
+//			printf("\n");
 			target = get_token_at_index(data->tokens, sec[0] + 1);
 			if (target && target->type == WORD)
 			{
@@ -99,8 +104,11 @@ t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 	tokens = data->tokens;
 	count = count_redirs(tokens, start, end);
 	sec[0] = start;
+//	printf("Set sec[0] to start = %d\n", sec[0]);
 	sec[1] = end;
+//	printf("Set sec[1] to end = %d\n", sec[1]);
 	sec[2] = count;
+//	printf("Set sec[2] to count = %d\n\n", sec[2]);
 	if (!count)
 		return (NULL);
 	redirs = (t_ast **) malloc(++count * sizeof(t_ast *));

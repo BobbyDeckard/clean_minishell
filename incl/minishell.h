@@ -184,7 +184,9 @@ int			waitpids(t_ast *root, int *pids, int cmd_count);
 /* General utils functions */
 char		*sf_strdup(const char *s, t_token **tokens, char **args,
 			t_shell *data);
+void		print_node_type(t_node_type type);
 void		print_token_list(t_token **token_list);
+void		print_token_type(t_token_type type);
 void		print_tree(t_ast *ast);
 int			count_digits(int lvl);
 

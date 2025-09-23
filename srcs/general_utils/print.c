@@ -14,11 +14,8 @@
 
 // REMOVE FILE FROM FINAL PROJECT
 
-static void	print_node_type(t_ast node)
+void	print_node_type(t_node_type type)
 {
-	int	type;
-
-	type = node.type;
 	if (type == 0)
 		printf("Command node\n");
 	else if (type == 1)
@@ -40,7 +37,7 @@ static void	print_node_type(t_ast node)
 // imprime les enfants de la node actuelle
 static void	print_child(t_ast node)
 {
-	print_node_type(node);
+	print_node_type(node.type);
 	if (node.type == NODE_CMD)
 		printf("%s\n", node.cmd.args[0]);
 }
@@ -50,12 +47,12 @@ static void	print_node_info(t_ast *node)
 {
 	int	i;
 
-	print_node_type(*node);
+	print_node_type(node->type);
 	printf("Pointer address: %p\n", node);
 	if (node->root)
 	{
 		printf("Root: ");
-		print_node_type(*node->root);
+		print_node_type(node->root->type);
 	}
 	if (node->cmd.path)
 		printf("Path:\n\t%s\n", node->cmd.path);
@@ -69,7 +66,6 @@ static void	print_node_info(t_ast *node)
 			printf("\t%s\n", node->cmd.args[i]);
 		}
 	}
-	printf("Finished printing arguments\n");
 	if (node->type == NODE_CMD)
 		printf("fd_in = %d\nfd_out = %d\n", node->cmd.fd_in, node->cmd.fd_out);
 	if (node->file)

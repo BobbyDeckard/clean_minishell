@@ -48,6 +48,14 @@ t_node_type	convert_types(t_token_type type)
 		return (NODE_AND_IF);
 	else if (type == OR)
 		return (NODE_OR_IF);
+	else if (type == REDIR_IN)
+		return (NODE_REDIR_IN);
+	else if (type == REDIR_OUT)
+		return (NODE_REDIR_OUT);
+	else if (type == REDIR_APPEND)
+		return (NODE_REDIR_APPEND);
+	else if (type == HEREDOC)
+		return (NODE_HEREDOC);
 	return (NODE_CMD);
 }
 
