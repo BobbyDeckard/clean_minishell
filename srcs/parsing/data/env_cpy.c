@@ -63,11 +63,19 @@ static char	**init_env_cpy(char **envp, int entries)
 	i = -1;
 	while (envp[++i])
 	{
+		if (!ft_strncmp(envp[i], "OLDPWD=", 7))
+		{
+			env_cpy[i] = (char *) malloc(7 * sizeof(char));
+			if (!env_cpy[i])
+				env_cpy_malloc_error(env_cpy, i);
+			ft_strlcpy(env_cpy[i], "OLDPWD", 7);
+			continue ;
+		}
 		len = ft_strlen(envp[i]) + 1;
 		env_cpy[i] = (char *) malloc(len * sizeof(char));
 		if (!env_cpy[i])
 			env_cpy_malloc_error(env_cpy, i);
-		ft_strlcat(env_cpy[i], envp[i], len);
+		ft_strlcpy(env_cpy[i], envp[i], len);
 	}
 	env_cpy[i] = NULL;
 	set_shlvl(env_cpy);

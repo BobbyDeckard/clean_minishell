@@ -17,9 +17,6 @@ static int	env(t_ast *node)
 	char	**envp;
 	int		i;
 
-	// env does not print empty variables
-	// Maybe make it so that empty variables' strings do not contain the
-	// equal sign as long as they're not set.
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 //	update_bltn(node->data);

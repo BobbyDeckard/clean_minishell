@@ -12,11 +12,10 @@
 
 #include "../../incl/minishell.h"
 
-// Using exit() is necessary since we're in a child process
 void	exec_cmd(t_ast *node, t_cmd cmd)
 {
 	if (!cmd.path)
-		exit(1);
+		return ;
 	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
 }

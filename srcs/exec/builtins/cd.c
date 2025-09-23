@@ -61,13 +61,13 @@ static void	make_updates(t_ast *node, char *oldpwd)
 	i = -1;
 	while (node->root->data->envp[++i])
 	{
-		if (!ft_strncmp(node->root->data->envp[i], "PWD=", 4))
+		if (!ft_strncmp(node->root->data->envp[i], "PWD", 3))
 			break ;
 	}
 	j = -1;
 	while (node->root->data->envp[++j])
 	{
-		if (!ft_strncmp(node->root->data->envp[j], "OLDPWD=", 7))
+		if (!ft_strncmp(node->root->data->envp[j], "OLDPWD", 6))
 			break ;
 	}
 	if (node->root->data->envp[i] && node->root->data->envp[j])
