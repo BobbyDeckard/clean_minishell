@@ -32,7 +32,8 @@ static void	trunc_cwd(char cwd[256], char full[256])
 		i--;
 	i++;
 	bzero_cwd(cwd);
-	ft_strlcat(cwd, "\e[1;36m", 256);
+//	ft_strlcat(cwd, "\e[1;36m", 256);	// BLUE
+	ft_strlcat(cwd, "\e[1;32m", 256);	// GREEN
 	ft_strlcat(cwd, full + i, 256);
 	ft_strlcat(cwd, "\x1b[0m", 256);
 	ft_strlcat(cwd, " ", 256);
