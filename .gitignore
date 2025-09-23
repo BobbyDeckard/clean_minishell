@@ -42,6 +42,7 @@ minishell
 *.su
 *.idb
 *.pdb
+file
 
 # Kernel Module Compile Results
 *.mod*
