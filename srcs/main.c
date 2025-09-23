@@ -65,8 +65,7 @@ int	main(int ac, char **av, char **envp)
 	(void) av;
 	data = init_shell_data(envp);
 	should_exit = 0;
-	int	i = 0;
-	while (!should_exit && i++ < 1)
+	while (!should_exit)
 	{
 		data.state = INTERACTIVE;
 		setup_interactive_signals(&data);	// in loop ??
