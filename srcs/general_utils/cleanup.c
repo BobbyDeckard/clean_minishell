@@ -47,6 +47,7 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
+	printf("Begining clean_ast()\n");
 	if (ast->children)
 	{
 		i = -1;
@@ -54,19 +55,31 @@ void	clean_ast(t_ast *ast)
 			clean_ast(ast->children[i]);
 		free(ast->children);
 	}
+	else
+		printf("Found no children\n");
 	if (ast->cmd.args)
 	{
+		printf("Found cmd.args, cmd.arg_count = %d\n", ast->cmd.arg_count);
 		i = -1;
 		while (++i < ast->cmd.arg_count)
 		{
 			if (ast->cmd.args[i])
+			{
+				printf("Freeing ast->cmd.args[%d] (%d of %d)\n", i, i + 1, ast->cmd.arg_count);
 				free(ast->cmd.args[i]);
+			}
+			else
+				printf("ast->cmd.args[%d] is empty\n", i);
 		}
 		free(ast->cmd.args);
 		free(ast->cmd.exp);
 	}
+	else
+		printf("Found no cmd.args\n");
 	if (ast->cmd.path)
 		free(ast->cmd.path);
+	else
+		printf("Found no cmd.path\n");
 	free(ast);
 }
 
