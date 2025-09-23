@@ -1,10 +1,19 @@
-1.	Check semicolons, maybe as simple as defining them as the root node
-2.	Replace every justified malloc with a calloc
-3.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
-4.	Check multiple redirs
+DONE:
+X.	Check semicolons, maybe as simple as defining them as the root node
+=>	Subject explicitly says we do NOT need to handle semicolons.
+X.	Check multiple redirs
 	=> peut-être les mettre en série dans children de cmd ? vu que c'est la dernière redir qui fait foi
-5.	Check behaviour for echo $USER, something, wondering about that comma...
+=>	Once again, AST supremacy had the solution ready to be implemented without having to think about it.
 
+TO DO:
+O.	Replace every justified malloc with a calloc
+O.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
+O.	Check comments left in exec with norminette
+O.	Check behaviour for echo $USER, something, wondering about that comma...
+	=> Test:
+	[input] > echo Hi this is $USER, nice to meet you
+	[bash output] > Hi this is ivo, nice to meet you
+	[hell output] > Hi this is ivo nice to meet you
 
 
 FIN
