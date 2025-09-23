@@ -54,8 +54,6 @@ t_token *target)
 	content = ft_strdup(target->content);
 	if (!content)
 		return (NULL);
-//	printf("About to call create_redir_node with content: '%s' and type ", content);
-	print_node_type(type);
 	node = create_redir_node(type, content, data);
 	if (!node)
 		free(content);
