@@ -41,8 +41,7 @@ static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		i;
 	int		j;
 
-	name = cmd->args[index];
-	printf("About to expand name = %s\n", name);
+	name = cmd->args[index] + 1;
 	i = -1;
 	while (envp[++i])
 	{
@@ -52,7 +51,7 @@ static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 		if (envp[i][j] == '=')
 		{
 			free(cmd->args[index]);
-			return (expand_var(node, envp[i] + j, index));
+			return (expand_var(node, envp[i] + j + 1, index));
 		}
 	}
 	free(cmd->args[index]);
