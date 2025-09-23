@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:05:06 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/23 23:32:21 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	clean_data(t_shell *data)
 		free(data->paths);
 		data->paths = NULL;
 	}
-	free(get_minipath(NULL));
+//	free(get_minipath(NULL));
 	return (data->exit_status);
 }
 
