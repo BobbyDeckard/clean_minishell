@@ -4,6 +4,7 @@
 4.	Check multiple redirs
 	=> peut-être les mettre en série dans children de cmd ? vu que c'est la dernière redir qui fait foi
 5.	Check behaviour for echo $USER, something, wondering about that comma...
+6.	Maybe remove subshell part since not necessary
 
 
 
