@@ -36,7 +36,7 @@ void	malloc_error(t_ast *node, t_shell *data, t_token **tl)
 {
 	perror("malloc");
 	if (data)
-		clean_data(*data);
+		clean_data(data);
 	if (tl)
 		free_tokens(tl);
 	if (node)

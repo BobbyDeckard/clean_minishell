@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:21:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 18:41:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void		cleanup(t_ast *node);
 void		free_char_array(char **arr);
 void		free_char_array_size(char **arr, int i);
 int			char_arr_len(char **arr);
-int			clean_data(t_shell data);
+int			clean_data(t_shell *data);
 
 /* Error handling functions */
 void		getcwd_error(char **envp);
@@ -230,7 +230,7 @@ void		env_cpy_malloc_error(char **env_cpy, int i);
 //void		expander(t_token **token_list, t_shell *data);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
-void		get_trunc_cwd(char cwd[256], t_shell data);
+void		get_trunc_cwd(char cwd[256], t_shell *data);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
@@ -256,8 +256,8 @@ int			valid_parentheses(t_shell *data, t_token **token_list);
 int			valid_syntax(t_shell *data, t_token **token_list);
 
 /* Signal handling functions */
-void		init_execution_signals(char *command, t_shell data);
-void		init_interactive_signals(t_shell data);
+void		setup_execution_signals(char *command, t_shell *data);
+void		setup_interactive_signals(t_shell *data);
 void		setup_child_signals(void);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "../../../incl/minishell.h"
 
-static void	get_paths_error(t_shell data)
+static void	get_paths_error(t_shell *data)
 {
 	clean_data(data);
 	exit(1);
@@ -25,9 +25,9 @@ void	get_paths(t_shell *data)
 
 	all_paths = getenv("PATH");
 	if (!all_paths)
-		get_paths_error(*data);
+		get_paths_error(data);
 	paths = ft_split_paths(all_paths, ':');
 	if (!paths)
-		get_paths_error(*data);
+		get_paths_error(data);
 	data->paths = paths;
 }

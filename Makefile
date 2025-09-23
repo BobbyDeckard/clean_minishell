@@ -6,13 +6,13 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/12 00:04:53 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/12 18:44:08 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CLFAGS = -Wextra -Wall -Werror
+CLFAGS = -Wextra -Wall -Werror -g
 LFLAGS = -lreadline
 RM = rm
 RMFLAGS = -f
@@ -25,6 +25,7 @@ endif
 # SOURCES
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
+			 $(EXEC) \
 			 $(PARS) \
 			 $(UTLS) \
 			 $(SIGS)
@@ -111,7 +112,8 @@ UTLS_FILES = char_arr.c \
 			 trunc_cwd.c
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
-SIGS_FILES = init.c
+SIGS_FILES = children_signals.c \
+			 setup.c
 
 # INCLUDES
 HEADERS = incl/minishell.h

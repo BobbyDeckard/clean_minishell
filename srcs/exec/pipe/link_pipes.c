@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:26:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:35:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:25:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static void	set_fd_out(t_ast *node, int fd[2][2], int i)
 {

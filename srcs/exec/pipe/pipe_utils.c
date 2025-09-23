@@ -6,12 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:04:42 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:40:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:26:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
-#include <sys/wait.h>
+#include "../../../incl/minishell.h"
 
 void	close_redirs_and_unlink_heredoc(t_ast *node)
 {

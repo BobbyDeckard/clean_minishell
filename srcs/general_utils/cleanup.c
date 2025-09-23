@@ -12,27 +12,42 @@
 
 #include "../../incl/minishell.h"
 
-int	clean_data(t_shell data)
+int	clean_data(t_shell *data)
 {
 	int	i;
 
-	if (data.cmd)
-		free(data.cmd);
-	if (data.envp)
+	printf("clean_data() called\n");
+	if (data->cmd)
+	{
+		free(data->cmd);
+		data->cmd = NULL;
+		printf("Freed data.cmd\n");
+	}
+	else
+		printf("No data.cmd\n");
+	if (data->envp)
 	{
 		i = -1;
-		while (data.envp[++i])
-			free(data.envp[i]);
-		free(data.envp);
+		while (data->envp[++i])
+			free(data->envp[i]);
+		free(data->envp);
+		data->envp = NULL;
+		printf("Freed data.envp\n");
 	}
-	if (data.paths)
+	else
+		printf("No data.envp\n");
+	if (data->paths)
 	{
 		i = -1;
-		while (data.paths[++i])
-			free(data.paths[i]);
-		free(data.paths);
+		while (data->paths[++i])
+			free(data->paths[i]);
+		free(data->paths);
+		data->paths = NULL;
+		printf("Freed data.paths\n");
 	}
-	return (data.exit_status);
+	else
+		printf("No data.paths\n");
+	return (data->exit_status);
 }
 
 //	This function supposes non-malloc'ed variables are set to NULL
@@ -42,6 +57,7 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
+	printf("clean_ast() called\n");
 	if (ast->children)
 	{
 		i = -1;
@@ -67,12 +83,14 @@ void	clean_ast(t_ast *ast)
 
 void	cleanup(t_ast *node)
 {
-	clean_data(*node->data);
+	printf("cleanup() called\n");
+	clean_data(node->data);
 	clean_ast(node->root);
 }
 
 void	clean_exit(t_ast *node, int status)
 {
+	printf("clean_exit() called\n");
 	cleanup(node->root);
 	exit(status);
 }

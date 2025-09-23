@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:00:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:04:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:25:35 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 void	sigint_heredoc_handler(int sig)
 {

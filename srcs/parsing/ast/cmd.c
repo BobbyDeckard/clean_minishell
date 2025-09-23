@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:15:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:34:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 			handle_arg(data, cmd, current, j++);
 		else if (is_redir_token(current))
 			i++;
-		printf("Value of i: %d, value of j: %d\n", i, j);
 	}
 	cmd->args[j] = NULL;
 }
@@ -94,6 +93,7 @@ t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
 	t_ast	*node;
 	t_cmd	cmd;
 
+	printf("In parse_command()\n");
 	parse_cmd(data, &cmd, start, end);
 	node = create_cmd_node(data, tokens, cmd);
 	redirs = extract_redirs(data, cmd.args, start, end);

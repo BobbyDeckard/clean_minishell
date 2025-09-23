@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:42:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:46:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:27:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static void	found_path(t_cmd *cmd, char *path)
 {

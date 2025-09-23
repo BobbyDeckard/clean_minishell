@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:23:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 18:47:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,33 @@ void	print_data(t_shell data)
 		printf("data.paths[%d]: %s\n", i, data.paths[i]);
 }
 
-static t_shell	process_command(char *command, t_shell data)
+static void	process_command(char *command, t_shell *data)
 {
 	t_ast	*ast;
 	
 	add_history(command);
-	data.state = EXECUTING;
-	data.cmd = command;
-	init_execution_signals(command, data);
-	ast = parse(command, &data);
+	data->state = EXECUTING;
+	data->cmd = command;
+	setup_execution_signals(command, data);
+	ast = parse(command, data);
 	if (ast)
 	{
 		print_tree(ast);
-		data.exit_status = exec_ast(ast);
+//		printf("Tree finished printing\n\n");
+//		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 	}
 	if (g_signal_received == SIGINT)
 	{
-		data.exit_status = 130;
+		data->exit_status = 130;
 		g_signal_received = 0;
 	}
 	else if (g_signal_received == SIGQUIT)
 	{
 		write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-		data.exit_status = 131;
+		data->exit_status = 131;
 		g_signal_received = 0;
 	}
-	return (data);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -57,25 +57,28 @@ int	main(int ac, char **av, char **envp)
 	t_shell	data;
 	char	*command;
 	char	cwd[256];
+	int		should_exit;
 
 	if (ac != 1)
 		return (1);
 	(void) av;
 	data = init_shell_data(envp);
-	while (1)
+	should_exit = 0;
+	while (!should_exit)
 	{
-		init_interactive_signals(data);	// in loop ??
-		get_trunc_cwd(cwd, data);
+		data.state = INTERACTIVE;
+		setup_interactive_signals(&data);	// in loop ??
+		get_trunc_cwd(cwd, &data);
 		command = readline(cwd);
 		if (!command)
 		{
-			printf("exit\n");
-			break ;
+			should_exit = printf("exit\n");
+			continue ;
 		}
 		else if (*command)
-			data = process_command(command, data);
+			process_command(command, &data);
 		free(command);
 		data.cmd = NULL;
 	}
-	return (clean_data(data));
+	return (clean_data(&data));
 }

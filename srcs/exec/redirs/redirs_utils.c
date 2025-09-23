@@ -6,12 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:41:38 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:26:48 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
-#include <unistd.h>
+#include "../../../incl/minishell.h"
 
 void	close_redirs(t_cmd cmd)
 {

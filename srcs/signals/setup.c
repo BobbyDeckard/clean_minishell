@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   setup.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/28 09:35:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:17:06 by imeulema         ###   ########.fr       */
+/*   Created: 2025/09/12 18:42:38 by imeulema          #+#    #+#             */
+/*   Updated: 2025/09/12 18:43:48 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 volatile sig_atomic_t	g_signal_received = 0;
 
-static void	signal_handler_execution(int signum)
+void	signal_handler_execution(int signum)
 {
 	g_signal_received = signum;
 	if (signum == SIGINT)
 		write(STDOUT_FILENO, "\n", 1);
 }
 
-void	init_execution_signals(char *command, t_shell data)
+void	setup_execution_signals(char *command, t_shell *data)
 {
 	struct sigaction	sa;
 
@@ -47,7 +47,7 @@ void	init_execution_signals(char *command, t_shell data)
 	}
 }
 
-static void	signal_handler_interactive(int signum)
+void	signal_handler_interactive(int signum)
 {
 	g_signal_received = signum;
 	if (signum == SIGINT)
@@ -59,7 +59,7 @@ static void	signal_handler_interactive(int signum)
 	}
 }
 
-void	init_interactive_signals(t_shell data)
+void	setup_interactive_signals(t_shell *data)
 {
 	struct sigaction	sa;
 
@@ -68,7 +68,7 @@ void	init_interactive_signals(t_shell data)
 	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
-		perror("sigaction SIGQUIT");
+		perror("sigaction SIGINT");
 		clean_data(data);
 		exit(1);
 	}

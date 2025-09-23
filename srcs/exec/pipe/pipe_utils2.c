@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:44:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:47:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:26:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 int	count_nodes(t_ast **children)
 {

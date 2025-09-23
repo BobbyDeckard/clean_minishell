@@ -61,11 +61,15 @@ static void	print_node_info(t_ast *node)
 		printf("Path:\n\t%s\n", node->cmd.path);
 	if (node->cmd.args)
 	{
-		printf("Arguments:\n");
+		printf("Arguments (%p):\n", node->cmd.args);
 		i = -1;
 		while (node->cmd.args[++i])
+		{
+			printf("node->cmd.args[%d]: %p\n", i, node->cmd.args[i]);
 			printf("\t%s\n", node->cmd.args[i]);
+		}
 	}
+	printf("Finished printing arguments\n");
 	if (node->type == NODE_CMD)
 		printf("fd_in = %d\nfd_out = %d\n", node->cmd.fd_in, node->cmd.fd_out);
 	if (node->file)
@@ -94,6 +98,66 @@ void	print_tree(t_ast *ast)
 	}
 }
 
+void	print_token_type(t_token_type type)
+{
+	if (type == DEFAULT)
+		printf("DEFAULT");
+	else if (type == WORD)
+		printf("WORD");
+	else if (type == SPACE)
+		printf("SPACE");
+	else if (type == ASSIGNMENT)
+		printf("ASSIGNMENT");
+	else if (type == QUOTE)
+		printf("QUOTE");
+	else if (type == SINGLE_QUOTE)
+		printf("SINGLE_QUOTE");
+	else if (type == DOUBLE_QUOTE)
+		printf("DOUBLE_QUOTE");
+	else if (type == REDIR)
+		printf("REDIR");
+	else if (type == REDIR_IN)
+		printf("REDIR_IN");
+	else if (type == REDIR_OUT)
+		printf("REDIR_OUT");
+	else if (type == REDIR_APPEND)
+		printf("REDIR_APPEND");
+	else if (type == HEREDOC)
+		printf("HEREDOC");
+	else if (type == OPERATOR)
+		printf("OPERATOR");
+	else if (type == PIPE)
+		printf("PIPE");
+	else if (type == AND)
+		printf("AND");
+	else if (type == OR)
+		printf("OR");
+	else if (type == SEMICOLON)
+		printf("SEMICOLON");
+	else if (type == PARENTHESIS)
+		printf("PARENTHESIS");
+	else if (type == PAREN_OPEN)
+		printf("PAREN_OPEN");
+	else if (type == PAREN_CLOSE)
+		printf("PAREN_CLOSE");
+	else if (type == SPECIAL_CHARACTER)
+		printf("SPECIAL_CHARACTER");
+	else if (type == ENV_VAR)
+		printf("ENV_VAR");
+	else if (type == EXIT_STATUS)
+		printf("EXIT_STATUS");
+	else if (type == ESCAPE)
+		printf("ESCAPE");
+	else if (type == COMMENT)
+		printf("COMMENT");
+	else if (type == T_NEWLINE)
+		printf("T_NEWLINE");
+	else if (type == T_EOF)
+		printf("T_EOF");
+	else if (type == UNKNOWN)
+		printf("UNKNOWN");
+}
+
 void	print_token_list(t_token **token_list)
 {
 	t_token	*current;
@@ -109,8 +173,9 @@ void	print_token_list(t_token **token_list)
 	current = *token_list;
 	while (current)
 	{
-		printf("Token %d --> Type: %d, Content: '%s'\n",
-			token_count++, current->type, current->content);
+		printf("Token %d --> Type: ", token_count++);
+		print_token_type(current->type);
+		printf(", Content: '%s'\n", current->content);
 		current = current->next;
 	}
 	printf("\n");

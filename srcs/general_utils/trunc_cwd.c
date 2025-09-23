@@ -38,7 +38,7 @@ static void	trunc_cwd(char cwd[256], char full[256])
 	ft_strlcat(cwd, " ", 256);
 }
 
-void	get_trunc_cwd(char cwd[256], t_shell data)
+void	get_trunc_cwd(char cwd[256], t_shell *data)
 {
 	char	full[256];
 

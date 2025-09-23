@@ -85,7 +85,7 @@ t_ast	*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd)
 	}
 	data->root = node;
 	set_root_node(node, node);
-	node->cmd = cmd;
+	node->cmd.args = cmd.args;
 	return (node);
 }
 

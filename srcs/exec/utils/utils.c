@@ -6,12 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:33:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 16:37:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:27:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
-#include <unistd.h>
+#include "../../../incl/minishell.h"
 
 void	dup_fds(t_ast node)
 {

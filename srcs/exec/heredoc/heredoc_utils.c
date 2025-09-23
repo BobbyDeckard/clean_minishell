@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:27:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 16:54:17 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:29:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incl/minishell.h"
+#include "../../../incl/minishell.h"
 
 static int	check_and_open(char *name, t_ast *node, t_cmd *cmd)
 {
@@ -63,7 +63,7 @@ int	open_temp(t_ast *node, t_cmd *cmd)
 	return (find_name(name, node, cmd));
 }
 
-char	*copy_detimiter(t_ast *node)
+char	*copy_delimiter(t_ast *node)
 {
 	char	*del;
 	int		len;

@@ -15,7 +15,8 @@
 void	init_cmd(t_shell *data, t_cmd *cmd, int count)
 {
 	cmd->path = NULL;
-	cmd->args = (char **) ft_calloc(count, sizeof(char));
+	cmd->args = (char **) malloc(count * sizeof(char *));
+	printf("Allocated %d elements to cmd->args (%p)\n", count, cmd->args);
 	if (!cmd->args)
 		malloc_error(data->root, data, data->tokens);
 	cmd->exp = (int *) malloc(count * sizeof(int));

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:02:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:32:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ t_ast	*parse(char *command, t_shell *data)
 	ast = create_ast(token_list, data);
 	if (!ast)
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);
+	printf("Tree before freeing tokens:\n");
+	print_tree(ast);
 	free_tokens(token_list);
+	printf("Tree after freeing tokens:\n");
+	print_tree(ast);
 	return (ast);
 }

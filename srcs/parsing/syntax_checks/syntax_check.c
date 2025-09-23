@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 00:11:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/12 15:33:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static int	follows_quote(t_token *current)
 		quote++;
 	if (prev->type == SINGLE_QUOTE || prev->type == DOUBLE_QUOTE)
 		quote++;
-	printf("Counted %d quotes\n", quote);
 	return (quote);
 }
 
