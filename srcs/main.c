@@ -38,6 +38,7 @@ static void	process_command(char *command, t_shell *data)
 		print_tree(ast);
 //		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
+		data->root = NULL;
 	}
 	if (g_signal_received == SIGINT)
 	{
