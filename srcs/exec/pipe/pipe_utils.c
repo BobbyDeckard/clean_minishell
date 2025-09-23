@@ -20,7 +20,6 @@ void	close_redirs_and_unlink_heredoc(t_ast *node)
 
 void	close_pipes(int fd[2][2], int i, int count)
 {
-	// heh ?
 	if (i + 1 < count)
 		close(fd[i % 2][1]);
 	if (i > 0)

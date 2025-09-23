@@ -69,7 +69,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	del = copy_delimiter(node);
 	free(node->file);
 	if (!open_temp(node, cmd))
-		return ;	// need to do better
+		return ; // need to do better
 	stdin_backup = dup(STDIN_FILENO);
 	init_sp_handler_sig(node, &new, &old);
 	heredoc_loop(node, cmd, del, &stdin_backup);

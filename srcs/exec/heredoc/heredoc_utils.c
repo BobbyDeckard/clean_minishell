@@ -86,4 +86,3 @@ void	unlink_heredoc(t_ast *node)
 	while (node->children[++i] && node->children[i]->type == NODE_HEREDOC)
 		unlink(node->children[i]->file);
 }
-

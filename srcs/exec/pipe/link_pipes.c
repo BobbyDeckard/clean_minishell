@@ -15,7 +15,7 @@
 static void	set_fd_out(t_ast *node, int fd[2][2], int i)
 {
 	int	j;
-	
+
 	if (node->type == NODE_CMD)
 		node->cmd.fd_out = fd[i % 2][1];
 	else if (node->children)
@@ -61,4 +61,3 @@ void	link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i)
 			set_fd_in(cmd2->children[j], fd, i);
 	}
 }
-

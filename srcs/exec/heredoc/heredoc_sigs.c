@@ -29,7 +29,8 @@ struct sigaction *old)
 	sigaction(SIGINT, new, old);
 }
 
-void	heredoc_end(t_ast *node, struct sigaction *new, struct sigaction *old, int stdin_bu)
+void	heredoc_end(t_ast *node, struct sigaction *new, struct sigaction *old,
+int stdin_bu)
 {
 	sigaction(SIGINT, old, NULL);
 	if (stdin_bu >= 0)

@@ -40,6 +40,18 @@ int	clean_data(t_shell *data)
 	return (data->exit_status);
 }
 
+static void	clean_args(char **args, int count)
+{
+	int	i;
+
+	i = -1;
+	while (++i < count)
+	{
+		if (args[i])
+			free(args[i]);
+	}
+}
+
 //	This function supposes non-malloc'ed variables are set to NULL
 //	and that cmd.path is malloc'ed (which I think to be the case,
 //	but need to verify).
@@ -47,7 +59,6 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
-//	printf("Beginning clean_ast()\n");
 	if (ast->children)
 	{
 		i = -1;
@@ -55,31 +66,14 @@ void	clean_ast(t_ast *ast)
 			clean_ast(ast->children[i]);
 		free(ast->children);
 	}
-//	else
-//		printf("Found no children\n");
 	if (ast->cmd.args)
 	{
-//		printf("Found cmd.args, cmd.arg_count = %d\n", ast->cmd.arg_count);
-		i = -1;
-		while (++i < ast->cmd.arg_count)
-		{
-			if (ast->cmd.args[i])
-			{
-//				printf("Freeing ast->cmd.args[%d] (%d of %d)\n", i, i + 1, ast->cmd.arg_count);
-				free(ast->cmd.args[i]);
-			}
-//			else
-//				printf("ast->cmd.args[%d] is empty\n", i);
-		}
+		clean_args(ast->cmd.args, ast->cmd.arg_count);
 		free(ast->cmd.args);
 		free(ast->cmd.exp);
 	}
-//	else
-//		printf("Found no cmd.args\n");
 	if (ast->cmd.path)
 		free(ast->cmd.path);
-//	else
-//		printf("Found no cmd.path\n");
 	if (ast->file)
 		free(ast->file);
 	free(ast);

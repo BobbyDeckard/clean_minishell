@@ -95,6 +95,5 @@ t_token	**tokenize_command(t_shell *data, char *command)
 		}
 		token_list = extract_token(&command, type, data, token_list);
 	}
-//	expander(token_list, data);
 	return (token_list);
 }

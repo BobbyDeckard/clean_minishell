@@ -58,7 +58,8 @@ static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 	remove_var(node, cmd, index);
 }
 
-static void	expand_exit_status(t_ast *node, t_cmd *cmd, t_shell *data, int index)
+static void	expand_exit_status(t_ast *node, t_cmd *cmd, t_shell *data,
+int index)
 {
 	char	*str;
 	int		digits;

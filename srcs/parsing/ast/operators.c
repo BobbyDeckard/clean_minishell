@@ -72,12 +72,7 @@ t_ast	*parse_operator(t_shell *data, int start, int end, int op_pos)
 
 	current = get_token_at_index(data->tokens, op_pos);
 	if (!current)
-	{
-		printf("In parse_operator(), about to parse_command()\n");
-		t_ast	*command;
-		command = parse_command(data->tokens, start, end, data);
-		return (command);
-	}
+		return (parse_command(data->tokens, start, end, data));
 	type = convert_types(current->type);
 	left = parse_command_line(data->tokens, start, op_pos - 1, data);
 	right = parse_command_line(data->tokens, op_pos + 1, end, data);

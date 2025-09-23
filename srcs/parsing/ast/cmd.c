@@ -12,54 +12,23 @@
 
 #include "../../../incl/minishell.h"
 
-/*
-static char	**extract_args(t_token **tokens, int st_nd[2], t_shell *data, t_cmd *cmd)
-{
-	t_token	*current;
-	char	**args;
-	int		count;
-	int		i;
-	int		j;
-
-	count = count_args(tokens, st_nd[0], st_nd[1]);
-	args = (char **) malloc((count + 1) * sizeof(char *));
-	if (!args)
-		malloc_error(data->root, data, tokens);
-	i = st_nd[0] - 1;
-	j = 0;
-	while (++i <= st_nd[1] && j < count)
-	{
-		current = get_token_at_index(tokens, i);
-		if (!current)
-			break ;
-		if (is_arg(current->type))
-			args[j++] = sf_strdup(current->content, tokens, args, data);
-		else if (is_redir_token(current))
-			i++;
-	}
-	args[j] = NULL;
-	return (args);
-}
-*/
-
 static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
 {
 	if (current->type == ENV_VAR && current->needs_expansion)
 	{
-		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args, data);
-//		printf("Transferred %s from ENV_VAR token\n", cmd->args[j]);
+		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
+				data);
 		cmd->exp[j] = 1;
 	}
 	else if (current->type == EXIT_STATUS && current->needs_expansion)
 	{
 		cmd->args[j] = sf_strdup("$?", data->tokens, cmd->args, data);
-//		printf("Transferred %s from EXIT_STATUS token\n", cmd->args[j]);
 		cmd->exp[j] = 2;
 	}
 	else
 	{
-		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args, data);
-//		printf("Transferred %s from WORD token\n", cmd->args[j]);
+		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
+				data);
 		cmd->exp[j] = 0;
 	}
 }
@@ -81,8 +50,10 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 			break ;
 		else if (is_arg(current->type) && j < cmd->arg_count)
 			handle_arg(data, cmd, current, j++);
-		else if (is_redir_token(current))	// why would there be a redir token inside the args ?
+		else if (is_redir_token(current))
 			i++;
+		// Why would there be a redir token inside the args ?
+		// Check if we can remove or if we should just leave it there.
 	}
 	cmd->args[j] = NULL;
 }

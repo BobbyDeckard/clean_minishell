@@ -19,7 +19,9 @@ t_ast	*parse(char *command, t_shell *data)
 
 	token_list = tokenize_command(data, command);
 	if (!token_list)
-		return (NULL);	// check if tokenization errors should exit completely or not
+		return (NULL);
+	// As is, an error in tokenize_command() would give the prompt back.
+	// Check for error messages and eventual exit() calls to be made.
 	if (!valid_syntax(data, token_list))
 	{
 		free_tokens(token_list);
@@ -27,7 +29,6 @@ t_ast	*parse(char *command, t_shell *data)
 		return (NULL);
 	}
 	data->tokens = token_list;
-//	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	if (!ast)
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);

@@ -12,7 +12,8 @@
 
 #include "../../../incl/minishell.h"
 
-static t_token	*tokenize_exit_status(t_shell *data, t_token **tokens, char **command, t_token *token)
+static t_token	*tokenize_exit_status(t_shell *data, t_token **tokens,
+char **command, t_token *token)
 {
 	token->type = EXIT_STATUS;
 	token->content = (char *) malloc(3 * sizeof(char));
@@ -26,7 +27,8 @@ static t_token	*tokenize_exit_status(t_shell *data, t_token **tokens, char **com
 	return (token);
 }
 
-t_token	*tokenize_env_var(t_shell *data, t_token **tokens, char **command, t_token *token)
+t_token	*tokenize_env_var(t_shell *data, t_token **tokens, char **command,
+t_token *token)
 {
 	int	len;
 
