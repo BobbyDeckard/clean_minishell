@@ -61,14 +61,17 @@ int	main(int ac, char **av, char **envp)
 	char	cwd[256];
 	int		should_exit;
 
-	if (ac != 1)
-		return (1);
+//	if (ac != 1)
+//		return (1);
+	int	n = 0;
+	if (ac == 2)
+		n = ft_atoi(av[1]);
 	(void) av;
 	data = init_shell_data(envp);
 //	init_minipath(&data, envp);
 	should_exit = 0;
 	int	i = 0;
-	while (!should_exit && i++ < 3)
+	while (!should_exit || (n && i++ < n))
 	{
 		data.state = INTERACTIVE;
 		setup_interactive_signals(&data);	// in loop ??
