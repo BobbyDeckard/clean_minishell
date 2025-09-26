@@ -17,13 +17,23 @@ void	dup_fds(t_ast node)
 	if (node.cmd.fd_in != STDIN_FILENO && node.cmd.fd_in >= 0)
 	{
 		if (dup2(node.cmd.fd_in, STDIN_FILENO) == -1)
+		{
+			ft_putstr_fd("Failed to dup2 stdin for ", 1);
+			ft_putstr_fd(node.cmd.args[0], 1);
+			ft_putchar_fd('\n', 1);
 			dup2_error();
+		}
 		close(node.cmd.fd_in);
 	}
 	if (node.cmd.fd_out != STDOUT_FILENO && node.cmd.fd_out >= 0)
 	{
 		if (dup2(node.cmd.fd_out, STDOUT_FILENO) == -1)
+		{
+			ft_putstr_fd("Failed to dup2 stdout for ", 1);
+			ft_putstr_fd(node.cmd.args[0], 1);
+			ft_putchar_fd('\n', 1);
 			dup2_error();
+		}
 		close(node.cmd.fd_out);
 	}
 }

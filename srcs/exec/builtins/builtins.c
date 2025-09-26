@@ -21,7 +21,7 @@ static int	env(t_ast *node)
 		return (set_exit_status(node, 1));
 //	update_bltn(node->data);
 	envp = node->data->envp;
-	printf("Address of data: %p\n", node->data);
+//	printf("Address of data: %p\n", node->data);
 	i = -1;
 	while (envp[++i])
 	{

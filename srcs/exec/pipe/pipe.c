@@ -68,17 +68,20 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 	{
 		if (make_and_link_pipe(child, fd, i, count))
 			return (waitpids((*child)->root, pids, count));
-		if (child[i]->type == NODE_CMD && is_builtin(child[i]->cmd)
-			&& exec_builtin(child[i]))
+		if (child[i]->type == NODE_CMD && is_builtin(child[i]->cmd))
+		{
 			pids[i] = -2;
+			if (exec_builtin(child[i]))
+				pids[i] = -3;
+		}
 		else if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
 		{
 			if (make_redirs(child[i]))
-				pids[i] = -2;
+				pids[i] = -3;
 			else
 				get_cmd_path(child[i], &child[i]->cmd, child[i]->data->paths);
 		}
-		if (pids[i] != -2)
+		if (pids[i] > -2)
 		{
 			pids[i] = make_fork();
 //			ft_putstr_fd("Made fork: pids[", 1);
