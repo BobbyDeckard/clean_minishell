@@ -21,9 +21,19 @@ void	close_redirs_and_unlink_heredoc(t_ast *node)
 void	close_pipes(int fd[2][2], int i, int count)
 {
 	if (i + 1 < count)
+	{
 		close(fd[i % 2][1]);
+//		ft_putstr_fd("Closed fd[", 1);
+//		ft_putnbr_fd(i % 2, 1);
+//		ft_putstr_fd("][1]\n", 1);
+	}
 	if (i > 0)
+	{
 		close(fd[(i + 1) % 2][0]);
+//		ft_putstr_fd("Closed fd[", 1);
+//		ft_putnbr_fd((i + 1) % 2, 1);
+//		ft_putstr_fd("][0]\n", 1);
+	}
 }
 
 int	make_fork(void)

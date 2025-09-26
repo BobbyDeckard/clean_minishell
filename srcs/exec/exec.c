@@ -15,7 +15,10 @@
 void	exec_cmd(t_ast *node, t_cmd cmd)
 {
 	if (!cmd.path)
+	{
+//		ft_putstr_fd("Command has no path\n", 1);
 		return ;
+	}
 	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
 }
