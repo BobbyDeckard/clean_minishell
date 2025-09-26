@@ -5,19 +5,6 @@ X.	Check multiple redirs
 	=> peut-être les mettre en série dans children de cmd ? vu que c'est la dernière redir qui fait foi
 =>	Once again, AST supremacy had the solution ready to be implemented without having to think about it.
 
-
-
-
-
-
-TO DO ASAP:
-FIX PIPES ????!??!???!!!! TT
-
-
-
-
-
-
 TO DO:
 O.	Fix unset
 O.	Replace every justified malloc with a calloc
