@@ -61,17 +61,17 @@ int	main(int ac, char **av, char **envp)
 	char	cwd[256];
 	int		should_exit;
 
-//	if (ac != 1)
-//		return (1);
-	int	n = 0;
+	int	n;
+	int	i = 0;
 	if (ac == 2)
 		n = ft_atoi(av[1]);
+	else if (ac != 1)
+		return (1);
 	(void) av;
 	data = init_shell_data(envp);
 //	init_minipath(&data, envp);
 	should_exit = 0;
-	int	i = 0;
-	while (!should_exit || (n && i++ < n))
+	while (!should_exit)
 	{
 		data.state = INTERACTIVE;
 		setup_interactive_signals(&data);	// in loop ??
@@ -86,6 +86,11 @@ int	main(int ac, char **av, char **envp)
 			data = process_command(command, data);
 		free(command);
 		data.cmd = NULL;
+		if (n)
+		{
+			if (++i == n)
+				should_exit = printf("Iteration limit met (%d)\n", n);
+		}
 	}
 	return (clean_data(&data));
 }
