@@ -11,13 +11,13 @@ X.	Check behaviour for echo $USER, something, wondering about that comma...
 	[bash output] > Hi this is ivo, nice to meet you
 	[hell output] > Hi this is ivo nice to meet you
 X.	We should maybe not separate arguments containing env vars in order to print them right with the spaces
+X.	Check exit status globally...
 
 TO DO:
 O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
 O.	Check exit status with builtins in pipes
-O.	Check exit status globally...
 
 
 FIN
