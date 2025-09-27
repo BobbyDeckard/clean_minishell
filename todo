@@ -11,15 +11,16 @@ O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
 O.	Check quotes and expansion...
+O.	echo Hello I'm $USER, nice to meet you
+	leads to a segfault
 
 Problems with expander:
-O.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
 O.	Check behaviour for echo $USER, something, wondering about that comma...
 	=> Test:
 	[input] > echo Hi this is $USER, nice to meet you
 	[bash output] > Hi this is ivo, nice to meet you
 	[hell output] > Hi this is ivo nice to meet you
-
+O.	We should maybe not separate arguments containing env vars in order to print them right with the spaces
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
