@@ -37,9 +37,7 @@ static void	set_shlvl(char **env_cpy)
 	{
 		if (!ft_strncmp(env_cpy[i], "SHLVL=", 6))
 		{
-			printf("In set_shlvl(), found SHLVL var: %s\n", env_cpy[i]);
 			lvl = ft_atoi(env_cpy[i] + 6) + 1;
-			printf("lvl has been set to %d\n", lvl);
 			free(env_cpy[i]);
 			len = count_digits(lvl) + 8;
 			env_cpy[i] = (char *) malloc(len * sizeof(char));
