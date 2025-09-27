@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:13:35 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:54:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:57:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	remove_var(t_ast *node, t_cmd *cmd, int i)
 		cmd->arg_count--;
 		i++;
 	}
+	cmd->args[i] = NULL;
 }
 
 static void	expand_var(t_ast *node, char *entry, int index)
@@ -57,7 +58,6 @@ static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 		}
 	}
 	free(cmd->args[index]);
-	cmd->args[index] = NULL;
 	remove_var(node, cmd, index);
 }
 
