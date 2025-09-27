@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:04:42 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 19:44:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:04:29 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	waitpids(t_ast *root, int *pids, int cmd_count)
 			if (WIFEXITED(status))
 				status = WEXITSTATUS(status);
 		}
-		root->exit_status = status;
+		root->data->exit_status = status;
 	}
 	return (status);
 }

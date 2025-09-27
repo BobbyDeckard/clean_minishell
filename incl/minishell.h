@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 13:20:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:04:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct s_ast
 	t_shell			*data;
 	t_cmd			cmd;
 	char			*file;
-	int				exit_status;
 }	t_ast;
 
 /* GLOBAL VARIABLE */

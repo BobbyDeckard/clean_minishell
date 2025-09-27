@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:19:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 18:25:51 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:05:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exit_bltn(t_ast *node)
 	}
 	else
 	{
-		n = node->root->exit_status;
+		n = node->data->exit_status;
 		cleanup(node);
 		exit(n);
 	}

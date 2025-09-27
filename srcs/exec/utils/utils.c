@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:33:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:27:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:03:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	dup_fds(t_ast node)
 
 int	set_exit_status(t_ast *node, int status)
 {
-	node->root->exit_status = status;
+	node->data->exit_status = status;
 	return (status);
 }
