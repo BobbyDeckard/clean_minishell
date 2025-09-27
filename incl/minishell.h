@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:22:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 11:54:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ void		env_cpy_malloc_error(char **env_cpy, int i);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
+void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		init_minipath(t_shell *data, char **envp);
 void		mark_for_expansion(t_shell *data, t_token **tokens);

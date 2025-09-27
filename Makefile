@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/23 23:22:42 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/27 11:55:23 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ DATA_FILES = create_env_cpy.c \
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
 SNTX_FILES = mark_expansion.c \
 			 parentheses_check.c \
+			 quotes.c \
 			 spaces.c \
 			 special_characters.c \
 			 syntax_check.c

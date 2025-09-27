@@ -29,6 +29,7 @@ t_ast	*parse(char *command, t_shell *data)
 		return (NULL);
 	}
 	data->tokens = token_list;
+	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	if (!ast)
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);

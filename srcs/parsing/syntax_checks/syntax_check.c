@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:33:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 11:55:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,8 @@ static int	valid_quote_pairs(t_shell *data, t_token **token_list)
 	{
 		if (current->type == SINGLE_QUOTE && !in_double)
 			in_single = !in_single;
-		else if (current->type == SINGLE_QUOTE)
-			current = cat_word(data, current, current->previous, current->next);
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
-		else if (current->type == DOUBLE_QUOTE)
-			current = cat_word(data, current, current->previous, current->next);
-		else if (current->content && (in_double || in_single))
-			current = cat_word(data, current, current->previous, current->next);
 		current = current->next;
 	}
 	return (!in_single && !in_double);
@@ -117,5 +111,6 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 		return (printf("Invalid redir\n"), 0);
 	else if (!valid_parentheses(data, token_list))
 		return (printf("Invalid parentheses\n"), 0);
+	handle_quotes(data, token_list);
 	return (1);
 }

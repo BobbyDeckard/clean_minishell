@@ -20,6 +20,8 @@ static void	remove_var(t_ast *node, t_cmd *cmd, int i)
 	while (cmd->args[i + 1])
 	{
 		cmd->args[i] = cmd->args[i + 1];
+		cmd->exp[i] = cmd->exp[i + 1];
+		cmd->arg_count--;
 		i++;
 	}
 }
