@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:33:38 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:46:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_ast	*parse(char *command, t_shell *data)
 		return (NULL);
 	}
 	data->tokens = token_list;
-	print_token_list(token_list);
+//	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	if (!ast)
 		ft_putstr_fd("Failed to create AST\n", STDERR_FILENO);

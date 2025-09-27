@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:18:41 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:32:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:49:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,14 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		j;
 
 	name = get_name(node, cmd->args[index]);
+	printf("In expand_cat(), name is %s\n", name);
 	i = -1;
 	while (envp[++i])
 	{
 		j = 0;
 		while (name[j] && name[j] == envp[i][j])
 			j++;
-		if (envp[i][j] == '=')
+		if (envp[i][j] == '=' && !name[j])
 		{
 			free(name);
 			return (cat_var_in_word(node, cmd, envp[i] + j + 1, index));
