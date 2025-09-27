@@ -37,13 +37,15 @@ static void	set_shlvl(char **env_cpy)
 	{
 		if (!ft_strncmp(env_cpy[i], "SHLVL=", 6))
 		{
+			printf("In set_shlvl(), found SHLVL var: %s\n", env_cpy[i]);
 			lvl = ft_atoi(env_cpy[i] + 6) + 1;
+			printf("lvl has been set to %d\n", lvl);
 			free(env_cpy[i]);
 			len = count_digits(lvl) + 8;
 			env_cpy[i] = (char *) malloc(len * sizeof(char));
 			if (!env_cpy)
 				set_shlvl_malloc_error(env_cpy, i);
-			ft_strlcat(env_cpy[i], "SHLVL=", len);
+			ft_strlcpy(env_cpy[i], "SHLVL=", len);
 			level = ft_itoa(lvl);
 			ft_strlcat(env_cpy[i], level, len);
 			free(level);
@@ -78,7 +80,6 @@ static char	**init_env_cpy(char **envp, int entries)
 		ft_strlcpy(env_cpy[i], envp[i], len);
 	}
 	env_cpy[i] = NULL;
-	set_shlvl(env_cpy);
 	return (env_cpy);
 }
 
