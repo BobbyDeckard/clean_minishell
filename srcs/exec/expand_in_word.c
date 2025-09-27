@@ -6,47 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:18:41 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 15:12:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 15:12:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
-
-/*
-static void	cat_var_in_word(t_ast *node, t_cmd *cmd, char *entry, int index)
-{
-	char	*new;
-	int		varlen;
-	int		len;
-	int		i;
-	int		j;
-
-	varlen = name_len(node->cmd.args[index] + offset);
-	len = ft_strlen(entry) + ft_strlen(node->cmd.args[index]) - varlen + 1;
-	new = (char *) malloc(len * sizeof(char));
-	if (!new)
-		malloc_error(node, node->data, NULL);
-	i = -1;
-	while (node->cmd.args[index][++i] != '$')
-		new[i] = node->cmd.args[index][i];
-	new[i] = 0;
-	ft_strlcat(new, entry, len);
-	ft_strlcat(new, node->cmd.args[index] + offset + varlen, len);
-	free(node->cmd.args[index]);
-	node->cmd.args[index] = new;
-}
-
-static void	remove_var_from_word(t_ast *node, t_cmd *cmd, int index)
-{
-	char	*new;
-	int		len;
-
-	len = ft_strlen(node->cmd.args[index]) - name_len(node->cmd.args[index] + offset) + 1;
-	new = (char *) malloc(len * sizeof(char));
-	if (!new)
-		malloc_error(node, node->data, NULL);
-}
-*/
 
 static int	contains_dol(const char *str)
 {
