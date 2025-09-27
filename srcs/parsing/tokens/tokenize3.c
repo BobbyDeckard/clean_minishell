@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 11:52:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 23:33:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:03:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,26 @@ t_token	*tokenize_space(char **command, t_token *token)
 	token->content = NULL;
 	token->type = SPACE;
 	*command += len;
+	return (token);
+}
+
+t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command,
+t_token *token)
+{
+	int	len;
+
+	len = 1;
+	if (**command == '(')
+		token->type = PAREN_OPEN;
+	else if (**command == ')')
+		token->type = PAREN_CLOSE;
+	token->content = (char *) malloc(++len * sizeof(char));
+	if (!token->content)
+	{
+		free(token);
+		malloc_error(NULL, data, tl);
+	}
+	ft_strlcpy(token->content, *command, len);
+	*command += --len;
 	return (token);
 }

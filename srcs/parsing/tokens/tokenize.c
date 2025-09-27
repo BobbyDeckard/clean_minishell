@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:50:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:03:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,6 @@ t_token *token)
 	return (token);
 }
 
-t_token	*tokenize_parenthesis(t_shell *data, t_token **tl, char **command,
-t_token *token)
-{
-	int	len;
-
-	len = 1;
-	if (**command == '(')
-		token->type = PAREN_OPEN;
-	else if (**command == ')')
-		token->type = PAREN_CLOSE;
-	token->content = (char *) malloc(++len * sizeof(char));
-	if (!token->content)
-	{
-		free(token);
-		malloc_error(NULL, data, tl);
-	}
-	ft_strlcpy(token->content, *command, len);
-	*command += --len;
-	return (token);
-}
-
 t_token	*tokenize_quote(t_shell *data, t_token **tl, char **command,
 t_token *token)
 {
@@ -107,5 +86,27 @@ t_token *token)
 	}
 	ft_strlcpy(token->content, *command, len);
 	*command += --len;
+	return (token);
+}
+
+t_token	*handle_token_type(t_shell *data, char	**command, t_token_type type,
+t_token *token)
+{
+	if (type == WORD)
+		token = tokenize_word(data, data->tokens, command, token);
+	else if (type == QUOTE)
+		token = tokenize_quote(data, data->tokens, command, token);
+	else if (type == REDIR)
+		token = tokenize_redir(data, data->tokens, command, token);
+	else if (type == OPERATOR)
+		token = tokenize_operator(data, data->tokens, command, token);
+	else if (type == PARENTHESIS)
+		token = tokenize_parenthesis(data, data->tokens, command, token);
+	else if (type == SPECIAL_CHARACTER)
+		token = tokenize_special_character(data, data->tokens, command, token);
+	else if (type == SPACE)
+		token = tokenize_space(command, token);
+	else if (type == ENV_VAR)
+		token = tokenize_env_var(data, data->tokens, command, token);
 	return (token);
 }
