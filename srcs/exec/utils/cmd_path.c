@@ -42,7 +42,6 @@ static void	update_(t_shell *data, char *path)
 			break ;
 		}
 	}
-
 }
 
 static void	found_path(t_ast *node, t_cmd *cmd, char *path)

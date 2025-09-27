@@ -35,3 +35,21 @@ int	*init_pids(t_ast *root, int count)
 		pids[i] = -1;
 	return (pids);
 }
+
+void	prep_pipe_cmd(t_ast *node, int *pid)
+{
+	expander(node, &node->cmd);
+	if (is_builtin(node->cmd))
+	{
+		*pid = -2;
+		if (exec_builtin(node))
+			*pid = -3;
+	}
+	else
+	{
+		if (make_redirs(node))
+			*pid = -3;
+		else
+			get_cmd_path(node, &node->cmd, node->data->paths);
+	}
+}

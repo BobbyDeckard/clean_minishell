@@ -19,9 +19,7 @@ static int	env(t_ast *node)
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
-//	update_bltn(node->data);
 	envp = node->data->envp;
-//	printf("Address of data: %p\n", node->data);
 	i = -1;
 	while (envp[++i])
 	{
@@ -49,7 +47,6 @@ static int	pwd(t_ast *node)
 		unlink_heredoc(node);
 		return (set_exit_status(node, 1));
 	}
-//	update_bltn(node->data);
 	ft_putstr_fd(cwd, node->cmd.fd_out);
 	ft_putchar_fd('\n', node->cmd.fd_out),
 	free(cwd);
@@ -65,7 +62,6 @@ static int	echo(t_ast *node)
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
-//	update_bltn(node->data);
 	flag = 0;
 	if (!ft_strncmp(node->cmd.args[1], "-n", node->cmd.fd_out))
 		flag++;

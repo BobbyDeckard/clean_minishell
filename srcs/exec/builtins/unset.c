@@ -28,6 +28,27 @@ char	*copy_env_entry(t_ast *node, char **arr, int i, int j)
 	return (new);
 }
 
+static void	filter_and_copy(t_ast *node, char **envp, char **new,
+const char *remove)
+{
+	int	len;
+	int	i;
+	int	j;
+
+	len = ft_strlen(remove);
+	i = -1;
+	j = 0;
+	while (envp[++i])
+	{
+		if (ft_strncmp(envp[i], remove, len))
+		{
+			new[j] = copy_env_entry(node, new, i, j);
+			j++;
+		}
+	}
+	new[j] = NULL;
+}
+
 int	unset(t_ast *node)
 {
 	char	**new;
@@ -41,18 +62,7 @@ int	unset(t_ast *node)
 	new = (char **) malloc(i * sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
-	i = -1;
-	j = 0;
-	while (node->data->envp[++i])
-	{
-		len = ft_strlen(node->cmd.args[1]);
-		if (ft_strncmp(node->data->envp[i], node->cmd.args[1], len))
-		{
-			new[j] = copy_env_entry(node, new, i, j);
-			j++;
-		}
-	}
-	new[j] = NULL;
+	filter_and_copy(node, node->data->envp, new, node->cmd.args[1]);
 	free_char_array(node->data->envp);
 	node->data->envp = new;
 	return (set_exit_status(node, 0));

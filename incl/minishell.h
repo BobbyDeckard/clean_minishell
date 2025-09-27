@@ -247,6 +247,7 @@ void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		init_minipath(t_shell *data, char **envp);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
+void		prep_pipe_cmd(t_ast *node, int *pid);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
 int			count_args(t_token **tokens, int start, int end);
