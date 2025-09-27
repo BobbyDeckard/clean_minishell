@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/27 11:55:23 by imeulema         ###   ########.fr        #
+#    Updated: 2025/09/27 20:38:20 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,12 +77,11 @@ TKNS_FILES = token_types.c \
 # EXECUTION
 EXEC = $(addprefix exec/, $(EXEC_FILES))
 EXEC_FILES = exec.c \
-			 expander.c \
-			 expand_in_word.c \
 			 $(BLTN) \
 			 $(HRDC) \
 			 $(PIPE) \
 			 $(RDRS) \
+			 $(XPDR) \
 			 $(XUTL)
 BLTN = $(addprefix builtins/, $(BLTN_FILES))
 BLTN_FILES = builtins.c \
@@ -104,6 +103,9 @@ PIPE_FILES = link_pipes.c \
 RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redirs.c \
 			 redirs_utils.c
+XPDR = $(addprefix expander/, $(XPDR_FILES))
+XPDR_FILES = expander.c \
+			 utils.c
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \
 			 minipath.c \

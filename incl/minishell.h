@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:04:19 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:36:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,13 +154,16 @@ void		exit_bltn(t_ast *node);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
 void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
+void		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 void		handle_spaces(t_shell *data, t_token **tokens);
+void		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 void		heredoc_end(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old, int stdin_bu);
 void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
+void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
 void		update_bltn(t_shell *data);
 void		update_error(t_shell *data, char *path, int i);
@@ -175,6 +178,7 @@ int			exec_builtin(t_ast *node);
 int			exec_pipe(t_ast **children);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
+int			get_name_len(const char *str);
 int			has_equal(const char *str);
 int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
