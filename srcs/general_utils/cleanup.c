@@ -37,7 +37,6 @@ int	clean_data(t_shell *data)
 		free(data->paths);
 		data->paths = NULL;
 	}
-//	free(get_minipath(NULL));
 	return (data->exit_status);
 }
 
