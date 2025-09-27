@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 08:35:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 13:11:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:16:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_wordlen(char *content)
 
 	i = 0;
 	c = content[i];
-while (c && !is_space(c) && !is_quote(c) && !is_parenthesis(c)
+	while (c && !is_space(c) && !is_quote(c) && !is_parenthesis(c)
 		&& !is_redirection(c) && !is_logical_operator(c)
 		&& !is_special_character(c) && is_command_char(c))
 		c = content[++i];

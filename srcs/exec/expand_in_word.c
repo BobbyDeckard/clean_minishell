@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:18:41 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:00:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:17:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	contains_dol(const char *str)
 static int	get_name_len(const char *str)
 {
 	int	i;
-	
+
 	i = 1;
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 13:15:28 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:11:26 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	mark_for_expansion(t_shell *data, t_token **tokens)
 			current->needs_expansion = 1;
 		else if (current->type == EXIT_STATUS && !in_single)
 			current->needs_expansion = 1;
-		else if (current->type == WORD && contains_dol(current->content) && !in_single)
+		else if (current->type == WORD && contains_dol(current->content)
+			&& !in_single)
 			current->needs_expansion = 1;
 		current = current->next;
 	}
