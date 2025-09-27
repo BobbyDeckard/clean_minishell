@@ -39,9 +39,12 @@ static char	*get_name(t_ast *node, const char *str)
 	name = (char *) malloc(len * sizeof(char));
 	if (!name)
 		malloc_error(node, node->data, NULL);
-	i = 0;
-	while (++i < len)
+	i = 1;
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+	{
 		name[i - 1] = str[i];
+		i++;
+	}
 	name[i - 1] = 0;
 	return (name);
 }
