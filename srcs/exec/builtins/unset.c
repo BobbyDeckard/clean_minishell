@@ -52,7 +52,7 @@ int	unset(t_ast *node)
 			j++;
 		}
 	}
-	new[++j] = NULL;
+	new[j] = NULL;
 	free_char_array(node->data->envp);
 	node->data->envp = new;
 	return (set_exit_status(node, 0));
