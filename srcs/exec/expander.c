@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:13:35 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:57:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 14:59:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 		j = 0;
 		while (name[j] && name[j] == envp[i][j])
 			j++;
-		if (envp[i][j] == '=' && !name[j])
+		if (envp[i][j] == '=' && !ft_isalnum(name[j]) && name[j] != '_')
 		{
 			free(cmd->args[index]);
 			return (expand_var(node, envp[i] + j + 1, index));
