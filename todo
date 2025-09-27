@@ -6,18 +6,19 @@ X.	Check multiple redirs
 =>	Once again, AST supremacy had the solution ready to be implemented without having to think about it.
 
 TO DO:
-O.	Fix unset
 O.	Replace every justified malloc with a calloc
-O.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
 O.	Check comments left in exec with norminette
+0.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
+	+ when C^C, should not print ^C
+
+Problems with expander:
+O.	Fix unset
+O.	When we remove an arg caused by nonexistent var we should also remove the corresponding exp entry
 O.	Check behaviour for echo $USER, something, wondering about that comma...
 	=> Test:
 	[input] > echo Hi this is $USER, nice to meet you
 	[bash output] > Hi this is ivo, nice to meet you
 	[hell output] > Hi this is ivo nice to meet you
-0.	Maybe just get rid of the "_=..." env variable...
-0.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
-	+ when C^C, should not print ^C
 
 
 FIN
