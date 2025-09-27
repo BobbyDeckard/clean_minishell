@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:18:41 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 15:12:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 20:00:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static char	*get_name(t_ast *node, const char *str)
 
 	while (*str && *str != '$')
 		str++;
+	if (*(str + 1) == '?')
+		return (NULL);
 	len = get_name_len(str) + 1;
 	name = (char *) malloc(len * sizeof(char));
 	if (!name)
@@ -100,6 +102,29 @@ static void	remove_var_from_word(t_ast *node, t_cmd *cmd, int index)
 	cmd->args[index] = new;
 }
 
+static void	cat_exit_status_in_word(t_ast *node, t_cmd *cmd, int index)
+{
+	char	*exit_status;
+	char	*new;
+	int		len;
+	int		i;
+
+	exit_status = ft_itoa(node->data->exit_status);
+	i = 0;
+	while (cmd->args[index][i] && cmd->args[index][i] != '$')
+		i++;
+	len = ft_strlen(cmd->args[index]) + ft_strlen(exit_status) - 1;
+	new = (char *) malloc(len * sizeof(char));
+	if (!new)
+		malloc_error(node, node->data, NULL);
+	ft_strlcpy(new, cmd->args[index], i + 1);
+	ft_strlcat(new, exit_status, len);
+	ft_strlcat(new, cmd->args[index] + i + 2, len);
+	free(exit_status);
+	free(cmd->args[index]);
+	cmd->args[index] = new;
+}
+
 static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	char	*name;
@@ -108,6 +133,8 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		j;
 
 	name = get_name(node, cmd->args[index]);
+	if (!name)
+		return (cat_exit_status_in_word(node, cmd, index));
 	i = -1;
 	while (envp[++i])
 	{
