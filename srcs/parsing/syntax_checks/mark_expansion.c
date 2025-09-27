@@ -6,11 +6,24 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 00:11:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:15:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+static int	contains_dol(const char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == '$')
+			return (1);
+	}
+	return (0);
+}
 
 void	mark_for_expansion(t_shell *data, t_token **tokens)
 {
@@ -30,6 +43,8 @@ void	mark_for_expansion(t_shell *data, t_token **tokens)
 		else if (current->type == ENV_VAR && !in_single)
 			current->needs_expansion = 1;
 		else if (current->type == EXIT_STATUS && !in_single)
+			current->needs_expansion = 1;
+		else if (current->type == WORD && contains_dol(current->content) && !in_single)
 			current->needs_expansion = 1;
 		current = current->next;
 	}

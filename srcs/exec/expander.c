@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:13:35 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:21:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:20:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ void	expander(t_ast *node, t_cmd *cmd)
 			expand(node, cmd, node->data->envp, i);
 		else if (cmd->exp[i] == 2)
 			expand_exit_status(node, cmd, node->data, i);
+		else if (cmd->exp[i] == 3)
+			expand_in_word(node, cmd, node->data->envp, i);
 	}
 }

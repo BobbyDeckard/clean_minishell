@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:34:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:17:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
 	{
 		cmd->args[j] = sf_strdup("$?", data->tokens, cmd->args, data);
 		cmd->exp[j] = 2;
+	}
+	else if (current->type == WORD && current->needs_expansion)
+	{
+		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
+				data);
+		cmd->exp[j] = 3;
 	}
 	else
 	{

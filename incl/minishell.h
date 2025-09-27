@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 11:54:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 13:20:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ void		dup_fds(t_ast node);
 void		dup2_error(void);
 void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exit_bltn(t_ast *node);
+void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
 void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
 void		handle_spaces(t_shell *data, t_token **tokens);

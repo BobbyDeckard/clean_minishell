@@ -78,6 +78,7 @@ TKNS_FILES = token_types.c \
 EXEC = $(addprefix exec/, $(EXEC_FILES))
 EXEC_FILES = exec.c \
 			 expander.c \
+			 expand_in_word.c \
 			 $(BLTN) \
 			 $(HRDC) \
 			 $(PIPE) \
