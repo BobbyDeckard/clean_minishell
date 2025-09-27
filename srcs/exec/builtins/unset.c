@@ -42,12 +42,15 @@ int	unset(t_ast *node)
 	if (!new)
 		malloc_error(node, node->data, NULL);
 	i = -1;
-	j = -1;
+	j = 0;
 	while (node->data->envp[++i])
 	{
-		len = ft_strlen(node->cmd.args[1]) + 1;
+		len = ft_strlen(node->cmd.args[1]);
 		if (ft_strncmp(node->data->envp[i], node->cmd.args[1], len))
+		{
 			new[j] = copy_env_entry(node, new, i, j);
+			j++;
+		}
 	}
 	new[++j] = NULL;
 	free_char_array(node->data->envp);
