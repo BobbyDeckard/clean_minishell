@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 13:18:41 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:49:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/27 15:12:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,27 @@ static void	cat_var_in_word(t_ast *node, t_cmd *cmd, char *entry, int index)
 	cmd->args[index] = new;
 }
 
+static void	remove_var_from_word(t_ast *node, t_cmd *cmd, int index)
+{
+	char	*new;
+	int		name_len;
+	int		len;
+	int		i;
+
+	i = 0;
+	while (cmd->args[index][i] && cmd->args[index][i] != '$')
+		i++;
+	name_len = get_name_len(cmd->args[index] + i);
+	len = ft_strlen(cmd->args[index]) - name_len + 1;
+	new = (char *) malloc(len * sizeof(char));
+	if (!new)
+		malloc_error(node, node->data, NULL);
+	ft_strlcpy(new, cmd->args[index], i + 1);
+	ft_strlcat(new, cmd->args[index] + i + name_len, len);
+	free(cmd->args[index]);
+	cmd->args[index] = new;
+}
+
 static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	char	*name;
@@ -123,7 +144,6 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		j;
 
 	name = get_name(node, cmd->args[index]);
-	printf("In expand_cat(), name is %s\n", name);
 	i = -1;
 	while (envp[++i])
 	{
@@ -137,12 +157,11 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 		}
 	}
 	free(name);
-//	return (remove_var_from_word(node, cmd, index));
+	return (remove_var_from_word(node, cmd, index));
 }
 
 void	expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
-	int	i = 0;
-	while (contains_dol(cmd->args[index]) && ++i < 2)
+	while (contains_dol(cmd->args[index]))
 		expand_cat(node, cmd, envp, index);
 }
