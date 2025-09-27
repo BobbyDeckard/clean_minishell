@@ -4,23 +4,20 @@ X.	Check semicolons, maybe as simple as defining them as the root node
 X.	Check multiple redirs
 	=> peut-être les mettre en série dans children de cmd ? vu que c'est la dernière redir qui fait foi
 =>	Once again, AST supremacy had the solution ready to be implemented without having to think about it.
-
-TO DO:
-O.	Replace every justified malloc with a calloc
-O.	Check comments left in exec with norminette
-O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
-	+ when C^C, should not print ^C
-O.	Check quotes and expansion...
-O.	Handle echo $$
-O. Check exit status with builtins in pipes
-
-Problems with expander:
-O.	Check behaviour for echo $USER, something, wondering about that comma...
+X.	Handle echo $$
+X.	Check behaviour for echo $USER, something, wondering about that comma...
 	=> Test:
 	[input] > echo Hi this is $USER, nice to meet you
 	[bash output] > Hi this is ivo, nice to meet you
 	[hell output] > Hi this is ivo nice to meet you
-O.	We should maybe not separate arguments containing env vars in order to print them right with the spaces
+X.	We should maybe not separate arguments containing env vars in order to print them right with the spaces
+
+TO DO:
+O.	Check comments left in exec with norminette
+O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
+	+ when C^C, should not print ^C
+O. Check exit status with builtins in pipes
+
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
