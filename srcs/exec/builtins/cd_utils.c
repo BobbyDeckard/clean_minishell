@@ -14,9 +14,30 @@
 
 // Once unset, OLDPWD never comes back, unless export OLDPWD is called.
 // Then, it is masked until set ?
-void	update_pwd(t_ast *node, int i)
+void	update_pwd(t_ast *node, int i, char *oldpwd)
 {
-	
+	char	**envp;
+	char	*cwd;
+	int		len;
+
+	printf("In update_pwd()\n");
+	free(oldpwd);
+	envp = node->data->envp;
+	printf("About to free envp[%d] '%s'\n", i, envp[i]);
+	free(envp[i]);
+	cwd = getcwd(NULL, 0);
+	printf("cwd: '%s'\n", cwd);
+	len = ft_strlen(cwd) + 5;
+	envp[i] = (char *) malloc(len * sizeof(char));
+	if (!envp[i])
+	{
+		free(cwd);
+		malloc_error(node, node->data, NULL);
+	}
+	ft_strlcpy(envp[i], "PWD=", len);
+	ft_strlcat(envp[i], cwd, len);
+	printf("envp[%d]: '%s'\n", i, envp[i]);
+	free(cwd);
 }
 
 // At launch, OLDPWD shouldn't already be set.
@@ -27,5 +48,20 @@ void	update_pwd(t_ast *node, int i)
 // called once again, then env will only print OLDPWD correctly set.
 void	update_oldpwd(t_ast *node, int i, char *oldpwd)
 {
-	
+	char	**envp;
+	int		len;
+
+	printf("In update_oldpwd()\n");
+	envp = node->data->envp;
+	free(envp[i]);
+	len = ft_strlen(oldpwd) + 8;
+	envp[i] = (char *) malloc(len * sizeof(char));
+	if (!envp[i])
+	{
+		free(oldpwd);
+		malloc_error(node, node->data, NULL);
+	}
+	ft_strlcpy(envp[i], "OLDPWD=", len);
+	ft_strlcat(envp[i], oldpwd, len);
+	free(oldpwd);
 }

@@ -87,6 +87,7 @@ BLTN = $(addprefix builtins/, $(BLTN_FILES))
 BLTN_FILES = builtins.c \
 			 builtins_utils.c \
 			 cd.c \
+			 cd_utils.c \
 			 exit.c \
 			 export.c \
 			 export_var.c \

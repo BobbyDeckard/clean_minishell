@@ -167,6 +167,8 @@ void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
 void		update_bltn(t_shell *data);
 void		update_error(t_shell *data, char *path, int i);
+void		update_oldpwd(t_ast *node, int i, char *oldpwd);
+void		update_pwd(t_ast *node, int i, char *oldpwd);
 int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size);
 int			cd(t_ast *node);

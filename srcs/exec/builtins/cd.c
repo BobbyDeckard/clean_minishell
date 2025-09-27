@@ -28,12 +28,14 @@ static char	*cd_error(t_ast *node)
 	return (msg);
 }
 
-static void	update_both(t_ast *node, int i, int j)
+static void	update_both(t_ast *node, int i, int j, char *oldpwd)
 {
 	char	**envp;
 	char	*cwd;
 	int		len;
 
+	printf("In update_both()\n");
+	free(oldpwd);
 	envp = node->data->envp;
 	free(envp[j]);
 	len = ft_strlen(envp[i]) + 4;
@@ -47,7 +49,10 @@ static void	update_both(t_ast *node, int i, int j)
 	len = ft_strlen(cwd) + 5;
 	envp[i] = (char *) malloc(len * sizeof(char));
 	if (!envp[i])
+	{
+		free(cwd);
 		malloc_error(node->root, node->data, NULL);
+	}
 	ft_strlcpy(envp[i], "PWD=", len);
 	ft_strlcat(envp[i], cwd, len);
 	free(cwd);
@@ -71,11 +76,12 @@ static void	make_updates(t_ast *node, char *oldpwd)
 			break ;
 	}
 	if (node->root->data->envp[i] && node->root->data->envp[j])
-		update_both(node, i, j);
-//	else if (node->root->data->envp[i])
-//		update_pwd(node, i);
-//	else if (node->root->data->envp[j])
-//		update_oldpwd(node, j, oldpwd);
+		return (update_both(node, i, j, oldpwd));
+	else if (node->root->data->envp[i])
+		return (update_pwd(node, i, oldpwd));
+	else if (node->root->data->envp[j])
+		return (update_oldpwd(node, j, oldpwd));
+	//	If there is no PWD, oldpwd sets to NULL
 }
 
 int	cd(t_ast *node)
@@ -85,7 +91,7 @@ int	cd(t_ast *node)
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
-	oldpwd = getcwd(NULL, 0);
+//	oldpwd = getcwd(NULL, 0);
 	if (chdir(node->cmd.args[1]) < 0)
 	{
 		error = cd_error(node);
