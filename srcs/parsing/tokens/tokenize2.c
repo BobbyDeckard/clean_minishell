@@ -33,7 +33,6 @@ t_token *token)
 	char	*str;
 	int		i;
 
-	printf("In set_as_env_var()\n");
 	token->type = ENV_VAR;
 	(*command)++;
 	str = *command;
@@ -41,7 +40,6 @@ t_token *token)
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	token->content = ft_substr(str, 0, i);
-	printf("Set env var token's content to: %s\n", token->content);
 	*command += i;
 	return (token);
 }

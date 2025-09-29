@@ -49,50 +49,6 @@ static int	make_and_link_pipe(t_ast **child, int fd[2][2], int i, int count)
 	return (0);
 }
 
-
-/*
-static void	prep_pipe_cmd(t_ast *node, int *pid)
-{
-	expander(node, &node->cmd);
-	if (is_builtin(node->cmd))
-	{
-		*pid = -2;
-		if (exec_builtin(node))
-			*pid = -3;
-	}
-	else
-	{
-		if (make_redirs(node))
-			*pid = -3;
-		else
-			get_cmd_path(node, &node->cmd, node->data->paths);
-	}
-}
-
-static int	complicated_old_run_pipe(t_ast **child, int *pids, int count)
-{
-	int	fd[2][2];
-	int	i;
-
-	i = -1;
-	while (++i < count)
-	{
-		if (make_and_link_pipe(child, fd, i, count))
-			return (waitpids((*child)->root, pids, count));
-		if (child[i]->type == NODE_CMD)
-			prep_pipe_cmd(child[i], &pids[i]);
-		if (pids[i] > -2)
-			pids[i] = make_fork();
-		if (pids[i] == 0)
-			exec_pipe_child(child[i]);
-		if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
-			close_redirs_and_unlink_heredoc(child[i]);
-		close_pipes(fd, i, count);
-	}
-	return (waitpids((*child)->root, pids, count));
-}
-*/
-
 static int	run_pipe(t_ast **child, int *pids, int count)
 {
 	int	fd[2][2];

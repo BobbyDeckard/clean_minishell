@@ -25,11 +25,6 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu, char *del)
 		cmd->fd_in = -1;
 		write(STDOUT_FILENO, "\n", 1);
 	}
-//	else
-//	{
-//		printf("minishell: warning: here-document delimited by end-of-file");
-//		printf(" (wanted `%s')\n", del);
-//	}
 }
 
 static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_bu)

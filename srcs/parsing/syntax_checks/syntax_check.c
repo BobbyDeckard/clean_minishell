@@ -104,13 +104,13 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	handle_spaces(data, token_list);
 	mark_for_expansion(data, token_list);
 	if (!valid_quote_pairs(data, token_list))
-		return (printf("Invalid quotes\n"), 0);
+		return (1);
 	else if (!valid_operator(token_list))
-		return (printf("Invalid operator\n"), 0);
+		return (2);
 	else if (!valid_redir_target(token_list))
-		return (printf("Invalid redir\n"), 0);
+		return (3);
 	else if (!valid_parentheses(data, token_list))
-		return (printf("Invalid parentheses\n"), 0);
+		return (4);
 	handle_quotes(data, token_list);
-	return (1);
+	return (0);
 }
