@@ -49,6 +49,26 @@ static int	make_and_link_pipe(t_ast **child, int fd[2][2], int i, int count)
 	return (0);
 }
 
+
+/*
+static void	prep_pipe_cmd(t_ast *node, int *pid)
+{
+	expander(node, &node->cmd);
+	if (is_builtin(node->cmd))
+	{
+		*pid = -2;
+		if (exec_builtin(node))
+			*pid = -3;
+	}
+	else
+	{
+		if (make_redirs(node))
+			*pid = -3;
+		else
+			get_cmd_path(node, &node->cmd, node->data->paths);
+	}
+}
+
 static int	complicated_old_run_pipe(t_ast **child, int *pids, int count)
 {
 	int	fd[2][2];
@@ -71,6 +91,7 @@ static int	complicated_old_run_pipe(t_ast **child, int *pids, int count)
 	}
 	return (waitpids((*child)->root, pids, count));
 }
+*/
 
 static int	run_pipe(t_ast **child, int *pids, int count)
 {
