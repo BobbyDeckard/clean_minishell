@@ -12,45 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-static int	check_token(t_token **stack, t_token *current, int *top)
-{
-	if (current->type == PAREN_OPEN)
-	{
-		if (current->next && current->next->type == PAREN_CLOSE)
-			return (0);
-		stack[++(*top)] = current;
-	}
-	else if (current->type == PAREN_CLOSE)
-	{
-		if (*top < 0)
-			return (0);
-		(*top)--;
-	}
-	return (1);
-}
-
-int	valid_parentheses(t_shell *data, t_token **token_list)
-{
-	t_token	**stack;
-	t_token	*current;
-	t_token	*temp;
-	int		top;
-
-	stack = (t_token **) malloc(count_tokens(token_list) * sizeof(t_token));
-	if (!stack)
-		malloc_error(NULL, data, token_list);
-	temp = *token_list;
-	while (temp)
-		temp = temp->next;
-	top = -1;
-	current = *token_list;
-	while (current && check_token(stack, current, &top))
-		current = current->next;
-	if (top >= 0)
-		return (free(stack), 0);
-	return (free(stack), 1);
-}
-
 static t_token	*get_last_close(t_token **tokens)
 {
 	t_token	*last_close;
@@ -66,7 +27,8 @@ static t_token	*get_last_close(t_token **tokens)
 	return (last_close);
 }
 
-static int	paren_check_body(t_token *current, t_token *last_close, int end, int open)
+static int	paren_check_body(t_token *current, t_token *last_close, int end,
+int open)
 {
 	int	start;
 

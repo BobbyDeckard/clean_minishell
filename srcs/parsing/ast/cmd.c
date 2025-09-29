@@ -58,8 +58,6 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 			handle_arg(data, cmd, current, j++);
 		else if (is_redir_token(current))
 			i++;
-		// Why would there be a redir token inside the args ?
-		// Check if we can remove or if we should just leave it there.
 	}
 	cmd->args[j] = NULL;
 }
