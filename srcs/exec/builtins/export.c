@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 14:02:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:18:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	has_equal(const char *str)
 static void	print_export(t_ast *node, char **abc)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (abc[++i])
@@ -35,7 +36,16 @@ static void	print_export(t_ast *node, char **abc)
 		if (!ft_strncmp(abc[i], "_=", 2))
 			continue ;
 		ft_putstr_fd("declare -x ", node->cmd.fd_out);
-		ft_putstr_fd(abc[i], node->cmd.fd_out);
+		j = 0;
+		while (abc[i][j] && abc[i][j] != '=')
+			ft_putchar_fd(abc[i][j++], node->cmd.fd_out);
+		if (abc[i][j])
+		{
+			ft_putchar_fd(abc[i][j++], node->cmd.fd_out);
+			ft_putchar_fd('"', node->cmd.fd_out);
+			ft_putstr_fd(abc[i] + j, node->cmd.fd_out);
+			ft_putchar_fd('"', node->cmd.fd_out);
+		}
 		ft_putchar_fd('\n', node->cmd.fd_out);
 	}
 }
