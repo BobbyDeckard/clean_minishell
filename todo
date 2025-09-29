@@ -28,5 +28,15 @@ O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
 
+ERRORS MET:
+O:	echo ":>)">file
+		works, but
+	(echo ":>)")>file
+		doesn't
+O:	(cat file || cat infile) > outfile
+		doesn't work (bad ast)
+O:	(cat file || cat infile) | wc -l
+		dup2 error
+
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
