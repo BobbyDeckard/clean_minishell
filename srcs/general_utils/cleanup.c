@@ -52,9 +52,6 @@ static void	clean_args(char **args, int count)
 	}
 }
 
-//	This function supposes non-malloc'ed variables are set to NULL
-//	and that cmd.path is malloc'ed (which I think to be the case,
-//	but need to verify).
 void	clean_ast(t_ast *ast)
 {
 	int	i;
