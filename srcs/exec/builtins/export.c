@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 14:18:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:21:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static void	print_export(t_ast *node, char **abc)
 	i = -1;
 	while (abc[++i])
 	{
-		if (!ft_strncmp(abc[i], "_=", 2))
-			continue ;
 		ft_putstr_fd("declare -x ", node->cmd.fd_out);
 		j = 0;
 		while (abc[i][j] && abc[i][j] != '=')
