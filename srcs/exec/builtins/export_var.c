@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:43:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:24:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:17:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	create_var(t_ast *node, int size)
 {
 	int	len;
 
+	if (var_exists(node->cmd.args[1], node->data->envp))
+		return (set_exit_status(node, 0));
 	len = ft_strlen(node->cmd.args[1]) + 1;
 	node->data->envp = make_new_env(node, size + 1);
 	node->data->envp[size] = (char *) malloc(len * sizeof(char));

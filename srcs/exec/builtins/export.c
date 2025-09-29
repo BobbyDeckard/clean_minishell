@@ -86,7 +86,7 @@ int	export_bltn(t_ast *node)
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)
-		return (set_exit_status(node, 1));	// à vérifier
+		return (set_exit_status(node, 0));
 	else if (!node->cmd.args[1])
 		return (export_print(node, size));
 	else if (has_equal(node->cmd.args[1]))
