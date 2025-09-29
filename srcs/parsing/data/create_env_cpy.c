@@ -6,56 +6,83 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:32:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:57:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static void	create__(char **envp)
+static char	*create__(char **envp)
 {
-	envp[2] = (char *) malloc(15 * sizeof(char));
-	if (!envp[2])
+	char	*new;
+
+	new = (char *) malloc(15 * sizeof(char));
+	if (!new)
 	{
+		free(envp[0]);
 		free(envp[1]);
-		free(envp[0]);
+		free(envp[2]);
 		free(envp);
 		malloc_error(NULL, NULL, NULL);
 	}
-	ft_strlcat(envp[2], "_=/usr/bin/env", 15);
+	ft_strlcpy(new, "_=/usr/bin/env", 15);
+	return (new);
 }
 
-static void	create_shlvl(char **envp)
+static char	*create_shlvl(char **envp)
 {
-	envp[1] = (char *) malloc(8 * sizeof(char));
-	if (!envp[1])
+	char	*new;
+
+	new = (char *) malloc(8 * sizeof(char));
+	if (!new)
 	{
 		free(envp[0]);
+		free(envp[1]);
 		free(envp);
 		malloc_error(NULL, NULL, NULL);
 	}
-	ft_strlcat(envp[1], "SHLVL=1", 8);
+	ft_strlcpy(new, "SHLVL=1", 8);
+	return (new);
 }
 
-static void	create_pwd(char **envp)
+static char	*create_pwd(char **envp)
 {
+	char	*new;
 	char	*cwd;
 	int		len;
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		getcwd_error(envp);
-	len = ft_strlen(cwd + 5);
-	envp[0] = (char *) malloc(len * sizeof(char));
-	if (!envp[0])
 	{
+		perror("getcwd");
+		free(envp[0]);
+		free(envp);
+		exit(1);
+	}
+	len = ft_strlen(cwd) + 5;
+	new = (char *) malloc(len * sizeof(char));
+	if (!new)
+	{
+		free(envp[0]);
 		free(envp);
 		free(cwd);
 		malloc_error(NULL, NULL, NULL);
 	}
-	ft_strlcat(envp[0], "PWD=", len);
-	ft_strlcat(envp[0], cwd, len);
+	ft_strlcat(new, "PWD=", len);
+	ft_strlcat(new, cwd, len);
 	free(cwd);
+	return (new);
+}
+
+static char	*create_oldpwd(void)
+{
+	char	*old;
+
+	old = (char *) malloc(7 * sizeof(char));
+	if (!old)
+		malloc_error(NULL, NULL, NULL);
+	ft_strlcpy(old, "OLDPWD", 7);
+	return (old);
 }
 
 char	**create_env_cpy(void)
@@ -63,12 +90,13 @@ char	**create_env_cpy(void)
 	char	**envp;
 	int		len;
 
-	envp = (char **) malloc(4 * sizeof(char *));
+	envp = (char **) malloc(5 * sizeof(char *));
 	if (!envp)
 		malloc_error(NULL, NULL, NULL);
-	create_pwd(envp);
-	create_shlvl(envp);
-	create__(envp);
-	envp[3] = NULL;
+	envp[0] = create_oldpwd();
+	envp[1] = create_pwd(envp);
+	envp[2] = create_shlvl(envp);
+	envp[3] = create__(envp);
+	envp[4] = NULL;
 	return (envp);
 }

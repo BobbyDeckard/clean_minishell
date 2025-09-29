@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:25:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:02:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	print_export(t_ast *node, char **abc)
 	i = -1;
 	while (abc[++i])
 	{
+		if (!ft_strncmp(abc[i], "_=", 2))
+			continue ;
 		ft_putstr_fd("declare -x ", node->cmd.fd_out);
 		ft_putstr_fd(abc[i], node->cmd.fd_out);
 		ft_putchar_fd('\n', node->cmd.fd_out);
@@ -83,7 +85,6 @@ int	export_bltn(t_ast *node)
 	int	size;
 
 	size = char_arr_len(node->data->envp);
-	printf("Export has found array to have size: %d\n", size);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)
