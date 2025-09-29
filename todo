@@ -20,14 +20,13 @@ X.	Check behaviour for export with existing var, and for VAR= without following
 	=> If every env entry is unset, export prints nothing and returns 0
 X.	Check wtf_bash screenshot.......
 	=> To hell we won't try and reproduce that
+X.	Check exit status with builtins in pipes
+X.	Check exit status with builtins allover
 
 TO DO:
 O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
-O.	Check exit status with builtins in pipes
-O.	Check exit status with builtins allover
-
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
