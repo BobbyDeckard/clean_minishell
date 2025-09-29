@@ -34,7 +34,7 @@ void	exit_bltn(t_ast *node)
 {
 	int	n;
 
-	ft_putstr_fd("exit\n", STDOUT_FILENO);
+	ft_putstr_fd("exit\n", node->cmd.fd_out);
 	if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);

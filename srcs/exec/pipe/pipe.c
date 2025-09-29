@@ -25,8 +25,10 @@ static void	exec_pipe_child(t_ast *node)
 
 	setup_child_signals();
 	status = 1;
-	if (node->type == NODE_CMD)
+	if (node->type == NODE_CMD && !is_builtin(node->cmd))
 		exec_pipe_cmd(node);
+	else if (node->type == NODE_CMD)
+		status = exec_builtin(node);
 	else
 		status = exec_ast(node);
 	exit(status);
@@ -47,7 +49,7 @@ static int	make_and_link_pipe(t_ast **child, int fd[2][2], int i, int count)
 	return (0);
 }
 
-static int	run_pipe(t_ast **child, int *pids, int count)
+static int	complicated_old_run_pipe(t_ast **child, int *pids, int count)
 {
 	int	fd[2][2];
 	int	i;
@@ -68,6 +70,32 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 		close_pipes(fd, i, count);
 	}
 	return (waitpids((*child)->root, pids, count));
+}
+
+static int	run_pipe(t_ast **child, int *pids, int count)
+{
+	int	fd[2][2];
+	int	i;
+
+	i = -1;
+	while (++i < count)
+	{
+		if (make_and_link_pipe(child, fd, i, count))
+			return (waitpids(*child, pids, count));
+		if (child[i]->type == NODE_CMD)
+		{
+			expander(child[i], &child[i]->cmd);
+			if (!is_builtin(child[i]->cmd) && !make_redirs(child[i]))
+				get_cmd_path(child[i], &child[i]->cmd, child[i]->data->paths);
+		}
+		pids[i] = make_fork();
+		if (pids[i] == 0)
+			exec_pipe_child(child[i]);
+		if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
+			close_redirs_and_unlink_heredoc(child[i]);
+		close_pipes(fd, i, count);
+	}
+	return (waitpids(*child, pids, count));
 }
 
 int	exec_pipe(t_ast **children)

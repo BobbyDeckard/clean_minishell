@@ -46,7 +46,7 @@ int	make_pipe(int fd[2])
 	return (1);
 }
 
-int	waitpids(t_ast *root, int *pids, int cmd_count)
+int	waitpids(t_ast *node, int *pids, int cmd_count)
 {
 	int	status;
 	int	i;
@@ -55,17 +55,20 @@ int	waitpids(t_ast *root, int *pids, int cmd_count)
 	i = -1;
 	while (++i < cmd_count)
 	{
-		if (pids[i] == -3)
+		if (pids[i] < 0)
+		{
+			ft_putstr_fd("Found a pid < 0: ", 2);
+			ft_putnbr_fd(i, 2);
+			ft_putchar_fd('\n', 2);
 			status = 1;
-		else if (pids[i] == -1 || pids[i] == -2)
-			status = 0;
+		}
 		else
 		{
 			waitpid(pids[i], &status, 0);
 			if (WIFEXITED(status))
 				status = WEXITSTATUS(status);
 		}
-		root->data->exit_status = status;
+		node->data->exit_status = status;
 	}
 	return (status);
 }
