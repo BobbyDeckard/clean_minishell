@@ -20,13 +20,10 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 	char	*cwd;
 	int		len;
 
-	printf("In update_pwd()\n");
 	free(oldpwd);
 	envp = node->data->envp;
-	printf("About to free envp[%d] '%s'\n", i, envp[i]);
 	free(envp[i]);
 	cwd = getcwd(NULL, 0);
-	printf("cwd: '%s'\n", cwd);
 	len = ft_strlen(cwd) + 5;
 	envp[i] = (char *) malloc(len * sizeof(char));
 	if (!envp[i])
@@ -36,7 +33,6 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 	}
 	ft_strlcpy(envp[i], "PWD=", len);
 	ft_strlcat(envp[i], cwd, len);
-	printf("envp[%d]: '%s'\n", i, envp[i]);
 	free(cwd);
 }
 
@@ -51,7 +47,6 @@ void	update_oldpwd(t_ast *node, int i, char *oldpwd)
 	char	**envp;
 	int		len;
 
-	printf("In update_oldpwd()\n");
 	envp = node->data->envp;
 	free(envp[i]);
 	len = ft_strlen(oldpwd) + 8;
