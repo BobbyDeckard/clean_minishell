@@ -105,12 +105,12 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	mark_for_expansion(data, token_list);
 	if (!valid_quote_pairs(data, token_list))
 		return (1);
-	else if (!valid_operator(token_list))
+	handle_quotes(data, token_list);
+	if (!valid_operator(token_list))
 		return (2);
 	else if (!valid_redir_target(token_list))
 		return (3);
 	else if (!check_parentheses(data, token_list))
 		return (4);
-	handle_quotes(data, token_list);
 	return (0);
 }
