@@ -16,6 +16,8 @@ void	set_root_node(t_ast *ast, t_ast *root)
 {
 	int	i;
 
+	if (!ast || !root)
+		return ;
 	ast->root = root;
 	if (ast->children)
 	{
