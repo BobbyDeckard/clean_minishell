@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:35:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 17:13:45 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 14:04:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void	malloc_error(t_ast *node, t_shell *data, t_token **tl)
 		free_tokens(tl);
 	if (node)
 		clean_exit(node->root, 1);
+	exit(1);
 }
