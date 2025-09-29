@@ -57,9 +57,9 @@ int	waitpids(t_ast *node, int *pids, int cmd_count)
 	{
 		if (pids[i] < 0)
 		{
-			ft_putstr_fd("Found a pid < 0: ", 2);
-			ft_putnbr_fd(i, 2);
-			ft_putchar_fd('\n', 2);
+//			ft_putstr_fd("Found a pid < 0: ", 2);
+//			ft_putnbr_fd(i, 2);
+//			ft_putchar_fd('\n', 2);
 			status = 1;
 		}
 		else

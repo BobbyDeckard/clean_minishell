@@ -19,7 +19,7 @@ static void	exec_pipe_cmd(t_ast *node)
 	clean_exit(node->root, 1);
 }
 
-static void	exec_pipe_child(t_ast *node)
+void	exec_pipe_child(t_ast *node)
 {
 	int	status;
 
@@ -29,6 +29,10 @@ static void	exec_pipe_child(t_ast *node)
 		exec_pipe_cmd(node);
 	else if (node->type == NODE_CMD)
 		status = exec_builtin(node);
+	else if (node->type == NODE_AND_IF)
+		status = exec_pipe_and(node);
+	else if (node->type == NODE_OR_IF)
+		status = exec_pipe_or(node);
 	else
 		status = exec_ast(node);
 	exit(status);
@@ -60,11 +64,7 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 		if (make_and_link_pipe(child, fd, i, count))
 			return (waitpids(*child, pids, count));
 		if (child[i]->type == NODE_CMD)
-		{
-			expander(child[i], &child[i]->cmd);
-			if (!is_builtin(child[i]->cmd) && !make_redirs(child[i]))
-				get_cmd_path(child[i], &child[i]->cmd, child[i]->data->paths);
-		}
+			prep_cmd(child[i]);
 		pids[i] = make_fork();
 		if (pids[i] == 0)
 			exec_pipe_child(child[i]);

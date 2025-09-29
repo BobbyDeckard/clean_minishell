@@ -20,6 +20,8 @@ void	dup_fds(t_ast node)
 		{
 			ft_putstr_fd("Failed to dup2 stdin for ", 1);
 			ft_putstr_fd(node.cmd.args[0], 1);
+			ft_putchar_fd(' ', 1);
+			ft_putstr_fd(node.cmd.args[1], 1);
 			ft_putchar_fd('\n', 1);
 			dup2_error();
 		}
@@ -31,6 +33,8 @@ void	dup_fds(t_ast node)
 		{
 			ft_putstr_fd("Failed to dup2 stdout for ", 1);
 			ft_putstr_fd(node.cmd.args[0], 1);
+			ft_putchar_fd(' ', 1);
+			ft_putstr_fd(node.cmd.args[1], 1);
 			ft_putchar_fd('\n', 1);
 			dup2_error();
 		}

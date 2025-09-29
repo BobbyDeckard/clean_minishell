@@ -163,6 +163,7 @@ void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
+void		prep_cmd(t_ast *node);
 void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
 void		update_error(t_shell *data, char *path, int i);
@@ -177,6 +178,9 @@ int			create_var(t_ast *node, int size);
 int			exec_ast(t_ast *node);
 int			exec_builtin(t_ast *node);
 int			exec_pipe(t_ast **children);
+int			exec_pipe_and(t_ast *node);
+void		exec_pipe_child(t_ast *node);
+int			exec_pipe_or(t_ast *node);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
 int			get_name_len(const char *str);
