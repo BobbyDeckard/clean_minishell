@@ -22,6 +22,10 @@ O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be conside
 O.	Check exit status with builtins in pipes
 O.	Check exit status with builtins allover
 O.	Check wtf_bash screenshot.......
+O.	Check behaviour for export with existing var, and for VAR= without following
+	=> If var exists, nothing is done
+	=> If VAR= is given as argument, the env entry will be VAR=""
+	=> If every env entry is unset, export prints nothing and returns 0
 
 
 FIN
