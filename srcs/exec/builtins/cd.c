@@ -57,6 +57,7 @@ static void	update_both(t_ast *node, int i, int j, char *oldpwd)
 	free(cwd);
 }
 
+//	If there is no PWD, oldpwd sets to NULL !!!ONCE!!!
 static void	make_updates(t_ast *node, char *oldpwd)
 {
 	int	i;
@@ -80,7 +81,6 @@ static void	make_updates(t_ast *node, char *oldpwd)
 		return (update_pwd(node, i, oldpwd));
 	else if (node->root->data->envp[j])
 		return (update_oldpwd(node, j, oldpwd));
-	//	If there is no PWD, oldpwd sets to NULL !!!ONCE!!!
 }
 
 int	cd(t_ast *node)
