@@ -251,6 +251,7 @@ void		init_minipath(t_shell *data, char **envp);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
+int			check_parentheses(t_shell *data, t_token **tokens);
 int			count_args(t_token **tokens, int start, int end);
 int			count_tokens(t_token **token_list);
 int			count_redirs(t_token **tokens, int start, int end);

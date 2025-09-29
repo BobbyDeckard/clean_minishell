@@ -109,7 +109,7 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 		return (2);
 	else if (!valid_redir_target(token_list))
 		return (3);
-	else if (!valid_parentheses(data, token_list))
+	else if (!check_parentheses(data, token_list))
 		return (4);
 	handle_quotes(data, token_list);
 	return (0);
