@@ -30,18 +30,20 @@ O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be conside
 O.	Check that redirs overwrite pipes
 	=> They do, but maybe have a look around a bit more
 
-ERRORS MET:
+ERRORS MET AND SOLVED
+X.	(cat file || cat infile) | wc -l
+		dup2 error
+	=> Solved by returning to overforking as done earlier in project
+ERRORS MET YET NOT SOLVED:
 O.	echo ":>)">file
 		works, but
 	(echo ":>)")>file
 		doesn't
 O.	(cat file || cat infile) > outfile
 		doesn't work (bad ast)
-X.	(cat file || cat infile) | wc -l
-		dup2 error
-	=> Solved by returning to overforking as done earlier in project
 O.	(Cat file || cat infile) grep foo
 		should give a syntax error
+	=> Seems like all those errors come from a bad handling of redirs around spaces for once, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
