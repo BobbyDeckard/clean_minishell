@@ -27,16 +27,21 @@ TO DO:
 O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
+O.	Check that redirs overwrite pipes
+	=> They do, but maybe have a look around a bit more
 
 ERRORS MET:
-O:	echo ":>)">file
+O.	echo ":>)">file
 		works, but
 	(echo ":>)")>file
 		doesn't
-O:	(cat file || cat infile) > outfile
+O.	(cat file || cat infile) > outfile
 		doesn't work (bad ast)
-O:	(cat file || cat infile) | wc -l
+X.	(cat file || cat infile) | wc -l
 		dup2 error
+	=> Solved by returning to overforking as done earlier in project
+O.	(Cat file || cat infile) grep foo
+		should give a syntax error
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
