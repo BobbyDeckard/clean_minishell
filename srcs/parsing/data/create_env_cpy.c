@@ -68,7 +68,7 @@ static char	*create_pwd(char **envp)
 		free(cwd);
 		malloc_error(NULL, NULL, NULL);
 	}
-	ft_strlcat(new, "PWD=", len);
+	ft_strlcpy(new, "PWD=", len);
 	ft_strlcat(new, cwd, len);
 	free(cwd);
 	return (new);

@@ -21,7 +21,7 @@ static void	redir_error(t_ast *node)
 	str = (char *) malloc(len * sizeof(char));
 	if (!str)
 		malloc_error(node, node->data, NULL);
-	ft_strlcat(str, "minishell: ", len);
+	ft_strlcpy(str, "minishell: ", len);
 	ft_strlcat(str, node->file, len);
 	perror(str);
 	free(str);

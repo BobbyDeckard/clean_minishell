@@ -22,7 +22,7 @@ t_token *token)
 		free(token);
 		malloc_error(NULL, data, tl);
 	}
-	ft_strlcat(token->content, *command, 2);
+	ft_strlcpy(token->content, *command, 2);
 	(*command)++;
 	return (token);
 }
