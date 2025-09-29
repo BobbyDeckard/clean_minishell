@@ -165,7 +165,6 @@ void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
 void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
-void		update_bltn(t_shell *data);
 void		update_error(t_shell *data, char *path, int i);
 void		update_oldpwd(t_ast *node, int i, char *oldpwd);
 void		update_pwd(t_ast *node, int i, char *oldpwd);
