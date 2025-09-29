@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:42:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:21:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:43:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path)
 	update_(node->data, cmd->path);
 }
 
+static void	absolute_path(t_ast *node, t_cmd *cmd, char *path)
+{
+	cmd->path = ft_strdup(path);
+	update_(node->data, cmd->path);
+}
+
 void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 {
 	char	*full_path;
@@ -58,6 +64,8 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	int		i;
 
 	name = cmd->args[0];
+	if (!access(name, F_OK))
+		return (absolute_path(node, cmd, name));
 	i = -1;
 	while (paths && paths[++i])
 	{

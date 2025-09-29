@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:19:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:32:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	create_pwd(char **envp)
 	if (!cwd)
 		getcwd_error(envp);
 	len = ft_strlen(cwd + 5);
-	envp[0] = (char *) malloc(len * sizeof(char *));
+	envp[0] = (char *) malloc(len * sizeof(char));
 	if (!envp[0])
 	{
 		free(envp);

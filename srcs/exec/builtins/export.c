@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 22:47:14 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/29 13:25:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	export_bltn(t_ast *node)
 	int	size;
 
 	size = char_arr_len(node->data->envp);
+	printf("Export has found array to have size: %d\n", size);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)
