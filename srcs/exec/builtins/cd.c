@@ -81,7 +81,8 @@ static void	make_updates(t_ast *node, char *oldpwd)
 		return (update_pwd(node, i, oldpwd));
 	else if (node->root->data->envp[j])
 		return (update_oldpwd(node, j, oldpwd));
-	//	If there is no PWD, oldpwd sets to NULL
+	//	If there is no PWD, oldpwd sets to NULL !!!ONCE!!!
+	//
 }
 
 int	cd(t_ast *node)
@@ -91,7 +92,7 @@ int	cd(t_ast *node)
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
-//	oldpwd = getcwd(NULL, 0);
+	oldpwd = getcwd(NULL, 0);
 	if (chdir(node->cmd.args[1]) < 0)
 	{
 		error = cd_error(node);
