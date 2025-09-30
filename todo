@@ -34,18 +34,23 @@ ERRORS MET AND SOLVED
 X.	(cat file || cat infile) | wc -l
 		dup2 error
 	=> Solved by returning to overforking as done earlier in project
+X.	(cat file || cat infile) > outfile
+		doesn't work (bad ast)
+	=> Not totally solved but bash is just too random on this syntax:
+	-	< file (grep foo && grep bar) is considered a syntax error
+	-	(grep foo && grep bar) < file works only with the first grep
+	-	(cat file && cat file2) > outfile concatenates both files in outfile
 ERRORS MET YET NOT SOLVED:
 O.	echo ":>)">file
 		works, but
 	(echo ":>)")>file
 		doesn't
-O.	(cat file || cat infile) > outfile
-		doesn't work (bad ast)
 O.	(cat file || cat infile) grep foo
 		should give a syntax error
 	=> Seems like all those errors come from a bad handling of redirs around spaces for one, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
 O.	< file (grep foo && grep bar)
 	=> strange arg handling
+	=> + should be a syntax error to have a redir before parentheses
 
 
 FIN
