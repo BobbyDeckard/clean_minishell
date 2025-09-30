@@ -22,9 +22,9 @@ X.	Check wtf_bash screenshot.......
 	=> To hell we won't try and reproduce that
 X.	Check exit status with builtins in pipes
 X.	Check exit status with builtins allover
+X.	Check comments left in exec with norminette
 
 TO DO:
-O.	Check comments left in exec with norminette
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
 O.	Check that redirs overwrite pipes
@@ -40,11 +40,11 @@ X.	(cat file || cat infile) > outfile
 	-	< file (grep foo && grep bar) is considered a syntax error
 	-	(grep foo && grep bar) < file works only with the first grep
 	-	(cat file && cat file2) > outfile concatenates both files in outfile
-ERRORS MET YET NOT SOLVED:
-O.	echo ":>)">file
+X.	echo ":>)">file
 		works, but
 	(echo ":>)")>file
 		doesn't
+ERRORS MET YET NOT SOLVED:
 O.	(cat file || cat infile) grep foo
 		should give a syntax error
 	=> Seems like all those errors come from a bad handling of redirs around spaces for one, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
