@@ -37,7 +37,6 @@ static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
 				data);
 		cmd->exp[j] = 0;
 	}
-//	printf("Ending handle_arg() with cmd->args[%d] set to '%s'\n", j, cmd->args[j]);
 }
 
 static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
@@ -46,9 +45,7 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 	int		i;
 	int		j;
 
-//	printf("In parse_cmd()\n");
 	cmd->arg_count = count_args(data->tokens, start, end);
-//	printf("Counted %d arguments\n", cmd->arg_count);
 	init_cmd(data, cmd, cmd->arg_count + 1);
 	i = start - 1;
 	j = 0;
@@ -60,13 +57,9 @@ static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)
 		else if (is_arg(current->type) && j < cmd->arg_count)
 			handle_arg(data, cmd, current, j++);
 		else if (is_redir_token(current))
-		{
-//			printf("Found that is_redir_token() and skipping ?\n");
 			i++;
-		}
 	}
 	cmd->args[j] = NULL;
-//	printf("Ending parse_cmd() and setting cmd->args[%d] to NULL\n", j);
 }
 
 t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
@@ -75,7 +68,6 @@ t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
 	t_ast	*node;
 	t_cmd	cmd;
 
-//	printf("In parse_command()\n");
 	parse_cmd(data, &cmd, start, end);
 	node = create_cmd_node(data, tokens, cmd);
 	redirs = extract_redirs(data, cmd.args, start, end);
