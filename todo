@@ -29,6 +29,7 @@ O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be conside
 	+ when C^C, should not print ^C
 O.	Check that redirs overwrite pipes
 	=> They do, but maybe have a look around a bit more
+O.	Check that calls to ft_strdup or ft_substr are protected
 
 ERRORS MET AND SOLVED
 X.	(cat file || cat infile) | wc -l
