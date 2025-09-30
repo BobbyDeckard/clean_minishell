@@ -6,13 +6,18 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:25:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:30:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-#include <sys/fcntl.h>
-#include <unistd.h>
+
+static void	heredoc_error(t_ast *node, char *del)
+{
+	free(del);
+	cleanup(node);
+	ft_putstr_fd("minishell: error creating temporary here-document\n", 2);
+}
 
 static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu, char *del)
 {
@@ -63,8 +68,9 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	len = ft_strlen(node->file);
 	del = copy_delimiter(node);
 	free(node->file);
+	node->file = NULL;
 	if (!open_temp(node, cmd))
-		return ; // need to do better
+		heredoc_error(node, del);
 	stdin_backup = dup(STDIN_FILENO);
 	init_sp_handler_sig(node, &new, &old);
 	heredoc_loop(node, cmd, del, &stdin_backup);

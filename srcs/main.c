@@ -6,16 +6,16 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:21:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:25:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
 
-static t_shell process_command(char *command, t_shell data)
+static t_shell	process_command(char *command, t_shell data)
 {
 	t_ast	*ast;
-	
+
 	add_history(command);
 	data.state = EXECUTING;
 	data.cmd = command;
