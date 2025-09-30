@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:35:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:05:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,9 @@ void		print_tree(t_ast *ast);
 int			count_digits(int lvl);
 
 /* Parsing functions */
+t_node_type	convert_redir_type(t_token_type token_type);
 t_node_type	convert_types(t_token_type type);
+t_redir		*find_trailing_redirs(t_token **tokens, int start, int count, t_shell *data);
 t_token		**tokenize_command(t_shell *data, char *command);
 t_token		*cat_word(t_shell *data, t_token *current, t_token *prev,
 				t_token *next);
@@ -247,6 +249,7 @@ t_ast		*parse_command(t_token **tokens, int start, int end, t_shell *data);
 t_ast		*parse_command_line(t_token **tokens, int start, int end,
 				t_shell *data);
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
+t_ast		*parse_parentheses(t_token **tokens, int start, int end, t_shell *data);
 char		**copy_env(char **envp);
 char		**create_env_cpy(void);
 char		**ft_split_paths(const char *s, char c);
@@ -259,9 +262,12 @@ void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
+void		set_trailing_redirs(t_shell *data, t_ast *node, t_redir *redirs, int count);
+void		trailing_redir_error(t_ast *node, t_shell *data, t_token **tokens, t_redir *redirs);
 int			check_parentheses(t_shell *data, t_token **tokens);
 int			count_args(t_token **tokens, int start, int end);
 int			count_tokens(t_token **token_list);
+int			count_trailing_redirs(t_token *current, int start);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);
 int			find_lowest_precedence_op(t_token **tokens, int i, int end);
