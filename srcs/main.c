@@ -6,22 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:33:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:21:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
-
-void	print_data(t_shell data)
-{
-	int	i = -1;
-
-	while (data.envp[++i])
-		printf("data.envp[%d]: %s\n", i, data.envp[i]);
-	i = -1;
-	while (data.paths[++i])
-		printf("data.paths[%d]: %s\n", i, data.paths[i]);
-}
 
 static t_shell process_command(char *command, t_shell data)
 {
@@ -34,8 +23,6 @@ static t_shell process_command(char *command, t_shell data)
 	ast = parse(command, &data);
 	if (ast)
 	{
-//		printf("\n");
-//		print_tree(ast);
 		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		data.root = NULL;
@@ -54,6 +41,45 @@ static t_shell process_command(char *command, t_shell data)
 	return (data);
 }
 
+static char	*read_command(t_shell *data)
+{
+	char	*command;
+	char	cwd[256];
+
+	get_trunc_cwd(cwd, data);
+	command = readline(cwd);
+	return (command);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_shell	data;
+	char	*command;
+	int		should_exit;
+
+	if (ac != 1)
+		return (1);
+	(void) av;
+	data = init_shell_data(envp);
+	should_exit = 0;
+	while (!should_exit)
+	{
+		setup_interactive_signals(&data);
+		command = read_command(&data);
+		if (!command)
+		{
+			should_exit = printf("exit\n");
+			continue ;
+		}
+		else if (*command)
+			data = process_command(command, data);
+		free(command);
+		data.cmd = NULL;
+	}
+	return (clean_data(&data));
+}
+/*	DEBUG MAIN */
+/*
 int	main(int ac, char **av, char **envp)
 {
 	t_shell	data;
@@ -93,3 +119,4 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(&data));
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:42:38 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 18:43:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:19:37 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	setup_interactive_signals(t_shell *data)
 {
 	struct sigaction	sa;
 
+	data->state = INTERACTIVE;
 	sa.sa_handler = signal_handler_interactive;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
