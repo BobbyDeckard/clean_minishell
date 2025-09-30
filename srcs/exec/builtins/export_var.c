@@ -117,7 +117,9 @@ int	assign_var(t_ast *node, int size, int arg)
 		if (!node->data->envp[i])
 			malloc_error(node, node->data, NULL);
 		ft_strlcpy(node->data->envp[i], node->cmd.args[arg], len);
+		free(name);
 		return (set_exit_status(node, 0));
 	}
+	free(name);
 	return (create_var(node, size, arg));
 }
