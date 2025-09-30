@@ -105,6 +105,7 @@ int	export_bltn(t_ast *node)
 	i = 0;
 	while (node->cmd.args[++i])
 	{
+		printf("Currently working on arg[%d]: '%s'\n", i, node->cmd.args[i]);
 		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
 			status = 1;
 		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))

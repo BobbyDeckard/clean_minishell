@@ -62,20 +62,20 @@ static char	**make_new_env(t_ast *node, int size)
 	return (new);
 }
 
-static char	*get_var_name(t_ast *node)
+static char	*get_var_name(t_ast *node, int arg)
 {
 	char	*name;
 	int		i;
 
 	i = 0;
-	while (node->cmd.args[1][i] != '=')
+	while (node->cmd.args[arg][i] != '=')
 		i++;
-	name = (char *) malloc(i * sizeof(char));
+	name = (char *) malloc(++i * sizeof(char));
 	if (!name)
 		malloc_error(node, node->data, NULL);
 	name[--i] = 0;
 	while (--i >= 0)
-		name[i] = node->cmd.args[1][i];
+		name[i] = node->cmd.args[arg][i];
 	return (name);
 }
 
@@ -83,6 +83,7 @@ int	create_var(t_ast *node, int size, int arg)
 {
 	int	len;
 
+	printf("Creating var '%s' from arg %d\n", node->cmd.args[arg], arg);
 	if (var_exists(node->cmd.args[arg], node->data->envp))
 		return (set_exit_status(node, 0));
 	len = ft_strlen(node->cmd.args[arg]) + 1;
@@ -101,7 +102,8 @@ int	assign_var(t_ast *node, int size, int arg)
 	int		len;
 	int		i;
 
-	name = get_var_name(node);
+	name = get_var_name(node, arg);
+	printf("Assigning var '%s' to name '%s'\n", node->cmd.args[arg], name);
 	len = ft_strlen(name);
 	i = -1;
 	while (node->data->envp[++i])
