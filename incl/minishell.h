@@ -78,7 +78,6 @@ typedef enum e_token_type
 	T_EOF,
 	UNKNOWN
 }	t_token_type;
-
 /* STRUCTS */
 typedef struct s_token
 {
@@ -119,6 +118,13 @@ typedef struct s_ast
 	t_cmd			cmd;
 	char			*file;
 }	t_ast;
+
+typedef struct s_redir
+{
+	t_node_type	type;
+	char		*file;
+	
+}	t_redir;
 
 /* GLOBAL VARIABLE */
 extern volatile sig_atomic_t	g_signal_received;

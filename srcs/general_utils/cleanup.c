@@ -56,12 +56,20 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
+//	printf("clean_ast() called on node of type: ");
+//	print_node_type(ast->type);
+//	printf("\n");
 	if (ast->children)
 	{
+//		printf("Node has children, cleaning them now\n");
 		i = -1;
 		while (ast->children[++i])
 			clean_ast(ast->children[i]);
+//		printf("About to free children of node of type: ");
+//		print_node_type(ast->type);
+//		printf("\n");
 		free(ast->children);
+//		printf("Freed node's children\n");
 	}
 	if (ast->cmd.args)
 	{
@@ -72,7 +80,13 @@ void	clean_ast(t_ast *ast)
 	if (ast->cmd.path)
 		free(ast->cmd.path);
 	if (ast->file)
+	{
+//		printf("About to free file for node of type ");
+//		print_node_type(ast->type);
+//		printf(", address: %p\n", ast->file);
 		free(ast->file);
+//		printf("File freed\n");
+	}
 	free(ast);
 }
 

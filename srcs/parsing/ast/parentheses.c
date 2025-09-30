@@ -12,17 +12,17 @@
 
 #include "../../../incl/minishell.h"
 
-int	find_matching_parentheses(t_token **tokens, int open_pos, int end)
+int	find_matching_parentheses(t_token **tokens, int start, int end)
 {
 	t_token	*current;
 	int		lvl;
 	int		i;
 
-	current = get_token_at_index(tokens, open_pos);
+	current = get_token_at_index(tokens, start);
 	if (!current || current->type != PAREN_OPEN)
 		return (-1);
 	lvl = 1;
-	i = open_pos;
+	i = start;
 	while (++i <= end)
 	{
 		current = get_token_at_index(tokens, i);

@@ -35,6 +35,7 @@ t_ast	*create_subshell_node(t_ast *child, t_shell *data)
 {
 	t_ast	*node;
 
+	printf("Creating subshell node\n");
 	node = create_ast_node(data, NODE_SUBSHELL);
 	if (!node)
 		return (NULL);

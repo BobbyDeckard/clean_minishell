@@ -70,11 +70,16 @@ t_ast	*parse_operator(t_shell *data, int start, int end, int op_pos)
 	t_ast		*left;
 	t_ast		*node;
 
+//	printf("In parse_operator\n");
 	current = get_token_at_index(data->tokens, op_pos);
 	if (!current)
 		return (parse_command(data->tokens, start, end, data));
+//	if (current->content)
+//		printf("Current has content '%s'\n", current->content);
 	type = convert_types(current->type);
+//	printf("parse_operator about to call parse_command_line() for left child\n");
 	left = parse_command_line(data->tokens, start, op_pos - 1, data);
+//	printf("parse_operator about to call parse_command_line() for right child\n");
 	right = parse_command_line(data->tokens, op_pos + 1, end, data);
 	node = create_operator_node(type, left, right, data);
 	if (!node)

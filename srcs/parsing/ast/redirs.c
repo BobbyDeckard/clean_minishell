@@ -98,6 +98,7 @@ t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 
 	tokens = data->tokens;
 	count = count_redirs(tokens, start, end);
+//	printf("In extract_redirs(), counted %d redirs, start = %d and end = %d\n\n", count, start, end);
 	sec[0] = start;
 	sec[1] = end;
 	sec[2] = count;
