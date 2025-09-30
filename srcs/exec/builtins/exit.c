@@ -35,7 +35,9 @@ void	exit_bltn(t_ast *node)
 	int	n;
 
 	ft_putstr_fd("exit\n", node->cmd.fd_out);
-	if (node->cmd.args[1])
+	if (node->cmd.args[2])
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+	else if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);
 		n = ft_atoi(node->cmd.args[1]);
