@@ -75,16 +75,22 @@ static int	export_print(t_ast *node, int size)
 	char	**abc;
 	int		i;
 
+	printf("In export_print()\n");
 	abc = (char **) malloc((size + 1) * sizeof(char *));
 	if (!abc)
 		malloc_error(node, node->data, NULL);
 	i = -1;
 	while (node->data->envp[++i])
+	{
+//		printf("In loop, about to copy envp[%d]\n", i);
 		abc[i] = copy_env_entry(node, abc, i, i);
+//		printf("In loop, entry copied\n");
+	}
 	abc[i] = NULL;
 	order(abc);
 	print_export(node, abc);
 	free_char_array(abc);
+	printf("Exiting export_print()\n");
 	return (set_exit_status(node, 0));
 }
 
@@ -94,8 +100,10 @@ int	export_bltn(t_ast *node)
 	int	size;
 	int	i;
 
+	printf("Export builtin called\n");
 	status = 0;
 	size = char_arr_len(node->data->envp);
+	printf("size at the beginning of export: %d\n", size);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)
@@ -111,6 +119,7 @@ int	export_bltn(t_ast *node)
 		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))
 		   status = 1;
 		size = char_arr_len(node->data->envp);
+		printf("size in loop: %d\n", size);
 	}
 	return (status);
 }
