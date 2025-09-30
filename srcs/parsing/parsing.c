@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:06:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:33:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-static t_ast	*invalid_syntax(t_shell *data, t_token **tokens, int err)
+static t_ast	*invalid_syntax(t_token **tokens, int err)
 {
 	ft_putstr_fd("minishell: syntax error in command (", STDERR_FILENO);
 	if (err == 1)
@@ -42,7 +42,7 @@ t_ast	*parse(char *command, t_shell *data)
 	}
 	err = valid_syntax(data, token_list);
 	if (err)
-		return (invalid_syntax(data, token_list, err));
+		return (invalid_syntax(token_list, err));
 	data->tokens = token_list;
 	ast = create_ast(token_list, data);
 	free_tokens(token_list);

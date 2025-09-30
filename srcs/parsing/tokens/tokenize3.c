@@ -6,11 +6,17 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 11:52:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 13:03:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:44:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	tokenization_error(t_shell *data, t_token **tokens, t_token *token)
+{
+	free(token);
+	malloc_error(NULL, data, tokens);
+}
 
 static t_token	*tokenize_exit_status(t_shell *data, t_token **tokens,
 char **command, t_token *token)

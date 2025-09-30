@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:28:23 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 15:37:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:29:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ const char *remove)
 int	unset(t_ast *node)
 {
 	char	**new;
-	int		len;
 	int		i;
-	int		j;
 
 	i = char_arr_len(node->data->envp);
 	if (i == -1)

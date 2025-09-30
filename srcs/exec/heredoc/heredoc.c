@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:30:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:32:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	heredoc_error(t_ast *node, char *del)
 	ft_putstr_fd("minishell: error creating temporary here-document\n", 2);
 }
 
-static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu, char *del)
+static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu)
 {
 	if (!isatty(STDIN_FILENO))
 	{
@@ -32,7 +32,7 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu, char *del)
 	}
 }
 
-static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_bu)
+static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 {
 	char	*line;
 	int		len;
@@ -43,7 +43,7 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_bu)
 		line = readline("> ");
 		if (!line)
 		{
-			loop_sigint(node, cmd, stdin_bu, node->file);
+			loop_sigint(node, cmd, stdin_backup);
 			break ;
 		}
 		if (!ft_strncmp(line, del, len))
@@ -63,9 +63,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	struct sigaction	old;
 	char				*del;
 	int					stdin_backup;
-	int					len;
 
-	len = ft_strlen(node->file);
 	del = copy_delimiter(node);
 	free(node->file);
 	node->file = NULL;
@@ -74,7 +72,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	stdin_backup = dup(STDIN_FILENO);
 	init_sp_handler_sig(node, &new, &old);
 	heredoc_loop(node, cmd, del, &stdin_backup);
-	heredoc_end(node, &new, &old, stdin_backup);
+	heredoc_end(node, &old, stdin_backup);
 	if (cmd->fd_in != -1)
 	{
 		close(cmd->fd_in);

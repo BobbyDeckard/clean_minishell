@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:00:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:25:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:32:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ struct sigaction *old)
 	sigaction(SIGINT, new, old);
 }
 
-void	heredoc_end(t_ast *node, struct sigaction *new, struct sigaction *old,
+void	heredoc_end(t_ast *node, struct sigaction *old,
 int stdin_bu)
 {
 	sigaction(SIGINT, old, NULL);

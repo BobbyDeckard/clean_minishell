@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:11:26 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:37:20 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	contains_dol(const char *str)
 	return (0);
 }
 
-void	mark_for_expansion(t_shell *data, t_token **tokens)
+void	mark_for_expansion(t_token **tokens)
 {
 	t_token	*current;
 	int		in_double;

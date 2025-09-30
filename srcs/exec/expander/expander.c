@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:32:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:33:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static char	*get_name(t_ast *node, const char *str)
 static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	char	*name;
-	int		name_len;
 	int		i;
 	int		j;
 

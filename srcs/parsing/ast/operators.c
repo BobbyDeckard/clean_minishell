@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:19:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:07:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:34:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	find_lowest_precedence_op(t_token **tokens, int i, int end)
 	t_token	*current;
 	int		paren_lvl;
 	int		low_prec;
-	int		cur_prec;
 	int		res;
 
 	res = -1;

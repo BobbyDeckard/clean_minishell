@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:02:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:38:29 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static t_token	*cat_both(t_shell *data, t_token *current, int len)
 
 t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 {
-	char	*new;
 	int		len;
 
 	len = ft_strlen(current->content) + 1;

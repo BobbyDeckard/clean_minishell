@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:02:59 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:06:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:36:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int count)
 	malloc_error(node, data, data->tokens);
 }
 
-int	count_trailing_redirs(t_token *current, int start)
+int	count_trailing_redirs(t_token *current)
 {
 	int	count;
 
@@ -44,8 +44,6 @@ int	count_trailing_redirs(t_token *current, int start)
 
 t_node_type	convert_redir_type(t_token_type token_type)
 {
-	t_node_type	type;
-
 	if (token_type == REDIR_IN)
 		return (NODE_REDIR_IN);
 	else if (token_type == REDIR_OUT)

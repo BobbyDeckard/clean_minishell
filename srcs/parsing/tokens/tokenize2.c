@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 21:39:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:45:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_token *token)
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	token->content = ft_substr(str, 0, i);
+	if (!token->content)
+		tokenization_error(data, tl, token);
 	*command += i;
 	return (token);
 }
@@ -53,6 +55,8 @@ t_token *token)
 	{
 		token->type = EXIT_STATUS;
 		token->content = ft_strdup("?");
+		if (!token->content)
+			tokenization_error(data, tl, token);
 		*command += 2;
 	}
 	else if (ft_isalpha((*command)[1]) || (*command)[1] == '_')
@@ -61,6 +65,8 @@ t_token *token)
 	{
 		token->type = WORD;
 		token->content = ft_strdup("$");
+		if (!token->content)
+			tokenization_error(data, tl, token);
 		(*command)++;
 	}
 	return (token);
@@ -92,10 +98,7 @@ t_token *token)
 		define_bonus_operator(command, token, &len);
 	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
-	{
-		free(token);
-		malloc_error(NULL, data, tl);
-	}
+		tokenization_error(data, tl, token);
 	i = -1;
 	while (is_logical_operator((*command)[++i]) && i < len)
 		token->content[i] = (*command)[i];

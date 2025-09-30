@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:25:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:44:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,7 @@ void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
 void		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 void		handle_spaces(t_shell *data, t_token **tokens);
 void		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
-void		heredoc_end(t_ast *node, struct sigaction *new_action,
-				struct sigaction *old, int stdin_bu);
+void		heredoc_end(t_ast *node, struct sigaction *old, int stdin_bu);
 void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
@@ -263,20 +262,21 @@ void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
 void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
-void		mark_for_expansion(t_shell *data, t_token **tokens);
+void		mark_for_expansion(t_token **tokens);
 void		replace_children(t_ast *node, t_ast **redirs);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
 void		set_trailing_redirs(t_shell *data, t_ast *node, t_redir *redirs,
 				int count);
+void		tokenization_error(t_shell *data, t_token **tokens, t_token *token);
 void		trailing_redir_error(t_ast *node, t_shell *data, t_redir *redirs,
 				int count);
-int			check_parentheses(t_shell *data, t_token **tokens);
+int			check_parentheses(t_token **tokens);
 int			copy_existing_children(t_ast **redirs, t_ast *node, int count);
 int			count_args(t_token **tokens, int start, int end);
 int			count_children(t_ast *node);
 int			count_tokens(t_token **token_list);
-int			count_trailing_redirs(t_token *current, int start);
+int			count_trailing_redirs(t_token *current);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);
 int			find_lowest_precedence_op(t_token **tokens, int i, int end);

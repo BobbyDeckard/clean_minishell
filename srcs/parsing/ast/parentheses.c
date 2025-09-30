@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:12:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:04:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:36:20 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,12 @@ t_ast	*parse_parentheses(t_token **tokens, int start, int end, t_shell *data)
 	int		closing;
 	int		count;
 
+	node = NULL;
 	closing = find_matching_parentheses(tokens, start, end);
 	if (closing > start && closing <= end)
 		node = parse_command_line(tokens, start + 1, closing - 1, data);
 	current = get_token_at_index(tokens, closing + 1);
-	count = count_trailing_redirs(current, closing + 1);
+	count = count_trailing_redirs(current);
 	redirs = find_trailing_redirs(tokens, closing + 1, count, data);
 	apply_redirs(data, node, redirs, count);
 	closing = -1;

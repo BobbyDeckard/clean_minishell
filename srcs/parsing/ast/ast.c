@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:43:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:02:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:34:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ static t_ast	*create_subshell(t_token **tokens, int start, int end,
 t_shell *data)
 {
 	t_token	*current;
-	t_redir	*redirs;
-	t_ast	*node;
-	int		closing;
 
 	current = get_token_at_index(tokens, start);
 	if (start < end && current && current->type == PAREN_OPEN)
@@ -29,7 +26,6 @@ t_shell *data)
 t_ast	*parse_command_line(t_token **tokens, int start, int end,
 t_shell *data)
 {
-	t_node_type	type;
 	int			op_pos;
 
 	if (start > end)

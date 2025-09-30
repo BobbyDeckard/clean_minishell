@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 11:55:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:39:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	valid_redir_target(t_token **token_list)
 	return (1);
 }
 
-static int	valid_quote_pairs(t_shell *data, t_token **token_list)
+static int	valid_quote_pairs(t_token **token_list)
 {
 	t_token	*current;
 	int		in_double;
@@ -102,15 +102,15 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	if (!*token_list)
 		return (1);
 	handle_spaces(data, token_list);
-	mark_for_expansion(data, token_list);
-	if (!valid_quote_pairs(data, token_list))
+	mark_for_expansion(token_list);
+	if (!valid_quote_pairs(token_list))
 		return (1);
 	handle_quotes(data, token_list);
 	if (!valid_operator(token_list))
 		return (2);
 	else if (!valid_redir_target(token_list))
 		return (3);
-	else if (!check_parentheses(data, token_list))
+	else if (!check_parentheses(token_list))
 		return (4);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:57:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:37:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static char	*create_oldpwd(void)
 char	**create_env_cpy(void)
 {
 	char	**envp;
-	int		len;
 
 	envp = (char **) malloc(5 * sizeof(char *));
 	if (!envp)

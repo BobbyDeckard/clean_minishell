@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:44:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:20:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:37:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int open)
 	return (open == 0);
 }
 
-int	check_parentheses(t_shell *data, t_token **tokens)
+int	check_parentheses(t_token **tokens)
 {
 	t_token	*last_close;
 

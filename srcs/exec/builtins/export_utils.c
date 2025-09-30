@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:16:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:12:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:28:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ void	create_env_error(t_ast *node, char **new, int i)
 
 int	var_exists(char *name, char **envp)
 {
-	int	len;
 	int	i;
 	int	j;
 
-	len = ft_strlen(name);
 	i = -1;
 	while (envp[++i])
 	{
