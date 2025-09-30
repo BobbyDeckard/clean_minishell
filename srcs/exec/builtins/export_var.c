@@ -16,19 +16,29 @@ int	create_env(t_ast *node)
 {
 	char	**new;
 	int		len;
+	int		i;
 
-	new = (char **) malloc(2 * sizeof(char *));
+	i = -1;
+	while (node->cmd.args[++i])
+		continue ;
+	new = (char **) malloc(i * sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
-	len = ft_strlen(node->cmd.args[1]) + 1;
-	new[0] = (char *) malloc(len * sizeof(char));
-	if (!new[0])
+	i = -1;
+	while (node->cmd.args[++i + 1])
 	{
-		free(new);
-		malloc_error(node, node->data, NULL);
+		len = ft_strlen(node->cmd.args[i + 1]) + 1;
+		new[i] = (char *) malloc(len * sizeof(char));
+		if (!new[i])
+		{
+			while (--i >= 0)
+				free(new[i]);
+			free(new);
+			malloc_error(node, node->data, NULL);
+		}
+		ft_strlcpy(new[i], node->cmd.args[i + 1], len);
 	}
-	ft_strlcpy(new[0], node->cmd.args[1], len);
-	new[1] = NULL;
+	new[i] = NULL;
 	node->data->envp = new;
 	return (0);
 }
@@ -45,6 +55,9 @@ static char	**make_new_env(t_ast *node, int size)
 	while (node->data->envp[++i])
 		new[i] = copy_env_entry(node, new, i, i);
 	new[i] = NULL;
+	i = -1;
+	while (node->data->envp[++i])
+		free(node->data->envp[i]);
 	free(node->data->envp);
 	return (new);
 }
@@ -66,23 +79,23 @@ static char	*get_var_name(t_ast *node)
 	return (name);
 }
 
-int	create_var(t_ast *node, int size)
+int	create_var(t_ast *node, int size, int arg)
 {
 	int	len;
 
-	if (var_exists(node->cmd.args[1], node->data->envp))
+	if (var_exists(node->cmd.args[arg], node->data->envp))
 		return (set_exit_status(node, 0));
-	len = ft_strlen(node->cmd.args[1]) + 1;
+	len = ft_strlen(node->cmd.args[arg]) + 1;
 	node->data->envp = make_new_env(node, size + 1);
 	node->data->envp[size] = (char *) malloc(len * sizeof(char));
 	if (!node->data->envp[size])
 		malloc_error(node, node->data, NULL);
-	ft_strlcpy(node->data->envp[size], node->cmd.args[1], len);
+	ft_strlcpy(node->data->envp[size], node->cmd.args[arg], len);
 	node->data->envp[++size] = NULL;
 	return (set_exit_status(node, 0));
 }
 
-int	assign_var(t_ast *node, int size)
+int	assign_var(t_ast *node, int size, int arg)
 {
 	char	*name;
 	int		len;
@@ -99,12 +112,12 @@ int	assign_var(t_ast *node, int size)
 	if (node->data->envp[i])
 	{
 		free(node->data->envp[i]);
-		len = ft_strlen(node->cmd.args[1]) + 1;
+		len = ft_strlen(node->cmd.args[arg]) + 1;
 		node->data->envp[i] = (char *) malloc(len * sizeof(char));
 		if (!node->data->envp[i])
 			malloc_error(node, node->data, NULL);
-		ft_strlcpy(node->data->envp[i], node->cmd.args[1], len);
+		ft_strlcpy(node->data->envp[i], node->cmd.args[arg], len);
 		return (set_exit_status(node, 0));
 	}
-	return (create_var(node, size));
+	return (create_var(node, size, arg));
 }

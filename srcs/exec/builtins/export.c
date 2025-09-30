@@ -90,8 +90,11 @@ static int	export_print(t_ast *node, int size)
 
 int	export_bltn(t_ast *node)
 {
+	int	status;
 	int	size;
+	int	i;
 
+	status = 0;
 	size = char_arr_len(node->data->envp);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
@@ -99,8 +102,14 @@ int	export_bltn(t_ast *node)
 		return (set_exit_status(node, 0));
 	else if (!node->cmd.args[1])
 		return (export_print(node, size));
-	else if (has_equal(node->cmd.args[1]))
-		return (assign_var(node, size));
-	else
-		return (create_var(node, size));
+	i = 0;
+	while (node->cmd.args[++i])
+	{
+		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
+			status = 1;
+		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))
+		   status = 1;
+		size = char_arr_len(node->data->envp);
+	}
+	return (status);
 }
