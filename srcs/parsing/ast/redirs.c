@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 17:18:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:06:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 
 	tokens = data->tokens;
 	count = count_redirs(tokens, start, end);
-//	printf("In extract_redirs(), counted %d redirs, start = %d and end = %d\n\n", count, start, end);
 	sec[0] = start;
 	sec[1] = end;
 	sec[2] = count;

@@ -6,13 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:02:59 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:32:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:06:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-void	trailing_redir_error(t_ast *node, t_shell *data, t_redir *redirs, int count)
+void	trailing_redir_error(t_ast *node, t_shell *data, t_redir *redirs,
+int count)
 {
 	int	i;
 

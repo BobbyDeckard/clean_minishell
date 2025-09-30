@@ -6,13 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:01:47 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:33:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:07:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-t_redir	*find_trailing_redirs(t_token **tokens, int start, int count, t_shell *data)
+t_redir	*find_trailing_redirs(t_token **tokens, int start, int count,
+t_shell *data)
 {
 	t_token	*current;
 	t_redir	*redirs;
@@ -36,7 +37,8 @@ t_redir	*find_trailing_redirs(t_token **tokens, int start, int count, t_shell *d
 	return (redirs);
 }
 
-void	set_trailing_redirs(t_shell *data, t_ast *node, t_redir *redirs, int count)
+void	set_trailing_redirs(t_shell *data, t_ast *node, t_redir *redirs,
+int count)
 {
 	t_ast	**new;
 	char	*file;
