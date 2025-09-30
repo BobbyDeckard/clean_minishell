@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:25:59 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 20:04:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static t_shell	process_command(char *command, t_shell data)
 	return (data);
 }
 
+/*
 static char	*read_command(t_shell *data)
 {
 	char	*command;
@@ -78,8 +79,9 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(&data));
 }
+*/
 /*	DEBUG MAIN */
-/*
+
 int	main(int ac, char **av, char **envp)
 {
 	t_shell	data;
@@ -119,4 +121,4 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(&data));
 }
-*/
+

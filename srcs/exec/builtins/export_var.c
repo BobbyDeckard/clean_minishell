@@ -21,7 +21,7 @@ int	create_env(t_ast *node)
 	i = -1;
 	while (node->cmd.args[++i])
 		continue ;
-	new = (char **) malloc(i * sizeof(char *));
+	new = (char **) ft_calloc(i, sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
 	i = -1;
@@ -43,12 +43,12 @@ static char	**make_new_env(t_ast *node, int size)
 	char	**new;
 	int		i;
 
-	new = (char **) malloc(size * sizeof(char *));
+	new = (char **) ft_calloc(size, sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
 	i = -1;
 	while (node->data->envp[++i])
-		new[i] = copy_env_entry(node, new, i, i);
+		new[i] = copy_env_entry(node, new, i);
 	new[i] = NULL;
 	i = -1;
 	while (node->data->envp[++i])

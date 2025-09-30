@@ -75,13 +75,12 @@ static int	export_print(t_ast *node, int size)
 	char	**abc;
 	int		i;
 
-	abc = (char **) malloc((size + 1) * sizeof(char *));
+	abc = (char **) ft_calloc(size + 1, sizeof(char *));
 	if (!abc)
 		malloc_error(node, node->data, NULL);
 	i = -1;
 	while (node->data->envp[++i])
-		abc[i] = copy_env_entry(node, abc, i, i);
-	abc[i] = NULL;
+		abc[i] = copy_env_entry(node, abc, i);
 	order(abc);
 	print_export(node, abc);
 	free_char_array(abc);

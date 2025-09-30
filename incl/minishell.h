@@ -148,7 +148,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* Exec functions */
 char		*copy_delimiter(t_ast *node);
-char		*copy_env_entry(t_ast *node, char **arr, int i, int j);
+char		*copy_env_entry(t_ast *node, char **arr, int i);
 void		close_pipes(int fd[2][2], int i, int count);
 void		close_redirs(t_cmd cmd);
 void		close_redirs_and_unlink_heredoc(t_ast *node);
