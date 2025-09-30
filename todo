@@ -41,9 +41,12 @@ O.	echo ":>)">file
 		doesn't
 O.	(cat file || cat infile) > outfile
 		doesn't work (bad ast)
-O.	(Cat file || cat infile) grep foo
+O.	(cat file || cat infile) grep foo
 		should give a syntax error
-	=> Seems like all those errors come from a bad handling of redirs around spaces for once, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
+	=> Seems like all those errors come from a bad handling of redirs around spaces for one, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
+O.	< file (grep foo && grep bar)
+	=> strange arg handling
+
 
 FIN
 Vérifier la fiche d'éval sur discord avec Pierre
