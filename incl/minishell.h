@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:05:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:36:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ t_token		*tokenize_word(t_shell *data, t_token **tl, char **command,
 				t_token *token);
 t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
+t_ast		**malloc_new(t_ast *node, t_redir *redirs, int count, int size);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
 t_ast		*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd);
 t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
@@ -254,18 +255,22 @@ char		**copy_env(char **envp);
 char		**create_env_cpy(void);
 char		**ft_split_paths(const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
+void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
 void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
+void		replace_children(t_ast *node, t_ast **redirs);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
 void		set_trailing_redirs(t_shell *data, t_ast *node, t_redir *redirs, int count);
-void		trailing_redir_error(t_ast *node, t_shell *data, t_token **tokens, t_redir *redirs);
+void		trailing_redir_error(t_ast *node, t_shell *data, t_redir *redirs, int count);
 int			check_parentheses(t_shell *data, t_token **tokens);
+int			copy_existing_children(t_ast **redirs, t_ast *node, int count);
 int			count_args(t_token **tokens, int start, int end);
+int			count_children(t_ast *node);
 int			count_tokens(t_token **token_list);
 int			count_trailing_redirs(t_token *current, int start);
 int			count_redirs(t_token **tokens, int start, int end);
