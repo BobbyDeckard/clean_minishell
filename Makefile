@@ -85,7 +85,6 @@ EXEC_FILES = exec.c \
 			 $(XUTL)
 BLTN = $(addprefix builtins/, $(BLTN_FILES))
 BLTN_FILES = builtins.c \
-			 builtins_utils.c \
 			 cd.c \
 			 cd_utils.c \
 			 exit.c \
@@ -110,7 +109,6 @@ XPDR_FILES = expander.c \
 			 utils.c
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \
-			 minipath.c \
 			 utils.c
 
 # GENERAL UTILS

@@ -203,7 +203,6 @@ int			var_exists(char *name, char **envp);
 int			waitpids(t_ast *root, int *pids, int cmd_count);
 
 /* General utils functions */
-char		*get_minipath(char *str);
 char		*sf_strdup(const char *s, t_token **tokens, char **args,
 				t_shell *data);
 void		print_node_type(t_node_type type);
@@ -257,7 +256,6 @@ void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
 void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
-void		init_minipath(t_shell *data, char **envp);
 void		mark_for_expansion(t_shell *data, t_token **tokens);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
