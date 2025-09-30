@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:43:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 14:08:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:13:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,7 @@ int	create_env(t_ast *node)
 		len = ft_strlen(node->cmd.args[i + 1]) + 1;
 		new[i] = (char *) malloc(len * sizeof(char));
 		if (!new[i])
-		{
-			while (--i >= 0)
-				free(new[i]);
-			free(new);
-			malloc_error(node, node->data, NULL);
-		}
+			create_env_error(node, new, i);
 		ft_strlcpy(new[i], node->cmd.args[i + 1], len);
 	}
 	new[i] = NULL;
@@ -48,7 +43,7 @@ static char	**make_new_env(t_ast *node, int size)
 	char	**new;
 	int		i;
 
-	new = (char **) malloc(size* sizeof(char *));
+	new = (char **) malloc(size * sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
 	i = -1;

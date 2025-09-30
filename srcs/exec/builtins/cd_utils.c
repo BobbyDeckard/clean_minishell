@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:22:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:36:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:10:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 
 // At launch, OLDPWD shouldn't already be set.
 // If unset PWD is called before OLDPWD is initialized, cd once then env
-// prints no WD variable, cd once more then env and there is OLDPWD correctly set.
+// prints no WD variable, cd once more then env and there is OLDPWD correctly
+// set.
 // If unset PWD is called after OLDPWD is initialized, env only prints OLDPWD
 // until cd is called, then env will not print any WD variable until cd is
 // called once again, then env will only print OLDPWD correctly set.

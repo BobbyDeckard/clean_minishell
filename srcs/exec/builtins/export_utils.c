@@ -6,11 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:16:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:21:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:12:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	create_env_error(t_ast *node, char **new, int i)
+{
+	while (--i >= 0)
+		free(new[i]);
+	free(new);
+	malloc_error(node, node->data, NULL);
+}
 
 int	var_exists(char *name, char **envp)
 {

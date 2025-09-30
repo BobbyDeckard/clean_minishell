@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:04:42 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:10:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:08:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,7 @@ int	waitpids(t_ast *node, int *pids, int cmd_count)
 	while (++i < cmd_count)
 	{
 		if (pids[i] < 0)
-		{
-//			ft_putstr_fd("Found a pid < 0: ", 2);
-//			ft_putnbr_fd(i, 2);
-//			ft_putchar_fd('\n', 2);
 			status = 1;
-		}
 		else
 		{
 			waitpid(pids[i], &status, 0);

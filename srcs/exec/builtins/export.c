@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 14:21:43 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:14:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	export_bltn(t_ast *node)
 		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
 			status = 1;
 		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))
-		   status = 1;
+			status = 1;
 		size = char_arr_len(node->data->envp);
 	}
 	return (status);

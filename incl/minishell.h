@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 16:36:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/09/30 17:12:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void		close_redirs(t_cmd cmd);
 void		close_redirs_and_unlink_heredoc(t_ast *node);
 void		dup_fds(t_ast node);
 void		dup2_error(void);
+void		create_env_error(t_ast *node, char **envp, int i);
 void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exit_bltn(t_ast *node);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
