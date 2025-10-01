@@ -10,12 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/minishell.h"
+#include "../../incl/minishell.h"
 
-static void	get_paths_error(t_shell *data)
+void	update_paths(t_ast *node, t_shell *data, const char *arg)
 {
-	clean_data(data);
-	exit(1);
+	char	**paths;
+	int		i;
+
+	paths = ft_split_paths(data, arg, ':');
+	if (!paths)
+		malloc_error(node, data, NULL);
+	if (data->paths)
+	{
+		i = -1;
+		while (data->paths && data->paths[++i])
+		{
+			free(data->paths[i]);
+			data->paths[i] = NULL;
+		}
+		free(data->paths);
+	}
+	data->paths = paths;
 }
 
 void	get_paths(t_shell *data)
@@ -24,10 +39,6 @@ void	get_paths(t_shell *data)
 	char	*all_paths;
 
 	all_paths = getenv("PATH");
-	if (!all_paths)
-		get_paths_error(data);
-	paths = ft_split_paths(all_paths, ':');
-	if (!paths)
-		get_paths_error(data);
+	paths = ft_split_paths(data, all_paths, ':');
 	data->paths = paths;
 }

@@ -173,6 +173,7 @@ void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
 void		update_error(t_shell *data, char *path, int i);
 void		update_oldpwd(t_ast *node, int i, char *oldpwd);
+void		update_paths(t_ast *node, t_shell *data, const char *new_paths);
 void		update_pwd(t_ast *node, int i, char *oldpwd);
 int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size, int arg);
@@ -254,7 +255,7 @@ t_ast		*parse_parentheses(t_token **tokens, int start, int end,
 				t_shell *data);
 char		**copy_env(char **envp);
 char		**create_env_cpy(void);
-char		**ft_split_paths(const char *s, char c);
+char		**ft_split_paths(t_shell *data, const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);

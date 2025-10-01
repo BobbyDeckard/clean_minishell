@@ -97,14 +97,16 @@ static char	**make_splits(char **tab, const char *s, unsigned int i, char c)
 }
 
 // variation de ft_split, qui alloue un char de plus et ajoute un / final
-char	**ft_split_paths(const char *s, char c)
+char	**ft_split_paths(t_shell *data, const char *s, char c)
 {
 	char			**tab;
 	unsigned int	i;
 
+	if (!s)
+		return (NULL);
 	tab = (char **) malloc(count_elements(s, c) * sizeof(char *));
 	if (!tab)
-		return (NULL);
+		malloc_error(data->root, data, NULL);
 	i = 0;
 	tab[0] = 0;
 	while (s[i] == c && c)

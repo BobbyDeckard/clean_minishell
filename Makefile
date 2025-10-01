@@ -59,7 +59,6 @@ DATA_FILES = create_env_cpy.c \
 			 env_cpy.c \
 			 env_errors.c \
 			 ft_split_paths.c \
-			 paths.c \
 			 shell_data.c
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
 SNTX_FILES = mark_expansion.c \
@@ -119,6 +118,7 @@ UTLS = $(addprefix general_utils/, $(UTLS_FILES))
 UTLS_FILES = char_arr.c \
 			 cleanup.c \
 			 errors.c \
+			 paths.c \
 			 print.c \
 			 safer_libft.c \
 			 trunc_cwd.c

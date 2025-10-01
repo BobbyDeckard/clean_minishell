@@ -12,6 +12,14 @@
 
 #include "../../incl/minishell.h"
 
+void	sf_free(void **ptr)
+{
+	if (!*ptr)
+		return ;
+	free(*ptr);
+	*ptr = NULL;
+}
+
 char	*sf_strdup(const char *s, t_token **tokens, char **args, t_shell *data)
 {
 	size_t	len;
