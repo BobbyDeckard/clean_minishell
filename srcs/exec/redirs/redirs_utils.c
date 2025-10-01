@@ -15,6 +15,7 @@
 
 void	close_redirs(t_cmd *cmd)
 {
+	// Big change maybe BEWARE
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
 		close(cmd->fd_in);
