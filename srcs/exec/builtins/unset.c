@@ -83,6 +83,8 @@ int	unset(t_ast *node)
 	int		len;
 	int		i;
 
+	if (make_redirs(node))
+		return (set_exit_status(node, 1));
 	len = char_arr_len(node->data->envp) - char_arr_len(node->cmd.args) + 2;
 	if (len == -1)
 		return (set_exit_status(node, 1));
@@ -98,5 +100,6 @@ int	unset(t_ast *node)
 	filter_and_copy(node, node->data->envp, new, node->cmd.args);
 	free_char_array(node->data->envp);
 	node->data->envp = new;
+	close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }

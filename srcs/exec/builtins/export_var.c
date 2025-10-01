@@ -35,6 +35,7 @@ int	create_env(t_ast *node)
 	}
 	new[i] = NULL;
 	node->data->envp = new;
+	close_all_redirs(node);
 	return (0);
 }
 
@@ -87,6 +88,7 @@ int	create_var(t_ast *node, int size, int arg)
 		malloc_error(node, node->data, NULL);
 	ft_strlcpy(node->data->envp[size], node->cmd.args[arg], len);
 	node->data->envp[++size] = NULL;
+	close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
 
@@ -113,6 +115,7 @@ int	assign_var(t_ast *node, int size, int arg)
 			malloc_error(node, node->data, NULL);
 		ft_strlcpy(node->data->envp[i], node->cmd.args[arg], len);
 		free(name);
+		close_all_redirs(node);
 		return (set_exit_status(node, 0));
 	}
 	free(name);

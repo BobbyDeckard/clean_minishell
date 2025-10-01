@@ -69,7 +69,7 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 		if (pids[i] == 0)
 			exec_pipe_child(child[i]);
 		if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
-			close_redirs_and_unlink_heredoc(child[i]);
+			close_all_redirs(child[i]);
 		close_pipes(fd, i, count);
 	}
 	return (waitpids(*child, pids, count));

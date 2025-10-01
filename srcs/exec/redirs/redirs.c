@@ -73,5 +73,5 @@ int	make_redirs(t_ast *node)
 		else if (node->children[i]->type == NODE_HEREDOC)
 			make_heredoc(node->children[i], &node->cmd);
 	}
-	return (check_redirs(node, node->cmd));
+	return (check_redirs(node, &node->cmd));
 }

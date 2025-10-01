@@ -43,14 +43,14 @@ int	exit_bltn(t_ast *node)
 	{
 		check_digits(node, node->cmd.args[1]);
 		n = ft_atoi(node->cmd.args[1]);
-		close_redirs_and_unlink_heredoc(node);
+		close_all_redirs(node);
 		cleanup(node);
 		exit(n);
 	}
 	else
 	{
 		n = node->data->exit_status;
-		close_redirs_and_unlink_heredoc(node);
+		close_all_redirs(node);
 		cleanup(node);
 		exit(n);
 	}

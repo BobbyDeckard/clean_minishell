@@ -12,9 +12,9 @@
 
 #include "../../../incl/minishell.h"
 
-void	close_redirs_and_unlink_heredoc(t_ast *node)
+void	close_all_redirs(t_ast *node)
 {
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	unlink_heredoc(node);
 }
 

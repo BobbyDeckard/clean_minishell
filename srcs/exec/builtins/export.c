@@ -84,7 +84,7 @@ static int	export_print(t_ast *node, int size)
 	order(abc);
 	print_export(node, abc);
 	free_char_array(abc);
-	close_redirs_and_unlink_heredoc(node);
+	close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
 
@@ -92,7 +92,6 @@ int	export_bltn(t_ast *node)
 {
 	int	status;
 	int	size;
-	int	i;
 
 	status = 0;
 	if (make_redirs(node))
@@ -105,6 +104,6 @@ int	export_bltn(t_ast *node)
 	else if (!node->cmd.args[1])
 		return (export_print(node, size));
 	status = handle_export_args(node, size);
-	close_redirs_and_unlink_heredoc(node);
+	close_all_redirs(node);
 	return (status);
 }

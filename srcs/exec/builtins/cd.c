@@ -99,12 +99,12 @@ int	cd(t_ast *node)
 		perror(error);
 		free(error);
 		free(oldpwd);
-		close_redirs(node->cmd);
+		close_redirs(&node->cmd);
 		unlink_heredoc(node);
 		return (set_exit_status(node, 1));
 	}
 	make_updates(node, oldpwd);
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	unlink_heredoc(node);
 	return (set_exit_status(node, 0));
 }

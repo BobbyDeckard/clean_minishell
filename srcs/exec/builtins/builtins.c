@@ -28,7 +28,7 @@ static int	env(t_ast *node)
 		ft_putstr_fd(envp[i], node->cmd.fd_out);
 		ft_putchar_fd('\n', node->cmd.fd_out);
 	}
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	unlink_heredoc(node);
 	return (set_exit_status(node, 0));
 }
@@ -43,14 +43,14 @@ static int	pwd(t_ast *node)
 	if (!cwd)
 	{
 		perror("getcwd");
-		close_redirs(node->cmd);
+		close_redirs(&node->cmd);
 		unlink_heredoc(node);
 		return (set_exit_status(node, 1));
 	}
 	ft_putstr_fd(cwd, node->cmd.fd_out);
 	ft_putchar_fd('\n', node->cmd.fd_out),
 	free(cwd);
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	unlink_heredoc(node);
 	return (set_exit_status(node, 0));
 }
@@ -74,7 +74,7 @@ static int	echo(t_ast *node)
 	}
 	if (!flag)
 		ft_putchar_fd('\n', node->cmd.fd_out);
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	unlink_heredoc(node);
 	return (set_exit_status(node, 0));
 }

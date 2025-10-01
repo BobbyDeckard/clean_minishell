@@ -41,7 +41,7 @@ static int	run_cmd(t_ast *node)
 		exec_cmd(node, node->cmd);
 		clean_exit(node->root, 1);
 	}
-	close_redirs(node->cmd);
+	close_redirs(&node->cmd);
 	waitpid(pid, &status, 0);
 	unlink_heredoc(node);
 	if (WIFEXITED(status))
