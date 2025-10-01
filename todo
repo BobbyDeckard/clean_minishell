@@ -37,6 +37,9 @@ O.	Maybe revamp the parsing to interpret unspecified special characters as norma
 O.	Check that empty arguments can't cause a segfault
 	=> DON'T JUST TEST IT, SEEMS LIKE SOMETIMES WE DON'T HAVE SEGFAULT BY SHEER LUCK
 O.	Run tests on Linux and especially leak tests with valgrind
+O.	Should we maybe close previously opened files in following redirs ?
+	=> Seems to not cause problems on the surface, but I suspect some file descriptors could be left open by the end of the execution
+	(their fd would be written over by any following redir and thus never be closed)
 
 
 
