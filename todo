@@ -36,6 +36,7 @@ O.	Check that calls to free are followed by a NULL reset (maybe do a free_null()
 O.	Maybe revamp the parsing to interpret unspecified special characters as normal characters (at least the printable ones)
 O.	Check that empty arguments can't cause a segfault
 	=> DON'T JUST TEST IT, SEEMS LIKE SOMETIMES WE DON'T HAVE SEGFAULT BY SHEER LUCK
+O.	Run tests on Linux and especially leak tests with valgrind
 
 
 
@@ -71,6 +72,8 @@ O.	export USER=IVOOO && export > outfile && < outfile grep USER
 O.	export USER=IVOOO && export > outfile
 O.	Just typing .. as a command gives a wrong error
 		redir doesn't work..?
+O.	time (sleep 2 | sleep 2)
+		doesn't work but actually never worked
 
 
 FIN
