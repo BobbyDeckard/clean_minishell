@@ -12,16 +12,6 @@
 
 #include "../incl/minishell.h"
 
-static void	print_paths(char **paths)
-{
-	int	i;
-
-	printf("Paths:\n");
-	i = -1;
-	while (paths[++i])
-		printf("\t%s\n", paths[i]);
-}
-
 static t_shell	process_command(char *command, t_shell data)
 {
 	t_ast	*ast;
@@ -51,7 +41,7 @@ static t_shell	process_command(char *command, t_shell data)
 	return (data);
 }
 
-/*
+
 static char	*read_command(t_shell *data)
 {
 	char	*command;
@@ -89,8 +79,18 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(&data));
 }
-*/
+
 /*	DEBUG MAIN */
+/*
+static void	print_paths(char **paths)
+{
+	int	i;
+
+	printf("Paths:\n");
+	i = -1;
+	while (paths[++i])
+		printf("\t%s\n", paths[i]);
+}
 
 int	main(int ac, char **av, char **envp)
 {
@@ -110,7 +110,7 @@ int	main(int ac, char **av, char **envp)
 	should_exit = 0;
 	while (!should_exit)
 	{
-//////////////////		print_paths(data.paths);
+		print_paths(data.paths);
 		data.state = INTERACTIVE;
 		setup_interactive_signals(&data);	// in loop ??
 		get_trunc_cwd(cwd, &data);
@@ -132,4 +132,4 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (clean_data(&data));
 }
-
+*/
