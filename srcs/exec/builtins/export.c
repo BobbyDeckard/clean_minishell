@@ -84,6 +84,7 @@ static int	export_print(t_ast *node, int size)
 	order(abc);
 	print_export(node, abc);
 	free_char_array(abc);
+	close_redirs_and_unlink_heredoc(node);
 	return (set_exit_status(node, 0));
 }
 
@@ -94,23 +95,16 @@ int	export_bltn(t_ast *node)
 	int	i;
 
 	status = 0;
+	if (make_redirs(node))
+		return (set_exit_status(node, 1));
 	size = char_arr_len(node->data->envp);
-	if (node->cmd.args[1] && size == -1)
+	if (node->cmd.args[1] && size == -1)	// to check !
 		return (create_env(node));
 	else if (size == -1)
 		return (set_exit_status(node, 0));
 	else if (!node->cmd.args[1])
 		return (export_print(node, size));
-	i = 0;
-	while (node->cmd.args[++i])
-	{
-		if (!ft_strncmp(node->cmd.args[i], "PATH=", 5))
-			update_paths(node, node->data, node->cmd.args[i] + 5);
-		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
-			status = 1;
-		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))
-			status = 1;
-		size = char_arr_len(node->data->envp);
-	}
+	status = handle_export_args(node, size);
+	close_redirs_and_unlink_heredoc(node);
 	return (status);
 }

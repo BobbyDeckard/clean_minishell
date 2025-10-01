@@ -11,13 +11,20 @@
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+#include <unistd.h>
 
-void	close_redirs(t_cmd cmd)
+void	close_redirs(t_cmd *cmd)
 {
-	if (cmd.fd_in != STDIN_FILENO && cmd.fd_in >= 0)
-		close(cmd.fd_in);
-	if (cmd.fd_out != STDOUT_FILENO && cmd.fd_out >= 0)
-		close(cmd.fd_out);
+	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
+	{
+		close(cmd->fd_in);
+		cmd->fd_in = STDIN_FILENO;
+	}
+	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out >= 0)
+	{
+		close(cmd->fd_out);
+		cmd->fd_out = STDOUT_FILENO;
+	}
 }
 
 int	check_redirs(t_ast *node, t_cmd cmd)

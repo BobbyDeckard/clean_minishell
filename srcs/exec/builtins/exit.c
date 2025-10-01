@@ -30,24 +30,29 @@ static void	check_digits(t_ast *node, char *arg)
 	}
 }
 
-void	exit_bltn(t_ast *node)
+int	exit_bltn(t_ast *node)
 {
 	int	n;
 
 	ft_putstr_fd("exit\n", node->cmd.fd_out);
+	if (make_redirs(node))
+		return (set_exit_status(node, 1));
 	if (node->cmd.args[2])
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 	else if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);
 		n = ft_atoi(node->cmd.args[1]);
+		close_redirs_and_unlink_heredoc(node);
 		cleanup(node);
 		exit(n);
 	}
 	else
 	{
 		n = node->data->exit_status;
+		close_redirs_and_unlink_heredoc(node);
 		cleanup(node);
 		exit(n);
 	}
+	return (1);
 }

@@ -12,6 +12,26 @@
 
 #include "../../../incl/minishell.h"
 
+int	handle_export_args(t_ast *node, int size)
+{
+	int	status;
+	int	i;
+
+	status = 0;
+	i = -1;
+	while (node->cmd.args[++i])
+	{
+		if (!ft_strncmp(node->cmd.args[i], "PATH=", 5))
+			update_paths(node, node->data, node->cmd.args[i] + 5);
+		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
+			status = 1;
+		else if (!has_equal(node->cmd.args[i]) && create_var(node, size, i))
+			status = 1;
+		size = char_arr_len(node->data->envp);
+	}
+	return (status);
+}
+
 void	create_env_error(t_ast *node, char **new, int i)
 {
 	while (--i >= 0)
