@@ -69,7 +69,7 @@ static void	free_tab(char **tab, unsigned int index)
 	free(tab);
 }
 
-static char	**make_splits(char **tab, const char *s, unsigned int i, char c)
+static int	make_splits(char **tab, const char *s, unsigned int i, char c)
 {
 	unsigned int	index;
 	unsigned int	j;
@@ -82,7 +82,7 @@ static char	**make_splits(char **tab, const char *s, unsigned int i, char c)
 		if (!tab[index])
 		{
 			free_tab(tab, index);
-			return (0);
+			return (1);
 		}
 		while (s[i] && s[i] != c)
 			tab[index][j++] = s[i++];
@@ -93,7 +93,7 @@ static char	**make_splits(char **tab, const char *s, unsigned int i, char c)
 		index++;
 	}
 	tab[index] = NULL;
-	return (tab);
+	return (0);
 }
 
 // variation de ft_split, qui alloue un char de plus et ajoute un / final
@@ -111,5 +111,7 @@ char	**ft_split_paths(t_shell *data, const char *s, char c)
 	tab[0] = 0;
 	while (s[i] == c && c)
 		i++;
-	return (make_splits(tab, s, i, c));
+	if (make_splits(tab, s, i, c))
+		malloc_error(data->root, data, NULL);
+	return (tab);
 }
