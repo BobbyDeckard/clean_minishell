@@ -45,7 +45,6 @@ X.	export USER=IVOOO && export > outfile
 REAL PROBLEMS:
 O.	(cat file || cat infile) grep foo
 		should give a syntax error
-		Seems like all those errors come from a bad handling of redirs around spaces for one, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
 O.	< file (grep foo && grep bar)
 		strange arg handling
 		+ should be a syntax error to have a redir before parentheses
@@ -57,7 +56,6 @@ O.	echo 'blaifhealb | > bibabou"'
 O.	export USER=IVOOO && export > outfile && < outfile grep USER
 		returns a syntax error (which contains a typo.. "invlalid operator")
 O.	Just typing .. as a command gives a wrong error
-		redir doesn't work..?
 O.	Check that calls to ft_strdup or ft_substr are protected
 O.	Check that calls to free are followed by a NULL reset (maybe do a free_null() func)
 O.	Maybe revamp the parsing to interpret unspecified special characters as normal characters (at least the printable ones)
@@ -74,6 +72,26 @@ X.	(cat file || cat infile) | wc -l
 	=> Solved by returning to overforking as done earlier in project
 	=> In subject: parentheses are to be implemented with logical operators for priorities, maybe go back to not overforking since we don't have to care for parentheses and pipes
 
+
+TO DO IN CLEAR:
+1.	Handle syntax errors around parentheses
+	Direct command before and after parentheses
+	Redir before and after parentheses
+	Pipe before and after parentheses
+		=> Try to return to the solution we had with less forks
+		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
+2.	Revamp pipe to a simplified version (see above points)
+3.	Check expansion with characters leading the env var
+4.	Check parsing issues:
+		echo 'foo | > bar' 
+			=> foo |> bar
+		export USER=IVOOO && export > outfile && < outfile grep USER
+			=> parsing issue and typo in error msg
+		..
+			=> wrong error is printed
+5.	Sanitize functions usage
+		free() has to be followed by a reset to NULL
+		ft_strdup() or ft_substr() return strings that need to be freed
 
 FAKE PROBLEMS:
 O.	time (sleep 2 | sleep 2)
