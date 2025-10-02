@@ -28,9 +28,6 @@ X.	Update the paths when export has PATH as argument
 
 
 ERRORS MET AND SOLVED
-X.	(cat file || cat infile) | wc -l
-		dup2 error
-	=> Solved by returning to overforking as done earlier in project
 X.	(cat file || cat infile) > outfile
 		doesn't work (bad ast)
 	=> Not totally solved but bash is just too random on this syntax:
@@ -72,6 +69,10 @@ O.	Check that redirs overwrite pipes
 O.	Should we maybe close previously opened files in following redirs ?
 	=> Seems to not cause problems on the surface, but I suspect some file descriptors could be left open by the end of the execution
 	(their fd would be written over by any following redir and thus never be closed)
+X.	(cat file || cat infile) | wc -l
+		dup2 error
+	=> Solved by returning to overforking as done earlier in project
+	=> In subject: parentheses are to be implemented with logical operators for priorities, maybe go back to not overforking since we don't have to care for parentheses and pipes
 
 
 FAKE PROBLEMS:
