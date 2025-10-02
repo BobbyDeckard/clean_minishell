@@ -26,22 +26,6 @@ X.	Check comments left in exec with norminette
 X.	Unset also takes multiple arguments
 X.	Update the paths when export has PATH as argument
 
-TO DO:
-O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
-	+ when C^C, should not print ^C
-O.	Check that redirs overwrite pipes
-	=> They do, but maybe have a look around a bit more
-O.	Check that calls to ft_strdup or ft_substr are protected
-O.	Check that calls to free are followed by a NULL reset (maybe do a free_null() func)
-O.	Maybe revamp the parsing to interpret unspecified special characters as normal characters (at least the printable ones)
-O.	Check that empty arguments can't cause a segfault
-	=> DON'T JUST TEST IT, SEEMS LIKE SOMETIMES WE DON'T HAVE SEGFAULT BY SHEER LUCK
-O.	Run tests on Linux and especially leak tests with valgrind
-O.	Should we maybe close previously opened files in following redirs ?
-	=> Seems to not cause problems on the surface, but I suspect some file descriptors could be left open by the end of the execution
-	(their fd would be written over by any following redir and thus never be closed)
-
-
 
 ERRORS MET AND SOLVED
 X.	(cat file || cat infile) | wc -l
@@ -57,8 +41,11 @@ X.	echo ":>)">file
 		works, but
 	(echo ":>)")>file
 		doesn't
+X.	export USER=IVOOO && export > outfile
+	=> some builtins missed redir handling
 
-ERRORS MET YET NOT SOLVED:
+
+REAL PROBLEMS:
 O.	(cat file || cat infile) grep foo
 		should give a syntax error
 		Seems like all those errors come from a bad handling of redirs around spaces for one, but maybe also the question of the root to set to an ast where the only thing outside parens is a redir
@@ -72,12 +59,23 @@ O.	echo 'blaifhealb | > bibabou"'
 		check screenshot about expander
 O.	export USER=IVOOO && export > outfile && < outfile grep USER
 		returns a syntax error (which contains a typo.. "invlalid operator")
-O.	export USER=IVOOO && export > outfile
 O.	Just typing .. as a command gives a wrong error
 		redir doesn't work..?
+O.	Check that calls to ft_strdup or ft_substr are protected
+O.	Check that calls to free are followed by a NULL reset (maybe do a free_null() func)
+O.	Maybe revamp the parsing to interpret unspecified special characters as normal characters (at least the printable ones)
+O.	Check that empty arguments can't cause a segfault
+	=> DON'T JUST TEST IT, SEEMS LIKE SOMETIMES WE DON'T HAVE SEGFAULT BY SHEER LUCK
+O.	Run tests on Linux and especially leak tests with valgrind
+O.	Check that redirs overwrite pipes
+	=> They do, but maybe have a look around a bit more
+O.	Should we maybe close previously opened files in following redirs ?
+	=> Seems to not cause problems on the surface, but I suspect some file descriptors could be left open by the end of the execution
+	(their fd would be written over by any following redir and thus never be closed)
+
+
+FAKE PROBLEMS:
 O.	time (sleep 2 | sleep 2)
 		doesn't work but actually never worked
-
-
-FIN
-Vérifier la fiche d'éval sur discord avec Pierre
+O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
+	+ when C^C, should not print ^C
