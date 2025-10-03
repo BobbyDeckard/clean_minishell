@@ -6,11 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:16:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 16:28:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:34:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+static int	name_is_invalid(char *arg)
+{
+	ft_putstr_fd("minishell: '", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+	return (0);
+}
 
 static int	valid_name(char *arg)
 {
@@ -22,14 +30,11 @@ static int	valid_name(char *arg)
 	while (arg[i] && arg[i] != '=')
 	{
 		if (!ft_isalpha(arg[i]) && arg[i] != '_' && !alpha)
-		{
-			ft_putstr_fd("minishell: '", 2);
-			ft_putstr_fd(arg, 2);
-			ft_putstr_fd("': not a valid identifier\n", 2);
-			return (0);
-		}
+			return (name_is_invalid(arg));
 		else if (ft_isalpha(arg[i]) && !alpha)
 			alpha = 1;
+		else if (!ft_isalnum(arg[i]) && arg[i] != '_')
+			return (name_is_invalid(arg));
 		i++;
 	}
 	return (1);
