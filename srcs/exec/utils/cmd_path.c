@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:42:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:43:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:29:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 		free(full_path);
 	}
 	cmd->path = NULL;
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(name, 2);
-	ft_putstr_fd(": command not found\n", 2);
+	if (!is_lone_redir(node))
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(name, 2);
+		ft_putstr_fd(": command not found\n", 2);
+	}
 }
