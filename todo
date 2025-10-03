@@ -89,8 +89,6 @@ TO DO IN CLEAR:
 			=> parsing issue and typo in error msg
 		..
 			=> wrong error is printed
-5.	Sanitize functions usage
-		ft_strdup() or ft_substr() return strings that need to be freed
 6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
 
 FAKE PROBLEMS:
@@ -98,3 +96,9 @@ O.	time (sleep 2 | sleep 2)
 		doesn't work but actually never worked
 O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
+
+DONE:
+5.	Sanitize functions usage
+		free() has to be followed by a reset to NULL
+		ft_strdup() or ft_substr() return strings that need to be freed
+		protect getcwd()
