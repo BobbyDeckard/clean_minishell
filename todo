@@ -82,6 +82,7 @@ TO DO IN CLEAR:
 10.	cat | cat | ls
 	=> enter + enter should exit pipe
 11.	Close discarded redir files
+12.	'&' needs to be concatenated to previous word if not alone
 
 FAKE PROBLEMS:
 X.	time (sleep 2 | sleep 2)
