@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:42:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:29:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:41:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	int		i;
 
 	name = cmd->args[0];
-	if (!access(name, F_OK))
+	if (!ft_strncmp(name, ".", 2) || !ft_strncmp(name, "..", 2))
+		return (invalid_name(cmd, name));
+	else if (!access(name, F_OK))
 		return (absolute_path(node, cmd, name));
 	i = -1;
 	while (paths && paths[++i])

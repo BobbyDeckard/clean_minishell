@@ -6,11 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:33:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:09:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:41:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	invalid_name(t_cmd *cmd, char *name)
+{
+	cmd->path = NULL;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": command not found\n", 2);
+}
 
 void	dup_fds(t_ast *node)
 {
