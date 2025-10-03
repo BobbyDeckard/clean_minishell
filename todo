@@ -74,13 +74,9 @@ X.	(cat file || cat infile) | wc -l
 
 
 TO DO IN CLEAR:
-1.	Handle syntax errors around parentheses
-	Direct command before and after parentheses
-	V		Redir before and after parentheses
-	v		Pipe before and after parentheses
+2.	Revamp pipe to a simplified version
 		=> Try to return to the solution we had with less forks
 		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
-2.	Revamp pipe to a simplified version (see above points)
 3.	Check expansion with characters leading the env var
 4.	Check parsing issues:
 		echo 'foo | > bar' 
@@ -102,3 +98,7 @@ DONE:
 		free() has to be followed by a reset to NULL
 		ft_strdup() or ft_substr() return strings that need to be freed
 		protect getcwd()
+1.	Handle syntax errors around parentheses
+	V		Direct command before and after parentheses
+	V		Redir before and after parentheses
+	v		Pipe before and after parentheses
