@@ -75,7 +75,6 @@ X.	(cat file || cat infile) | wc -l
 
 TO DO IN CLEAR:
 6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
-7.	Export: seulement majuscules, minuscules et _
 8.	echo "$a""$b""$c"
 	=> pas d'espaces entre les args
 9.	expander in heredoc
@@ -112,3 +111,4 @@ DONE:
 		..
 			=> wrong error is printed
 3.	Check expansion with characters leading the env var
+7.	Export: seulement majuscules, minuscules et _
