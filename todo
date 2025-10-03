@@ -74,9 +74,6 @@ X.	(cat file || cat infile) | wc -l
 
 
 TO DO IN CLEAR:
-2.	Revamp pipe to a simplified version
-		=> Try to return to the solution we had with less forks
-		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
 3.	Check expansion with characters leading the env var
 4.	Check parsing issues:
 		echo 'foo | > bar' 
@@ -88,10 +85,12 @@ TO DO IN CLEAR:
 6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
 
 FAKE PROBLEMS:
-O.	time (sleep 2 | sleep 2)
+X.	time (sleep 2 | sleep 2)
 		doesn't work but actually never worked
-O.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
+		=> anyways as is this command will return a syntax error
+X.	PINAILLAGE: signals with heredoc: when C^D, the given input should be considered WITH the preceding '>' character followed by a space at the beginning of lines, + our version gives a warining nonexistent in bash
 	+ when C^C, should not print ^C
+		=> fuck you
 
 DONE:
 5.	Sanitize functions usage
@@ -102,3 +101,6 @@ DONE:
 	V		Direct command before and after parentheses
 	V		Redir before and after parentheses
 	v		Pipe before and after parentheses
+2.	Revamp pipe to a simplified version
+		=> Try to return to the solution we had with less forks
+		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
