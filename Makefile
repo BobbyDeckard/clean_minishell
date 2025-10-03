@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/03 13:03:41 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/03 14:14:11 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,12 +62,12 @@ DATA_FILES = create_env_cpy.c \
 			 shell_data.c
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
 SNTX_FILES = mark_expansion.c \
-			 paren_utils.c \
 			 parentheses_check.c \
 			 quotes.c \
 			 spaces.c \
 			 special_characters.c \
-			 syntax_check.c
+			 syntax_check.c \
+			 syntax_utils.c
 TKNS = $(addprefix tokens/, $(TKNS_FILES))
 TKNS_FILES = token_types.c \
 			 token_types2.c \

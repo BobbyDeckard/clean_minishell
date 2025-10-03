@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:58:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:16:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_token *token)
 t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command,
 t_token *token)
 {
-	printf("In tokenize_special_character()\n");
 	if (**command != '$')
 		return (set_as_unknown(data, tl, command, token));
 	else if ((*command)[1] == '?')
@@ -77,7 +76,6 @@ t_token *token)
 
 static void	define_bonus_operator(char **command, t_token *token, int *len)
 {
-	printf("In define_bonus_operator()\n");
 	if (**command == '&' && (*command)[1] == '&')
 	{
 		token->type = AND;

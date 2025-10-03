@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:27:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:12:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,7 @@ t_token	**tokenize_command(t_shell *data, char *command)
 	*token_list = NULL;
 	while (*command)
 	{
-		printf("Command remaining to parse: '%s'\n", command);
 		type = get_token_type(*command);
-		printf("Current token has type ");
-		print_token_type(type);
-		printf("\n");
 		if (type == DEFAULT)
 		{
 			command++;

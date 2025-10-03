@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:25:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:18:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	exec_pipe_child(t_ast *node)
 		exec_pipe_cmd(node);
 	else if (node->type == NODE_CMD)
 		status = exec_builtin(node);
-	else if (node->type == NODE_AND_IF)
-		status = exec_pipe_and(node);
-	else if (node->type == NODE_OR_IF)
-		status = exec_pipe_or(node);
+//	else if (node->type == NODE_AND_IF)
+//		status = exec_pipe_and(node);
+//	else if (node->type == NODE_OR_IF)
+//		status = exec_pipe_or(node);
 	else
 		status = exec_ast(node);
 	exit(status);

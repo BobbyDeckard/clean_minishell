@@ -6,12 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:44:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:26:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 14:15:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
+/*
 int	exec_pipe_and(t_ast *node)
 {
 	int	status;
@@ -67,7 +68,7 @@ int	exec_pipe_or(t_ast *node)
 	}
 	return (status);
 }
-
+*/
 void	prep_cmd(t_ast *node)
 {
 	expander(node, &node->cmd);
