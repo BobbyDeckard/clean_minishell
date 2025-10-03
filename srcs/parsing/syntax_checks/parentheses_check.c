@@ -6,22 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:44:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:05:01 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:07:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-int	pipe_around_par(t_token *current)
-{
-	if (current->type != PIPE)
-		return (0);
-	else if (current->previous->type == PAREN_CLOSE || current->previous->type == PAREN_OPEN)
-		return (1);
-	else if (current->next->type == PAREN_CLOSE || current->next->type == PAREN_OPEN)
-		return (1);
-	return (0);
-}
 
 static t_token	*get_last_close(t_token **tokens)
 {

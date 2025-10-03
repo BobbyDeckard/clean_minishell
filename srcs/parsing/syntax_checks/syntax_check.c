@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:42:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:06:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ static int	valid_operator(t_token **token_list)
 				current = current->next;
 				continue ;
 			}
-			else if (pipe_around_par(current))
-				return (0);
 			else if (current->previous->type != WORD
 				&& current->previous->type != PAREN_CLOSE)
 				return (0);
