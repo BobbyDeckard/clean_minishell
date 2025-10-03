@@ -76,8 +76,8 @@ X.	(cat file || cat infile) | wc -l
 TO DO IN CLEAR:
 1.	Handle syntax errors around parentheses
 	Direct command before and after parentheses
-	Redir before and after parentheses
-	Pipe before and after parentheses
+	V		Redir before and after parentheses
+	v		Pipe before and after parentheses
 		=> Try to return to the solution we had with less forks
 		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
 2.	Revamp pipe to a simplified version (see above points)
