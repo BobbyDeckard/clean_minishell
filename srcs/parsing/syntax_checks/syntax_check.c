@@ -6,12 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:06:59 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:30:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
+/*
 static int	precedes_quote(t_token *current)
 {
 	t_token	*next;
@@ -27,7 +28,9 @@ static int	precedes_quote(t_token *current)
 		quote++;
 	return (quote);
 }
+*/
 
+/*
 static int	valid_operator(t_token **token_list)
 {
 	t_token	*current;
@@ -40,7 +43,7 @@ static int	valid_operator(t_token **token_list)
 		{
 			if (!current->previous || !current->next)
 				return (0);
-			else if (precedes_quote(current))
+			else if (_quote(current))
 			{
 				current = current->next;
 				continue ;
@@ -50,6 +53,28 @@ static int	valid_operator(t_token **token_list)
 				return (0);
 			else if (current->next->type != WORD
 				&& current->next->type != PAREN_OPEN)
+				return (0);
+		}
+		current = current->next;
+	}
+	return (1);
+}
+*/
+
+static int	valid_operator(t_token **tokens)
+{
+	t_token	*current;
+
+	current = *tokens;
+	while (current)
+	{
+		if (current->type == PIPE || current->type == AND || current->type == OR)
+		{
+			if (!current->previous || !current->next)
+				return (0);
+			else if (is_logical_operator(current->previous))
+				return (0);
+			else if (is_logical_operator(current->next))
 				return (0);
 		}
 		current = current->next;
@@ -71,10 +96,10 @@ static int	valid_redir_target(t_token **token_list)
 		{
 			if (!current->next || current->next->type != WORD)
 				return (0);
-			else if (current->next->next && current->next->next->type == PAREN_OPEN)
-				return (0);
-			else if (current->previous && current->previous->type == PAREN_CLOSE)
-				return (0);
+//			else if (current->next->next && current->next->next->type == PAREN_OPEN)
+//				return (0);
+//			else if (current->previous && current->previous->type == PAREN_CLOSE)
+//				return (0);
 		}
 		current = current->next;
 	}

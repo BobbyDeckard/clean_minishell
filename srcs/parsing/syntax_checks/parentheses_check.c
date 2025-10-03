@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:44:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:07:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:26:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static int	check_paren_syntax(t_token *current, t_token *last_close)
 {
 	while (current)
 	{
-		if (current->type == PAREN_OPEN && !is_operator(current->previous))
+		if (current->type == PAREN_OPEN && current->previous && !is_logical_operator(current->previous))
 			return (0);
-		else if (current->type == PAREN_CLOSE && !is_operator(current->next))
+		else if (current->type == PAREN_CLOSE && current->next && !is_logical_operator(current->next))
 			return (0);
 		if (current == last_close)
 			break ;

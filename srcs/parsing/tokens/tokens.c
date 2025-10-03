@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:03:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:17:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:27:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_token_type	get_token_type(char c)
 		return (QUOTE);
 	else if (is_redirection(c))
 		return (REDIR);
-	else if (is_logical_operator(c))
+	else if (is_operator(c))
 		return (OPERATOR);
 	else if (is_parenthesis(c))
 		return (PARENTHESIS);

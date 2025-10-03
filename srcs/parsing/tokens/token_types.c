@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:16:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/08 12:37:26 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:20:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_redirection(char c)
 	return (0);
 }
 
-int	is_logical_operator(char c)
+int	is_operator(char c)
 {
 	if (c == '&' || c == '|' || c == ';')
 		return (1);
