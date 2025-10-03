@@ -16,6 +16,7 @@
 void	dup2_error(void)
 {
 	perror("dup2");
+	// should we also call cleanup ?
 	exit(1);
 }
 
@@ -25,10 +26,10 @@ int	fork_error(void)
 	return (1);
 }
 
-void	getcwd_error(char **envp)
+void	getcwd_error(t_ast *node)
 {
 	perror("getcwd");
-	free(envp);
+	cleanup(node);
 	exit(1);
 }
 

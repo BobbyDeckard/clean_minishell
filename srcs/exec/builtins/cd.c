@@ -43,8 +43,10 @@ static void	update_both(t_ast *node, int i, int j, char *oldpwd)
 		malloc_error(node->root, node->data, NULL);
 	ft_strlcpy(envp[j], "OLDPWD=", len);
 	ft_strlcat(envp[j], envp[i] + 4, len);
-	free(envp[i]);
 	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		getcwd_error(node);
+	free(envp[i]);
 	len = ft_strlen(cwd) + 5;
 	envp[i] = (char *) malloc(len * sizeof(char));
 	if (!envp[i])
@@ -87,10 +89,13 @@ int	cd(t_ast *node)
 {
 	char	*oldpwd;
 	char	*error;
+	int		status;
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	oldpwd = getcwd(NULL, 0);
+	if (!oldpwd)
+		getcwd_error(node);
 	if (!node->cmd.args[1])
 		return (set_exit_status(node, 0));
 	if (chdir(node->cmd.args[1]) < 0)

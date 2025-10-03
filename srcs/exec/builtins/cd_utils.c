@@ -22,8 +22,10 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 
 	free(oldpwd);
 	envp = node->data->envp;
-	free(envp[i]);
 	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		getcwd_error(node);
+	free(envp[i]);
 	len = ft_strlen(cwd) + 5;
 	envp[i] = (char *) malloc(len * sizeof(char));
 	if (!envp[i])

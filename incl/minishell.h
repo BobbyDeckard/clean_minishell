@@ -143,7 +143,7 @@ int			char_arr_len(char **arr);
 int			clean_data(t_shell *data);
 
 /* Error handling functions */
-void		getcwd_error(char **envp);
+void		getcwd_error(t_ast *node);
 void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* Exec functions */
