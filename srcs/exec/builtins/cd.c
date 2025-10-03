@@ -89,7 +89,6 @@ int	cd(t_ast *node)
 {
 	char	*oldpwd;
 	char	*error;
-	int		status;
 
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
