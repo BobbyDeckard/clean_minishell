@@ -90,7 +90,6 @@ TO DO IN CLEAR:
 		..
 			=> wrong error is printed
 5.	Sanitize functions usage
-		free() has to be followed by a reset to NULL
 		ft_strdup() or ft_substr() return strings that need to be freed
 6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
 
