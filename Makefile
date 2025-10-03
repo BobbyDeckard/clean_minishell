@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/09/30 18:28:00 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/03 12:25:56 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,8 @@ PIPE = $(addprefix pipe/, $(PIPE_FILES))
 PIPE_FILES = link_pipes.c \
 			 pipe.c \
 			 pipe_utils.c \
-			 pipe_utils2.c
+			 pipe_utils2.c \
+			 pipe_utils3.c
 RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redirs.c \
 			 redirs_utils.c

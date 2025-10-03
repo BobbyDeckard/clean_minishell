@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 14:45:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:25:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	exec_pipe_cmd(t_ast *node)
 {
+	if (is_lone_redir(node))
+		clean_exit(node->root, 0);
 	dup_fds(node);
 	exec_cmd(node, node->cmd);
 	clean_exit(node->root, 1);

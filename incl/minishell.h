@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:44:28 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:25:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ int			handle_export_args(t_ast *node, int size);
 int			has_equal(const char *str);
 int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
+int			is_lone_redir(t_ast *node);
 int			make_fork(void);
 int			make_pipe(int fd[2]);
 int			make_redirs(t_ast *node);

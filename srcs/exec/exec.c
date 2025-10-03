@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/29 13:43:38 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:27:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exec_cmd(t_ast *node, t_cmd cmd)
 {
-	if (!cmd.path)
+	if (!cmd.path || is_lone_redir(node))
 		return ;
 	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
@@ -39,6 +39,8 @@ static int	run_cmd(t_ast *node)
 	{
 		dup_fds(node);
 		exec_cmd(node, node->cmd);
+		if (is_lone_redir(node))
+			clean_exit(node->root, 0);
 		clean_exit(node->root, 1);
 	}
 	close_redirs(&node->cmd);
