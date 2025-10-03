@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:33:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:43:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_ast	*invalid_syntax(t_token **tokens, int err)
 	if (err == 1)
 		ft_putstr_fd("invalid quotes)\n", STDERR_FILENO);
 	else if (err == 2)
-		ft_putstr_fd("invlalid operator)\n", STDERR_FILENO);
+		ft_putstr_fd("invalid operator)\n", STDERR_FILENO);
 	else if (err == 3)
 		ft_putstr_fd("invalid redirection)\n", STDERR_FILENO);
 	else if (err == 4)

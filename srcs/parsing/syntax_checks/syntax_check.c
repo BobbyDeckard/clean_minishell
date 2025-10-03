@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:39:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:42:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	follows_quote(t_token *current)
+static int	precedes_quote(t_token *current)
 {
 	t_token	*next;
 	t_token	*prev;
@@ -40,11 +40,13 @@ static int	valid_operator(t_token **token_list)
 		{
 			if (!current->previous || !current->next)
 				return (0);
-			else if (follows_quote(current))
+			else if (precedes_quote(current))
 			{
 				current = current->next;
 				continue ;
 			}
+			else if (pipe_around_par(current))
+				return (0);
 			else if (current->previous->type != WORD
 				&& current->previous->type != PAREN_CLOSE)
 				return (0);

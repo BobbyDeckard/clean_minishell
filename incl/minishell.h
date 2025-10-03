@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:25:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 12:35:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,7 @@ int			is_space(char c);
 int			is_special_character(char c);
 int			is_quote(char c);
 int			matching_parentheses(t_token **tokens, int start, int end);
+int			pipe_around_par(t_token *current);
 int			valid_parentheses(t_shell *data, t_token **token_list);
 int			valid_syntax(t_shell *data, t_token **token_list);
 
