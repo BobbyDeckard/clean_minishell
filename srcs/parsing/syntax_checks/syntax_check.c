@@ -71,6 +71,10 @@ static int	valid_redir_target(t_token **token_list)
 		{
 			if (!current->next || current->next->type != WORD)
 				return (0);
+			else if (current->next->next && current->next->next->type == PAREN_OPEN)
+				return (0);
+			else if (current->previous && current->previous->type == PAREN_CLOSE)
+				return (0);
 		}
 		current = current->next;
 	}
