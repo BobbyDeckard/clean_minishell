@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:35:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:03:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,6 @@ int			handle_export_args(t_ast *node, int size);
 int			has_equal(const char *str);
 int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
-int			is_lone_redir(t_ast *node);
 int			make_fork(void);
 int			make_pipe(int fd[2]);
 int			make_redirs(t_ast *node);
@@ -282,6 +281,8 @@ int			count_tokens(t_token **token_list);
 int			count_trailing_redirs(t_token *current);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);
+int			is_lone_redir(t_ast *node);
+int			is_operator(t_token *token);
 int			find_lowest_precedence_op(t_token **tokens, int i, int end);
 int			find_matching_parentheses(t_token **tokens, int open_pos, int end);
 int			ft_wordlen(char *content);

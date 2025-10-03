@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:44:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 12:42:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:05:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_token	*get_last_close(t_token **tokens)
 	return (last_close);
 }
 
-static int	paren_check_body(t_token *current, t_token *last_close, int end,
+static int	check_matching_par(t_token *current, t_token *last_close, int end,
 int open)
 {
 	int	start;
@@ -66,10 +66,29 @@ int open)
 	return (open == 0);
 }
 
+static int	check_paren_syntax(t_token *current, t_token *last_close)
+{
+	while (current)
+	{
+		if (current->type == PAREN_OPEN && !is_operator(current->previous))
+			return (0);
+		else if (current->type == PAREN_CLOSE && !is_operator(current->next))
+			return (0);
+		if (current == last_close)
+			break ;
+		current = current->next;
+	}
+	return (1);
+}
+
 int	check_parentheses(t_token **tokens)
 {
 	t_token	*last_close;
 
 	last_close = get_last_close(tokens);
-	return (paren_check_body(*tokens, last_close, 0, 0));
+	if (!check_matching_par(*tokens, last_close, 0, 0))
+		return (0);
+	else if (!check_paren_syntax(*tokens, last_close))
+		return (0);
+	return (1);
 }
