@@ -12,19 +12,19 @@
 
 #include "../../../incl/minishell.h"
 
-void	dup_fds(t_ast node)
+void	dup_fds(t_ast *node)
 {
-	if (node.cmd.fd_in != STDIN_FILENO && node.cmd.fd_in >= 0)
+	if (node->cmd.fd_in != STDIN_FILENO && node->cmd.fd_in >= 0)
 	{
-		if (dup2(node.cmd.fd_in, STDIN_FILENO) == -1)
-			dup2_error();
-		close(node.cmd.fd_in);
+		if (dup2(node->cmd.fd_in, STDIN_FILENO) == -1)
+			dup2_error(node);
+		close(node->cmd.fd_in);
 	}
-	if (node.cmd.fd_out != STDOUT_FILENO && node.cmd.fd_out >= 0)
+	if (node->cmd.fd_out != STDOUT_FILENO && node->cmd.fd_out >= 0)
 	{
-		if (dup2(node.cmd.fd_out, STDOUT_FILENO) == -1)
-			dup2_error();
-		close(node.cmd.fd_out);
+		if (dup2(node->cmd.fd_out, STDOUT_FILENO) == -1)
+			dup2_error(node);
+		close(node->cmd.fd_out);
 	}
 }
 

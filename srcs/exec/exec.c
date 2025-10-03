@@ -37,7 +37,7 @@ static int	run_cmd(t_ast *node)
 		return (fork_error());
 	else if (pid == 0)
 	{
-		dup_fds(*node);
+		dup_fds(node);
 		exec_cmd(node, node->cmd);
 		clean_exit(node->root, 1);
 	}

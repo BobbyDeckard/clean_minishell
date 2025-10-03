@@ -13,10 +13,10 @@
 #include "../../incl/minishell.h"
 
 // Function can only be called from within child processes, hence the exit()
-void	dup2_error(void)
+void	dup2_error(t_ast *node)
 {
 	perror("dup2");
-	// should we also call cleanup ?
+	cleanup(node);
 	exit(1);
 }
 
