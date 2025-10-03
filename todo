@@ -75,14 +75,14 @@ X.	(cat file || cat infile) | wc -l
 
 TO DO IN CLEAR:
 3.	Check expansion with characters leading the env var
-4.	Check parsing issues:
-		echo 'foo | > bar' 
-			=> foo |> bar
-		export USER=IVOOO && export > outfile && < outfile grep USER
-			=> parsing issue and typo in error msg
-		..
-			=> wrong error is printed
 6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
+7.	Export: seulement majuscules, minuscules et _
+8.	echo "$a""$b""$c"
+	=> pas d'espaces entre les args
+9.	expander in heredoc
+10.	cat | cat | ls
+	=> enter + enter should exit pipe
+11.	Close discarded redir files
 
 FAKE PROBLEMS:
 X.	time (sleep 2 | sleep 2)
@@ -104,3 +104,10 @@ DONE:
 2.	Revamp pipe to a simplified version
 		=> Try to return to the solution we had with less forks
 		=> Actually just remove a whole part of pipes since we would remove the possibility of anything else than commands being in pipes
+4.	Check parsing issues:
+		echo 'foo | > bar' 
+			=> foo |> bar
+		export USER=IVOOO && export > outfile && < outfile grep USER
+			=> parsing issue and typo in error msg
+		..
+			=> wrong error is printed
