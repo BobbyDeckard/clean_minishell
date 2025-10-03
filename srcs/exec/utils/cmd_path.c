@@ -57,12 +57,16 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path)
 {
 	cmd->path = ft_strdup(path);
 	free(path);
+	if (!cmd->path)
+		malloc_error(node, node->data, NULL);
 	update_(node->data, cmd->path);
 }
 
 static void	absolute_path(t_ast *node, t_cmd *cmd, char *path)
 {
 	cmd->path = ft_strdup(path);
+	if (!cmd->path)
+		malloc_error(node, node->data, NULL);
 	update_(node->data, cmd->path);
 }
 
