@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 16:14:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 16:29:48 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		j;
 
 	name = get_name(node, cmd->args[index]);
-	printf("expand_cat found name: '%s'\n", name);
 	if (!name)
 		return (handle_exit_status(node, cmd, index));
 	i = -1;
@@ -85,7 +84,6 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	printf("Entered expander\n");
 	i = -1;
 	while (cmd->args[++i])
 	{
