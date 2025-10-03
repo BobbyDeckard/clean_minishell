@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:19:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:05:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 15:35:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ static void	check_digits(t_ast *node, char *arg)
 	}
 }
 
+static void	check_length(t_ast *node, char *arg)
+{
+	while (*arg == '0')
+		arg++;
+	if (ft_strlen(arg) > 14)
+	{
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		cleanup(node);
+		exit(255);
+	}
+}
+
 int	exit_bltn(t_ast *node)
 {
 	int	n;
@@ -42,7 +56,8 @@ int	exit_bltn(t_ast *node)
 	else if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);
-		n = ft_atoi(node->cmd.args[1]);
+		check_length(node, node->cmd.args[1]);
+		n = ft_atol(node->cmd.args[1]) % 256;
 		close_all_redirs(node);
 		cleanup(node);
 		exit(n);
