@@ -287,7 +287,6 @@ int			find_lowest_precedence_op(t_token **tokens, int i, int end);
 int			find_matching_parentheses(t_token **tokens, int open_pos, int end);
 int			ft_wordlen(char *content);
 int			is_command_char(char c);
-int			is_env_var(char c);
 int			is_logical_operator(t_token *token);
 int			is_parenthesis(char c);
 int			is_redir_token(t_token *token);

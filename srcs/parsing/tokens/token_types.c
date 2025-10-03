@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
-
 //	This method seems to be absolute shite at detecting command elements' types
 //	What happens if we have special characters inside of a string argument ?
 int	is_command_char(char c)
@@ -37,7 +36,7 @@ int	is_redirection(char c)
 
 int	is_operator(char c)
 {
-	if (c == '&' || c == '|' || c == ';')
+	if (c == '&' || c == '|')
 		return (1);
 	return (0);
 }

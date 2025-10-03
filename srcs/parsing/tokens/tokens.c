@@ -65,8 +65,8 @@ static t_token_type	get_token_type(char c)
 		return (OPERATOR);
 	else if (is_parenthesis(c))
 		return (PARENTHESIS);
-	else if (is_special_character(c))
-		return (SPECIAL_CHARACTER);
+//	else if (is_special_character(c))
+//		return (SPECIAL_CHARACTER);
 	else if (is_space(c))
 		return (SPACE);
 	else if (is_command_char(c))
@@ -85,7 +85,11 @@ t_token	**tokenize_command(t_shell *data, char *command)
 	*token_list = NULL;
 	while (*command)
 	{
+		printf("Command remaining to parse: '%s'\n", command);
 		type = get_token_type(*command);
+		printf("Current token has type ");
+		print_token_type(type);
+		printf("\n");
 		if (type == DEFAULT)
 		{
 			command++;

@@ -25,10 +25,3 @@ int	is_special_character(char c)
 		return (1);
 	return (0);
 }
-
-int	is_env_var(char c)
-{
-	if (c == '$')
-		return (1);
-	return (0);
-}

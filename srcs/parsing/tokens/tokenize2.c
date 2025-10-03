@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:23:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:58:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ t_token *token)
 	return (token);
 }
 
+
 t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command,
 t_token *token)
 {
+	printf("In tokenize_special_character()\n");
 	if (**command != '$')
 		return (set_as_unknown(data, tl, command, token));
 	else if ((*command)[1] == '?')
@@ -72,15 +74,22 @@ t_token *token)
 	return (token);
 }
 
+
 static void	define_bonus_operator(char **command, t_token *token, int *len)
 {
+	printf("In define_bonus_operator()\n");
 	if (**command == '&' && (*command)[1] == '&')
+	{
 		token->type = AND;
+		*len = 2;
+	}
 	else if (**command == '|' && (*command)[1] == '|')
+	{
 		token->type = OR;
-	else
-		token->type = UNKNOWN;
-	*len = 2;
+		*len = 2;
+	}
+	else if (**command != '|')
+		token->type = WORD;
 }
 
 t_token	*tokenize_operator(t_shell *data, t_token **tl, char **command,
@@ -92,13 +101,16 @@ t_token *token)
 	len = 1;
 	if (**command == '|')
 		token->type = PIPE;
-	else if (**command == ';')
-		token->type = SEMICOLON;
-	if (is_operator((*command)[1]))
-		define_bonus_operator(command, token, &len);
+	define_bonus_operator(command, token, &len);
 	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
 		tokenization_error(data, tl, token);
+	else if (token->type == WORD)
+	{
+		ft_strlcpy(token->content, "&", 2);
+		*command += len;
+		return (token);
+	}
 	i = -1;
 	while (is_operator((*command)[++i]) && i < len)
 		token->content[i] = (*command)[i];

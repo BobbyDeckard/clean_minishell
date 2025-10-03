@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:30:17 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 13:33:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,6 @@ static int	valid_redir_target(t_token **token_list)
 		{
 			if (!current->next || current->next->type != WORD)
 				return (0);
-//			else if (current->next->next && current->next->next->type == PAREN_OPEN)
-//				return (0);
-//			else if (current->previous && current->previous->type == PAREN_CLOSE)
-//				return (0);
 		}
 		current = current->next;
 	}
@@ -141,5 +137,7 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 		return (3);
 	else if (!check_parentheses(token_list))
 		return (4);
+//	else if (!last_checks(token_list))
+//		return (5);
 	return (0);
 }
