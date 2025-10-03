@@ -89,6 +89,9 @@ static char	**init_env_cpy(char **envp, int entries)
 	return (env_cpy);
 }
 
+//	This function is only called from init_shell_data() at the very
+//	beginning of parsing, thus exit(1) is justified as is without
+//	anything needing to be freed.
 char	**copy_env(char **envp)
 {
 	char	**env_cpy;

@@ -12,9 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-//	In case of error within the scope of this function,
-//	free everything that's been malloc'ed in this scope,
-//	then exit.
 t_shell	init_shell_data(char **envp)
 {
 	t_shell	data;

@@ -39,6 +39,8 @@ int	create_env(t_ast *node)
 	return (0);
 }
 
+//	Since node->data->envp is immediately set to our new pointer,
+//	there is no need to reset to NULL.
 static char	**make_new_env(t_ast *node, int size)
 {
 	char	**new;

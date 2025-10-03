@@ -12,13 +12,22 @@
 
 #include "../../../incl/minishell.h"
 
+//	This function is only called when trying to update _= env var.
+//	Thus, the i given is the index of the _ env var entry in our envp.
+//	If this error is called, it means allocation of the new entry failed,
+//	and that the previous entry has been freed and reset to NULL.
+//	The goal here is not to free the whole envp but rather the following entries
+//	that would'nt be reached by our cleanup() function.
 void	update_error(t_shell *data, char *path, int i)
 {
 	if (path)
 		free(path);
 	data->envp[i] = NULL;
 	while (data->envp[++i])
+	{
 		free(data->envp[i]);
+		data->envp[i] = NULL;
+	}
 	malloc_error(NULL, data, NULL);
 }
 
