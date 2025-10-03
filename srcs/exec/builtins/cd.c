@@ -30,32 +30,30 @@ static char	*cd_error(t_ast *node)
 
 static void	update_both(t_ast *node, int i, int j, char *oldpwd)
 {
-	char	**envp;
 	char	*cwd;
 	int		len;
 
 	free(oldpwd);
-	envp = node->data->envp;
-	free(envp[j]);
-	len = ft_strlen(envp[i]) + 4;
-	envp[j] = (char *) malloc(len * sizeof(char));
-	if (!envp[j])
+	free(node->data->envp[j]);
+	len = ft_strlen(node->data->envp[i]) + 4;
+	node->data->envp[j] = (char *) malloc(len * sizeof(char));
+	if (!node->data->envp[j])
 		malloc_error(node->root, node->data, NULL);
-	ft_strlcpy(envp[j], "OLDPWD=", len);
-	ft_strlcat(envp[j], envp[i] + 4, len);
+	ft_strlcpy(node->data->envp[j], "OLDPWD=", len);
+	ft_strlcat(node->data->envp[j], node->data->envp[i] + 4, len);
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		getcwd_error(node);
-	free(envp[i]);
+	free(node->data->envp[i]);
 	len = ft_strlen(cwd) + 5;
-	envp[i] = (char *) malloc(len * sizeof(char));
-	if (!envp[i])
+	node->data->envp[i] = (char *) malloc(len * sizeof(char));
+	if (!node->data->envp[i])
 	{
 		free(cwd);
 		malloc_error(node->root, node->data, NULL);
 	}
-	ft_strlcpy(envp[i], "PWD=", len);
-	ft_strlcat(envp[i], cwd, len);
+	ft_strlcpy(node->data->envp[i], "PWD=", len);
+	ft_strlcat(node->data->envp[i], cwd, len);
 	free(cwd);
 }
 
