@@ -1,0 +1,3 @@
+set in exec sigterm to sigquit (has to quit cat for example) and reset sigterm to sigdefault
+
+signals --> check shell lvl (not add readline logic / mutliple rl_redisplays, etc...)
