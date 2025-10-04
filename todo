@@ -112,3 +112,5 @@ DONE:
 			=> wrong error is printed
 3.	Check expansion with characters leading the env var
 7.	Export: seulement majuscules, minuscules et _
+13.	exit sometimes returns wrong error
+	=> 2nd element of args array must not be correctly malloc'ed
