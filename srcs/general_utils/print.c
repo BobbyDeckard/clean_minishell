@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 22:18:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:18:53 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	print_token_type(t_token_type type)
 		printf("REDIR_OUT");
 	else if (type == REDIR_APPEND)
 		printf("REDIR_APPEND");
-	else if (type == HEREDOC)
+	else if (type == HEREDOC || type == HEREDOC_EXP)
 		printf("HEREDOC");
 	else if (type == OPERATOR)
 		printf("OPERATOR");

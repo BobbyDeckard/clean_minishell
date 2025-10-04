@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:35:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 20:02:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ void	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 	int		i;
 
 	exit_status = ft_itoa(node->data->exit_status);
+	if (!exit_status)
+		malloc_error(node, node->data, NULL);
 	i = 0;
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
 	len = ft_strlen(cmd->args[index]) + ft_strlen(exit_status) - 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
+	{
+		free(exit_status);
 		malloc_error(node, node->data, NULL);
+	}
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, exit_status, len);
 	ft_strlcat(new, cmd->args[index] + i + 2, len);

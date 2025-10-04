@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/03 14:14:11 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/04 20:15:10 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ BLTN_FILES = builtins.c \
 			 unset.c
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
 HRDC_FILES = heredoc.c \
+			 heredoc_expander.c \
 			 heredoc_sigs.c \
 			 heredoc_utils.c
 PIPE = $(addprefix pipe/, $(PIPE_FILES))

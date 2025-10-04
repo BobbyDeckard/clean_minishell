@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:33:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:56:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	contains_dol(const char *str)
+int	contains_dol(const char *str)
 {
 	int	i;
 

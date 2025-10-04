@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:47:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:17:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,20 @@ static void	make_redir_append(t_ast *node, t_cmd *cmd)
 
 int	make_redirs(t_ast *node)
 {
-	int	i;
+	t_node_type	type;
+	int			i;
 
 	i = -1;
 	while (node->children && node->children[++i])
 	{
-		if (node->children[i]->type == NODE_REDIR_IN)
+		type = node->children[i]->type;
+		if (type == NODE_REDIR_IN)
 			make_redir_in(node->children[i], &node->cmd);
-		else if (node->children[i]->type == NODE_REDIR_OUT)
+		else if (type == NODE_REDIR_OUT)
 			make_redir_out(node->children[i], &node->cmd);
-		else if (node->children[i]->type == NODE_REDIR_APPEND)
+		else if (type == NODE_REDIR_APPEND)
 			make_redir_append(node->children[i], &node->cmd);
-		else if (node->children[i]->type == NODE_HEREDOC)
+		else if (type == NODE_HEREDOC || type == NODE_HEREDOC_EXP)
 			make_heredoc(node->children[i], &node->cmd);
 	}
 	return (check_redirs(node, &node->cmd));

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:02:59 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:36:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:19:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ t_node_type	convert_redir_type(t_token_type token_type)
 		return (NODE_REDIR_APPEND);
 	else if (token_type == HEREDOC)
 		return (NODE_HEREDOC);
+	else if (token_type == HEREDOC_EXP)
+		return (NODE_HEREDOC_EXP);
 	return (-1);
 }
 

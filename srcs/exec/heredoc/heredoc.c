@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:46:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 19:29:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 			free(line);
 			break ;
 		}
-		//	Add expander here
+		if (node->type == NODE_HEREDOC_EXP)
+			line = expand_line(node, node->data->envp, line);
 		ft_putstr_fd(line, cmd->fd_in);
 		ft_putchar_fd('\n', cmd->fd_in);
 		free(line);

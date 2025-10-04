@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 18:32:17 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 20:14:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_node_type
 	NODE_REDIR_OUT,
 	NODE_REDIR_APPEND,
 	NODE_HEREDOC,
+	NODE_HEREDOC_EXP,
 	NODE_SUBSHELL
 }	t_node_type;
 
@@ -61,6 +62,7 @@ typedef enum e_token_type
 	REDIR_OUT,
 	REDIR_APPEND,
 	HEREDOC,
+	HEREDOC_EXP,
 	OPERATOR,
 	PIPE,
 	AND,
@@ -149,6 +151,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 /* Exec functions */
 char		*copy_delimiter(t_ast *node);
 char		*copy_env_entry(t_ast *node, char **arr, int i);
+char		*expand_line(t_ast *node, char **envp, char *line);
 void		close_all_redirs(t_ast *node);
 void		close_pipes(int fd[2][2], int i, int count);
 void		close_redirs(t_cmd *cmd);
@@ -180,6 +183,7 @@ int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size, int arg);
 int			cd(t_ast *node);
 int			check_redirs(t_ast *node, t_cmd *cmd);
+int			contains_dol(const char *str);
 int			count_nodes(t_ast **children);
 int			create_var(t_ast *node, int size, int arg);
 int			exec_ast(t_ast *node);

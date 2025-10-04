@@ -6,23 +6,47 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:37:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 20:44:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	contains_dol(const char *str)
+static void	make_changes(t_token *heredoc, t_token *quote1, t_token *quote2,
+t_token *word)
 {
-	int	i;
+	heredoc->type = HEREDOC_EXP;
+	heredoc->next = word;
+	word->previous = heredoc;
+	word->next = quote2->next;
+	free(quote1->content);
+	free(quote1);
+	free(quote2->content);
+	free(quote2);
+}
 
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == '$')
-			return (1);
-	}
-	return (0);
+void	mark_heredoc_exp(t_token **tokens)
+{
+	t_token	*heredoc;
+	t_token	*quote1;
+	t_token *quote2;
+	t_token	*word;
+
+	heredoc = *tokens;
+	while (heredoc && heredoc->type != HEREDOC)
+		heredoc = heredoc->next;
+	if (!heredoc)
+		return ;
+	quote1 = heredoc->next;
+	if (!quote1 || quote1->type != DOUBLE_QUOTE)
+		return ;
+	word = quote1->next;
+	if (!word || word->type != WORD)
+		return ;
+	quote2 = word->next;
+	if (!quote2 || quote2->type != DOUBLE_QUOTE)
+		return ;
+	return (make_changes(heredoc, quote1, quote2, word));
 }
 
 void	mark_for_expansion(t_token **tokens)
@@ -49,4 +73,5 @@ void	mark_for_expansion(t_token **tokens)
 			current->needs_expansion = 1;
 		current = current->next;
 	}
+	mark_heredoc_exp(tokens);
 }

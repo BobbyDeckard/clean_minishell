@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:33:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 20:41:26 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	valid_redir_target(t_token **token_list)
 	{
 		type = current->type;
 		if (type == REDIR_OUT || type == REDIR_IN || type == REDIR_APPEND
-			|| type == HEREDOC)
+			|| type == HEREDOC || type == HEREDOC_EXP)
 		{
 			if (!current->next || current->next->type != WORD)
 				return (0);
