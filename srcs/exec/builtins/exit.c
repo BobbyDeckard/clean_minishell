@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:19:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 15:35:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:30:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ int	exit_bltn(t_ast *node)
 	ft_putstr_fd("exit\n", node->cmd.fd_out);
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
-	if (node->cmd.args[2])
+	if (node->cmd.args[1] && node->cmd.args[2])
+	{
 		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ft_putstr_fd(node->cmd.args[2], 2);
+	}
 	else if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);
