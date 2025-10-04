@@ -47,6 +47,7 @@ infile
 outfile
 in
 out
+test_alex
 
 # Kernel Module Compile Results
 *.mod*
