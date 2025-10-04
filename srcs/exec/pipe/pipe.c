@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 18:32:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:35:37 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exec_pipe_child(t_ast *node)
 //		status = exec_pipe_or(node);
 	else
 		status = exec_ast(node);
-	//	Need to cleanup here
+	cleanup(node);
 	exit(status);
 }
 
