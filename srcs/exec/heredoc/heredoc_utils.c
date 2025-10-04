@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:27:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/12 15:29:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:42:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ void	unlink_heredoc(t_ast *node)
 	if (!node->children)
 		return ;
 	i = -1;
-	while (node->children[++i] && node->children[i]->type == NODE_HEREDOC)
-		unlink(node->children[i]->file);
+	while (node->children[++i])
+	{
+		if (node->children[i]->type == NODE_HEREDOC)
+			unlink(node->children[i]->file);
+	}
 }

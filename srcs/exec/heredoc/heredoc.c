@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:32:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:46:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 			free(line);
 			break ;
 		}
+		//	Add expander here
 		ft_putstr_fd(line, cmd->fd_in);
 		ft_putchar_fd('\n', cmd->fd_in);
 		free(line);
@@ -64,6 +65,8 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	char				*del;
 	int					stdin_backup;
 
+	if (cmd->fd_in != STDIN_FILENO)
+		close(cmd->fd_in);
 	del = copy_delimiter(node);
 	free(node->file);
 	node->file = NULL;
