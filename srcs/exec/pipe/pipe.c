@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 14:18:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 18:32:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exec_pipe_child(t_ast *node)
 {
 	int	status;
 
-	setup_child_signals();
+	setup_child_signals(node);
 	status = 1;
 	if (node->type == NODE_CMD && !is_builtin(node->cmd))
 		exec_pipe_cmd(node);
@@ -37,6 +37,7 @@ void	exec_pipe_child(t_ast *node)
 //		status = exec_pipe_or(node);
 	else
 		status = exec_ast(node);
+	//	Need to cleanup here
 	exit(status);
 }
 

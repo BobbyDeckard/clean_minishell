@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:40:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 10:40:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 18:34:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	trunc_cwd(char cwd[256], char full[256])
 	ft_strlcat(cwd, " ", 256);
 }
 
+//	Function only gets called at a point in the main loop where only certain
+//	elements of data have been allocated
 void	get_trunc_cwd(char cwd[256], t_shell *data)
 {
 	char	full[256];

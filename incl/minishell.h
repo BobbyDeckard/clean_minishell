@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 14:41:28 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/03 18:32:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -303,6 +303,6 @@ int			valid_syntax(t_shell *data, t_token **token_list);
 /* Signal handling functions */
 void		setup_execution_signals(char *command, t_shell *data);
 void		setup_interactive_signals(t_shell *data);
-void		setup_child_signals(void);
+void		setup_child_signals(t_ast *node);
 
 #endif
