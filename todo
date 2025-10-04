@@ -1,3 +1,12 @@
+TO DO:
+8.	echo "$a""$b""$c"
+	=> pas d'espaces entre les args
+9.	expander in heredoc
+10.	cat | cat | ls
+	=> enter + enter should exit pipe
+12.	'&' needs to be concatenated to previous word if not alone
+
+
 DONE:
 X.	Check semicolons, maybe as simple as defining them as the root node
 =>	Subject explicitly says we do NOT need to handle semicolons.
@@ -73,16 +82,6 @@ X.	(cat file || cat infile) | wc -l
 	=> In subject: parentheses are to be implemented with logical operators for priorities, maybe go back to not overforking since we don't have to care for parentheses and pipes
 
 
-TO DO IN CLEAR:
-6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
-8.	echo "$a""$b""$c"
-	=> pas d'espaces entre les args
-9.	expander in heredoc
-10.	cat | cat | ls
-	=> enter + enter should exit pipe
-11.	Close discarded redir files
-12.	'&' needs to be concatenated to previous word if not alone
-
 FAKE PROBLEMS:
 X.	time (sleep 2 | sleep 2)
 		doesn't work but actually never worked
@@ -114,3 +113,5 @@ DONE:
 7.	Export: seulement majuscules, minuscules et _
 13.	exit sometimes returns wrong error
 	=> 2nd element of args array must not be correctly malloc'ed
+6.	Call cleanup() in child processes whenever execve isn't called to terminate said child process
+11.	Close discarded redir files
