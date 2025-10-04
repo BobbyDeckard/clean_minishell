@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:45:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:47:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static void	redir_error(t_ast *node)
 static void	make_redir_in(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_in != STDIN_FILENO)
-	{
-		printf("Closing previously opened redir\n");
 		close(cmd->fd_in);
-	}
 	if (access(node->file, F_OK) || access(node->file, R_OK))
 		cmd->fd_in = -1;
 	else
@@ -45,10 +42,7 @@ static void	make_redir_in(t_ast *node, t_cmd *cmd)
 static void	make_redir_out(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
-	{
-		printf("Closing previously opened redir\n");
 		close(cmd->fd_out);
-	}
 	if (!access(node->file, F_OK) && access(node->file, W_OK))
 		cmd->fd_out = -1;
 	else
