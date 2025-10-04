@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 23:29:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:32:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	exec_builtin(t_ast *node)
 	if (!node->cmd.args)
 		return (1);
 	name = node->cmd.args[0];
+	print_tree(node);
 	if (!ft_strncmp(name, "echo", 5))
 		return (echo(node));
 	else if (!ft_strncmp(name, "cd", 3))
