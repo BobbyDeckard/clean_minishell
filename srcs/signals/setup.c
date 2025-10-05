@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 18:42:38 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:53:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 10:22:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	setup_execution_signals(char *command, t_shell *data)
 void	signal_handler_interactive(int signum)
 {
 	printf("signal_handler_interactive() called\n");
+//	if (data->shlvl > 1)
+//		return ;
 	g_signal_received = signum;
 	if (signum == SIGINT)
 	{
