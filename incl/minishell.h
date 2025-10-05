@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:01:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:28:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 char		*copy_delimiter(t_ast *node);
 char		*copy_env_entry(t_ast *node, char **arr, int i);
 char		*expand_line(t_ast *node, char **envp, char *line);
+void		cat_words(t_ast *node, t_cmd *cmd);
 void		close_all_redirs(t_ast *node);
 void		close_pipes(int fd[2][2], int i, int count);
 void		close_redirs(t_cmd *cmd);

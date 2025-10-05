@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 15:59:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:29:14 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,10 @@ static int	remove_arg(t_cmd *cmd, int index)
 {
 	int	i;
 
-	printf("In remove_arg(), arg_count = %d\n", cmd->arg_count);
 	free(cmd->args[index]);
 	i = index;
-	printf("Starting loop with i = %d\n", i);
 	while (i < cmd->arg_count)
 	{
-		printf("In loop\n");
 		cmd->args[i] = cmd->args[i + 1];
 		if (i + 1 < cmd->arg_count)
 		{
@@ -93,7 +90,6 @@ static int	remove_arg(t_cmd *cmd, int index)
 		}
 		i++;
 	}
-	printf("Out of loop\n");
 	cmd->arg_count--;
 	printf("wtf\n");
 	return (1);

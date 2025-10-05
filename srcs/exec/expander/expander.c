@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:00:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:29:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 	i = -1;
 	while (cmd->args[++i])
 	{
-		printf("Starting loop %d\n", i);
 		if (cmd->exp[i] && contains_dol(cmd->args[i]))
 			expand(node, cmd, node->data->envp, i);
-		printf("Ending loop %d\n", i);
 	}
+	cat_words(node, cmd);
 }

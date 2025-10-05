@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 15:55:17 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:30:26 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,11 @@ static int	echo(t_ast *node)
 	int	flag;
 	int	i;
 
-	printf("Made to echo bltn\n");
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	flag = 0;
-	printf("Ah?\n");
 	if (!ft_strncmp(node->cmd.args[1], "-n", node->cmd.fd_out))
 		flag++;
-	printf("Oh!\n");
 	i = flag;
 	while (node->cmd.args[++i])
 	{
@@ -86,7 +83,6 @@ int	exec_builtin(t_ast *node)
 {
 	char	*name;
 
-	printf("In exec_builtin\n");
 	if (!node->cmd.args)
 		return (1);
 	name = node->cmd.args[0];
@@ -111,7 +107,6 @@ int	is_builtin(t_cmd cmd)
 {
 	char	*name;
 
-	printf("In is_builtin\n");
 	if (!cmd.args)
 		return (0);
 	name = cmd.args[0];

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 15:48:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:28:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	init_cmd(t_shell *data, t_cmd *cmd, int count)
 {
 	cmd->path = NULL;
-	printf("Allocating %d elements for args\n", count);
 	cmd->args = (char **) ft_calloc(count, sizeof(char *));
 	if (!cmd->args)
 		malloc_error(data->root, data, data->tokens);

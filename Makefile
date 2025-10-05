@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/04 21:03:51 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/05 16:28:27 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,8 @@ RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redirs.c \
 			 redirs_utils.c
 XPDR = $(addprefix expander/, $(XPDR_FILES))
-XPDR_FILES = expander.c \
+XPDR_FILES = cat_words.c \
+			 expander.c \
 			 utils.c
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \
