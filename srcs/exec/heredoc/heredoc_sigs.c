@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 17:00:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:32:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 21:03:20 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,25 @@ int stdin_bu)
 		close(stdin_bu);
 	node->data->state = INTERACTIVE;
 	g_signal_received = 0;
+}
+
+void	setup_child_signals(t_ast *node)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = SIG_DFL;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+	{
+		perror("child sigaction SIGINT");
+		cleanup(node);
+		exit(1);
+	}
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	{
+		perror("child sigaction SIGQUIT");
+		cleanup(node);
+		exit(1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:38:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/27 20:16:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 21:00:47 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_digits(int lvl)
 	return (dig);
 }
 
-static void	set_shlvl(char **env_cpy)
+static void	set_shlvl(char **env_cpy, t_shell *data)
 {
 	char	*level;
 	int		len;
@@ -49,6 +49,7 @@ static void	set_shlvl(char **env_cpy)
 			free(level);
 		}
 	}
+	data->shlvl = lvl;
 }
 
 static char	*reinit_oldpwd(char **env_cpy, int i)
@@ -92,7 +93,7 @@ static char	**init_env_cpy(char **envp, int entries)
 //	This function is only called from init_shell_data() at the very
 //	beginning of parsing, thus exit(1) is justified as is without
 //	anything needing to be freed.
-char	**copy_env(char **envp)
+char	**copy_env(char **envp, t_shell *data)
 {
 	char	**env_cpy;
 	int		i;
@@ -100,11 +101,11 @@ char	**copy_env(char **envp)
 	if (!envp)
 		exit(1);
 	else if (!*envp)
-		return (create_env_cpy());
+		return (create_env_cpy(data));
 	i = 0;
 	while (envp[i])
 		i++;
 	env_cpy = init_env_cpy(envp, i);
-	set_shlvl(env_cpy);
+	set_shlvl(env_cpy, data);
 	return (env_cpy);
 }

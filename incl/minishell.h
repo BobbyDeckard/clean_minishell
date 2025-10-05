@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:14:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 21:01:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_shell
 	char			**paths;
 	char			*cmd;
 	int				exit_status;
+	int				shlvl;
 	int				state;
 }	t_shell;
 
@@ -259,8 +260,8 @@ t_ast		*parse_command_line(t_token **tokens, int start, int end,
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 t_ast		*parse_parentheses(t_token **tokens, int start, int end,
 				t_shell *data);
-char		**copy_env(char **envp);
-char		**create_env_cpy(void);
+char		**copy_env(char **envp, t_shell *data);
+char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		free_new(t_ast **redirs, int i);

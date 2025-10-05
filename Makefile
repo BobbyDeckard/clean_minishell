@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/04 20:15:10 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/04 21:03:51 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,8 +128,7 @@ UTLS_FILES = char_arr.c \
 
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
-SIGS_FILES = children_signals.c \
-			 setup.c
+SIGS_FILES = setup.c
 
 # INCLUDES
 HEADERS = incl/minishell.h

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:37:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/04 21:00:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static char	*create_oldpwd(void)
 	return (old);
 }
 
-char	**create_env_cpy(void)
+char	**create_env_cpy(t_shell *data)
 {
 	char	**envp;
 
@@ -97,5 +97,6 @@ char	**create_env_cpy(void)
 	envp[2] = create_shlvl(envp);
 	envp[3] = create__(envp);
 	envp[4] = NULL;
+	data->shlvl = 1;
 	return (envp);
 }
