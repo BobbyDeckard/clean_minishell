@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:06:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:05:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_redirs(t_token **tokens, int start, int end)
 		if (is_redir_token(current) && i + 1 <= end)
 		{
 			current = get_token_at_index(tokens, i + 1);
-			if (current && current->type == WORD)
+			if (current && is_word(current->type))
 				count++;
 		}
 	}
@@ -76,7 +76,7 @@ static t_ast	**extract_redirs_body(t_ast **redirs, t_shell *data, int sec[3])
 		else if (is_redir_token(current) && sec[0] + 1 <= sec[1])
 		{
 			target = get_token_at_index(data->tokens, sec[0] + 1);
-			if (target && target->type == WORD)
+			if (target && is_word(target->type))
 			{
 				redirs[j] = redir_node_helper(data, current, target);
 				if (!redirs[j])

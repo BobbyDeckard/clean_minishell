@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:59:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 14:16:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:07:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_token *token)
 	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
 		tokenization_error(data, tl, token);
-	else if (token->type == WORD)
+	else if (is_word(token->type))
 	{
 		ft_strlcpy(token->content, "&", 2);
 		*command += len;

@@ -6,11 +6,18 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 08:35:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/03 13:28:09 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:01:29 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	is_word(t_token_type type)
+{
+	if (type == WORD || type == WORD_CAT)
+		return (1);
+	return (0);
+}
 
 int	count_tokens(t_token **token_list)
 {

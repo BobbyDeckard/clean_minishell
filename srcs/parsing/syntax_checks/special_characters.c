@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:38:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:04:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,22 @@ t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 	int		len;
 
 	len = ft_strlen(current->content) + 1;
-	if ((!prev || prev->type != WORD) && (!next || next->type != WORD))
+	if ((!prev || !is_word(prev->type)) && (!next || !is_word(next->type)))
 	{
 		current->type = WORD;
 		return (current);
 	}
-	else if (prev && prev->type == WORD && next && next->type == WORD)
+	else if (prev && is_word(prev->type) && next && is_word(next->type))
 	{
 		len += ft_strlen(prev->content) + ft_strlen(next->content);
 		return (cat_both(data, current, len));
 	}
-	else if (prev && prev->type == WORD)
+	else if (prev && is_word(prev->type))
 	{
 		len += ft_strlen(prev->content);
 		return (cat_prev(data, current, prev, len));
 	}
-	else if (next && next->type == WORD)
+	else if (next && is_word(next->type))
 	{
 		len += ft_strlen(next->content);
 		return (cat_next(data, current, next, len));

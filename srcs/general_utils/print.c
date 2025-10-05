@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:18:53 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:40:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ static void	print_node_info(t_ast *node)
 		{
 			printf("node->cmd.args[%d]: %p\n", i, node->cmd.args[i]);
 			printf("\t%s\n", node->cmd.args[i]);
+			if (node->cmd.exp[i])
+				printf("\tNeeds expansion (%d)\n", node->cmd.exp[i]);
+			if (node->cmd.cat[i])
+				printf("\tNeeds to be cat\n");
 		}
 	}
 	if (node->type == NODE_CMD)
@@ -101,6 +105,8 @@ void	print_token_type(t_token_type type)
 		printf("DEFAULT");
 	else if (type == WORD)
 		printf("WORD");
+	else if (type == WORD_CAT)
+		printf("WORD_CAT");
 	else if (type == SPACE)
 		printf("SPACE");
 	else if (type == ASSIGNMENT)

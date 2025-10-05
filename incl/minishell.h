@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 21:01:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:01:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef enum e_token_type
 {
 	DEFAULT,
 	WORD,
+	WORD_CAT,
 	SPACE,
 	ASSIGNMENT,
 	QUOTE,
@@ -80,6 +81,7 @@ typedef enum e_token_type
 	T_EOF,
 	UNKNOWN
 }	t_token_type;
+
 /* STRUCTS */
 typedef struct s_token
 {
@@ -88,12 +90,14 @@ typedef struct s_token
 	t_token_type	type;
 	char			*content;
 	int				needs_expansion;
+	int				in_double_quotes;
 }	t_token;
 
 typedef struct s_cmd
 {
 	char	**args;
 	char	*path;
+	int		*cat;
 	int		*exp;
 	int		arg_count;
 	int		fd_in;
@@ -164,9 +168,7 @@ void		exec_pipe_child(t_ast *node);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
 void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
-void		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 void		handle_spaces(t_shell *data, t_token **tokens);
-void		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 void		heredoc_end(t_ast *node, struct sigaction *old, int stdin_bu);
 void		init_sp_handler_sig(t_ast *node, struct sigaction *new_action,
 				struct sigaction *old);
@@ -174,7 +176,6 @@ void		invalid_name(t_cmd *cmd, char *name);
 void		link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
 void		make_heredoc(t_ast *node, t_cmd *cmd);
 void		prep_cmd(t_ast *node);
-void		remove_var(t_ast *node, t_cmd *cmd, int index);
 void		unlink_heredoc(t_ast *node);
 void		update_error(t_shell *data, char *path, int i);
 void		update_oldpwd(t_ast *node, int i, char *oldpwd);
@@ -196,7 +197,9 @@ int			exit_bltn(t_ast *node);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
 int			get_name_len(const char *str);
+int			handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int			handle_export_args(t_ast *node, int size);
+int			handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 int			has_equal(const char *str);
 int			is_arg(t_token_type type);
 int			is_builtin(t_cmd cmd);
@@ -204,6 +207,7 @@ int			make_fork(void);
 int			make_pipe(int fd[2]);
 int			make_redirs(t_ast *node);
 int			open_temp(t_ast *node, t_cmd *cmd);
+int			remove_var(t_ast *node, t_cmd *cmd, int index);
 int			set_exit_status(t_ast *node, int status);
 int			unset(t_ast *node);
 int			var_exists(char *name, char **envp);
@@ -268,9 +272,11 @@ void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
+void		handle_contiguous_quotes(t_token **tokens);
 void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		mark_for_expansion(t_token **tokens);
+void		remove_spaces(t_token **tokens);
 void		replace_children(t_ast *node, t_ast **redirs);
 void		set_root_node(t_ast *ast, t_ast *root);
 void		set_shlvl_malloc_error(char **env_cpy, int i);
@@ -289,6 +295,7 @@ int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);
 int			is_lone_redir(t_ast *node);
 int			is_operator(char c);
+int			is_word(t_token_type type);
 int			find_lowest_precedence_op(t_token **tokens, int i, int end);
 int			find_matching_parentheses(t_token **tokens, int open_pos, int end);
 int			ft_wordlen(char *content);

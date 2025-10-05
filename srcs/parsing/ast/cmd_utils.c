@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:33:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:48:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,21 @@
 void	init_cmd(t_shell *data, t_cmd *cmd, int count)
 {
 	cmd->path = NULL;
-	cmd->args = (char **) malloc(count * sizeof(char *));
+	printf("Allocating %d elements for args\n", count);
+	cmd->args = (char **) ft_calloc(count, sizeof(char *));
 	if (!cmd->args)
 		malloc_error(data->root, data, data->tokens);
-	cmd->exp = (int *) malloc(count * sizeof(int));
+	cmd->exp = (int *) ft_calloc(count, sizeof(int));
 	if (!cmd->exp)
 	{
 		free(cmd->args);
+		malloc_error(data->root, data, data->tokens);
+	}
+	cmd->cat = (int *) ft_calloc(count, sizeof(int));
+	if (!cmd->cat)
+	{
+		free(cmd->args);
+		free(cmd->exp);
 		malloc_error(data->root, data, data->tokens);
 	}
 }
@@ -49,7 +57,7 @@ int	count_args(t_token **tokens, int start, int end)
 
 int	is_arg(t_token_type type)
 {
-	if (type == WORD || type == ENV_VAR || type == EXIT_STATUS)
+	if (is_word(type) || type == ENV_VAR || type == EXIT_STATUS)
 		return (1);
 	return (0);
 }

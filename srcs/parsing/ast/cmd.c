@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:33:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:29:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,19 @@
 
 static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
 {
-	if (current->type == ENV_VAR && current->needs_expansion)
+	char	*content;
+
+	content = current->content;
+	if (is_word(current->type) && current->needs_expansion)
 	{
-		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
-				data);
-		cmd->exp[j] = 1;
+		if (current->in_double_quotes)
+			cmd->exp[j] = 2;
+		else
+			cmd->exp[j] = 1;
 	}
-	else if (current->type == EXIT_STATUS && current->needs_expansion)
-	{
-		cmd->args[j] = sf_strdup("$?", data->tokens, cmd->args, data);
-		cmd->exp[j] = 2;
-	}
-	else if (current->type == WORD && current->needs_expansion)
-	{
-		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
-				data);
-		cmd->exp[j] = 3;
-	}
-	else
-	{
-		cmd->args[j] = sf_strdup(current->content, data->tokens, cmd->args,
-				data);
-		cmd->exp[j] = 0;
-	}
+	if (current->type == WORD_CAT)
+		cmd->cat[j] = 1;
+	cmd->args[j] = sf_strdup(content, data->tokens, cmd->args, data);
 }
 
 static void	parse_cmd(t_shell *data, t_cmd *cmd, int start, int end)

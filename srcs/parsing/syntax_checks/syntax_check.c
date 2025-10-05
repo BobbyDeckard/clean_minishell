@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 13:13:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:41:26 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:02:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	valid_redir_target(t_token **token_list)
 		if (type == REDIR_OUT || type == REDIR_IN || type == REDIR_APPEND
 			|| type == HEREDOC || type == HEREDOC_EXP)
 		{
-			if (!current->next || current->next->type != WORD)
+			if (!current->next || !is_word(current->next->type))
 				return (0);
 		}
 		current = current->next;
@@ -131,6 +131,8 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 	if (!valid_quote_pairs(token_list))
 		return (1);
 	handle_quotes(data, token_list);
+	handle_contiguous_quotes(token_list);
+	remove_spaces(token_list);
 	if (!valid_operator(token_list))
 		return (2);
 	else if (!valid_redir_target(token_list))

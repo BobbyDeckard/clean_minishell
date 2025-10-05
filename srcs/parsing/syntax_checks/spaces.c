@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 19:39:11 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/11 23:34:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 10:58:24 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ static t_token	*remove_token(t_token **tokens, t_token *current)
 	return (ptr);
 }
 
+void	remove_spaces(t_token **tokens)
+{
+	t_token	*current;
+
+	current = *tokens;
+	while (current)
+	{
+		if (current->type == SPACE)
+			current = remove_token(tokens, current);
+		else
+			current = current->next;
+	}
+}
+
 static void	init_content(t_shell *data, t_token **tokens, t_token *current)
 {
 	current->content = (char *) malloc(2 * sizeof(char));
@@ -60,9 +74,9 @@ void	handle_spaces(t_shell *data, t_token **tokens)
 			in_double = !in_double;
 		else if (current->type == SPACE && (in_single || in_double))
 			init_content(data, tokens, current);
-		if (current->type == SPACE && !in_single && !in_double)
-			current = remove_token(tokens, current);
-		else
-			current = current->next;
+//		if (current->type == SPACE && !in_single && !in_double)
+//			current = remove_token(tokens, current);
+//		else
+		current = current->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:14:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 13:52:41 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	clean_ast(t_ast *ast)
 		clean_args(ast->cmd.args, ast->cmd.arg_count);
 		free(ast->cmd.args);
 		free(ast->cmd.exp);
+		free(ast->cmd.cat);
 	}
 	if (ast->cmd.path)
 		free(ast->cmd.path);

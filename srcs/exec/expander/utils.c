@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:02:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:59:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_name_len(const char *str)
 	return (i);
 }
 
-void	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
+int	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 {
 	char	*exit_status;
 	char	*new;
@@ -48,9 +48,10 @@ void	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 	free(exit_status);
 	free(cmd->args[index]);
 	cmd->args[index] = new;
+	return (0);
 }
 
-void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
+int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 {
 	char	*new;
 	int		name_len;
@@ -70,9 +71,35 @@ void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
 	free(cmd->args[index]);
 	cmd->args[index] = new;
+	return (0);
 }
 
-void	remove_var(t_ast *node, t_cmd *cmd, int index)
+static int	remove_arg(t_cmd *cmd, int index)
+{
+	int	i;
+
+	printf("In remove_arg(), arg_count = %d\n", cmd->arg_count);
+	free(cmd->args[index]);
+	i = index;
+	printf("Starting loop with i = %d\n", i);
+	while (i < cmd->arg_count)
+	{
+		printf("In loop\n");
+		cmd->args[i] = cmd->args[i + 1];
+		if (i + 1 < cmd->arg_count)
+		{
+			cmd->exp[i] = cmd->exp[i + 1];
+			cmd->cat[i] = cmd->cat[i + 1];
+		}
+		i++;
+	}
+	printf("Out of loop\n");
+	cmd->arg_count--;
+	printf("wtf\n");
+	return (1);
+}
+
+int	remove_var(t_ast *node, t_cmd *cmd, int index)
 {
 	char	*new;
 	int		name_len;
@@ -83,6 +110,8 @@ void	remove_var(t_ast *node, t_cmd *cmd, int index)
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
 	name_len = get_name_len(cmd->args[index] + i);
+	if (cmd->exp[index] == 1 && i == 0 && (int) ft_strlen(cmd->args[index]) == name_len)
+		return (remove_arg(cmd, index));
 	len = ft_strlen(cmd->args[index]) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
@@ -91,4 +120,5 @@ void	remove_var(t_ast *node, t_cmd *cmd, int index)
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
 	free(cmd->args[index]);
 	cmd->args[index] = new;
+	return (0);
 }

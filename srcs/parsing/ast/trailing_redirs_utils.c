@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 16:02:59 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:19:50 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 11:05:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	count_trailing_redirs(t_token *current)
 		if (!is_redir_token(current))
 			break ;
 		current = current->next;
-		if (current->type != WORD)
+		if (!is_word(current->type))
 			break ;
 		count++;
 		current = current->next;

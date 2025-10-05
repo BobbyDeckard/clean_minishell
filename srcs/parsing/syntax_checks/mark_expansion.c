@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:44:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 15:27:05 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	mark_heredoc_exp(t_token **tokens)
 	if (!quote1 || quote1->type != DOUBLE_QUOTE)
 		return ;
 	word = quote1->next;
-	if (!word || word->type != WORD)
+	if (!word || !is_word(word->type))
 		return ;
 	quote2 = word->next;
 	if (!quote2 || quote2->type != DOUBLE_QUOTE)
@@ -64,13 +64,15 @@ void	mark_for_expansion(t_token **tokens)
 			in_single = !in_single;
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
-		else if (current->type == ENV_VAR && !in_single)
-			current->needs_expansion = 1;
-		else if (current->type == EXIT_STATUS && !in_single)
-			current->needs_expansion = 1;
-		else if (current->type == WORD && contains_dol(current->content)
+//		else if (current->type == ENV_VAR && !in_single)
+//			current->needs_expansion = 1;
+//		else if (current->type == EXIT_STATUS && !in_single)
+//			current->needs_expansion = 1;
+		else if (is_word(current->type) && contains_dol(current->content)
 			&& !in_single)
 			current->needs_expansion = 1;
+		if (is_word(current->type) && in_double)
+			current->in_double_quotes = 1;
 		current = current->next;
 	}
 	mark_heredoc_exp(tokens);

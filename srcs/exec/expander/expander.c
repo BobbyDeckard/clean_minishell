@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:56:50 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:00:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*get_name(t_ast *node, const char *str)
 	return (name);
 }
 
-static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
+static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	char	*name;
 	int		i;
@@ -77,7 +77,10 @@ static void	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	while (contains_dol(cmd->args[index]))
-		expand_cat(node, cmd, envp, index);
+	{
+		if (expand_cat(node, cmd, envp, index))
+			return ;
+	}
 }
 
 void	expander(t_ast *node, t_cmd *cmd)
@@ -87,7 +90,9 @@ void	expander(t_ast *node, t_cmd *cmd)
 	i = -1;
 	while (cmd->args[++i])
 	{
-		if (contains_dol(cmd->args[i]))
+		printf("Starting loop %d\n", i);
+		if (cmd->exp[i] && contains_dol(cmd->args[i]))
 			expand(node, cmd, node->data->envp, i);
+		printf("Ending loop %d\n", i);
 	}
 }
