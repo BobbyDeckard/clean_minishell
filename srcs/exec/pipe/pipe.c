@@ -6,29 +6,30 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 18:35:37 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:12:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static void	exec_pipe_cmd(t_ast *node)
+static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 {
 	if (is_lone_redir(node))
 		clean_exit(node->root, 0);
 	dup_fds(node);
+	close_pipes(fd, i, count);
 	exec_cmd(node, node->cmd);
 	clean_exit(node->root, 1);
 }
 
-void	exec_pipe_child(t_ast *node)
+void	exec_pipe_child(t_ast *node, int fd[2][2], int i, int count)
 {
 	int	status;
 
 	setup_child_signals(node);
 	status = 1;
 	if (node->type == NODE_CMD && !is_builtin(node->cmd))
-		exec_pipe_cmd(node);
+		exec_pipe_cmd(node, fd, i, count);
 	else if (node->type == NODE_CMD)
 		status = exec_builtin(node);
 //	else if (node->type == NODE_AND_IF)
@@ -37,6 +38,8 @@ void	exec_pipe_child(t_ast *node)
 //		status = exec_pipe_or(node);
 	else
 		status = exec_ast(node);
+	if (is_builtin(node->cmd) || node->type != NODE_CMD)
+		close_pipes(fd, i, count);
 	cleanup(node);
 	exit(status);
 }
@@ -70,7 +73,7 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 			prep_cmd(child[i]);
 		pids[i] = make_fork();
 		if (pids[i] == 0)
-			exec_pipe_child(child[i]);
+			exec_pipe_child(child[i], fd, i, count);
 		if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
 			close_all_redirs(child[i]);
 		close_pipes(fd, i, count);

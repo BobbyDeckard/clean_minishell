@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:51:47 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:09:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void		dup_fds(t_ast *node);
 void		dup2_error(t_ast *node);
 void		create_env_error(t_ast *node, char **envp, int i);
 void		exec_cmd(t_ast *node, t_cmd cmd);
-void		exec_pipe_child(t_ast *node);
+void		exec_pipe_child(t_ast *node, int fd[2][2], int i, int count);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
 void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
@@ -193,8 +193,6 @@ int			create_var(t_ast *node, int size, int arg);
 int			exec_ast(t_ast *node);
 int			exec_builtin(t_ast *node);
 int			exec_pipe(t_ast **children);
-int			exec_pipe_and(t_ast *node);
-int			exec_pipe_or(t_ast *node);
 int			exit_bltn(t_ast *node);
 int			export_bltn(t_ast *node);
 int			fork_error(void);
