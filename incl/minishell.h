@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:44:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:23:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,7 @@ t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
 t_ast		**malloc_new(t_ast *node, t_redir *redirs, int count, int size);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
+t_ast		*create_ast_node(t_shell *data, t_node_type type);
 t_ast		*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd);
 t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
 				t_shell *data);
@@ -264,6 +265,7 @@ t_ast		*parse_command_line(t_token **tokens, int start, int end,
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 t_ast		*parse_parentheses(t_token **tokens, int start, int end,
 				t_shell *data);
+t_ast		*parse_pipe(t_shell *data, int start, int end, int op_pos);
 char		**copy_env(char **envp, t_shell *data);
 char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);

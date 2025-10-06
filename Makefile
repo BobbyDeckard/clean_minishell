@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/06 15:10:52 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/06 17:53:26 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ AST_FILES = ast.c \
 			nodes.c \
 			operators.c \
 			parentheses.c \
+			pipe.c \
 			redirs.c
 DATA = $(addprefix data/, $(DATA_FILES))
 DATA_FILES = create_env_cpy.c \
