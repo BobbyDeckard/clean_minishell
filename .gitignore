@@ -48,6 +48,7 @@ outfile
 in
 out
 test_alex
+ivotest
 
 # Kernel Module Compile Results
 *.mod*
