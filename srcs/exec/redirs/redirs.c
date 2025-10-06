@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:17:45 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:53:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	make_redir_in(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_in != STDIN_FILENO)
 		close(cmd->fd_in);
+	if (!node->file)
+		make_file_name(node);
 	if (access(node->file, F_OK) || access(node->file, R_OK))
 		cmd->fd_in = -1;
 	else
@@ -43,6 +45,8 @@ static void	make_redir_out(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
 		close(cmd->fd_out);
+	if (!node->file)
+		make_file_name(node);
 	if (!access(node->file, F_OK) && access(node->file, W_OK))
 		cmd->fd_out = -1;
 	else
@@ -55,6 +59,8 @@ static void	make_redir_append(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
 		close(cmd->fd_out);
+	if (!node->file)
+		make_file_name(node);
 	if (!access(node->file, F_OK) && access(node->file, W_OK))
 		cmd->fd_out = -1;
 	else
