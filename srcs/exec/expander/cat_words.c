@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:27:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:00:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	cat_words(t_ast *node, t_cmd *cmd)
 	while (++i < cmd->arg_count)
 	{
 		if (cmd->cat[i])
-			cat_args(node, cmd, i);
+			cat_args(node, cmd, i--);
 	}
 }

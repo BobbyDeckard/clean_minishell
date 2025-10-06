@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 17:41:02 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 13:03:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:59:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ static void	check_prevs(t_token *current)
 {
 	if (!current->previous || !current->previous->previous)
 		return ;
-	if (current->previous->type == SPACE)
+	else if (current->previous->type == SPACE)
+		return ;
+	else if ((current->previous->type == SINGLE_QUOTE || current->previous->type == DOUBLE_QUOTE) && current->previous->previous->type == SPACE)
 		return ;
 	current->type = WORD_CAT;
 }

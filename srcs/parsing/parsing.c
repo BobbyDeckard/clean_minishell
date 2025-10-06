@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:24:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:55:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_ast	*parse(char *command, t_shell *data)
 	err = valid_syntax(data, token_list);
 	if (err)
 		return (invalid_syntax(token_list, err));
+	print_token_list(token_list);
 	data->tokens = token_list;
 	ast = create_ast(token_list, data);
 	free_tokens(token_list);
