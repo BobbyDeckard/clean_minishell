@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/05 16:28:27 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/05 17:51:22 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ DATA_FILES = create_env_cpy.c \
 			 ft_split_paths.c \
 			 shell_data.c
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
-SNTX_FILES = mark_expansion.c \
+SNTX_FILES = cont_words.c \
+			 mark_expansion.c \
 			 parentheses_check.c \
 			 quotes.c \
 			 spaces.c \

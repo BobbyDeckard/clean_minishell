@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 10:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 11:04:51 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 13:08:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 	len = ft_strlen(current->content) + 1;
 	if ((!prev || !is_word(prev->type)) && (!next || !is_word(next->type)))
 	{
-		current->type = WORD;
+		if (current->type != WORD_CAT)
+			current->type = WORD;	// Make sure this doesn't overwrite WORD_CAT attribution
 		return (current);
 	}
 	else if (prev && is_word(prev->type) && next && is_word(next->type))

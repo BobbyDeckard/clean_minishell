@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:28:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:50:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -273,7 +273,7 @@ void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
 void		get_trunc_cwd(char cwd[256], t_shell *data);
-void		handle_contiguous_quotes(t_token **tokens);
+void		handle_contiguous_words(t_token **tokens);
 void		handle_quotes(t_shell *data, t_token **tokens);
 void		init_cmd(t_shell *data, t_cmd *cmd, int count);
 void		mark_for_expansion(t_token **tokens);
@@ -292,6 +292,7 @@ int			count_args(t_token **tokens, int start, int end);
 int			count_children(t_ast *node);
 int			count_tokens(t_token **token_list);
 int			count_trailing_redirs(t_token *current);
+int			count_redir_related_tokens(t_token *current);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);
 int			is_lone_redir(t_ast *node);

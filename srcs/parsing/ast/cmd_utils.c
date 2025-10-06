@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:28:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/05 17:17:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	count_args(t_token **tokens, int start, int end)
 		else if (is_arg(current->type))
 			count++;
 		else if (is_redir_token(current))
-			i++;
+			i += count_redir_related_tokens(current);
 	}
 	return (count);
 }
