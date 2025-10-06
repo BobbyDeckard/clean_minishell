@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:53:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:54:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	redir_error(t_ast *node)
 	free(str);
 }
 
-static void	make_redir_in(t_ast *node, t_cmd *cmd)
+static int	make_redir_in(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_in != STDIN_FILENO)
 		close(cmd->fd_in);
@@ -38,10 +38,14 @@ static void	make_redir_in(t_ast *node, t_cmd *cmd)
 	else
 		cmd->fd_in = open(node->file, O_RDONLY);
 	if (cmd->fd_in < 0)
+	{
 		redir_error(node);
+		return (1);
+	}
+	return (0);
 }
 
-static void	make_redir_out(t_ast *node, t_cmd *cmd)
+static int	make_redir_out(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
 		close(cmd->fd_out);
@@ -52,10 +56,14 @@ static void	make_redir_out(t_ast *node, t_cmd *cmd)
 	else
 		cmd->fd_out = open(node->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (cmd->fd_out < 0)
+	{
 		redir_error(node);
+		return (1);
+	}
+	return (0);
 }
 
-static void	make_redir_append(t_ast *node, t_cmd *cmd)
+static int	make_redir_append(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
 		close(cmd->fd_out);
@@ -66,7 +74,11 @@ static void	make_redir_append(t_ast *node, t_cmd *cmd)
 	else
 		cmd->fd_out = open(node->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (cmd->fd_out < 0)
+	{
 		redir_error(node);
+		return (1);
+	}
+	return (0);
 }
 
 int	make_redirs(t_ast *node)
@@ -78,13 +90,13 @@ int	make_redirs(t_ast *node)
 	while (node->children && node->children[++i])
 	{
 		type = node->children[i]->type;
-		if (type == NODE_REDIR_IN)
-			make_redir_in(node->children[i], &node->cmd);
-		else if (type == NODE_REDIR_OUT)
-			make_redir_out(node->children[i], &node->cmd);
-		else if (type == NODE_REDIR_APPEND)
-			make_redir_append(node->children[i], &node->cmd);
-		else if (type == NODE_HEREDOC || type == NODE_HEREDOC_EXP)
+		if (type == NODE_REDIR_IN && make_redir_in(node->children[i], &node->cmd))
+			break ;
+		else if (type == NODE_REDIR_OUT && make_redir_out(node->children[i], &node->cmd))
+				break ;
+		else if (type == NODE_REDIR_APPEND && make_redir_append(node->children[i], &node->cmd))
+				break ;
+		else if ((type == NODE_HEREDOC || type == NODE_HEREDOC_EXP))
 			make_heredoc(node->children[i], &node->cmd);
 	}
 	return (check_redirs(node, &node->cmd));
