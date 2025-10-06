@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:33:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:44:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_shell	process_command(char *command, t_shell data)
 	ast = parse(command, &data);
 	if (ast)
 	{
-		printf("\n");
-		print_tree(ast);
-//		data.exit_status = exec_ast(ast);
+//		printf("\n");
+//		print_tree(ast);
+		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		data.root = NULL;
 	}

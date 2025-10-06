@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:19:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:24:19 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:37:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_ast	*parse_operator(t_shell *data, int start, int end, int op_pos)
 	if (!current)
 		return (parse_command(data->tokens, start, end, data));
 	else if (current->type == PIPE)
-		return (parse_pipe(data, start, end, op_pos));
+		return (parse_pipe(data, start, end));
 	type = convert_types(current->type);
 	printf("In parse_operator for ");
 	print_node_type(type);

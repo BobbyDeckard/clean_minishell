@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:23:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:37:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ t_ast		*parse_command_line(t_token **tokens, int start, int end,
 t_ast		*parse_operator(t_shell *data, int start, int end, int op_pos);
 t_ast		*parse_parentheses(t_token **tokens, int start, int end,
 				t_shell *data);
-t_ast		*parse_pipe(t_shell *data, int start, int end, int op_pos);
+t_ast		*parse_pipe(t_shell *data, int start, int end);
 char		**copy_env(char **envp, t_shell *data);
 char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);
