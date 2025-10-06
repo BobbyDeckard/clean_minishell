@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:30:26 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:32:21 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	echo(t_ast *node)
 	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	flag = 0;
-	if (!ft_strncmp(node->cmd.args[1], "-n", node->cmd.fd_out))
+	if (!ft_strncmp(node->cmd.args[1], "-n", 2))
 		flag++;
 	i = flag;
 	while (node->cmd.args[++i])

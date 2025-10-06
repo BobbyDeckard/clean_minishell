@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:23:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:43:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ static t_ast	*redir_node_helper(t_shell *data, t_token *current)
 	cmd.arg_count = count_redir_args(current);
 	if (cmd.arg_count == 1)
 	{
+		bzero_cmd(&cmd);
 		content = set_content(current);
 		if (!content)
 			return (NULL);

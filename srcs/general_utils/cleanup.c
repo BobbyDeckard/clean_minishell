@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 13:52:41 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:44:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	clean_data(t_shell *data)
 	return (data->exit_status);
 }
 
-static void	clean_args(char **args, int count)
+static void	clean_args(char **args)
 {
 	int	i;
 
 	i = -1;
-	while (++i < count)
+	while (args[++i])
 	{
 		if (args[i])
 			free(args[i]);
@@ -66,7 +66,7 @@ void	clean_ast(t_ast *ast)
 	}
 	if (ast->cmd.args)
 	{
-		clean_args(ast->cmd.args, ast->cmd.arg_count);
+		clean_args(ast->cmd.args);
 		free(ast->cmd.args);
 		free(ast->cmd.exp);
 		free(ast->cmd.cat);

@@ -6,11 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 17:17:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:43:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	bzero_cmd(t_cmd *cmd)
+{
+	cmd->path = NULL;
+	cmd->args = NULL;
+	cmd->exp = NULL;
+	cmd->cat = NULL;
+}
 
 void	init_cmd(t_shell *data, t_cmd *cmd, int count)
 {

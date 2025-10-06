@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:09:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:44:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,6 +267,7 @@ t_ast		*parse_parentheses(t_token **tokens, int start, int end,
 char		**copy_env(char **envp, t_shell *data);
 char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);
+void		bzero_cmd(t_cmd *cmd);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);
