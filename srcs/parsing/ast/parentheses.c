@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:12:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:36:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:12:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	matching_parentheses(t_token **tokens, int start, int end)
 	return (check_between_parentheses(tokens, start, end));
 }
 
+/*
 static void	apply_redirs(t_shell *data, t_ast *node, t_redir *redirs, int count)
 {
 	int	i;
@@ -90,26 +91,27 @@ static void	apply_redirs(t_shell *data, t_ast *node, t_redir *redirs, int count)
 			apply_redirs(data, node->children[i], redirs, count);
 	}
 }
+*/
 
 t_ast	*parse_parentheses(t_token **tokens, int start, int end, t_shell *data)
 {
-	t_token	*current;
-	t_redir	*redirs;
+//	t_token	*current;
+//	t_redir	*redirs;
 	t_ast	*node;
 	int		closing;
-	int		count;
+//	int		count;
 
 	node = NULL;
 	closing = find_matching_parentheses(tokens, start, end);
 	if (closing > start && closing <= end)
 		node = parse_command_line(tokens, start + 1, closing - 1, data);
-	current = get_token_at_index(tokens, closing + 1);
-	count = count_trailing_redirs(current);
-	redirs = find_trailing_redirs(tokens, closing + 1, count, data);
-	apply_redirs(data, node, redirs, count);
+//	current = get_token_at_index(tokens, closing + 1);
+//	count = count_trailing_redirs(current);
+//	redirs = find_trailing_redirs(tokens, closing + 1, count, data);
+//	apply_redirs(data, node, redirs, count);
 	closing = -1;
-	while (++closing < count)
-		free(redirs[closing].file);
-	free(redirs);
+//	while (++closing < count)
+//		free(redirs[closing].file);
+//	free(redirs);
 	return (node);
 }

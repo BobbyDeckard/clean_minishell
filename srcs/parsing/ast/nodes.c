@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:17:06 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 13:55:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:57:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_ast	*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd)
 	return (node);
 }
 
-t_ast	*create_redir_node(t_node_type type, char *file, t_shell *data)
+t_ast	*create_redir_node(t_shell *data, t_node_type type, char *file, t_cmd cmd)
 {
 	t_ast	*node;
 
@@ -103,5 +103,9 @@ t_ast	*create_redir_node(t_node_type type, char *file, t_shell *data)
 	data->root = node;
 	set_root_node(node, node);
 	node->file = file;
+	node->cmd.args = cmd.args;
+	node->cmd.exp = cmd.exp;
+	node->cmd.cat = cmd.cat;
+	node->cmd.arg_count = cmd.arg_count;
 	return (node);
 }

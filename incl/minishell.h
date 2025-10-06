@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 17:50:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:58:09 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,7 @@ t_ast		*create_ast(t_token **token_list, t_shell *data);
 t_ast		*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd);
 t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
 				t_shell *data);
-t_ast		*create_redir_node(t_node_type type, char *file, t_shell *data);
+t_ast		*create_redir_node(t_shell *data, t_node_type type, char *file, t_cmd cmd);
 t_ast		*create_subshell_node(t_ast *child, t_shell *data);
 t_ast		*parse(char *command, t_shell *data);
 t_ast		*parse_command(t_token **tokens, int start, int end, t_shell *data);
