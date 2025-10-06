@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:11:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:15:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:23:47 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,7 @@ t_ast	*parse_command(t_token **tokens, int start, int end, t_shell *data)
 //	printf("In parse_command(), start = %d, end = %d\n", start, end);
 	parse_cmd(data, &cmd, start, end);
 	node = create_cmd_node(data, tokens, cmd);
-	printf("About to extract redirs\n");
 	redirs = extract_redirs(data, cmd.args, start, end);
-	printf("Redirs extracted\n");
 	if (redirs)
 		node->children = redirs;
 	return (node);

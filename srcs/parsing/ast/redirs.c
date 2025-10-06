@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:20:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:23:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int	count_redir_args(t_token *current)
 			break ;
 		current = current->next;
 	}
-	printf("Counted %d args for redir\n", i);
 	return (i);
 }
 
