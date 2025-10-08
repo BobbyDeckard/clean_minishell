@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:33:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:43:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:07:14 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	dup_fds(t_ast *node)
 			dup2_error(node);
 		if (close(node->cmd.fd_in) == -1)
 			perror("close");
-		else
-			fprintf(stderr, "%d\tClosed %s->fd_in (%d) after dup2\n", getpid(), node->cmd.args[0], node->cmd.fd_in);
 	}
 	if (node->cmd.fd_out != STDOUT_FILENO && node->cmd.fd_out >= 0)
 	{
@@ -37,8 +35,6 @@ void	dup_fds(t_ast *node)
 			dup2_error(node);
 		if (close(node->cmd.fd_out) == -1)
 			perror("close");
-		else
-			fprintf(stderr, "%d\tClosed %s->fd_out (%d) after dup2\n", getpid(), node->cmd.args[0], node->cmd.fd_out);
 	}
 }
 

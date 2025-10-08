@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:04:42 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:14:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:07:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	close_pipes(int fd[2][2], int i, int count)
 	{
 		if (close(fd[i % 2][0]) == -1)
 			perror("close");
-		else
-			fprintf(stderr, "%d\tClosed fd[%d][0] (%d)\n", getpid(), i % 2, fd[i % 2][0]);
 	}
 }
 

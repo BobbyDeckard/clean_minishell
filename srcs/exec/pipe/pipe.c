@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 16:02:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 16:07:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-
+/*
 static void	print_open_fds(const char *name)
 {
 	fprintf(stderr, "Printing open fds for %s\n", name);
@@ -20,7 +20,7 @@ static void	print_open_fds(const char *name)
     	if (fcntl(fd, F_GETFD) != -1)
         	fprintf(stderr, "%d\thas fd %d open\n", getpid(), fd);
 }
-
+*/
 
 static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 {
@@ -28,7 +28,6 @@ static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 		clean_exit(node->root, 0);
 	dup_fds(node);
 	close_pipes(fd, i, count);
-	print_open_fds(node->cmd.args[0]);
 	exec_cmd(node, node->cmd);
 	clean_exit(node->root, 1);
 }
@@ -45,7 +44,6 @@ void	exec_pipe_child(t_ast *node, int fd[2][2], int i, int count)
 	{
 		dup_fds(node);
 		close_pipes(fd, i, count);
-		print_open_fds(node->cmd.args[0]);
 		status = exec_builtin(node, 1);
 	}
 	cleanup(node);
@@ -84,7 +82,6 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 			exec_pipe_child(child[i], fd, i, count);
 		if (child[i]->type == NODE_CMD)
 			close_all_redirs(child[i]);
-		print_open_fds("main");
 	}
 	return (waitpids(*child, pids, count));
 }
