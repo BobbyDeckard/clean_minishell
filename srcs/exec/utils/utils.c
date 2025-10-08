@@ -28,6 +28,8 @@ void	dup_fds(t_ast *node)
 			dup2_error(node);
 		if (close(node->cmd.fd_in) == -1)
 			perror("close");
+		else
+			node->cmd.fd_in = STDIN_FILENO;
 	}
 	if (node->cmd.fd_out != STDOUT_FILENO && node->cmd.fd_out >= 0)
 	{
@@ -35,6 +37,8 @@ void	dup_fds(t_ast *node)
 			dup2_error(node);
 		if (close(node->cmd.fd_out) == -1)
 			perror("close");
+		else
+			node->cmd.fd_out = STDOUT_FILENO;
 	}
 }
 
