@@ -12,16 +12,22 @@
 
 #include "../../../incl/minishell.h"
 
+/*
+static void	print_open_fds(void)
+{
+	for (int fd = 0; fd < 1024; fd++)
+    	if (fcntl(fd, F_GETFD) != -1)
+        	fprintf(stderr, "pid = %d(child)\thas fd %d open\n", getpid(), fd);
+	fprintf(stderr, "\n");
+}
+*/
+
 static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 {
 	if (is_lone_redir(node))
 		clean_exit(node->root, 0);
 	dup_fds(node);
 	close_pipes(fd, i, count);
-	for (int fd = 0; fd < 1024; fd++)
-    	if (fcntl(fd, F_GETFD) != -1)
-        	fprintf(stderr, "pid = %d(child)\thas fd %d open\n", getpid(), fd);
-	fprintf(stderr, "\n");
 	exec_cmd(node, node->cmd);
 	clean_exit(node->root, 1);
 }
@@ -72,10 +78,6 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 			exec_pipe_child(child[i], fd, i, count);
 		if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
 			close_all_redirs(child[i]);
-		for (int fd = 0; fd < 1024; fd++)
-    		if (fcntl(fd, F_GETFD) != -1)
-        		fprintf(stderr, "pid = %d (main)\thas fd %d open\n", getpid(), fd);
-	fprintf(stderr, "\n");
 	}
 	return (waitpids(*child, pids, count));
 }

@@ -12,64 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-/*
-int	exec_pipe_and(t_ast *node)
-{
-	int	status;
-	int	pid;
-	int	i;
-
-	i = -1;
-	status = 1;
-	while (node->children[++i])
-	{
-		if (node->children[i]->type == NODE_CMD)
-		{
-			prep_cmd(node->children[i]);
-			pid = make_fork();
-			if (pid == 0)
-				exec_pipe_child(node->children[i]);
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				status = WEXITSTATUS(status);
-			if (status)
-				break ;
-		}
-		else
-			exec_pipe_child(node->children[i]);
-	}
-	return (status);
-}
-
-int	exec_pipe_or(t_ast *node)
-{
-	int	status;
-	int	pid;
-	int	i;
-
-	i = -1;
-	status = 1;
-	while (node->children[++i])
-	{
-		if (node->children[i]->type == NODE_CMD)
-		{
-			prep_cmd(node->children[i]);
-			pid = make_fork();
-			if (pid == 0)
-				exec_pipe_child(node->children[i]);
-			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
-				status = WEXITSTATUS(status);
-			if (!status)
-				break ;
-		}
-		else
-			exec_pipe_child(node->children[i]);
-	}
-	return (status);
-}
-*/
-
 int	is_lone_redir(t_ast *node)
 {
 	if (node->cmd.fd_in == STDIN_FILENO && node->cmd.fd_out == STDOUT_FILENO)
