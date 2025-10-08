@@ -1,7 +1,6 @@
 TO DO:
 10.	cat | cat | ls
 	=> enter + enter should exit pipe
-13.	Check Alex's todo
 13.1	ctrl + C prints as many newlines as there are shell levels
 	=> check shlvl ?
 13.2	something with signals for ctrl + \ ?
