@@ -26,18 +26,14 @@ void	dup_fds(t_ast *node)
 	{
 		if (dup2(node->cmd.fd_in, STDIN_FILENO) == -1)
 			dup2_error(node);
-		fprintf(stderr, "pid = %d\tdup2'ed fd_in for %s\n", getpid(), node->cmd.args[0]);
 		if (close(node->cmd.fd_in) == -1)
 			perror("close");
-		fprintf(stderr, "pid = %d\tClosed fd_in for %s\n", getpid(), node->cmd.args[0]);
 	}
 	if (node->cmd.fd_out != STDOUT_FILENO && node->cmd.fd_out >= 0)
 	{
 		if (dup2(node->cmd.fd_out, STDOUT_FILENO) == -1)
 			dup2_error(node);
-		fprintf(stderr, "pid = %d\tdup2'ed fd_out for %s\n", getpid(), node->cmd.args[0]);
 		close(node->cmd.fd_out);
-		fprintf(stderr, "pid = %d\tClosed fd_out for %s\n", getpid(), node->cmd.args[0]);
 	}
 }
 

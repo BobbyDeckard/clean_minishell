@@ -18,43 +18,13 @@ void	close_all_redirs(t_ast *node)
 	unlink_heredoc(node);
 }
 
-// For cmd cat file | grep foo:
-// 1 pipe is created: fd[0]
-// cat->fd_out = fd[0][1] (4)
-// grep->fd_in = fd[0][0] (3)
-// Main process calls this func and closes fd[0][1] (cat->fd_out)
-// 3 is still open in main process (= fd[0][0], grep->fd_in)
-// cat's process calls this func and closes fd[0][1] (cat->fd_out)
-// 3 is still open in cat's process (grep->fd_in)
-// After making fork for grep in main process, this func is called
-// and closes fd[0][0] (grep->fd_in)
-// main process only has stdfds open
-// grep's process calls this func and closes fd[0][0] (grep->fd_in)
-// all processes have exited
-// The only thing we could do differently seems to be closing 3
-// in cat's process
 void	close_pipes(int fd[2][2], int i, int count)
 {
-	fprintf(stderr, "pid = %d\tIn close_pipes()\n", getpid());
 	if (i + 1 < count)
 	{
-//		if (close(fd[i % 2][1]) == -1)
-//			perror("close");
-//		fprintf(stderr, "pid = %d\tClosed fd[%d][1]\n", getpid(), i % 2);
-		fprintf(stderr, "pid = %d\tAbout to close fd[%d][0]\n", getpid(), i % 2);
 		if (close(fd[i % 2][0]) == -1)
 			perror("close");
 	}
-//	if (i > 0)
-//	{
-//		if (close(fd[(i + 1) % 2][0]) == -1)
-//			perror("close");
-//		fprintf(stderr, "pid = %d\tClosed fd[%d][0]\n", getpid(), (i + 1) % 2);
-//		fprintf(stderr, "pid = %d\tAbout to close fd[%d][1]\n", getpid(), (i + 1) % 2);
-//		if (close(fd[(i + 1) % 2][1]) == -1)
-//			perror("close");
-//	}
-	fprintf(stderr, "\n");
 }
 
 int	make_fork(void)
