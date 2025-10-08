@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 13:56:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:40:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	run_cmd(t_ast *node)
 	status = -1;
 	expander(node, &node->cmd);
 	if (is_builtin(node->cmd))
-		return (exec_builtin(node));
+		return (exec_builtin(node, 0));
 	else if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	get_cmd_path(node, &node->cmd, node->data->paths);

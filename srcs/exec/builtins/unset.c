@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:28:23 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 18:29:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:57:35 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,21 @@ static void	remove_paths(t_shell *data)
 	data->paths = NULL;
 }
 
-int	unset(t_ast *node)
+int	unset(t_ast *node, int in_pipe)
 {
 	char	**new;
 	int		len;
 	int		i;
 
-	if (make_redirs(node))
+	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	len = char_arr_len(node->data->envp) - char_arr_len(node->cmd.args) + 2;
 	if (len == -1)
+	{
+		if (!in_pipe)
+			close_all_redirs(node);
 		return (set_exit_status(node, 1));
+	}
 	new = (char **) ft_calloc(len, sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);
@@ -100,6 +104,7 @@ int	unset(t_ast *node)
 	filter_and_copy(node, node->data->envp, new, node->cmd.args);
 	free_char_array(node->data->envp);
 	node->data->envp = new;
-	close_all_redirs(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }

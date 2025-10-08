@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 13:53:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:39:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,16 +186,16 @@ void		update_paths(t_ast *node, t_shell *data, const char *new_paths);
 void		update_pwd(t_ast *node, int i, char *oldpwd);
 int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size, int arg);
-int			cd(t_ast *node);
+int			cd(t_ast *node, int in_pipe);
 int			check_redirs(t_ast *node, t_cmd *cmd);
 int			contains_dol(const char *str);
 int			count_nodes(t_ast **children);
 int			create_var(t_ast *node, int size, int arg);
 int			exec_ast(t_ast *node);
-int			exec_builtin(t_ast *node);
+int			exec_builtin(t_ast *node, int in_pipe);
 int			exec_pipe(t_ast **children);
-int			exit_bltn(t_ast *node);
-int			export_bltn(t_ast *node);
+int			exit_bltn(t_ast *node, int in_pipe);
+int			export_bltn(t_ast *node, int in_pipe);
 int			fork_error(void);
 int			get_name_len(const char *str);
 int			handle_exit_status(t_ast *node, t_cmd *cmd, int index);
@@ -210,7 +210,7 @@ int			make_redirs(t_ast *node);
 int			open_temp(t_ast *node, t_cmd *cmd);
 int			remove_var(t_ast *node, t_cmd *cmd, int index);
 int			set_exit_status(t_ast *node, int status);
-int			unset(t_ast *node);
+int			unset(t_ast *node, int in_pipe);
 int			var_exists(char *name, char **envp);
 int			waitpids(t_ast *root, int *pids, int cmd_count);
 

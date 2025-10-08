@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:16:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/23 21:56:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:55:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,30 +83,34 @@ static void	make_updates(t_ast *node, char *oldpwd)
 		return (update_oldpwd(node, j, oldpwd));
 }
 
-int	cd(t_ast *node)
+int	cd(t_ast *node, int in_pipe)
 {
 	char	*oldpwd;
 	char	*error;
 
-	if (make_redirs(node))
+	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	oldpwd = getcwd(NULL, 0);
 	if (!oldpwd)
 		getcwd_error(node);
 	if (!node->cmd.args[1])
+	{
+		if (!in_pipe)
+			close_all_redirs(node);
 		return (set_exit_status(node, 0));
+	}
 	if (chdir(node->cmd.args[1]) < 0)
 	{
 		error = cd_error(node);
 		perror(error);
 		free(error);
 		free(oldpwd);
-		close_redirs(&node->cmd);
-		unlink_heredoc(node);
+		if (!in_pipe)
+			close_all_redirs(node);
 		return (set_exit_status(node, 1));
 	}
 	make_updates(node, oldpwd);
-	close_redirs(&node->cmd);
-	unlink_heredoc(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }

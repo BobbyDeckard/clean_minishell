@@ -6,18 +6,18 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:32:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:53:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static int	env(t_ast *node)
+static int	env(t_ast *node, int in_pipe)
 {
 	char	**envp;
 	int		i;
 
-	if (make_redirs(node))
+	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	envp = node->data->envp;
 	i = -1;
@@ -28,16 +28,16 @@ static int	env(t_ast *node)
 		ft_putstr_fd(envp[i], node->cmd.fd_out);
 		ft_putchar_fd('\n', node->cmd.fd_out);
 	}
-	close_redirs(&node->cmd);
-	unlink_heredoc(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
 
-static int	pwd(t_ast *node)
+static int	pwd(t_ast *node, int in_pipe)
 {
 	char	*cwd;
 
-	if (make_redirs(node))
+	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
@@ -50,17 +50,17 @@ static int	pwd(t_ast *node)
 	ft_putstr_fd(cwd, node->cmd.fd_out);
 	ft_putchar_fd('\n', node->cmd.fd_out),
 	free(cwd);
-	close_redirs(&node->cmd);
-	unlink_heredoc(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
 
-static int	echo(t_ast *node)
+static int	echo(t_ast *node, int in_pipe)
 {
 	int	flag;
 	int	i;
 
-	if (make_redirs(node))
+	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	flag = 0;
 	if (!ft_strncmp(node->cmd.args[1], "-n", 2))
@@ -74,12 +74,12 @@ static int	echo(t_ast *node)
 	}
 	if (!flag)
 		ft_putchar_fd('\n', node->cmd.fd_out);
-	close_redirs(&node->cmd);
-	unlink_heredoc(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
 
-int	exec_builtin(t_ast *node)
+int	exec_builtin(t_ast *node, int in_pipe)
 {
 	char	*name;
 
@@ -87,19 +87,19 @@ int	exec_builtin(t_ast *node)
 		return (1);
 	name = node->cmd.args[0];
 	if (!ft_strncmp(name, "echo", 5))
-		return (echo(node));
+		return (echo(node, in_pipe));
 	else if (!ft_strncmp(name, "cd", 3))
-		return (cd(node));
+		return (cd(node, in_pipe));
 	else if (!ft_strncmp(name, "pwd", 4))
-		return (pwd(node));
+		return (pwd(node, in_pipe));
 	else if (!ft_strncmp(name, "export", 7))
-		return (export_bltn(node));
+		return (export_bltn(node, in_pipe));
 	else if (!ft_strncmp(name, "unset", 6))
-		return (unset(node));
+		return (unset(node, in_pipe));
 	else if (!ft_strncmp(name, "env", 4))
-		return (env(node));
+		return (env(node, in_pipe));
 	else if (!ft_strncmp(name, "exit", 5))
-		return (exit_bltn(node));
+		return (exit_bltn(node, in_pipe));
 	return (1);
 }
 

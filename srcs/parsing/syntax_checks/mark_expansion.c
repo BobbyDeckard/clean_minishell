@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 15:27:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 14:39:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ void	mark_for_expansion(t_token **tokens)
 			in_single = !in_single;
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
-//		else if (current->type == ENV_VAR && !in_single)
-//			current->needs_expansion = 1;
-//		else if (current->type == EXIT_STATUS && !in_single)
-//			current->needs_expansion = 1;
 		else if (is_word(current->type) && contains_dol(current->content)
 			&& !in_single)
 			current->needs_expansion = 1;
