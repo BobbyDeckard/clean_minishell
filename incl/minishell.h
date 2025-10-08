@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 12:50:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:53:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void		dup_fds(t_ast *node);
 void		dup2_error(t_ast *node);
 void		create_env_error(t_ast *node, char **envp, int i);
 void		exec_cmd(t_ast *node, t_cmd cmd);
+void		exec_minishell(t_ast *node, t_cmd cmd);
 void		exec_pipe_child(t_ast *node, int fd[2][2], int i, int count);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);

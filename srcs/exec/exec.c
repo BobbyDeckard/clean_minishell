@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:29:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:56:20 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	exec_cmd(t_ast *node, t_cmd cmd)
 {
 	if (!cmd.path || is_lone_redir(node))
 		return ;
+	if (!ft_strncmp(cmd.args[0], "minishell", 10) || ! ft_strncmp(cmd.args[0], "./minishell", 12))
+		return (exec_minishell(node, cmd));
 	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
 		perror("execve");
 }
