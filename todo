@@ -1,6 +1,7 @@
 TO DO:
 14.	export => spaces in quoted args
 15.	cd -
+16.	Protect closes
 13.2	something with signals for ctrl + \ ?
 
 
