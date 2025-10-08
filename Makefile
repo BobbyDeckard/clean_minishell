@@ -127,7 +127,8 @@ UTLS_FILES = char_arr.c \
 
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
-SIGS_FILES = setup.c
+SIGS_FILES = setup.c \
+			 utils.c
 
 # INCLUDES
 HEADERS = incl/minishell.h
