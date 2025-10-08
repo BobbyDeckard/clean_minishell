@@ -2,6 +2,8 @@ TO DO:
 14.	export => spaces in quoted args
 15.	cd -
 16.	Protect closes
+	=> make sure calls are followed by perror
+	=> make sure we reset when we close to avoid double close
 13.2	something with signals for ctrl + \ ?
 
 
