@@ -19,7 +19,7 @@ int	mute_shlvl(char **envp)
 	i = -1;
 	while (envp[++i])
 	{
-		if (!ft_strncmp(envp[i], "SHLVL=", 6) && ft_atoi(envp[i] + 6) > 1)
+		if (!ft_strncmp(envp[i], "SHLVL=", 6) && ft_atoi(envp[i] + 6) > 2)
 			return (1);
 	}
 	return (0);

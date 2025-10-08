@@ -320,7 +320,6 @@ int			valid_syntax(t_shell *data, t_token **token_list);
 void		setup_execution_signals(char *command, t_shell *data);
 void		setup_interactive_signals(t_shell *data);
 void		setup_child_signals(t_ast *node);
-void		signal_handler_mute(int signum);
 int			mute_shlvl(char **envp);
 
 #endif

@@ -14,13 +14,26 @@
 
 volatile sig_atomic_t	g_signal_received = 0;
 
-void	signal_handler_mute(int signum)
+void	signal_handler_execution_mute(int signum)
 {
 	g_signal_received = signum;
 }
 
+void	signal_handler_interactive_mute(int signum)
+{
+//	printf("signal_handler_interactive_mute() called\n");
+	g_signal_received = signum;
+	if (signum == SIGINT)
+	{
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 void	signal_handler_interactive(int signum)
 {
+//	printf("signal_handler_interactive() called\n");
 	g_signal_received = signum;
 	if (signum == SIGINT)
 	{
@@ -39,7 +52,7 @@ void	setup_interactive_signals(t_shell *data)
 	if (!mute_shlvl(data->envp))
 		sa.sa_handler = signal_handler_interactive;
 	else
-		sa.sa_handler = signal_handler_mute;
+		sa.sa_handler = signal_handler_interactive_mute;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGINT, &sa, NULL) == -1)
@@ -73,7 +86,7 @@ void	setup_execution_signals(char *command, t_shell *data)
 	if (!mute_shlvl(data->envp))
 		sa.sa_handler = signal_handler_execution;
 	else
-		sa.sa_handler = signal_handler_mute;
+		sa.sa_handler = signal_handler_execution_mute;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGINT, &sa, NULL) == -1)
