@@ -1,6 +1,4 @@
 TO DO:
-10.	cat | cat | ls
-	=> enter + enter should exit pipe
 13.1	ctrl + C prints as many newlines as there are shell levels
 	=> check shlvl ?
 13.2	something with signals for ctrl + \ ?
@@ -118,3 +116,5 @@ DONE:
 8.	echo "$a""$b""$c"
 	=> pas d'espaces entre les args
 12.	'&' needs to be concatenated to previous word if not alone
+10.	cat | cat | ls
+	=> enter + enter should exit pipe
