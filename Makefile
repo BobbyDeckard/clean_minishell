@@ -103,8 +103,7 @@ PIPE = $(addprefix pipe/, $(PIPE_FILES))
 PIPE_FILES = link_pipes.c \
 			 pipe.c \
 			 pipe_utils.c \
-			 pipe_utils2.c \
-			 pipe_utils3.c
+			 pipe_utils2.c
 RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redirs.c \
 			 redirs_utils.c

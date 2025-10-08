@@ -38,24 +38,3 @@ int stdin_bu)
 	node->data->state = INTERACTIVE;
 	g_signal_received = 0;
 }
-
-void	setup_child_signals(t_ast *node)
-{
-	struct sigaction	sa;
-
-	sa.sa_handler = SIG_DFL;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-	{
-		perror("child sigaction SIGINT");
-		cleanup(node);
-		exit(1);
-	}
-	if (sigaction(SIGQUIT, &sa, NULL) == -1)
-	{
-		perror("child sigaction SIGQUIT");
-		cleanup(node);
-		exit(1);
-	}
-}

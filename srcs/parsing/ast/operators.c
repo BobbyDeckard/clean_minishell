@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:19:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:37:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:49:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ t_ast	*parse_operator(t_shell *data, int start, int end, int op_pos)
 	else if (current->type == PIPE)
 		return (parse_pipe(data, start, end));
 	type = convert_types(current->type);
-	printf("In parse_operator for ");
-	print_node_type(type);
-	printf(", start = %d, end = %d, op_pos = %d\n", start, end, op_pos);
+//	printf("In parse_operator for ");
+//	print_node_type(type);
+//	printf(", start = %d, end = %d, op_pos = %d\n", start, end, op_pos);
 	left = parse_command_line(data->tokens, start, op_pos - 1, data);
 	right = parse_command_line(data->tokens, op_pos + 1, end, data);
 	node = create_operator_node(type, left, right, data);
