@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 17:47:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:44:01 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:47:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,33 +43,29 @@ static int	is_pipe_or_op(t_token *current)
 	return (0);
 }
 
-static t_ast	*parse_pipe_commands(t_shell *data, int start, int end, int done)
+static t_ast	*parse_pipe_commands(t_shell *data, int start, int end,
+int done)
 {
 	t_token	*current;
 	int		cmd_end;
 
-//	printf("In parse_pipe_commands\n");
 	current = get_token_at_index(data->tokens, start);
 	if (!current)
 		return (NULL);
 	while (current && done > 0)
 	{
-//		printf("In skipping loop\n");
 		if (current->type == PIPE)
 			done--;
 		current = current->next;
 		start++;
 	}
-//	printf("New start value = %d\n", start);
 	cmd_end = start - 1;
 	while (current && !is_pipe_or_op(current) && cmd_end < end)
 	{
 		current = current->next;
 		cmd_end++;
 	}
-//	printf("End value for command: %d\n", cmd_end);
 	return (parse_command(data->tokens, start, cmd_end, data));
-
 }
 
 static t_ast	*create_pipe_node(t_ast **children, t_shell *data)
@@ -91,9 +87,7 @@ t_ast	*parse_pipe(t_shell *data, int start, int end)
 	int		commands;
 	int		i;
 
-//	printf("In parse_pipe(), start = %d, end = %d\n", start, end);
 	commands = count_commands(data->tokens, start);
-//	printf("Counted %d commands\n", commands);
 	if (!commands)
 		return (NULL);
 	children = (t_ast **) malloc((commands + 1) * sizeof(t_ast *));

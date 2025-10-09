@@ -6,76 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 20:14:43 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:43:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:56:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-int	count_redirs(t_token **tokens, int start, int end)
-{
-	t_token	*current;
-	int		count;
-	int		i;
-
-	count = 0;
-	i = start - 1;
-	while (++i <= end)
-	{
-		current = get_token_at_index(tokens, i);
-		if (!current)
-			break ;
-		if (is_redir_token(current) && i + 1 <= end)
-		{
-			current = get_token_at_index(tokens, i + 1);
-			if (current && is_word(current->type))
-				count++;
-		}
-	}
-	return (count);
-}
-
-static t_ast	**free_redirs(t_ast **redirs, int i)
-{
-	while (--i >= 0)
-		free(redirs[i]);
-	free(redirs);
-	return (NULL);
-}
-
-static int	count_redir_args(t_token *current)
-{
-	int	i;
-
-	i = 0;
-	current = current->next;
-	if (current && current->type == WORD)
-	{
-		current = current->next;
-		i++;
-	}
-	while (current)
-	{
-		if (current->type == WORD_CAT)
-			i++;
-		else if (current->type != SINGLE_QUOTE && current->type != DOUBLE_QUOTE)
-			break ;
-		current = current->next;
-	}
-	return (i);
-}
-
-static void	free_cmd(t_cmd cmd)
-{
-	int	i;
-
-	i = -1;
-	while (cmd.args[++i])
-		free(cmd.args[i]);
-	free(cmd.args);
-	free(cmd.exp);
-	free(cmd.cat);
-}
 
 static char	*set_content(t_token *current)
 {
@@ -139,10 +74,7 @@ static t_ast	*redir_node_helper(t_shell *data, t_token *current)
 	}
 	type = convert_types(current->type);
 	node = create_redir_node(data, type, content, cmd);
-	if (!node && content)
-		free(content);
-	else if (!node && cmd.args)
-		free_cmd(cmd);
+	free_content_or_cmd(node, content, cmd);
 	return (node);
 }
 
@@ -173,7 +105,6 @@ static t_ast	**extract_redirs_body(t_ast **redirs, t_shell *data, int sec[3])
 	return (redirs);
 }
 
-
 t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 {
 	t_token	**tokens;
@@ -202,84 +133,3 @@ t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
 	}
 	return (redirs);
 }
-
-
-/*
-t_ast	*parse_redir(t_shell *data, t_token **tokens, int *start, int end)
-{
-	t_token	*current;
-	t_ast	*redir;
-	t_cmd	cmd;
-	int		i;
-	int		j;
-
-	current = get_token_at_index(tokens, *start);
-	cmd.arg_count = count_redir_related_tokens(current);
-	init_cmd(data, &cmd, cmd.arg_count + 1);
-	i = *start - 1;
-	j = 0;
-	while (++i <= end && j < cmd.arg_count)
-	{
-		current = get_token_at_index(tokens, i);
-		if (!current)
-			break ;
-		else if (is_word(current->type))
-		{
-			cmd.args[j] = (char *) malloc((ft_strlen(current->content) + 1) * sizeof(char));
-			if (!cmd.args[j])
-			{
-				while (--j >= 0)
-					free(cmd.args[j]);
-				free(cmd.args);
-				free(cmd.exp);
-				free(cmd.cat);
-				return (NULL);
-			}
-			else if (current->type == WORD_CAT)
-				cmd.cat[j] = 1;
-			if (current->needs_expansion && current->in_double_quotes)
-				cmd.exp[j] = 2;
-			else if (current->needs_expansion)
-				cmd.exp[j] = 1;
-			j++;
-		}
-	}
-	*start += j;
-	return (create_redir(data, get_token_at_index
-}
-*/
-
-/*
-// Why pass args to below func ?
-t_ast	**extract_redirs(t_shell *data, char **args, int start, int end)
-{
-	t_token	**tokens;
-	t_ast	**redirs;
-	int		count;
-	int		i;
-
-	tokens = data->tokens;
-	count = count_redirs(tokens, start, end);
-	if (!count)
-		return (NULL);
-	redirs = (t_ast **) malloc((count + 1) * sizeof(t_ast *));
-	if (!redirs)
-	{
-		free_char_array(args);
-		malloc_error(data->root, data, tokens);
-	}
-	i = -1;
-	while (++i < count)
-	{
-		redirs[i] = parse_redir(data, tokens, &start, end);
-		if (!redirs[i])
-		{
-			free_char_array(args);
-			while (--i >= 0)
-				free(redirs[i]);
-			free(redirs);
-			malloc_error(data->root, data, tokens);
-		}
-	}
-}
-*/

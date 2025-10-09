@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 12:51:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:55:41 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ t_token		*tokenize_word(t_shell *data, t_token **tl, char **command,
 				t_token *token, int *ptr);
 t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
+t_ast		**free_redirs(t_ast **redirs, int i);
 t_ast		**malloc_new(t_ast *node, t_redir *redirs, int count, int size);
 t_ast		*create_ast(t_token **token_list, t_shell *data);
 t_ast		*create_ast_node(t_shell *data, t_node_type type);
@@ -275,6 +276,8 @@ char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);
 void		bzero_cmd(t_cmd *cmd);
 void		env_cpy_malloc_error(char **env_cpy, int i);
+void		free_cmd(t_cmd cmd);
+void		free_content_or_cmd(t_ast *node, char *content, t_cmd cmd);
 void		free_new(t_ast **redirs, int i);
 void		free_tokens(t_token **token_list);
 void		get_paths(t_shell *data);
@@ -297,7 +300,7 @@ int			copy_existing_children(t_ast **redirs, t_ast *node, int count);
 int			count_args(t_token **tokens, int start, int end);
 int			count_children(t_ast *node);
 int			count_tokens(t_token **token_list);
-int			count_trailing_redirs(t_token *current);
+int			count_redir_args(t_token *current);
 int			count_redir_related_tokens(t_token *current);
 int			count_redirs(t_token **tokens, int start, int end);
 int			create_env(t_ast *node);

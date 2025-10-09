@@ -29,6 +29,24 @@ static void	handle_arg(t_shell *data, t_cmd *cmd, t_token *current, int j)
 	cmd->args[j] = sf_strdup(content, data->tokens, cmd->args, data);
 }
 
+static t_token	*handle_quote_content(t_token *current, int *count,
+t_token_type type)
+{
+	current = current->next;
+	(*count)++;
+	while (current && current->type != type)
+	{
+		current = current->next;
+		(*count)++;
+	}
+	if (current && current->type == type)
+	{
+		current = current->next;
+		(*count)++;
+	}
+	return (current);
+}
+
 int	count_redir_related_tokens(t_token *current)
 {
 	int				count;
@@ -43,35 +61,9 @@ int	count_redir_related_tokens(t_token *current)
 	while (current)
 	{
 		if (current->type == DOUBLE_QUOTE)
-		{
-			current = current->next;
-			count++;
-			while (current && current->type != DOUBLE_QUOTE)
-			{
-				current = current->next;
-				count++;
-			}
-			if (current && current->type == DOUBLE_QUOTE)
-			{
-				current = current->next;
-				count++;
-			}
-		}
+			current = handle_quote_content(current, &count, DOUBLE_QUOTE);
 		else if (current->type == SINGLE_QUOTE)
-		{
-			current = current->next;
-			count++;
-			while (current && current->type != SINGLE_QUOTE)
-			{
-				current = current->next;
-				count++;
-			}
-			if (current && current->type == SINGLE_QUOTE)
-			{
-				current = current->next;
-				count++;
-			}
-		}
+			current = handle_quote_content(current, &count, SINGLE_QUOTE);
 		else if (current->type == WORD_CAT)
 		{
 			current = current->next;
