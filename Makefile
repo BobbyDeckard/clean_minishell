@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/08 13:54:01 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/09 13:45:36 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,7 +129,8 @@ UTLS_FILES = char_arr.c \
 
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
-SIGS_FILES = setup.c \
+SIGS_FILES = setup_execution.c \
+			 setup_interactive.c \
 			 utils.c
 
 # INCLUDES
