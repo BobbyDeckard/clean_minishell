@@ -37,6 +37,8 @@ static int	valid_name(char *arg)
 			return (name_is_invalid(arg));
 		i++;
 	}
+	if (!i)
+		return (name_is_invalid(arg));
 	return (1);
 }
 
@@ -45,10 +47,11 @@ int	handle_export_args(t_ast *node, int size)
 	int	status;
 	int	i;
 
-	status = 0;
 	i = 0;
+	status = 0;
 	while (node->cmd.args[++i])
 	{
+
 		if (node->cmd.exp[i] != 2 && !valid_name(node->cmd.args[i]))
 		{
 			status = 1;
