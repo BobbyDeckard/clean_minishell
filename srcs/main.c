@@ -23,8 +23,6 @@ static t_shell	process_command(char *command, t_shell data)
 	ast = parse(command, &data);
 	if (ast)
 	{
-//		printf("\n");
-//		print_tree(ast);
 		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		data.root = NULL;
@@ -42,7 +40,6 @@ static t_shell	process_command(char *command, t_shell data)
 	}
 	return (data);
 }
-
 
 static char	*read_command(t_shell *data)
 {
