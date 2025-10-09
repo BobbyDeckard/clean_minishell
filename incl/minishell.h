@@ -242,7 +242,8 @@ t_token		**tokenize_command(t_shell *data, char *command);
 t_token		*cat_word(t_shell *data, t_token *current, t_token *prev,
 				t_token *next);
 t_token		*get_token_at_index(t_token **tokens, int index);
-t_token		*handle_token_type(t_shell *data, char	**command, t_token *new_token, int *ptr);
+t_token		*handle_token_type(t_shell *data, char	**command,
+				t_token *new_token, int *ptr);
 t_token		*parse_export_args(t_shell *data, char **command, t_token *token,
 				int *ptr);
 t_token		*tokenize_env_var(t_shell *data, t_token **tokens, char **command,
@@ -258,7 +259,8 @@ t_token		*tokenize_redir(t_shell *data, t_token **tl, char **command,
 t_token		*tokenize_space(char **command, t_token *token);
 t_token		*tokenize_special_character(t_shell *data, t_token **tl,
 				char **command, t_token *token);
-t_token		*tokenize_word(t_shell *data, char **command, t_token *token, int *ptr);
+t_token		*tokenize_word(t_shell *data, char **command, t_token *token,
+				int *ptr);
 t_shell		init_shell_data(char **envp);
 t_ast		**extract_redirs(t_shell *data, char **args, int start, int end);
 t_ast		**free_redirs(t_ast **redirs, int i);
