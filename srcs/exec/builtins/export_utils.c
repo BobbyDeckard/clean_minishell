@@ -29,6 +29,7 @@ static int	valid_name(char *arg)
 	alpha = 0;
 	while (arg[i] && arg[i] != '=')
 	{
+//		printf("Checking arg[%d]: '%c'\n", i, arg[i]);
 		if (!ft_isalpha(arg[i]) && arg[i] != '_' && !alpha)
 			return (name_is_invalid(arg));
 		else if (ft_isalpha(arg[i]) && !alpha)
@@ -49,7 +50,7 @@ int	handle_export_args(t_ast *node, int size)
 	i = 0;
 	while (node->cmd.args[++i])
 	{
-		if (!valid_name(node->cmd.args[i]))
+		if (node->cmd.exp[i] != 2 && !valid_name(node->cmd.args[i]))
 		{
 			status = 1;
 			continue ;

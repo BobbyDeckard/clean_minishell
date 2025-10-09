@@ -34,6 +34,7 @@ t_ast	*parse(char *command, t_shell *data)
 	int		err;
 
 	token_list = tokenize_command(data, command);
+	print_token_list(token_list);
 	if (!token_list)
 	{
 		ft_putstr_fd("An unexpected error has occurred ", STDERR_FILENO);
@@ -44,7 +45,7 @@ t_ast	*parse(char *command, t_shell *data)
 	if (err)
 		return (invalid_syntax(token_list, err));
 	data->tokens = token_list;
-//	print_token_list(token_list);
+	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	free_tokens(token_list);
 	return (ast);

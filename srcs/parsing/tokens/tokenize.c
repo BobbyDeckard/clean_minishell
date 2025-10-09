@@ -72,7 +72,7 @@ t_token *token)
 }
 
 t_token	*tokenize_word(t_shell *data, t_token **tl, char **command,
-t_token *token)
+t_token *token, int *export)
 {
 	int	len;
 
@@ -85,15 +85,17 @@ t_token *token)
 		malloc_error(NULL, data, tl);
 	}
 	ft_strlcpy(token->content, *command, len);
+	if (!ft_strncmp(*command, "export", 6) && *(*command + 6) == ' ')
+		*export = 1;
 	*command += --len;
 	return (token);
 }
 
 t_token	*handle_token_type(t_shell *data, char	**command, t_token_type type,
-t_token *token)
+t_token *token, int *export)
 {
 	if (type == WORD)
-		token = tokenize_word(data, data->tokens, command, token);
+		token = tokenize_word(data, data->tokens, command, token, export);
 	else if (type == QUOTE)
 		token = tokenize_quote(data, data->tokens, command, token);
 	else if (type == REDIR)

@@ -44,15 +44,86 @@ static t_token	*create_token(t_shell *data, t_token **tl)
 	return (new);
 }
 
+static int	arg_len(const char *str)
+{
+	int	in_double;
+	int	in_single;
+	int	i;
+
+	i = -1;
+	in_double = 0;
+	in_single = 0;
+	while (str[++i])
+	{
+		if (str[i] == '"' && !in_single)
+			in_double = !in_double;
+		else if (str[i] == '\'' && !in_double)
+			in_single = !in_single;
+		else if (!in_double && !in_single && (str[i] == '<' || str[i] == '>'))
+	  		break ;
+		else if (!in_double && !in_single && (str[i] == '|' || str[i] == '&'))
+			break ;
+		else if (!in_double && !in_single && (str[i] == '(' || str[i] == ')'))
+			break ;
+		else if (!in_double && !in_single && str[i] == ' ')
+			break ;
+	}
+	if (in_single || in_double)
+		return (-2);
+	return (i);
+}
+
+/*
+static int	check_next_arg(const char *str)
+{
+	printf("In check_next_arg() with '%s'\n", str);
+	return (0);
+}
+*/
+
+t_token	*parse_export_args(t_shell *data, char **command, t_token *token, int *export)
+{
+	int	len;
+
+	if (**command == ' ')
+		return (tokenize_space(command, token));
+	len = arg_len(*command) + 1;
+	if (len == -1)
+	{
+		*export = 0;
+		return (NULL);
+	}
+	token->type = WORD;
+	token->content = (char *) malloc(len * sizeof(char));
+	if (!token->content)
+	{
+		free(token);
+		malloc_error(NULL, data, data->tokens);
+	}
+	ft_strlcpy(token->content, *command, len);
+	*command += --len;
+	return (token);
+}
+
 static t_token	**extract_token(char **command, t_token_type type,
 t_shell *data, t_token **token_list)
 {
 	t_token	*new_token;
+	int		export;
 
+	export = 0;
 	new_token = create_token(data, token_list);
-	new_token = handle_token_type(data, command, type, new_token);
+	new_token = handle_token_type(data, command, type, new_token, &export);
 	if (new_token)
 		link_token(new_token, token_list);
+	int	i = 0;
+	while (export && ++i < 5)
+	{
+		new_token = create_token(data, token_list);
+		new_token = parse_export_args(data, command, new_token, &export);
+		if (new_token)
+			link_token(new_token, token_list);
+	}
 	return (token_list);
 }
 

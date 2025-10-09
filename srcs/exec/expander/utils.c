@@ -96,6 +96,7 @@ static int	get_shortened_len(const char *str, int count, int space)
 
 	i = -1;
 	last_nonsp = get_last_non_space(str);
+	printf("Found last non-space to be at index %d\n", last_nonsp);
 	while (str[++i])
 	{
 		if (str[i] == ' ' && i > last_nonsp)
@@ -122,22 +123,24 @@ static void	make_new_entry(char *str, char *old, int len)
 	int	i;
 	int	j;
 	
+	printf("In make_new_entry, len = %d\n", len);
 	i = -1;
 	j = -1;
-	while (old[++i] && ++j < len)
+	while (old[++i] && j + 2 < len)
 	{
 		if (old[i] == ' ' && !space)
 		{
 			space = !space;
-			str[j] = old[i];
+			str[++j] = old[i];
+			printf("Set str[%d] to '%c'\n", j, str[j]);
 		}
 		else if (old[i] == ' ')
-			i++;
+			continue ;
 		else
 		{
 			if (space)
 				space = !space;
-			str[j] = old[i];
+			str[++j] = old[i];
 		}
 	}
 }
