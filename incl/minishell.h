@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:10:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:21:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ char		*cd_error(t_ast *node, int arg);
 char		*copy_delimiter(t_ast *node);
 char		*copy_env_entry(t_ast *node, char **arr, int i);
 char		*expand_line(t_ast *node, char **envp, char *line);
+char		*filter_spaces(t_ast *node, char *entry);
 char		*get_name(t_ast *node, const char *str);
 void		cat_words(t_ast *node, t_cmd *cmd);
 void		close_all_redirs(t_ast *node);
@@ -191,6 +192,7 @@ int			*init_pids(t_ast *root, int count);
 int			assign_var(t_ast *node, int size, int arg);
 int			cd(t_ast *node, int in_pipe);
 int			check_redirs(t_ast *node, t_cmd *cmd);
+int			contains_contig_spaces(const char *str);
 int			contains_dol(const char *str);
 int			count_nodes(t_ast **children);
 int			create_var(t_ast *node, int size, int arg);
