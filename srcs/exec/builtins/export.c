@@ -88,6 +88,7 @@ static int	export_print(t_ast *node, int size)
 	return (set_exit_status(node, 0));
 }
 
+//	create_env() is never called [clown emoji]
 int	export_bltn(t_ast *node, int in_pipe)
 {
 	int	status;
@@ -98,7 +99,7 @@ int	export_bltn(t_ast *node, int in_pipe)
 		return (set_exit_status(node, 1));
 	export_expander(node);
 	size = char_arr_len(node->data->envp);
-	if (node->cmd.args[1] && size == -1)	// to check !
+	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)
 		return (set_exit_status(node, 0));
