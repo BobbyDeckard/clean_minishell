@@ -6,11 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:44:19 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 13:44:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/minishell.h"
+
+volatile sig_atomic_t	g_signal_received = 0;
 
 static t_shell	process_command(char *command, t_shell data)
 {
