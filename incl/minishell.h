@@ -259,7 +259,8 @@ t_ast		*create_ast_node(t_shell *data, t_node_type type);
 t_ast		*create_cmd_node(t_shell *data, t_token **tokens, t_cmd cmd);
 t_ast		*create_operator_node(t_node_type type, t_ast *left, t_ast *right,
 				t_shell *data);
-t_ast		*create_redir_node(t_shell *data, t_node_type type, char *file, t_cmd cmd);
+t_ast		*create_redir_node(t_shell *data, t_node_type type, char *file,
+				t_cmd cmd);
 t_ast		*create_subshell_node(t_ast *child, t_shell *data);
 t_ast		*parse(char *command, t_shell *data);
 t_ast		*parse_command(t_token **tokens, int start, int end, t_shell *data);
