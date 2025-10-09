@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:29:59 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:25:58 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,19 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 	}
 }
 
+static void	heredoc_end_end(t_ast *node, t_cmd *cmd, char *del)
+{
+	if (cmd->fd_in >= 0)
+	{
+		if (close(cmd->fd_in))
+			perror("close");
+		cmd->fd_in = open(node->file, O_RDONLY);
+		if (cmd->fd_in < 0)
+			perror(node->file);
+	}
+	free(del);
+}
+
 void	make_heredoc(t_ast *node, t_cmd *cmd)
 {
 	struct sigaction	new;
@@ -81,13 +94,5 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	init_sp_handler_sig(node, &new, &old);
 	heredoc_loop(node, cmd, del, &stdin_backup);
 	heredoc_end(node, &old, stdin_backup);
-	if (cmd->fd_in != -1)
-	{
-		if (close(cmd->fd_in))
-			perror("close");
-		cmd->fd_in = open(node->file, O_RDONLY);
-		if (cmd->fd_in < 0)
-			perror(node->file);
-	}
-	free(del);
+	heredoc_end_end(node, cmd, del);
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:21:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:27:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ char		*copy_env_entry(t_ast *node, char **arr, int i);
 char		*expand_line(t_ast *node, char **envp, char *line);
 char		*filter_spaces(t_ast *node, char *entry);
 char		*get_name(t_ast *node, const char *str);
+char		*get_name_bis(t_ast *node, char *line);
 void		cat_words(t_ast *node, t_cmd *cmd);
 void		close_all_redirs(t_ast *node);
 void		close_pipes(int fd[2][2], int i, int count);
@@ -170,6 +171,7 @@ void		create_env_error(t_ast *node, char **envp, int i);
 void		exec_cmd(t_ast *node, t_cmd cmd);
 void		exec_minishell(t_ast *node, t_cmd cmd);
 void		exec_pipe_child(t_ast *node, int fd[2][2], int i, int count);
+void		expand_heredoc_error(t_ast *node, char *line);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
 void		export_expander(t_ast *node);
@@ -196,6 +198,7 @@ int			contains_contig_spaces(const char *str);
 int			contains_dol(const char *str);
 int			count_nodes(t_ast **children);
 int			create_var(t_ast *node, int size, int arg);
+int			dol_pos(const char *str);
 int			exec_ast(t_ast *node);
 int			exec_builtin(t_ast *node, int in_pipe);
 int			exec_pipe(t_ast **children);

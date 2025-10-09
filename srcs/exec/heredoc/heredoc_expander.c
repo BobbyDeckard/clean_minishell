@@ -6,51 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:30:30 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 11:59:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:27:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-static char	*get_name_bis(t_ast *node, char *line)
-{
-	char	*name;
-	int		len;
-	int		i;
-
-	while (*line && *line != '$')
-		line++;
-	if (*(line + 1) == '?')
-		return (NULL);
-	len = get_name_len(line) + 1;
-	name = (char *) malloc(len * sizeof(char));
-	if (!name)
-	{
-		free(line);
-		malloc_error(node, node->data, NULL);
-	}
-	i = 0;
-	while (line[++i] && (ft_isalnum(line[i]) || line[i] == '_'))
-		name[i - 1] = line[i];
-	name[i - 1] = 0;
-	return (name);
-}
-
-static int	dol_pos(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '$')
-		i++;
-	return (i);
-}
-
-static void	expand_heredoc_error(t_ast *node, char *line)
-{
-free(line);
-	malloc_error(node, node->data, NULL);
-}
 
 static char	*expand_exit_status(t_ast *node, char *line)
 {
