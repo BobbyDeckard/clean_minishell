@@ -1,0 +1,1 @@
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=val_out.log --suppressions=ignore_readline_leaks.supp ./minishell
