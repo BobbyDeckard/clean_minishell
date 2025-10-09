@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:30:30 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 20:14:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 11:59:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static char	*get_name(t_ast *node, char *line)
+static char	*get_name_bis(t_ast *node, char *line)
 {
 	char	*name;
 	int		len;
@@ -123,7 +123,7 @@ static char	*expand_cat(t_ast *node, char **envp, char *line)
 	int		i;
 	int		j;
 
-	name = get_name(node, line);
+	name = get_name_bis(node, line);
 	if (!name)
 		return (expand_exit_status(node, line));
 	i = -1;

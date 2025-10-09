@@ -73,14 +73,6 @@ static int	arg_len(const char *str)
 	return (i);
 }
 
-/*
-static int	check_next_arg(const char *str)
-{
-	printf("In check_next_arg() with '%s'\n", str);
-	return (0);
-}
-*/
-
 t_token	*parse_export_args(t_shell *data, char **command, t_token *token, int *export)
 {
 	int	len;

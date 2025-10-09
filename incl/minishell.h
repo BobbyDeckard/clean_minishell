@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:39:50 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 11:35:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 char		*copy_delimiter(t_ast *node);
 char		*copy_env_entry(t_ast *node, char **arr, int i);
 char		*expand_line(t_ast *node, char **envp, char *line);
+char		*get_name(t_ast *node, const char *str);
 void		cat_words(t_ast *node, t_cmd *cmd);
 void		close_all_redirs(t_ast *node);
 void		close_pipes(int fd[2][2], int i, int count);
@@ -169,6 +170,7 @@ void		exec_minishell(t_ast *node, t_cmd cmd);
 void		exec_pipe_child(t_ast *node, int fd[2][2], int i, int count);
 void		expand_in_word(t_ast *node, t_cmd *cmd, char **envp, int index);
 void		expander(t_ast *node, t_cmd *cmd);
+void		export_expander(t_ast *node);
 void		get_cmd_path(t_ast *node, t_cmd *cmd, char **paths);
 void		handle_spaces(t_shell *data, t_token **tokens);
 void		heredoc_end(t_ast *node, struct sigaction *old, int stdin_bu);

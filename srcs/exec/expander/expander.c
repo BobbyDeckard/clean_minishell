@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 16:29:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 11:34:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	contains_dol(const char *str)
 	return (0);
 }
 
-static char	*get_name(t_ast *node, const char *str)
+char	*get_name(t_ast *node, const char *str)
 {
 	char	*name;
 	int		len;
@@ -87,6 +87,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
+	if (!ft_strncmp(cmd->args[0], "export", 7))
+		return ;
 	i = -1;
 	while (cmd->args[++i])
 	{

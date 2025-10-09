@@ -91,6 +91,7 @@ BLTN_FILES = builtins.c \
 			 cd_utils.c \
 			 exit.c \
 			 export.c \
+			 export_expander.c \
 			 export_utils.c \
 			 export_var.c \
 			 unset.c
