@@ -1,1 +1,2 @@
 In extract_tokens: while loop is infinite without current safeguard (need debug)
+Check builtins with "" as arg
