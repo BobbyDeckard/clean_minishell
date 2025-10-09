@@ -40,7 +40,7 @@ static int	count_uninit_vars(char **envp)
 	return (count);
 }
 
-static char **remove_uninit_vars(t_ast *node, char **envp)
+static char	**remove_uninit_vars(t_ast *node, char **envp)
 {
 	char	**new;
 	int		count;
