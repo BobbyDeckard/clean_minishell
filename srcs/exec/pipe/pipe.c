@@ -12,7 +12,7 @@
 
 #include "../../../incl/minishell.h"
 
-
+/*
 static void	print_open_fds(const char *name)
 {
 	fprintf(stderr, "%d\tPrinting open fds for %s\n", getpid(), name);
@@ -20,7 +20,7 @@ static void	print_open_fds(const char *name)
     	if (fcntl(fd, F_GETFD) != -1)
         	fprintf(stderr, "%d\thas fd %d open\n", getpid(), fd);
 }
-
+*/
 
 static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 {
@@ -43,10 +43,8 @@ void	exec_pipe_child(t_ast *node, int fd[2][2], int i, int count)
 	else if (node->type == NODE_CMD)
 	{
 		dup_fds(node);
-//		close_pipes(fd, i, count);
 		status = exec_builtin(node, 1);
 	}
-	print_open_fds(node->cmd.args[0]);
 	cleanup(node);
 	exit(status);
 }
@@ -82,11 +80,7 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 		if (pids[i] == 0)
 			exec_pipe_child(child[i], fd, i, count);
 		if (child[i]->type == NODE_CMD)
-		{
-			fprintf(stderr, "%d\tAbout to close all redirs from main process with child[%d]: %s\n", getpid(), i, child[i]->cmd.args[0]);
 			close_all_redirs(child[i]);
-		}
-		print_open_fds("main");
 	}
 	return (waitpids(*child, pids, count));
 }
