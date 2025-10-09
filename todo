@@ -1,6 +1,4 @@
 TO DO:
-15.	cd -
-17.	echo -nananana
 16.	Protect closes
 	=> make sure calls are followed by perror
 	=> make sure we reset when we close to avoid double close
@@ -130,3 +128,5 @@ DONE:
 	flag single and double quotes
 	cat the same as 
 	do this directly from builtin !!!
+15.	cd -
+17.	echo -nananana
