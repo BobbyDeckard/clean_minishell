@@ -1,3 +1,2 @@
-In extract_tokens: while loop is infinite without current safeguard (need debug)
 Check builtins with "" as arg
-Had to bundle vars in an array in make_new_arg in export's expander, check that it still works (just fix this damn export thing)
+Had to bundle vars in an array in make_new_arg in export's expander, check that it still works
