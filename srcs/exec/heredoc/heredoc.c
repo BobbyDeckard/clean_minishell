@@ -25,7 +25,8 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu)
 	{
 		dup2(*stdin_bu, STDIN_FILENO);
 		close(*stdin_bu);
-		close(cmd->fd_in);
+		if (close(cmd->fd_in))
+			perror("close");
 		unlink(node->file);
 		cmd->fd_in = -1;
 		write(STDOUT_FILENO, "\n", 1);
@@ -67,7 +68,10 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	int					stdin_backup;
 
 	if (cmd->fd_in != STDIN_FILENO)
-		close(cmd->fd_in);
+	{
+		if (close(cmd->fd_in))
+			perror("close");
+	}
 	del = copy_delimiter(node);
 	free(node->file);
 	node->file = NULL;
@@ -79,7 +83,8 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 	heredoc_end(node, &old, stdin_backup);
 	if (cmd->fd_in != -1)
 	{
-		close(cmd->fd_in);
+		if (close(cmd->fd_in))
+			perror("close");
 		cmd->fd_in = open(node->file, O_RDONLY);
 		if (cmd->fd_in < 0)
 			perror(node->file);

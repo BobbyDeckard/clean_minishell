@@ -16,7 +16,8 @@ void	sigint_heredoc_handler(int sig)
 {
 	(void) sig;
 	g_signal_received = SIGINT;
-	close(STDIN_FILENO);
+	if (close(STDIN_FILENO))
+		perror("close");
 }
 
 void	init_sp_handler_sig(t_ast *node, struct sigaction *new,
@@ -34,7 +35,10 @@ int stdin_bu)
 {
 	sigaction(SIGINT, old, NULL);
 	if (stdin_bu >= 0)
-		close(stdin_bu);
+	{
+		if (close(stdin_bu))
+			perror("close");
+	}
 	node->data->state = INTERACTIVE;
 	g_signal_received = 0;
 }

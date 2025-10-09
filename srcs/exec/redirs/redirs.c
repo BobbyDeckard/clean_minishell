@@ -30,7 +30,10 @@ static void	redir_error(t_ast *node)
 static int	make_redir_in(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_in != STDIN_FILENO)
-		close(cmd->fd_in);
+	{
+		if (close(cmd->fd_in))
+			perror("close");
+	}
 	if (!node->file)
 		make_file_name(node);
 	if (access(node->file, F_OK) || access(node->file, R_OK))
@@ -48,7 +51,10 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 static int	make_redir_out(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
-		close(cmd->fd_out);
+	{
+		if (close(cmd->fd_out))
+			perror("close");
+	}
 	if (!node->file)
 		make_file_name(node);
 	if (!access(node->file, F_OK) && access(node->file, W_OK))
@@ -66,7 +72,10 @@ static int	make_redir_out(t_ast *node, t_cmd *cmd)
 static int	make_redir_append(t_ast *node, t_cmd *cmd)
 {
 	if (cmd->fd_out != STDOUT_FILENO)
-		close(cmd->fd_out);
+	{
+		if (close(cmd->fd_out))
+			perror("close");
+	}
 	if (!node->file)
 		make_file_name(node);
 	if (!access(node->file, F_OK) && access(node->file, W_OK))

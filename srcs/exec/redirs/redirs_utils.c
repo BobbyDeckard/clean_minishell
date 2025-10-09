@@ -39,12 +39,14 @@ void	close_redirs(t_cmd *cmd)
 	// Big change maybe BEWARE
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
-		close(cmd->fd_in);
+		if (close(cmd->fd_in))
+			perror("close");
 		cmd->fd_in = STDIN_FILENO;
 	}
 	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out >= 0)
 	{
-		close(cmd->fd_out);
+		if (close(cmd->fd_out))
+			perror("close");
 		cmd->fd_out = STDOUT_FILENO;
 	}
 }
