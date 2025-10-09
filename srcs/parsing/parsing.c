@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:54:10 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 18:44:11 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 12:28:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_ast	*parse(char *command, t_shell *data)
 	int		err;
 
 	token_list = tokenize_command(data, command);
-	print_token_list(token_list);
 	if (!token_list)
 	{
 		ft_putstr_fd("An unexpected error has occurred ", STDERR_FILENO);
@@ -45,7 +44,6 @@ t_ast	*parse(char *command, t_shell *data)
 	if (err)
 		return (invalid_syntax(token_list, err));
 	data->tokens = token_list;
-	print_token_list(token_list);
 	ast = create_ast(token_list, data);
 	free_tokens(token_list);
 	return (ast);
