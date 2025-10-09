@@ -23,7 +23,12 @@ void	close_pipes(int fd[2][2], int i, int count)
 	if (i + 1 < count)
 	{
 		if (close(fd[i % 2][0]) == -1)
+		{
+			fprintf(stderr, "%d\tFailed to close fd[%d][0] (%d) in close_pipes\n", getpid(), i % 2, fd[i % 2][0]);
 			perror("close");
+		}
+		else
+			fprintf(stderr, "%d\tClosed fd[%d][0] (%d) in close_pipes\n", getpid(), i % 2, fd[i % 2][0]);
 	}
 }
 

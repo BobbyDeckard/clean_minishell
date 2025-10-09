@@ -39,13 +39,23 @@ void	close_redirs(t_cmd *cmd)
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
 		if (close(cmd->fd_in))
+		{
+			fprintf(stderr, "%d\tFailed to close %s->fd_in (%d) in close_redirs\n", getpid(), cmd->args[0], cmd->fd_in);
 			perror("close");
+		}
+		else
+			fprintf(stderr, "%d\tClosed %s->fd_in (%d) in close_redirs\n", getpid(), cmd->args[0], cmd->fd_in);
 		cmd->fd_in = STDIN_FILENO;
 	}
 	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out >= 0)
 	{
 		if (close(cmd->fd_out))
+		{
+			fprintf(stderr, "%d\tFailed to close %s->fd_out (%d) in close_redirs\n", getpid(), cmd->args[0], cmd->fd_out);
 			perror("close");
+		}
+		else
+			fprintf(stderr, "%d\tClosed %s->fd_out (%d) in close_redirs\n", getpid(), cmd->args[0], cmd->fd_out);
 		cmd->fd_out = STDOUT_FILENO;
 	}
 }
