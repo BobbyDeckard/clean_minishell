@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   special_characters.c                               :+:      :+:    :+:   */
+/*   cat_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -84,7 +84,7 @@ t_token	*cat_word(t_shell *data, t_token *current, t_token *prev, t_token *next)
 	if ((!prev || !is_word(prev->type)) && (!next || !is_word(next->type)))
 	{
 		if (current->type != WORD_CAT)
-			current->type = WORD;	// Make sure this doesn't overwrite WORD_CAT attribution
+			current->type = WORD;
 		return (current);
 	}
 	else if (prev && is_word(prev->type) && next && is_word(next->type))

@@ -18,7 +18,9 @@ static void	check_prevs(t_token *current)
 		return ;
 	else if (current->previous->type == SPACE)
 		return ;
-	else if ((current->previous->type == SINGLE_QUOTE || current->previous->type == DOUBLE_QUOTE) && current->previous->previous->type == SPACE)
+	else if ((current->previous->type == SINGLE_QUOTE
+			|| current->previous->type == DOUBLE_QUOTE)
+		&& current->previous->previous->type == SPACE)
 		return ;
 	current->type = WORD_CAT;
 }

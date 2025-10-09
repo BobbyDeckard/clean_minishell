@@ -12,18 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-int	last_checks(t_token **tokens)
-{
-	t_token	*current;
-
-	current = *tokens;
-	while (current)
-	{
-		current = current->next;
-	}
-	return (1);
-}
-
 int	is_logical_operator(t_token *token)
 {
 	if (!token)

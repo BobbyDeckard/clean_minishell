@@ -12,55 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-/*
-static int	precedes_quote(t_token *current)
-{
-	t_token	*next;
-	t_token	*prev;
-	int		quote;
-
-	quote = 0;
-	next = current->next;
-	prev = current->previous;
-	if (next->type == SINGLE_QUOTE || next->type == DOUBLE_QUOTE)
-		quote++;
-	if (prev->type == SINGLE_QUOTE || prev->type == DOUBLE_QUOTE)
-		quote++;
-	return (quote);
-}
-*/
-
-/*
-static int	valid_operator(t_token **token_list)
-{
-	t_token	*current;
-
-	current = *token_list;
-	while (current)
-	{
-		if (current->type == PIPE || current->type == AND
-			|| current->type == OR)
-		{
-			if (!current->previous || !current->next)
-				return (0);
-			else if (_quote(current))
-			{
-				current = current->next;
-				continue ;
-			}
-			else if (current->previous->type != WORD
-				&& current->previous->type != PAREN_CLOSE)
-				return (0);
-			else if (current->next->type != WORD
-				&& current->next->type != PAREN_OPEN)
-				return (0);
-		}
-		current = current->next;
-	}
-	return (1);
-}
-*/
-
 static int	valid_operator(t_token **tokens)
 {
 	t_token	*current;
@@ -68,7 +19,8 @@ static int	valid_operator(t_token **tokens)
 	current = *tokens;
 	while (current)
 	{
-		if (current->type == PIPE || current->type == AND || current->type == OR)
+		if (current->type == PIPE || current->type == AND
+			|| current->type == OR)
 		{
 			if (!current->previous || !current->next)
 				return (0);
@@ -94,7 +46,9 @@ static int	valid_redir_target(t_token **token_list)
 		if (type == REDIR_OUT || type == REDIR_IN || type == REDIR_APPEND
 			|| type == HEREDOC || type == HEREDOC_EXP)
 		{
-			if (!current->next || (!is_word(current->next->type) && current->next->type != DOUBLE_QUOTE && current->next->type != SINGLE_QUOTE))
+			if (!current->next || (!is_word(current->next->type)
+					&& current->next->type != DOUBLE_QUOTE
+					&& current->next->type != SINGLE_QUOTE))
 				return (0);
 		}
 		current = current->next;
@@ -139,7 +93,5 @@ int	valid_syntax(t_shell *data, t_token **token_list)
 		return (3);
 	else if (!check_parentheses(token_list))
 		return (4);
-//	else if (!last_checks(token_list))
-//		return (5);
 	return (0);
 }

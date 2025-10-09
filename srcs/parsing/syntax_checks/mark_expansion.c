@@ -29,7 +29,7 @@ void	mark_heredoc_exp(t_token **tokens)
 {
 	t_token	*heredoc;
 	t_token	*quote1;
-	t_token *quote2;
+	t_token	*quote2;
 	t_token	*word;
 
 	heredoc = *tokens;

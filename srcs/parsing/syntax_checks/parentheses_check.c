@@ -59,9 +59,11 @@ static int	check_paren_syntax(t_token *current, t_token *last_close)
 {
 	while (current)
 	{
-		if (current->type == PAREN_OPEN && current->previous && !is_logical_operator(current->previous))
+		if (current->type == PAREN_OPEN && current->previous
+			&& !is_logical_operator(current->previous))
 			return (0);
-		else if (current->type == PAREN_CLOSE && current->next && !is_logical_operator(current->next))
+		else if (current->type == PAREN_CLOSE && current->next
+			&& !is_logical_operator(current->next))
 			return (0);
 		if (current == last_close)
 			break ;

@@ -74,9 +74,6 @@ void	handle_spaces(t_shell *data, t_token **tokens)
 			in_double = !in_double;
 		else if (current->type == SPACE && (in_single || in_double))
 			init_content(data, tokens, current);
-//		if (current->type == SPACE && !in_single && !in_double)
-//			current = remove_token(tokens, current);
-//		else
 		current = current->next;
 	}
 }
