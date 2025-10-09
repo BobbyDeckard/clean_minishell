@@ -63,7 +63,7 @@ static int	echo(t_ast *node, int in_pipe)
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	flag = 0;
-	if (!ft_strncmp(node->cmd.args[1], "-n", 3))
+	if (!ft_strncmp(node->cmd.args[1], "-n", 2))
 		flag++;
 	i = flag;
 	while (node->cmd.args[++i])
