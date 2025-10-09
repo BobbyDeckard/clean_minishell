@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:04:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 12:25:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	contains_contig_spaces(const char *str)
 
 static int	get_last_non_space(const char *str)
 {
-	int	last_space;
 	int	last_nonsp;
 	int	i;
 
@@ -80,13 +79,11 @@ static int	get_last_non_space(const char *str)
 	while (str[++i])
 	{
 		if (str[i] == ' ')
-			last_space = i;
+			continue ;
 		else
 			last_nonsp = i;
 	}
-	if (last_space > last_nonsp)
-		return (last_nonsp);
-	return (-1);
+	return (last_nonsp);
 }
 
 static int	get_shortened_len(const char *str, int count, int space)
