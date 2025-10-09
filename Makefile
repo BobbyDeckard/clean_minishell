@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/09 15:28:07 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/09 15:34:28 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ TKNS_FILES = token_types.c \
 # EXECUTION
 EXEC = $(addprefix exec/, $(EXEC_FILES))
 EXEC_FILES = exec.c \
+			 exec2.c \
 			 $(BLTN) \
 			 $(HRDC) \
 			 $(PIPE) \

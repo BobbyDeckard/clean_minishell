@@ -6,20 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:40:03 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:34:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-void	exec_cmd(t_ast *node, t_cmd cmd)
+static void	run_child_process(t_ast *node)
 {
-	if (!cmd.path || is_lone_redir(node))
-		return ;
-	if (!ft_strncmp(cmd.args[0], "minishell", 10) || ! ft_strncmp(cmd.args[0], "./minishell", 12))
-		return (exec_minishell(node, cmd));
-	if (execve(cmd.path, cmd.args, node->root->data->envp) == -1)
-		perror("execve");
+	dup_fds(node);
+	exec_cmd(node, node->cmd);
+	if (is_lone_redir(node))
+		clean_exit(node->root, 0);
+	clean_exit(node->root, 1);
 }
 
 static int	run_cmd(t_ast *node)
@@ -38,13 +37,7 @@ static int	run_cmd(t_ast *node)
 	if (pid < 0)
 		return (fork_error());
 	else if (pid == 0)
-	{
-		dup_fds(node);
-		exec_cmd(node, node->cmd);
-		if (is_lone_redir(node))
-			clean_exit(node->root, 0);
-		clean_exit(node->root, 1);
-	}
+		run_child_process(node);
 	close_redirs(&node->cmd);
 	waitpid(pid, &status, 0);
 	unlink_heredoc(node);
