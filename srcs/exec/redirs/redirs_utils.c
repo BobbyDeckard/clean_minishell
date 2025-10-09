@@ -36,7 +36,6 @@ void	make_file_name(t_ast *node)
 
 void	close_redirs(t_cmd *cmd)
 {
-	// Big change maybe BEWARE
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
 		if (close(cmd->fd_in))

@@ -99,12 +99,15 @@ int	make_redirs(t_ast *node)
 	while (node->children && node->children[++i])
 	{
 		type = node->children[i]->type;
-		if (type == NODE_REDIR_IN && make_redir_in(node->children[i], &node->cmd))
+		if (type == NODE_REDIR_IN
+			&& make_redir_in(node->children[i], &node->cmd))
 			break ;
-		else if (type == NODE_REDIR_OUT && make_redir_out(node->children[i], &node->cmd))
-				break ;
-		else if (type == NODE_REDIR_APPEND && make_redir_append(node->children[i], &node->cmd))
-				break ;
+		else if (type == NODE_REDIR_OUT
+			&& make_redir_out(node->children[i], &node->cmd))
+			break ;
+		else if (type == NODE_REDIR_APPEND
+			&& make_redir_append(node->children[i], &node->cmd))
+			break ;
 		else if ((type == NODE_HEREDOC || type == NODE_HEREDOC_EXP))
 			make_heredoc(node->children[i], &node->cmd);
 	}
