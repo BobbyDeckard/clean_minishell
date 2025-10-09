@@ -46,7 +46,6 @@ t_token *token)
 	return (token);
 }
 
-
 t_token	*tokenize_special_character(t_shell *data, t_token **tl, char **command,
 t_token *token)
 {
@@ -72,7 +71,6 @@ t_token *token)
 	}
 	return (token);
 }
-
 
 static void	define_bonus_operator(char **command, t_token *token, int *len)
 {

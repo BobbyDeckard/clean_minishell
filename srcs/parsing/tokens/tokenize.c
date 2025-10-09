@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 09:15:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 11:09:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:12:17 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ t_token *token)
 	return (token);
 }
 
-t_token	*tokenize_word(t_shell *data, t_token **tl, char **command,
-t_token *token, int *export)
+t_token	*tokenize_word(t_shell *data, char **command, t_token *token,
+int *export)
 {
-	int	len;
+	t_token	**tl;
+	int		len;
 
+	tl = data->tokens;
 	token->type = WORD;
 	len = ft_wordlen(*command);
 	token->content = (char *) malloc(++len * sizeof(char));
@@ -91,11 +93,14 @@ t_token *token, int *export)
 	return (token);
 }
 
-t_token	*handle_token_type(t_shell *data, char	**command, t_token_type type,
-t_token *token, int *export)
+t_token	*handle_token_type(t_shell *data, char	**command, t_token *token,
+int *export)
 {
+	t_token_type	type;
+
+	type = token->type;
 	if (type == WORD)
-		token = tokenize_word(data, data->tokens, command, token, export);
+		token = tokenize_word(data, command, token, export);
 	else if (type == QUOTE)
 		token = tokenize_quote(data, data->tokens, command, token);
 	else if (type == REDIR)
