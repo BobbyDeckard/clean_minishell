@@ -1,8 +1,10 @@
-TO DO:
-16.	Protect closes
-	=> make sure calls are followed by perror
-	=> make sure we reset when we close to avoid double close
-13.2	something with signals for ctrl + \ ?
+valgrind:
+--leak-check=full
+--trace-children=yes
+--track-fds=yes
+
+--malloc-fill=<hexnumber>
+	=> check ?
 
 
 DONE:
@@ -130,3 +132,6 @@ DONE:
 	do this directly from builtin !!!
 15.	cd -
 17.	echo -nananana
+16.	Protect closes
+	=> make sure calls are followed by perror
+	=> make sure we reset when we close to avoid double close
