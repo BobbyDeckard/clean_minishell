@@ -44,6 +44,14 @@ static void	check_length(t_ast *node, char *arg)
 	}
 }
 
+static void	too_many_args_error(t_ast *node, int in_pipe)
+{
+	ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+	ft_putstr_fd(node->cmd.args[2], 2);
+	if (!in_pipe)
+		close_all_redirs(node);
+}
+
 int	exit_bltn(t_ast *node, int in_pipe)
 {
 	int	n;
@@ -52,12 +60,7 @@ int	exit_bltn(t_ast *node, int in_pipe)
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
 	if (node->cmd.args[1] && node->cmd.args[2])
-	{
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-		ft_putstr_fd(node->cmd.args[2], 2);
-		if (!in_pipe)
-			close_all_redirs(node);
-	}
+		too_many_args_error(node, in_pipe);
 	else if (node->cmd.args[1])
 	{
 		check_digits(node, node->cmd.args[1]);

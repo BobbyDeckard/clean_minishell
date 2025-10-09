@@ -6,28 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:28:23 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 15:57:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 14:28:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-//	The usage of free_char_array() supposes a ft_calloc'ed char array
-char	*copy_env_entry(t_ast *node, char **arr, int i)
-{
-	char	*new;
-	int		len;
-
-	len = ft_strlen(node->data->envp[i]) + 1;
-	new = (char *) malloc(len * sizeof(char));
-	if (!new)
-	{
-		free_char_array(arr);
-		malloc_error(node, node->data, NULL);
-	}
-	ft_strlcpy(new, node->data->envp[i], len);
-	return (new);
-}
 
 static int	is_cmd_arg(char **args, char *entry)
 {
@@ -77,6 +60,13 @@ static void	remove_paths(t_shell *data)
 	data->paths = NULL;
 }
 
+static int	nothing_to_unset(t_ast *node, int in_pipe)
+{
+	if (!in_pipe)
+		close_all_redirs(node);
+	return (set_exit_status(node, 1));
+}
+
 int	unset(t_ast *node, int in_pipe)
 {
 	char	**new;
@@ -85,13 +75,9 @@ int	unset(t_ast *node, int in_pipe)
 
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-	len = char_arr_len(node->data->envp) - char_arr_len(node->cmd.args) + 2;
-	if (len == -1)
-	{
-		if (!in_pipe)
-			close_all_redirs(node);
-		return (set_exit_status(node, 1));
-	}
+	if (char_arr_len(node->data->envp) == -1)
+		return (nothing_to_unset(node, in_pipe));
+	len = char_arr_len(node->data->envp) + 1;
 	new = (char **) ft_calloc(len, sizeof(char *));
 	if (!new)
 		malloc_error(node, node->data, NULL);

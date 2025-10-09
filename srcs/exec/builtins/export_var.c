@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 15:43:15 by imeulema          #+#    #+#             */
-/*   Updated: 2025/09/30 17:13:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:00:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,7 @@ int	assign_var(t_ast *node, int size, int arg)
 
 	name = get_var_name(node, arg);
 	len = ft_strlen(name);
-	i = -1;
-	while (node->data->envp[++i])
-	{
-		if (!ft_strncmp(name, node->data->envp[i], len))
-			break ;
-	}
+	i = get_entry_index(name, node->data->envp, len);
 	if (node->data->envp[i])
 	{
 		free(node->data->envp[i]);

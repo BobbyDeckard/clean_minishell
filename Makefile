@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/09 13:52:27 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/09 15:01:07 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,8 +94,10 @@ BLTN_FILES = builtins.c \
 			 export.c \
 			 export_expander.c \
 			 export_utils.c \
+			 export_utils2.c \
 			 export_var.c \
-			 unset.c
+			 unset.c \
+			 unset_utils.c
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
 HRDC_FILES = heredoc.c \
 			 heredoc_expander.c \

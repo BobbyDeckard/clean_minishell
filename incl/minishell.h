@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 14:18:23 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:10:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void		getcwd_error(t_ast *node);
 void		malloc_error(t_ast *node, t_shell *data, t_token **tl);
 
 /* Exec functions */
+char		*cd_error(t_ast *node, int arg);
 char		*copy_delimiter(t_ast *node);
 char		*copy_env_entry(t_ast *node, char **arr, int i);
 char		*expand_line(t_ast *node, char **envp, char *line);
@@ -199,6 +200,8 @@ int			exec_pipe(t_ast **children);
 int			exit_bltn(t_ast *node, int in_pipe);
 int			export_bltn(t_ast *node, int in_pipe);
 int			fork_error(void);
+int			get_arg_len(t_ast *node, char **envp, const char *arg);
+int			get_entry_index(const char *name, char **envp, int len);
 int			get_name_len(const char *str);
 int			handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int			handle_export_args(t_ast *node, int size);

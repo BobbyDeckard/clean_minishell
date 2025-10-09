@@ -6,27 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:16:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 13:08:34 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/09 15:10:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-
-static char	*cd_error(t_ast *node, int arg)
-{
-	t_cmd	cmd;
-	char	*msg;
-	int		len;
-
-	cmd = node->cmd;
-	len = ft_strlen(cmd.args[arg]) + 5;
-	msg = (char *) malloc(len * sizeof(char));
-	if (!msg)
-		malloc_error(node, node->data, NULL);
-	ft_strlcpy(msg, "cd: ", len);
-	ft_strlcat(msg, cmd.args[arg], len);
-	return (msg);
-}
 
 static void	update_both(t_ast *node, int i, int j, char *oldpwd)
 {
