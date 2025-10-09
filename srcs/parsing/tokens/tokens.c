@@ -55,8 +55,7 @@ t_shell *data, t_token **token_list)
 	new_token = handle_token_type(data, command, new_token, &export);
 	if (new_token)
 		link_token(new_token, token_list);
-	int	i = 0;
-	while (export && ++i < 5)
+	while (export)
 	{
 		new_token = create_token(data, token_list, type);
 		new_token = parse_export_args(data, command, new_token, &export);
