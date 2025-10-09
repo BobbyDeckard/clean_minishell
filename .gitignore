@@ -49,6 +49,8 @@ in
 out
 test_alex
 ivo*
+output.txt
+test_file.txt
 
 # Kernel Module Compile Results
 *.mod*
