@@ -37,7 +37,7 @@ static int	arg_len(const char *str)
 			break ;
 	}
 	if (in_single || in_double)
-		return (-2);
+		return (-1);
 	return (i);
 }
 
@@ -48,14 +48,14 @@ int *export)
 
 	if (**command == ' ')
 		return (tokenize_space(command, token));
-	len = arg_len(*command) + 1;
-	if (len == -1)
+	len = arg_len(*command);
+	if (len < 1)
 	{
 		*export = 0;
 		return (NULL);
 	}
 	token->type = WORD;
-	token->content = (char *) malloc(len * sizeof(char));
+	token->content = (char *) malloc((len + 1) * sizeof(char));
 	if (!token->content)
 	{
 		free(token);

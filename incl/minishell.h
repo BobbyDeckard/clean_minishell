@@ -206,7 +206,7 @@ int			exit_bltn(t_ast *node, int in_pipe);
 int			export_bltn(t_ast *node, int in_pipe);
 int			fork_error(void);
 int			get_arg_len(t_ast *node, char **envp, const char *arg);
-int			get_entry_index(const char *name, char **envp, int len);
+int			get_entry_index(const char *name, char **envp);
 int			get_name_len(const char *str);
 int			handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int			handle_export_args(t_ast *node, int size);

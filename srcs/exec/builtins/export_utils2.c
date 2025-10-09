@@ -76,7 +76,7 @@ int	get_arg_len(t_ast *node, char **envp, const char *arg)
 	return (len);
 }
 
-int	get_entry_index(const char *name, char **envp, int len)
+int	get_entry_index(const char *name, char **envp)
 {
 	int	i;
 	int	j;

@@ -69,7 +69,8 @@ SNTX_FILES = cont_words.c \
 			 syntax_check.c \
 			 syntax_utils.c
 TKNS = $(addprefix tokens/, $(TKNS_FILES))
-TKNS_FILES = token_types.c \
+TKNS_FILES = export_tokenization.c \
+			 token_types.c \
 			 token_types2.c \
 			 tokenize.c \
 			 tokenize2.c \
@@ -116,6 +117,7 @@ RDRS_FILES = redirs.c \
 XPDR = $(addprefix expander/, $(XPDR_FILES))
 XPDR_FILES = cat_words.c \
 			 expander.c \
+			 spaces.c \
 			 utils.c
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \

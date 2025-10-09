@@ -102,7 +102,7 @@ int	assign_var(t_ast *node, int size, int arg)
 
 	name = get_var_name(node, arg);
 	len = ft_strlen(name);
-	i = get_entry_index(name, node->data->envp, len);
+	i = get_entry_index(name, node->data->envp);
 	if (node->data->envp[i])
 	{
 		free(node->data->envp[i]);
