@@ -60,12 +60,12 @@ DATA_FILES = create_env_cpy.c \
 			 ft_split_paths.c \
 			 shell_data.c
 SNTX = $(addprefix syntax_checks/, $(SNTX_FILES))
-SNTX_FILES = cont_words.c \
+SNTX_FILES = cat_word.c \
+			 cont_words.c \
 			 mark_expansion.c \
 			 parentheses_check.c \
 			 quotes.c \
 			 spaces.c \
-			 special_characters.c \
 			 syntax_check.c \
 			 syntax_utils.c
 TKNS = $(addprefix tokens/, $(TKNS_FILES))
