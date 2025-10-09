@@ -16,11 +16,11 @@ static void	check_prevs(t_token *current)
 {
 	if (!current->previous || !current->previous->previous)
 		return ;
-	else if (current->previous->type == SPACE)
+	else if (current->previous->type == SPACE_TKN)
 		return ;
 	else if ((current->previous->type == SINGLE_QUOTE
 			|| current->previous->type == DOUBLE_QUOTE)
-		&& current->previous->previous->type == SPACE)
+		&& current->previous->previous->type == SPACE_TKN)
 		return ;
 	current->type = WORD_CAT;
 }
@@ -29,9 +29,9 @@ static void	check_prevs_and_next(t_token *current)
 {
 	if (!current->previous || !current->next)
 		return ;
-	if (current->previous->type == SPACE)
+	if (current->previous->type == SPACE_TKN)
 		return ;
-	if (current->next->type != SPACE)
+	if (current->next->type != SPACE_TKN)
 		current->next->type = WORD_CAT;
 }
 

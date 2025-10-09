@@ -61,7 +61,7 @@ t_token	*tokenize_space(char **command, t_token *token)
 
 	len = 1;
 	token->content = NULL;
-	token->type = SPACE;
+	token->type = SPACE_TKN;
 	*command += len;
 	return (token);
 }

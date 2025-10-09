@@ -42,7 +42,7 @@ void	remove_spaces(t_token **tokens)
 	current = *tokens;
 	while (current)
 	{
-		if (current->type == SPACE)
+		if (current->type == SPACE_TKN)
 			current = remove_token(tokens, current);
 		else
 			current = current->next;
@@ -72,7 +72,7 @@ void	handle_spaces(t_shell *data, t_token **tokens)
 			in_single = !in_single;
 		else if (current->type == DOUBLE_QUOTE && !in_single)
 			in_double = !in_double;
-		else if (current->type == SPACE && (in_single || in_double))
+		else if (current->type == SPACE_TKN && (in_single || in_double))
 			init_content(data, tokens, current);
 		current = current->next;
 	}

@@ -111,7 +111,7 @@ int *export)
 		token = tokenize_parenthesis(data, data->tokens, command, token);
 	else if (type == SPECIAL_CHARACTER)
 		token = tokenize_special_character(data, data->tokens, command, token);
-	else if (type == SPACE)
+	else if (type == SPACE_TKN)
 		token = tokenize_space(command, token);
 	else if (type == ENV_VAR)
 		token = tokenize_env_var(data, data->tokens, command, token);

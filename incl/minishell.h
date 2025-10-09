@@ -53,7 +53,7 @@ typedef enum e_token_type
 	DEFAULT,
 	WORD,
 	WORD_CAT,
-	SPACE,
+	SPACE_TKN,
 	ASSIGNMENT,
 	QUOTE,
 	SINGLE_QUOTE,

@@ -107,7 +107,7 @@ void	print_token_type(t_token_type type)
 		printf("WORD");
 	else if (type == WORD_CAT)
 		printf("WORD_CAT");
-	else if (type == SPACE)
+	else if (type == SPACE_TKN)
 		printf("SPACE");
 	else if (type == ASSIGNMENT)
 		printf("ASSIGNMENT");

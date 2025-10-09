@@ -76,7 +76,7 @@ static t_token_type	get_token_type(char c)
 	else if (is_parenthesis(c))
 		return (PARENTHESIS);
 	else if (is_space(c))
-		return (SPACE);
+		return (SPACE_TKN);
 	else if (is_command_char(c))
 		return (WORD);
 	return (DEFAULT);
