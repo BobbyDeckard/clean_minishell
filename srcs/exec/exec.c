@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:54:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:34:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:41:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	run_child_process(t_ast *node)
 	exec_cmd(node, node->cmd);
 	if (is_lone_redir(node))
 		clean_exit(node->root, 0);
+	if (!node->cmd.path)
+		clean_exit(node, 127);
 	clean_exit(node->root, 1);
 }
 
