@@ -61,7 +61,7 @@ int *export)
 		free(token);
 		malloc_error(NULL, data, data->tokens);
 	}
-	ft_strlcpy(token->content, *command, len);
+	ft_strlcpy(token->content, *command, len + 1);
 	*command += len;
 	return (token);
 }
