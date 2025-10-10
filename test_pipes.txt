@@ -1,0 +1,4 @@
+echo hello | cat
+echo hello | grep hello
+ls | wc -l
+echo first | echo second | echo third
