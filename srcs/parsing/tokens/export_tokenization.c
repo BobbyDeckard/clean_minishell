@@ -48,7 +48,7 @@ int *export)
 
 	if (**command == ' ')
 		return (tokenize_space(command, token));
-	len = arg_len(*command);	// remettre le + 1 ici et verifier les quotes pour export ""
+	len = arg_len(*command);
 	if (len < 1)
 	{
 		*export = 0;
