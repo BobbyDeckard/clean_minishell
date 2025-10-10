@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/09 15:34:28 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/10 16:38:38 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ BLTN = $(addprefix builtins/, $(BLTN_FILES))
 BLTN_FILES = builtins.c \
 			 cd.c \
 			 cd_utils.c \
+			 echo.c \
 			 exit.c \
 			 export.c \
 			 export_expander.c \

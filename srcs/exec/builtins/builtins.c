@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:14:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 13:09:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:37:11 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,6 @@ static int	pwd(t_ast *node, int in_pipe)
 	ft_putstr_fd(cwd, node->cmd.fd_out);
 	ft_putchar_fd('\n', node->cmd.fd_out),
 	free(cwd);
-	if (!in_pipe)
-		close_all_redirs(node);
-	return (set_exit_status(node, 0));
-}
-
-static int	echo(t_ast *node, int in_pipe)
-{
-	int	flag;
-	int	i;
-
-	if (!in_pipe && make_redirs(node))
-		return (set_exit_status(node, 1));
-	flag = 0;
-	if (!ft_strncmp(node->cmd.args[1], "-n", 2))
-		flag++;
-	i = flag;
-	while (node->cmd.args[++i])
-	{
-		ft_putstr_fd(node->cmd.args[i], node->cmd.fd_out);
-		if (node->cmd.args[i + 1])
-			ft_putchar_fd(' ', node->cmd.fd_out);
-	}
-	if (!flag)
-		ft_putchar_fd('\n', node->cmd.fd_out);
 	if (!in_pipe)
 		close_all_redirs(node);
 	return (set_exit_status(node, 0));

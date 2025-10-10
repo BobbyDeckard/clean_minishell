@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:32:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:37:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ int			contains_dol(const char *str);
 int			count_nodes(t_ast **children);
 int			create_var(t_ast *node, int size, int arg);
 int			dol_pos(const char *str);
+int			echo(t_ast *node, int in_pipe);
 int			exec_ast(t_ast *node);
 int			exec_builtin(t_ast *node, int in_pipe);
 int			exec_pipe(t_ast **children);
