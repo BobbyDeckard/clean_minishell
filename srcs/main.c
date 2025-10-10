@@ -48,8 +48,11 @@ static char	*read_command(t_shell *data)
 	char	*command;
 	char	cwd[256];
 
-	get_trunc_cwd(cwd, data);
-	command = readline(cwd);
+//	get_trunc_cwd(cwd, data);
+//	command = readline(cwd);
+	(void) cwd;
+	(void) data;
+	command = readline("> ");
 	return (command);
 }
 
