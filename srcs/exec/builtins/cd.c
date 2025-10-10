@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:16:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:10:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:23:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ static int	chdir_error(t_ast *node, char *oldpwd, int arg, int in_pipe)
 	return (set_exit_status(node, 1));
 }
 
-//	wtf...?
-//	Test done in this directory
 static int	print_oldpwd(t_ast *node, char **envp, int in_pipe)
 {
 	char	name[7];
@@ -120,6 +118,7 @@ int	cd(t_ast *node, int in_pipe)
 	if (!oldpwd)
 		getcwd_error(node);
 	if (!node->cmd.args[1])
+		return (cd_home(node, in_pipe));
 	{
 		if (!in_pipe)
 			close_all_redirs(node);

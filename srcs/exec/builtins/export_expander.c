@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 11:18:34 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:08:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:19:23 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-static char	*get_entry(char **envp, const char *name)
+char	*get_entry(char **envp, const char *name)
 {
 	int		i;
 	int		j;

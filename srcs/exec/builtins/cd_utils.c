@@ -6,11 +6,33 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:22:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:10:21 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:26:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	cd_home(t_ast *node, int in_pipe)
+{
+	char	*home;
+
+	home = get_entry(node->data->envp, "HOME");
+	if (!home)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		set_exit_status(node, 1);
+	}
+	else if (chdir(home) < 0)
+	{
+		perror("chdir");
+		set_exit_status(node, 1);
+	}
+	else
+		set_exit_status(node, 0);
+	if (!in_pipe)
+		close_all_redirs(node);
+	return (node->data->exit_status);
+}
 
 char	*cd_error(t_ast *node, int arg)
 {
