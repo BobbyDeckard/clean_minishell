@@ -1,0 +1,28 @@
+echo hello > file.txt
+cat < file.txt
+echo bye >> file.txt
+cat < file.txt > new.txt
+< file.txt cat > out.txt
+cat out.txt
+cat new.txt
+rm file.txt
+rm new.txt
+rm out.txt
+> empty.txt
+ls
+< empty.txt cat
+< nonexistentfile.txt cat
+echo $?
+rm empty.txt
+touch unauthorizedfile.txt
+chmod 0 unauthorizedfile.txt
+echo hello > unauthorizedfile.txt
+echo $?
+chmod 644 unauthorizedfile.txt
+rm unauthorizedfile.txt
+echo test > file1 > file2
+< file1 cat
+echo $?
+< file2 cat
+rm file1
+rm file2

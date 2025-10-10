@@ -1,0 +1,69 @@
+1,2d0
+< > export VAR=hello
+< > echo $VAR
+4d1
+< > echo "$VAR"
+6d2
+< > echo '$VAR'
+8d3
+< > echo $VAR$VAR
+10d4
+< > export
+27,28d20
+< declare -x GLIBCPP_FORCE_NEW="1"
+< declare -x GLIBCXX_FORCE_NEW="1"
+37,38d28
+< declare -x LD_LIBRARY_PATH="/usr/lib/debug"
+< declare -x LD_PRELOAD="/usr/libexec/valgrind/vgpreload_core-amd64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so"
+45c35
+< declare -x OLDPWD
+---
+> declare -x OLDPWD="/home/imeulema/cursus/clean_minishell"
+84,86d73
+< declare -x _="/usr/bin/valgrind"
+< > export TEST
+< > export
+103,104d89
+< declare -x GLIBCPP_FORCE_NEW="1"
+< declare -x GLIBCXX_FORCE_NEW="1"
+113,114d97
+< declare -x LD_LIBRARY_PATH="/usr/lib/debug"
+< declare -x LD_PRELOAD="/usr/libexec/valgrind/vgpreload_core-amd64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so"
+121c104
+< declare -x OLDPWD
+---
+> declare -x OLDPWD="/home/imeulema/cursus/clean_minishell"
+161,163d143
+< declare -x _="/usr/bin/valgrind"
+< > export VAR1=hello VAR2=there
+< > echo $VAR1$VAR2
+165d144
+< > echo "$VAR1 $VAR2"
+167,168d145
+< > export TEST="    heyyyyyyy there      "
+< > export
+185,186d161
+< declare -x GLIBCPP_FORCE_NEW="1"
+< declare -x GLIBCXX_FORCE_NEW="1"
+195,196d169
+< declare -x LD_LIBRARY_PATH="/usr/lib/debug"
+< declare -x LD_PRELOAD="/usr/libexec/valgrind/vgpreload_core-amd64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so"
+203c176
+< declare -x OLDPWD
+---
+> declare -x OLDPWD="/home/imeulema/cursus/clean_minishell"
+220d192
+< declare -x TEST
+222a195
+> declare -x VAR="hello"
+225d197
+< declare -x VAR="hello"
+246,249c218
+< declare -x _="/usr/bin/valgrind"
+< > echo $TEST
+<  heyyyyyyy there
+< > echo "$TEST"
+---
+> heyyyyyyy there
+251d219
+< > exit

@@ -1,0 +1,37 @@
+1,36d0
+< > |
+< > ||
+< > &&
+< > echo |
+< > echo >
+< > cat <
+< > <
+< > >
+< > <<
+< > >>
+< > .
+< > ..
+< > /
+< > echo hi | | ls
+< ignore_readline_leaks.supp
+< incl
+< libft
+< logs
+< Makefile
+< minishell
+< norm.txt
+< objs
+< srcs
+< tests
+< todo
+< todo.aseite
+< valgrind_script.sh
+< val_out.log
+< > echo hi >
+< > echo hi | echo hi
+< hi
+< > ls|wc
+<      14      14     135
+< > echo "$USR"
+< 
+< > exit

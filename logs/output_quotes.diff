@@ -1,0 +1,16 @@
+1d0
+< > echo "hello world"
+3d1
+< > echo 'hello wordl'
+5,6c3
+< > echo "mix 'quotes'"
+< > echo 'mix " quotes'
+---
+> mix 'quotes'
+8,10c5,6
+< > echo '"$USER"'
+< > echo "'$USER'"
+< > exit
+---
+> "$USER"
+> 'imeulema'

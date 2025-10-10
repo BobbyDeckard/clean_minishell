@@ -1,0 +1,24 @@
+echo hello
+echo hello world
+echo -n hello
+echo world
+pwd
+cd /
+cd ..
+cd
+cd /doesnotexist
+cd -
+unset OLDPWD
+cd -
+export OLDPWD
+cd ..
+unset HOME
+cd
+export VAR=42
+export
+echo $VAR
+unset VAR
+echo $VAR
+env
+exit hello
+exit 42

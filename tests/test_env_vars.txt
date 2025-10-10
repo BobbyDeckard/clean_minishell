@@ -1,0 +1,15 @@
+export VAR=hello
+echo $VAR
+echo "$VAR"
+echo '$VAR'
+echo $VAR$VAR
+export
+export TEST
+export
+export VAR1=hello VAR2=there
+echo $VAR1$VAR2
+echo "$VAR1 $VAR2"
+export TEST="    heyyyyyyy there      "
+export
+echo $TEST
+echo "$TEST"
