@@ -40,10 +40,10 @@ void	setup_interactive_signals(t_shell *data)
 	struct sigaction	sa;
 
 	data->state = INTERACTIVE;
-	if (!mute_shlvl(data->envp))
-		sa.sa_handler = signal_handler_interactive;
-	else
-		sa.sa_handler = signal_handler_interactive_mute;
+//	if (!mute_shlvl(data->envp))
+	sa.sa_handler = signal_handler_interactive;
+//	else
+//		sa.sa_handler = signal_handler_interactive_mute;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGINT, &sa, NULL) == -1)

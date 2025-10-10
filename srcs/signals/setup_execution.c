@@ -28,10 +28,10 @@ void	setup_execution_signals(char *command, t_shell *data)
 {
 	struct sigaction	sa;
 
-	if (!mute_shlvl(data->envp))
-		sa.sa_handler = signal_handler_execution;
-	else
-		sa.sa_handler = signal_handler_execution_mute;
+//	if (!mute_shlvl(data->envp))
+	sa.sa_handler = signal_handler_execution;
+//	else
+//		sa.sa_handler = signal_handler_execution_mute;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
 	if (sigaction(SIGINT, &sa, NULL) == -1)
