@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:27:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 15:58:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,7 @@ char		**copy_env(char **envp, t_shell *data);
 char		**create_env_cpy(t_shell *data);
 char		**ft_split_paths(t_shell *data, const char *s, char c);
 void		bzero_cmd(t_cmd *cmd);
+void		create__error(char **envp);
 void		env_cpy_malloc_error(char **env_cpy, int i);
 void		free_cmd(t_cmd cmd);
 void		free_content_or_cmd(t_ast *node, char *content, t_cmd cmd);

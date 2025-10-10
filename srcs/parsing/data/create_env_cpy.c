@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:59:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 21:00:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:01:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 
 static char	*create__(char **envp)
 {
+	char	*cwd;
 	char	*new;
+	int		len;
 
-	new = (char *) malloc(15 * sizeof(char));
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+	{
+		perror("getcwd");
+		create__error(envp);
+	}
+	len = ft_strlen(cwd) + 13;
+	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 	{
-		free(envp[0]);
-		free(envp[1]);
-		free(envp[2]);
-		free(envp);
+		free(cwd);
+		create__error(envp);
 		malloc_error(NULL, NULL, NULL);
 	}
-	ft_strlcpy(new, "_=/usr/bin/env", 15);
+	ft_strlcpy(new, "_=", len);
+	ft_strlcat(new, cwd, len);
+	ft_strlcat(new, "/minishell", len);
 	return (new);
 }
 

@@ -6,11 +6,21 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:17:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/30 09:09:20 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:00:35 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	create__error(char **envp)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 3)
+		free(envp[i]);
+	free(envp);
+}
 
 void	set_shlvl_malloc_error(char **env_cpy, int i)
 {
