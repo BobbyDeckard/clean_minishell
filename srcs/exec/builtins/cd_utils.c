@@ -6,11 +6,19 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 21:22:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:26:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:32:24 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+int	too_many_args_cd(t_ast *node, int in_pipe)
+{
+	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+	if (!in_pipe)
+		close_all_redirs(node);
+	return (set_exit_status(node, 1));
+}
 
 int	cd_home(t_ast *node, int in_pipe)
 {

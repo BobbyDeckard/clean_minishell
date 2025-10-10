@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:43:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:19:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:32:52 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ int			make_redirs(t_ast *node);
 int			open_temp(t_ast *node, t_cmd *cmd);
 int			remove_var(t_ast *node, t_cmd *cmd, int index);
 int			set_exit_status(t_ast *node, int status);
+int			too_many_args_cd(t_ast *node, int in_pipe);
 int			unset(t_ast *node, int in_pipe);
 int			var_exists(char *name, char **envp);
 int			waitpids(t_ast *root, int *pids, int cmd_count);

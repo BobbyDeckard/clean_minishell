@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:16:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:23:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:32:39 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,8 @@ int	cd(t_ast *node, int in_pipe)
 		getcwd_error(node);
 	if (!node->cmd.args[1])
 		return (cd_home(node, in_pipe));
-	{
-		if (!in_pipe)
-			close_all_redirs(node);
-		return (set_exit_status(node, 0));
-	}
+	else if (node->cmd.args[2])
+		return (too_many_args_cd(node, in_pipe));
 	if (!ft_strncmp(node->cmd.args[1], "-", 2))
 		return (!print_oldpwd(node, node->data->envp, in_pipe));
 	else if (chdir(node->cmd.args[1]) < 0)
