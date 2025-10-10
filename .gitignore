@@ -49,7 +49,10 @@ in
 out
 test_alex
 ivo*
-output.txt
+output.diff
+val_out.log
+*output.txt
+
 test_file.txt
 
 # Kernel Module Compile Results
