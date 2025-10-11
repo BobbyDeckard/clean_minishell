@@ -40,7 +40,11 @@ t_ast	*parse(char *command, t_shell *data)
 		ft_putstr_fd("while tokenizing command\n", STDERR_FILENO);
 		return (NULL);
 	}
+	printf("Token list before syntax checks\n");
+	print_token_list(token_list);
 	err = valid_syntax(data, token_list);
+	printf("Token list after syntax checks\n");
+	print_token_list(token_list);
 	if (err)
 		return (invalid_syntax(token_list, err));
 	data->tokens = token_list;

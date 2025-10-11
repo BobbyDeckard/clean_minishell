@@ -25,6 +25,7 @@ static t_shell	process_command(char *command, t_shell data)
 	ast = parse(command, &data);
 	if (ast)
 	{
+		print_tree(ast);
 		data.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		data.root = NULL;
@@ -48,11 +49,11 @@ static char	*read_command(t_shell *data)
 	char	*command;
 	char	cwd[256];
 
-//	get_trunc_cwd(cwd, data);
-//	command = readline(cwd);
-	(void) cwd;
-	(void) data;
-	command = readline("> ");
+	get_trunc_cwd(cwd, data);
+	command = readline(cwd);
+//	(void) cwd;
+//	(void) data;
+//	command = readline("> ");
 	return (command);
 }
 
