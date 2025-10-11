@@ -6,11 +6,11 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:38:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/08/28 11:15:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 14:35:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../incl/minishell.h"
+#include "../../incl/minishell.h"
 
 static unsigned int	get_len(const char *s, unsigned int i, char c)
 {
@@ -97,7 +97,7 @@ static int	make_splits(char **tab, const char *s, unsigned int i, char c)
 }
 
 // variation de ft_split, qui alloue un char de plus et ajoute un / final
-char	**ft_split_paths(t_shell *data, const char *s, char c)
+char	**ft_split_paths(t_shell *shell, const char *s, char c)
 {
 	char			**tab;
 	unsigned int	i;
@@ -106,12 +106,12 @@ char	**ft_split_paths(t_shell *data, const char *s, char c)
 		return (NULL);
 	tab = (char **) malloc(count_elements(s, c) * sizeof(char *));
 	if (!tab)
-		malloc_error(data->root, data, NULL);
+		malloc_error(shell->root, shell, NULL);
 	i = 0;
 	tab[0] = 0;
 	while (s[i] == c && c)
 		i++;
 	if (make_splits(tab, s, i, c))
-		malloc_error(data->root, data, NULL);
+		malloc_error(shell->root, shell, NULL);
 	return (tab);
 }

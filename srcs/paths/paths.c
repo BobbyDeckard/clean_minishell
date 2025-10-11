@@ -6,11 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:21:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 14:05:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 15:57:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
+
+char	**ft_split_paths(t_shell *shell, const char *s, char c);
 
 void	update_paths(t_ast *node, t_shell *shell, const char *arg)
 {

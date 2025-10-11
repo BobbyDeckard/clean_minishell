@@ -5,42 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 20:35:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 14:09:42 by imeulema         ###   ########.fr       */
+/*   Created: 2025/10/11 14:08:17 by imeulema          #+#    #+#             */
+/*   Updated: 2025/10/11 14:21:23 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
-// Function can only be called from within child processes, hence the exit()
-void	dup2_error(t_ast *node)
-{
-	perror("dup2");
-	cleanup(node);
-	exit(1);
-}
+void	clean_tokens(t_token **tokens);
+void	clean_ast(t_ast *root);
 
-int	fork_error(void)
-{
-	perror("fork");
-	return (1);
-}
-
-void	getcwd_error(t_ast *node)
-{
-	perror("getcwd");
-	cleanup(node);
-	exit(1);
-}
-
-void	malloc_error(t_ast *node, t_shell *shell, t_token **tl)
+void	malloc_error(t_ast *ast, t_shell *shell, t_token **tokens)
 {
 	perror("malloc");
 	if (shell)
 		clean_shell(shell);
-	if (tl)
-		free_tokens(tl);
-	if (node)
-		clean_exit(node->root, 1);
+	if (tokens)
+		clean_tokens(tokens);
+	if (ast)
+		clean_ast(ast->root);
 	exit(1);
 }

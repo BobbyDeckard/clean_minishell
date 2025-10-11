@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/05 15:40:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 16:21:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,66 +99,34 @@ void	print_tree(t_ast *ast)
 	}
 }
 
-void	print_token_type(t_token_type type)
+static void	print_token_type(t_t_type type)
 {
-	if (type == DEFAULT)
-		printf("DEFAULT");
-	else if (type == WORD)
-		printf("WORD");
-	else if (type == WORD_CAT)
-		printf("WORD_CAT");
-	else if (type == SPACE_TKN)
-		printf("SPACE");
-	else if (type == ASSIGNMENT)
-		printf("ASSIGNMENT");
-	else if (type == QUOTE)
-		printf("QUOTE");
-	else if (type == SINGLE_QUOTE)
-		printf("SINGLE_QUOTE");
+	if (type == REDIR_APPEND)
+		printf("REDIR_APPEND");
 	else if (type == DOUBLE_QUOTE)
 		printf("DOUBLE_QUOTE");
-	else if (type == REDIR)
-		printf("REDIR");
-	else if (type == REDIR_IN)
-		printf("REDIR_IN");
+	else if (type == SINGLE_QUOTE)
+		printf("SINGLE_QUOTE");
+	else if (type == PAREN_CLOSE)
+		printf("PAREN_CLOSE");
+	else if (type == PAREN_OPEN)
+		printf("PAREN_OPEN");
+	else if (type == WHITESPACE)
+		printf("WHITESPACE");
 	else if (type == REDIR_OUT)
 		printf("REDIR_OUT");
-	else if (type == REDIR_APPEND)
-		printf("REDIR_APPEND");
-	else if (type == HEREDOC || type == HEREDOC_EXP)
+	else if (type == REDIR_IN)
+		printf("REDIR_IN");
+	else if (type == HEREDOC)
 		printf("HEREDOC");
-	else if (type == OPERATOR)
-		printf("OPERATOR");
+	else if (type == WORD)
+		printf("WORD");
 	else if (type == PIPE)
 		printf("PIPE");
 	else if (type == AND)
 		printf("AND");
 	else if (type == OR)
 		printf("OR");
-	else if (type == SEMICOLON)
-		printf("SEMICOLON");
-	else if (type == PARENTHESIS)
-		printf("PARENTHESIS");
-	else if (type == PAREN_OPEN)
-		printf("PAREN_OPEN");
-	else if (type == PAREN_CLOSE)
-		printf("PAREN_CLOSE");
-	else if (type == SPECIAL_CHARACTER)
-		printf("SPECIAL_CHARACTER");
-	else if (type == ENV_VAR)
-		printf("ENV_VAR");
-	else if (type == EXIT_STATUS)
-		printf("EXIT_STATUS");
-	else if (type == ESCAPE)
-		printf("ESCAPE");
-	else if (type == COMMENT)
-		printf("COMMENT");
-	else if (type == T_NEWLINE)
-		printf("T_NEWLINE");
-	else if (type == T_EOF)
-		printf("T_EOF");
-	else if (type == UNKNOWN)
-		printf("UNKNOWN");
 }
 
 void	print_token_list(t_token **token_list)
