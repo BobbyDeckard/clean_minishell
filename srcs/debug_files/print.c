@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:21:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 16:28:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	print_tree(t_ast *ast)
 	}
 }
 
-static void	print_token_type(t_t_type type)
+void	print_token_type(t_t_type type)
 {
 	if (type == REDIR_APPEND)
 		printf("REDIR_APPEND");

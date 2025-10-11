@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:40:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:10:45 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 16:30:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,22 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 	return (list);
 }
 
+void	print_token_type(t_t_type type);
+
+static void print_last_token(t_token **list)
+{
+	t_token	*current;
+
+	current = *list;
+	while (current->next)
+		current = current->next;
+	printf("Extracted token of type ");
+	print_token_type(current->type);
+	if (current->content)
+		printf(" with content = '%s'", current->content);
+	printf("\n");
+}
+
 t_token	**tokenize_command(t_shell *shell, char *command)
 {
 	t_token		**tokens;
@@ -105,6 +121,10 @@ t_token	**tokenize_command(t_shell *shell, char *command)
 		malloc_error(NULL, shell, NULL);
 	*tokens = NULL;
 	while (*command)
+	{
+		printf("Remaining command: '%s'\n", command);
 		tokens = extract_token(shell, &command, tokens);
+		print_last_token(tokens);
+	}
 	return (tokens);
 }
