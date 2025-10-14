@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:40:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:30:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/14 10:30:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static t_token	*init_token(t_shell *shell, t_token **tokens)
 	new->content = NULL;
 	new->next = NULL;
 	new->prev = NULL;
-	new->type = UNSET;
 	return (new);
 }
 

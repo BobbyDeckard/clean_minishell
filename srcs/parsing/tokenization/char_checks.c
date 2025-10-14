@@ -6,18 +6,9 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:32:03 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 15:36:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/11 20:24:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int	isop(const char c)
-{
-	if (c == '|')
-		return (1);
-	else if (c == '&')
-		return (1);
-	return (0);
-}
 
 int	ispar(const char c)
 {

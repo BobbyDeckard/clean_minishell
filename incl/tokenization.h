@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:33:04 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 14:42:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/14 09:29:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef enum e_t_type
 	REDIR_OUT,
 	REDIR_IN,
 	HEREDOC,
-	UNSET,
 	WORD,
 	PIPE,
 	AND,
