@@ -6,33 +6,76 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:30:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:21:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/14 11:50:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incl/minishell.h"
 
 t_token	**tokenize_command(t_shell *shell, char *command);
+void	clean_tokens(t_token **list);
 void	print_token_list(t_token **token_list);
+int		check_operators(t_token **list);
+int		check_parentheses(t_token **list);
+int		check_pipes(t_token **list);
+int		check_quotes(t_shell *shell, t_token **list);
+int		check_redirs(t_token **list);
 
-t_ast	*parse(char *command, t_shell *data)
+static int	check_syntax(t_shell *shell, t_token **list)
 {
-	t_token	**tokens;
-	t_ast	*ast;
-//	int		err;
+	if (!*list)
+		return (1);
+	if (check_quotes(shell, list))
+		return (2);
+	else if (check_operators(list))
+		return (3);
+	else if (check_pipes(list))
+		return (4);
+	else if (check_redirs(list))
+		return (5);
+	else if (check_parentheses(list))
+		return (6);
+	return (0);
+}
 
-	tokens = tokenize_command(data, command);
-	if (!tokens)
+static t_ast	*invalid_syntax(t_token **list, int err)
+{
+	ft_putstr_fd("minishell: syntax error in command (", 2);
+	if (err == 1)
+		ft_putstr_fd("unexpected tokenization error)\n", 2);
+	else if (err == 2)
+		ft_putstr_fd("invalid quote)\n", 2);
+	else if (err == 3)
+		ft_putstr_fd("invalid operator)\n", 2);
+	else if (err == 4)
+		ft_putstr_fd("invalid pipe)\n", 2);
+	else if (err == 5)
+		ft_putstr_fd("invalid redir)\n", 2);
+	else if (err == 6)
+		ft_putstr_fd("invalid parenthesis)\n", 2);
+	clean_tokens(list);
+	return (NULL);
+}
+
+t_ast	*parse(char *command, t_shell *shell)
+{
+	t_token	**list;
+	t_ast	*ast;
+	int		err;
+
+	list = tokenize_command(shell, command);
+	if (!list)
 	{
-		ft_putstr_fd("An unexpected error has occurred while ", 2);
-		ft_putstr_fd("tokenizing command\n", 2);
+		ft_putstr_fd("Unexpected tokenization error\n", 2);
 		return (NULL);
 	}
-	print_token_list(tokens);
-//	err = valid_syntax(data, tokens);
-//	if (err)
-//		return (invalid_syntax(tokens, err));
-	data->tokens = tokens;
+	print_token_list(list);
+	err = check_syntax(shell, list);
+	if (err)
+		return (invalid_syntax(list, err));
+	printf("\n");
+	print_token_list(list);
+	shell->tokens = list;
 //	ast = create_ast(token_list);
 	ast = NULL;
 	return (ast);

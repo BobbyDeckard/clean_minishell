@@ -57,11 +57,11 @@ static void	link_token(t_token **list, t_token *token)
 
 static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_token *token)
 {
-	if (**command == '|' && **command + 1 && **command + 1 == '|')
+	if (**command == '|' && *(*command + 1) && *(*command + 1) == '|')
 		return (tokenize_or(command, token));
 	else if (**command == '|')
 		return (tokenize_pipe(command, token));
-	else if (**command == '&' && **command + 1 && **command + 1 == '&')
+	else if (**command == '&' && *(*command + 1) && *(*command + 1) == '&')
 		return (tokenize_and(command, token));
 	else if (**command == '(')
 		return (tokenize_paren_open(command, token));
@@ -71,11 +71,11 @@ static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_tok
 		return (tokenize_double_quote(command, token));
 	else if (**command == '\'')
 		return (tokenize_single_quote(command, token));
-	else if (**command == '<' && **command + 1 && **command + 1 == '<')
+	else if (**command == '<' && *(*command + 1) && *(*command + 1) == '<')
 		return (tokenize_heredoc(command, token));
 	else if (**command == '<')
 		return (tokenize_redir_in(command, token));
-	else if (**command == '>' && **command + 1 && **command + 1 == '>')
+	else if (**command == '>' && *(*command + 1) && *(*command + 1) == '>')
 		return (tokenize_redir_append(command, token));
 	else if (**command == '>')
 		return (tokenize_redir_out(command, token));
@@ -95,6 +95,7 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 	return (list);
 }
 
+/*
 void	print_token_type(t_t_type type);
 
 static void print_last_token(t_token **list)
@@ -110,6 +111,7 @@ static void print_last_token(t_token **list)
 		printf(" with content = '%s'", current->content);
 	printf("\n");
 }
+*/
 
 t_token	**tokenize_command(t_shell *shell, char *command)
 {
@@ -120,10 +122,6 @@ t_token	**tokenize_command(t_shell *shell, char *command)
 		malloc_error(NULL, shell, NULL);
 	*tokens = NULL;
 	while (*command)
-	{
-		printf("Remaining command: '%s'\n", command);
 		tokens = extract_token(shell, &command, tokens);
-		print_last_token(tokens);
-	}
 	return (tokens);
 }

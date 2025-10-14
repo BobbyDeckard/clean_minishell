@@ -40,12 +40,20 @@ OBJS_PATH = objs/
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parsing.c \
 			 $(SHLL) \
+			 $(SNTX) \
 			 $(TKNS)
 SHLL = $(addprefix shell/, $(SHLL_FILES))
 SHLL_FILES = copy_env.c \
 			 create_env.c \
 			 env_errors.c \
 			 shell.c
+SNTX = $(addprefix syntax/, $(SNTX_FILES))
+SNTX_FILES = operators.c \
+			 parentheses.c \
+			 parentheses_utils.c \
+			 pipes.c \
+			 quotes.c \
+			 redirs.c
 TKNS = $(addprefix tokenization/, $(TKNS_FILES))
 TKNS_FILES = char_checks.c \
 			 errors.c \
