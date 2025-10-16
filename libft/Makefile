@@ -1,5 +1,7 @@
 NAME = libft.a
-CC = /usr/bin/cc
+AR = /usr/bin/ar
+ARFLAGS = -cr
+CC = /usr/bin/cc 
 CFLAGS = -Wextra -Wall -Werror
 RM = /bin/rm
 RMFLAGS = -f
@@ -67,19 +69,19 @@ HEADERS = libft.h
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar -cr $(NAME) $?
+	$(AR) $(ARFLAGS) $(NAME) $?
 
 bonus: $(OBJS) $(B_OBJS)
-	ar -cr $(NAME) $?
+	$(AR) $(ARFLAGS) $(NAME) $?
 	
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(RMFILES) -f $(OBJS) $(B_OBJS)
+	$(RM) $(RMFLAGS) $(OBJS) $(B_OBJS)
 
 fclean: clean
-	$(RM) $(RMFILES) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME)
 
 re: fclean all
 
