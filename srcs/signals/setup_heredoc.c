@@ -26,7 +26,7 @@ struct sigaction *old)
 	new->sa_handler = sigint_heredoc_handler;
 	sigemptyset(&(new->sa_mask));
 	new->sa_flags = 0;
-//	node->shell->state = HEREDOC_MODE;
+	node->shell->state = HEREDOC_MODE;
 	sigaction(SIGINT, new, old);
 }
 
@@ -39,6 +39,6 @@ int stdin_bu)
 		if (close(stdin_bu))
 			perror("close");
 	}
-//	node->shell->state = INTERACTIVE;
+	node->shell->state = INTERACTIVE;
 	g_signal_received = 0;
 }
