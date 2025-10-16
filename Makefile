@@ -98,7 +98,11 @@ DEBUG_FILES = print.c
 
 
 # INCLUDES
-HEADERS = incl/minishell.h
+HEADERS = incl/minishell.h \
+		  incl/ast.h \
+		  incl/shell.h \
+		  incl/tokenization.h
+
 LIBFT = libft/libft.a
 
 # TERMINAL COLOURS
@@ -126,10 +130,13 @@ $(LIBFT):
 
 clean:
 	$(RM) $(RMFLAGS) $(OBJS)
+	echo "$(GREEN)Cleaned minishell object files.$(RESET)"
 	$(MAKE) clean -C libft --no-print-directory
+	echo "$(GREEN)Clean done.$(RESET)"
 
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
+	echo "$(GREEN)Cleaned executable.$(RESET)"
 	$(MAKE) fclean -C libft --no-print-directory
 	echo "$(GREEN)Full clean done.$(RESET)"
 
