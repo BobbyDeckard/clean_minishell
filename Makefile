@@ -98,10 +98,7 @@ DEBUG_FILES = print.c
 
 
 # INCLUDES
-HEADERS = incl/minishell.h \
-		  incl/ast.h \
-		  incl/shell.h \
-		  incl/tokenization.h
+HEADERS = incl/minishell.h
 LIBFT = libft/libft.a
 
 # TERMINAL COLOURS
@@ -125,6 +122,7 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS) $(LIBFT)
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft.$(RESET)"
 	$(MAKE) -C libft --no-print-directory
+	echo "$(GREEN)Libft compiled.$(RESET)"
 
 clean:
 	$(RM) $(RMFLAGS) $(OBJS)
