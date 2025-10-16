@@ -96,6 +96,10 @@ UTLS_FILES = cleanup.c \
 			 read_command.c \
 			 utils.c
 
+# DEBUG
+DEBUG = $(addprefix debug_files/, $(DEBUG_FILES))
+DEBUG_FILES = print.c
+
 # INCLUDES
 HEADERS = incl/minishell.h
 LIBFT = libft/libft.a
