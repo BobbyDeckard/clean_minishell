@@ -32,7 +32,7 @@ SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
 			 $(DEBUG) \
 			 $(PARS) \
-			 $(PATH) \
+			 $(PTHS) \
 			 $(SIGS) \
 			 $(UTLS)
 OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
@@ -79,8 +79,8 @@ TKNS_FILES = char_checks.c \
 			 wordlen.c
 
 # PATHS
-PATH = $(addprefix paths/, $(PATH_FILES))
-PATH_FILES = ft_split_paths.c \
+PTHS = $(addprefix paths/, $(PTHS_FILES))
+PTHS_FILES = ft_split_paths.c \
 			 paths.c
 
 # SIGNALS

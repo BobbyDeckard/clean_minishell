@@ -1,9 +1,9 @@
 NAME = libft.a
-AR = /usr/bin/ar
+AR = ar
 ARFLAGS = -cr
-CC = /usr/bin/cc 
+CC = cc 
 CFLAGS = -Wextra -Wall -Werror
-RM = /bin/rm
+RM = rm
 RMFLAGS = -f
 SRCS = ft_abs.c \
        ft_atod.c \
