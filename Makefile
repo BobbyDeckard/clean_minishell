@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/16 11:47:39 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/10 16:38:38 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,17 +22,20 @@ ifeq ($(UNAME), Darwin)
 	LFLAGS += -L /opt/homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include/readline
 endif
 
+# PATHS
+LIBFT_PATH = libft/
+OBJS_PATH = objs/
+SRCS_PATH = srcs/
+
 # SOURCES
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
+			 $(DEBUG) \
 			 $(PARS) \
 			 $(PATH) \
 			 $(SIGS) \
-			 $(UTLS) \
-			 $(DEBUG)
-SRCS_PATH = srcs/
+			 $(UTLS)
 OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
-OBJS_PATH = objs/
 
 # SOURCES SUBDIRECTORIES
 
@@ -83,7 +86,8 @@ PATH_FILES = ft_split_paths.c \
 # SIGNALS
 SIGS = $(addprefix signals/, $(SIGS_FILES))
 SIGS_FILES = setup_execution.c \
-			 setup_interactive.c
+			 setup_heredoc.c \
+			 setup_interactive.c \
 
 # UTILS
 UTLS = $(addprefix utils/, $(UTLS_FILES))
@@ -92,17 +96,8 @@ UTLS_FILES = cleanup.c \
 			 read_command.c \
 			 utils.c
 
-# DEBUG
-DEBUG = $(addprefix debug_files/, $(DEBUG_FILES))
-DEBUG_FILES = print.c
-
-
 # INCLUDES
-HEADERS = incl/minishell.h \
-		  incl/ast.h \
-		  incl/shell.h \
-		  incl/tokenization.h
-
+HEADERS = incl/minishell.h
 LIBFT = libft/libft.a
 
 # TERMINAL COLOURS
@@ -125,19 +120,15 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(HEADERS) $(LIBFT)
 
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft.$(RESET)"
-	$(MAKE) -C libft --no-print-directory
-	echo "$(GREEN)Libft compiled.$(RESET)"
+	$(MAKE) -C $(LIBFT_PATH) --no-print-directory
 
 clean:
 	$(RM) $(RMFLAGS) $(OBJS)
-	echo "$(GREEN)Cleaned minishell object files.$(RESET)"
-	$(MAKE) clean -C libft --no-print-directory
-	echo "$(GREEN)Clean done.$(RESET)"
+	$(MAKE) clean -C $(LIBFT_PATH) --no-print-directory
 
 fclean: clean
 	$(RM) $(RMFLAGS) $(NAME)
-	echo "$(GREEN)Cleaned executable.$(RESET)"
-	$(MAKE) fclean -C libft --no-print-directory
+	$(MAKE) fclean -C $(LIBFT_PATH) --no-print-directory
 	echo "$(GREEN)Full clean done.$(RESET)"
 
 re: fclean all
