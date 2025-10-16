@@ -5,29 +5,32 @@ echo "	3. Redirs"
 echo "	4. Env vars"
 echo "	5. Quotes"
 echo "	6. Syntax"
+echo "	7. Parsing"
 echo -n "Please select what you want to test: "
 read option
 echo -n "Do you want to check diff with bash ? (y/n): "
 read diff_flag
-filename=tests/
+filename=tests/test_
 if [ $option = "1" ]; then
-	filename+=test_builtins.txt
+	filename+=builtins.txt
 	test=builtins
 elif [ $option = "2" ]; then
-	filename+=test_pipes.txt
+	filename+=pipes.txt
 	test=pipes
 elif [ $option = "3" ]; then
-	filename+=test_redirs.txt
+	filename+=redirs.txt
 	test=redirs
 elif [ $option = "4" ]; then
-	filename+=test_env_vars.txt
+	filename+=env_vars.txt
 	test=env_vars
 elif [ $option = "5" ]; then
-	filename+=test_quotes.txt
+	filename+=quotes.txt
 	test=quotes
 elif [ $option = "6" ]; then
-	filename+=test_syntax.txt
+	filename+=syntax.txt
 	test=syntax
+elif [ $option = "7" ]; then
+	filename+=parsing.txt
 fi
 echo
 echo Starting tests.
