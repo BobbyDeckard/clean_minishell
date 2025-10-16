@@ -95,24 +95,6 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 	return (list);
 }
 
-/*
-void	print_token_type(t_t_type type);
-
-static void print_last_token(t_token **list)
-{
-	t_token	*current;
-
-	current = *list;
-	while (current->next)
-		current = current->next;
-	printf("Extracted token of type ");
-	print_token_type(current->type);
-	if (current->content)
-		printf(" with content = '%s'", current->content);
-	printf("\n");
-}
-*/
-
 t_token	**tokenize_command(t_shell *shell, char *command)
 {
 	t_token		**tokens;

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:50:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:06:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:34:25 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_shell	init_shell(char **envp)
 	shell.command = NULL;
 	shell.tokens = NULL;
 	shell.paths = NULL;
+	shell.root = NULL;
 	shell.state = INTERACTIVE;
 	shell.envp = copy_env(envp);
 	if (*envp)

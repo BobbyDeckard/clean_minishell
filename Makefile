@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/11 16:17:39 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/16 11:47:39 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,21 @@ OBJS_PATH = objs/
 # PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parsing.c \
+			 $(AST) \
 			 $(SHLL) \
 			 $(SNTX) \
 			 $(TKNS)
+AST = $(addprefix ast/, $(AST_FILES))
+AST_FILES = ast.c \
+			ast_utils.c \
+			commands.c \
+			commands_utils.c \
+			lone_redirs.c \
+			operators.c \
+			parentheses.c \
+			pipes.c \
+			redirs.c \
+			redirs_utils.c
 SHLL = $(addprefix shell/, $(SHLL_FILES))
 SHLL_FILES = copy_env.c \
 			 create_env.c \
@@ -80,7 +92,6 @@ UTLS_FILES = cleanup.c \
 			 read_command.c \
 			 utils.c
 
-
 # DEBUG
 DEBUG = $(addprefix debug_files/, $(DEBUG_FILES))
 DEBUG_FILES = print.c
@@ -88,6 +99,7 @@ DEBUG_FILES = print.c
 
 # INCLUDES
 HEADERS = incl/minishell.h \
+		  incl/ast.h \
 		  incl/shell.h \
 		  incl/tokenization.h
 LIBFT = libft/libft.a

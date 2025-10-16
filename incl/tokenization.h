@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:33:04 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/14 09:29:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:06:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ typedef struct s_token
 	t_t_type		type;
 	char			*content;
 }	t_token;
+
+t_token	*get_token_at_index(t_token **list, int index);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 17:07:01 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:28:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/16 11:18:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // REMOVE FILE FROM FINAL PROJECT
 
-void	print_node_type(t_node_type type)
+void	print_node_type(t_n_type type)
 {
 	if (type == 0)
 		printf("Command node\n");
@@ -49,7 +49,7 @@ static void	print_node_info(t_ast *node)
 
 	print_node_type(node->type);
 	printf("Pointer address: %p\n", node);
-	printf("Address of data: %p\n", node->data);
+	printf("Address of data: %p\n", node->shell);
 	if (node->root)
 	{
 		printf("Root: ");
@@ -65,16 +65,12 @@ static void	print_node_info(t_ast *node)
 		{
 			printf("node->cmd.args[%d]: %p\n", i, node->cmd.args[i]);
 			printf("\t%s\n", node->cmd.args[i]);
-			if (node->cmd.exp[i])
-				printf("\tNeeds expansion (%d)\n", node->cmd.exp[i]);
-			if (node->cmd.cat[i])
-				printf("\tNeeds to be cat\n");
 		}
 	}
 	if (node->type == NODE_CMD)
 		printf("fd_in = %d\nfd_out = %d\n", node->cmd.fd_in, node->cmd.fd_out);
-	if (node->file)
-		printf("File: %s\n", node->file);
+	if (node->rdr.file)
+		printf("File: %s\n", node->rdr.file);
 	if (node->children)
 	{
 		printf("Children:\n");
