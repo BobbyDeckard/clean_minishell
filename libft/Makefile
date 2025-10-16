@@ -1,6 +1,8 @@
 NAME = libft.a
-CC = cc
+CC = /usr/bin/cc
 CFLAGS = -Wextra -Wall -Werror
+RM = /bin/rm
+RMFLAGS = -f
 SRCS = ft_abs.c \
        ft_atod.c \
        ft_atoi.c \
@@ -74,10 +76,10 @@ bonus: $(OBJS) $(B_OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(B_OBJS)
+	$(RM) $(RMFILES) -f $(OBJS) $(B_OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(RMFILES) $(NAME)
 
 re: fclean all
 
