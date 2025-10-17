@@ -33,7 +33,6 @@ static int	check_redir_prev(t_token *prev)
 		prev = prev->prev;
 	if (!prev)
 		return (0);
-	printf("There's a prev... ?\n");
 	type = prev->type;
 	if (type == PAREN_CLOSE || is_redir_token(type))
 		return (1);
@@ -64,15 +63,9 @@ int	check_redirs(t_token **list)
 		if (is_redir_token(current->type))
 		{
 			if (check_redir_prev(current->prev))
-			{
-				printf("check_redir_prev flagged\n");
 				return (1);
-			}
 			else if (check_redir_next(current->next))
-			{
-				printf("check_redir_next flagged\n");
 				return (1);
-			}
 		}
 		current = current->next;
 	}
