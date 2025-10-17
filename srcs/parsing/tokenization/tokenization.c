@@ -88,6 +88,7 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 {
 	t_token	*new;
 
+//	printf("In extract_token() with remaining command '%s'\n", *command);
 	new = init_token(shell, list);
 	new = make_token(shell, command, list, new);
 	if (new)

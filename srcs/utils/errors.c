@@ -19,10 +19,19 @@ void	malloc_error(t_ast *ast, t_shell *shell, t_token **tokens)
 {
 	perror("malloc");
 	if (shell)
+	{
 		clean_shell(shell);
+		printf("malloc_error() successfully cleaned shell\n");
+	}
 	if (tokens)
+	{
 		clean_tokens(tokens);
+		printf("malloc_error() successfully cleaned token list\n");
+	}
 	if (ast)
+	{
 		clean_ast(ast->root);
+		printf("malloc_error() successfully cleaned ast\n");
+	}
 	exit(1);
 }

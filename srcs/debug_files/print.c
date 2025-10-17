@@ -16,21 +16,21 @@
 
 void	print_node_type(t_n_type type)
 {
-	if (type == 0)
+	if (type == NODE_CMD)
 		printf("Command node\n");
-	else if (type == 1)
+	else if (type == NODE_PIPE)
 		printf("Pipe node\n");
-	else if (type == 2)
-		printf("And-if node\n");
-	else if (type == 3)
-		printf("Or-if node\n");
-	else if (type == 4)
+	else if (type == NODE_AND)
+		printf("And node\n");
+	else if (type == NODE_OR)
+		printf("Or node\n");
+	else if (type == NODE_REDIR_IN)
 		printf("Redir in node\n");
-	else if (type == 5)
+	else if (type == NODE_REDIR_OUT)
 		printf("Redir out node\n");
-	else if (type == 6)
+	else if (type == NODE_REDIR_APPEND)
 		printf("Redir append node\n");
-	else if (type == 7)
+	else if (type == NODE_HEREDOC)
 		printf("Heredoc node\n");
 }
 

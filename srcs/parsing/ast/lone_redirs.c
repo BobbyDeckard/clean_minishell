@@ -23,33 +23,56 @@ int	is_lone_redir(t_token **list, int start, int end)
 {
 	t_token	*current;
 
+	printf("In is_lone_redir() with start = %d and end = %d\n", start, end);
 	current = get_token_at_index(list, start);
 	if (!is_redir_token(current->type))
 		return (0);
-	while (current && (is_redir_token(current->type) || is_redir_arg(current)) && start <= end)
+	current = current->next;
+	start++;
+	while (current && current->type == WHITESPACE && start <= end)
 	{
+		printf("Skipping whitespaces, start = %d\n", start);
+		current = current->next;
+		start++;
+	}
+	while (current && is_redir_arg(current) && start <= end)
+	{
+		printf("Iterating through redirs args, start = %d\n", start);
+		if (current->content)
+			printf("Current has content '%s'\n", current->content);
+		else
+			printf("Current has no content\n");
 		current = current->next;
 		start++;
 	}
 	while (current && current->type == WHITESPACE && start <= end)
 	{
+		printf("Skipping whitespaces, start = %d\n", start);
 		current = current->next;
 		start++;
 	}
 	if (current && is_redir_token(current->type))
+	{
+		printf("About to check lone redirs further down (start = %d, end = %d\n", start, end);
 		return (is_lone_redir(list, start, end));
+	}
 	else if (current)
+	{
+		printf("About to return 0\n");
 		return (0);
+	}
+	printf("About to return 1\n");
 	return (1);
 }
 
 static void	alloc_redir_args(t_shell *shell, t_ast *node, int count)
 {
+	printf("In alloc_redir_args() with count = %d\n", count);
 	node->rdr.args = (char **) malloc(count * sizeof(char *));
 	if (!node->rdr.args)
 		malloc_error(shell->root, shell, shell->tokens);
 	while (count-- >= 0)
-		node->rdr.args = NULL;
+		node->rdr.args[count] = NULL;
 }
 
 static void	make_arg_error(t_shell *shell, t_ast *node)
@@ -64,9 +87,11 @@ static char	*make_arg(t_shell *shell, t_ast *node, t_token *current)
 	char	*str;
 	int		len;
 
+	printf("In make_arg()\n");
 	str = NULL;
 	if (current->content)
 	{
+		printf("Redir arg has content: '%s'\n", current->content);
 		len = ft_strlen(current->content) + 1;
 		str = (char *) malloc(len * sizeof(char));
 		if (!str)
@@ -75,6 +100,7 @@ static char	*make_arg(t_shell *shell, t_ast *node, t_token *current)
 	}
 	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
 	{
+		printf("Redir arg is quote\n");
 		str = (char *) malloc(2 * sizeof(char));
 		if (!str)
 			make_arg_error(shell, node);
@@ -101,13 +127,19 @@ static t_ast	*parse_lone_redir(t_shell *shell, t_ast *node, int start, int end)
 	int		count;
 	int		i;
 
+	printf("In parse_lone_redir()\n");
 	current = get_token_at_index(shell->tokens, start);
-	count = count_redir_args(current) + 1;
+//	printf("Fetched token at index %d\n", start);
+	count = count_redir_args(current->next) + 1;
+	printf("Counted %d redir args\n", count);
+	if (count == 1)
+		return (node);
 	alloc_redir_args(shell, node, count);
 	i = -1;
 	current = current->next;
 	while (current && is_redir_arg(current) && start <= end)
 	{
+//		printf("In while loop, start = %d\n", start);
 		node->rdr.args[++i] = make_arg(shell, node, current);
 		current = current->next;
 		start++;
@@ -119,6 +151,7 @@ static t_ast *check_remaining_lone_redirs(t_shell *shell, t_ast *node, int start
 {
 	t_token	*current;
 
+	printf("in check_remaining_lone_redirs()\n");
 	if (start != end)
 	{
 		current = get_token_at_index(shell->tokens, start);
@@ -139,6 +172,7 @@ t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end)
 	t_token	*current;
 	t_ast	*node;
 
+	printf("In parse_lone_redirs()\n");
 	current = get_token_at_index(list, start);
 	node = create_node(shell, convert_types(current->type));
 	if (!node)

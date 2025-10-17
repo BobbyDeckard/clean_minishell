@@ -26,8 +26,12 @@ t_token	*get_token_at_index(t_token **list, int index)
 	return (current);
 }
 
+void	print_token_type(t_t_type type);
 t_n_type	convert_types(t_t_type type)
 {
+	printf("In convert_types() with type ");
+	print_token_type(type);
+	printf("\n");
 	if (type == REDIR_APPEND)
 		return (NODE_REDIR_APPEND);
 	else if (type == REDIR_OUT)
@@ -48,7 +52,11 @@ t_n_type	convert_types(t_t_type type)
 void	set_root(t_shell *shell, t_ast *node)
 {
 	if (!shell->root)
+	{
+//		printf("Setting root to %p\n", node);
 		shell->root = node;
+		node->root = node;
+	}
 }
 
 t_ast	*create_node(t_shell *shell, t_n_type type)
@@ -61,7 +69,10 @@ t_ast	*create_node(t_shell *shell, t_n_type type)
 	node->type = type;
 	node->shell = shell;
 	node->children = NULL;
-	node->root = NULL;
+	if (shell->root)
+		node->root = shell->root;
+	else
+		node->root = NULL;
 	node->cmd.args = NULL;
 	node->cmd.path = NULL;
 	node->cmd.fd_in = STDIN_FILENO;

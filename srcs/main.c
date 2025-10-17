@@ -21,6 +21,7 @@ void	clean_ast(t_ast *ast);
 void	setup_execution_signals(char *command, t_shell *shell);
 void	setup_interactive_signals(t_shell *shell);
 
+void	print_tree(t_ast *ast);
 static t_shell	process_command(char *command, t_shell shell)
 {
 	t_ast	*ast;
@@ -32,6 +33,8 @@ static t_shell	process_command(char *command, t_shell shell)
 	ast = parse(command, &shell);
 	if (ast)
 	{
+		printf("\nAST:\n");
+		print_tree(ast);
 //		shell.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		shell.root = NULL;

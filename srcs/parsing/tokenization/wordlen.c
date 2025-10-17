@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+int	isop(const char c);
 int	ispar(const char c);
 int	isredir(const char c);
 int	isquote(const char c);
@@ -24,6 +25,8 @@ static int	iswordchar(const char c)
 	else if (isredir(c))
 		return (0);
 	else if (isquote(c))
+		return (0);
+	else if (isop(c))
 		return (0);
 	return (1);
 }

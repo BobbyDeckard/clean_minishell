@@ -13,6 +13,7 @@
 #include "../../incl/minishell.h"
 
 t_token	**tokenize_command(t_shell *shell, char *command);
+t_ast	*create_ast(t_shell *shell, t_token **list);
 void	clean_tokens(t_token **list);
 void	print_token_list(t_token **token_list);
 int		check_operators(t_token **list);
@@ -69,14 +70,11 @@ t_ast	*parse(char *command, t_shell *shell)
 		ft_putstr_fd("Unexpected tokenization error\n", 2);
 		return (NULL);
 	}
-	print_token_list(list);
 	err = check_syntax(shell, list);
 	if (err)
 		return (invalid_syntax(list, err));
-	printf("\n");
 	print_token_list(list);
 	shell->tokens = list;
-//	ast = create_ast(token_list);
-	ast = NULL;
+	ast = create_ast(shell, list);
 	return (ast);
 }

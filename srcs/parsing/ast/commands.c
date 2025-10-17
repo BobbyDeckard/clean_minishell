@@ -27,10 +27,17 @@ int	count_redirs(t_token **list, int start, int end)
 
 	count = 0;
 	current = get_token_at_index(list, start);
+//	if (current->content)
+//		printf("Fetched token at index %d with content '%s'\n", start, current->content);
+//	int	i = 0;
 	while (current && start <= end)
 	{
+//		printf("In count_redirs() in iteration %d\n", i++);
 		if (is_redir_token(current->type))
+		{
+//			printf("Found redir token\n");
 			count++;
+		}
 		current = current->next;
 		start++;
 	}
@@ -46,6 +53,8 @@ static t_ast	*create_cmd_node(t_shell *shell, int redirs)
 	if (!node)
 		malloc_error(shell->root, shell, shell->tokens);
 	set_root(shell, node);
+	if (redirs == 1)
+		return (node);
 	node->children = (t_ast **) malloc(redirs * sizeof(t_ast *));
 	if (!node->children)
 		malloc_error(shell->root, shell, shell->tokens);
@@ -92,12 +101,12 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 {
 	int	i;
 
+	if (count == 1)
+		return ;
 	node->cmd.args = (char **) malloc(count * sizeof(char *));
 	if (!node->cmd.args)
-	{
-		free(node);
 		malloc_error(shell->root, shell, shell->tokens);
-	}
+	printf("In init_cmd(), allocated %d pointers for args\n", count);
 	i = -1;
 	while (++i < count)
 		node->cmd.args[i] = NULL;
@@ -109,12 +118,14 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	int		count;
 
 	count = count_redirs(list, start, end) + 1;
+	printf("parse_command() counted %d redirs\n", count);
 	if (is_lone_redir(list, start, end))
 		return (parse_lone_redirs(shell, list, start, end));
 	node = create_cmd_node(shell, count);
 	set_root(shell, node);
 	parse_redirs(shell, node, start, end);
 	count = count_args(list, start, end) + 1;
+	printf("parse_command() counted %d args\n", count);
 	init_cmd(shell, node, count);
 	parse_args(shell, node, start, end);
 	return (node);

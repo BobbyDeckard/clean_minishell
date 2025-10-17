@@ -19,6 +19,7 @@ int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count);
 
 int	is_redir_arg(t_token *token)
 {
+//	printf("In is_redir_arg()\n");
 	if (token->type == WORD)
 		return (1);
 	else if (token->type == DOUBLE_QUOTE)
@@ -28,6 +29,7 @@ int	is_redir_arg(t_token *token)
 	return (0);
 }
 
+void	print_token_type(t_t_type type);
 int	is_redir_token(t_t_type type)
 {
 	if (type == REDIR_IN)
@@ -45,29 +47,43 @@ int	count_redir_args(t_token *current)
 {
 	int	count;
 
+	if (!current)
+		return (0);
+	printf("In count_redir_args()\n");
 	count = 0;
 	while (current && is_redir_arg(current))
 	{
+		if (current->content)
+			printf("Current token has content '%s'\n", current->content);
 		current = current->next;
 		count++;
 	}
 	return (count);
 }
 
-static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current)
+static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *start)
 {
-	int	count;
-	int	i;
-	int	j;
+	t_t_type	type;
+	int			count;
+	int			i;
+	int			j;
 
+	printf("In parse_redir()\n");
+	if (!current)
+		return (NULL);
+	type = current->type;
+	current = current->next;
+	(*start)++;
 	count = count_redir_args(current) + 1;
-	i = create_redir_node(shell, node, convert_types(current->type), count);
+	i = create_redir_node(shell, node, convert_types(type), count);
 	j = -1;
 	while (current && is_redir_arg(current))
 	{
 		node->children[i]->rdr.args[++j] = extract_content(current);
 		if (!node->children[i]->rdr.args[j])
 			parse_redir_error(shell, node, i);
+		current = current->next;
+		(*start)++;
 	}
 	return (current);
 }
@@ -78,12 +94,18 @@ void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 {
 	t_token	*current;
 
+	printf("In parse_redirs()\n");
+	if (!node->children)
+		return ;
 	current = get_token_at_index(shell->tokens, start);
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
-			current = parse_redir(shell, node, current);
+			current = parse_redir(shell, node, current, &start);
 		else
+		{
 			current = current->next;
+			start++;
+		}
 	}
 }

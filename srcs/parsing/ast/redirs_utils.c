@@ -54,6 +54,7 @@ static void	alloc_redir_args(t_shell *shell, t_ast *node, int count, int i)
 {
 	char	**args;
 
+	printf("In alloc_redir_args() with count = %d\n", count);
 	args = (char **) malloc(count * sizeof(char *));
 	if (!args)
 	{
@@ -65,13 +66,18 @@ static void	alloc_redir_args(t_shell *shell, t_ast *node, int count, int i)
 	node->children[i]->rdr.args = args;
 }
 
+void	print_node_type(t_n_type type);
 int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 {
 	int	i;
 
+	printf("In create_redir_node()\n");
 	i = -1;
 	while (node->children[++i])
 		continue ;
+	printf("About to create node of type ");
+	print_node_type(type);
+	printf(" for child %d\n", i);
 	node->children[i] = create_node(shell, type);
 	if (!node->children[i])
 	{
@@ -81,5 +87,6 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 		malloc_error(shell->root, shell, shell->tokens);
 	}
 	alloc_redir_args(shell, node, count, i);
+	printf("About to return i = %d\n", i);
 	return (i);
 }

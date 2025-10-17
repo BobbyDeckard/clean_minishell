@@ -75,8 +75,10 @@ void	clean_ast(t_ast *ast)
 	int	i;
 
 //	close_all_redirs(ast);
+	printf("In clean_ast(), given node has address: %p\n", ast);
 	if (ast->children)
 	{
+		printf("Found node %p to have children\n", ast);
 		i = -1;
 		while (ast->children[++i])
 			clean_ast(ast->children[i]);
@@ -84,23 +86,33 @@ void	clean_ast(t_ast *ast)
 	}
 	if (ast->cmd.args)
 	{
+		printf("Found node %p to have cmd.args\n", ast);
 		clean_args(ast->cmd.args);
 		free(ast->cmd.args);
 	}
 	if (ast->cmd.path)
+	{
+		printf("Found node %p to have cmd.path\n", ast);
 		free(ast->cmd.path);
+	}
 	if (ast->rdr.args)
 	{
+		printf("Found node %p to have rdr.args\n", ast);
 		clean_args(ast->rdr.args);
 		free(ast->rdr.args);
 	}
 	if (ast->rdr.file)
+	{
+		printf("Found node %p to have rdr.file\n", ast);
 		free(ast->rdr.file);
+	}
 	free(ast);
 }
 
 void	cleanup(t_ast *node)
 {
+	if (!node)
+		return ;
 	clean_shell(node->shell);
 	clean_ast(node->root);
 }
