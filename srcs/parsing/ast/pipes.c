@@ -90,7 +90,7 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 	t_token	*current;
 	int		end;
 	
-	printf("In parse_pipe_command() with i = %d\n", i);
+	printf("In parse_pipe_command() with i = %d and start = %d\n", i, start);
 	current = get_token_at_index(shell->tokens, start);
 	if (!current)
 		return (-1);
@@ -111,7 +111,7 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 		current = current->next;
 		end++;
 	}
-	return (start + end - 1);
+	return (end - 1);
 }
 
 static void	parse_pipe_error(t_shell *shell, t_ast *node)
@@ -131,7 +131,7 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 
 	printf("In parse_pipe() with start = %d and end = %d\n", start, end);
 	count = count_commands(list, start) + 1;
-	printf("Found %d commands\n", count);
+	printf("Counted %d commands\n", count - 1);
 	if (!count)
 		return (NULL);	// Ah ?
 	node = create_pipe_node(shell, count);

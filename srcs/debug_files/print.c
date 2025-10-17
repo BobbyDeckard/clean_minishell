@@ -64,7 +64,17 @@ static void	print_node_info(t_ast *node)
 		while (node->cmd.args[++i])
 		{
 			printf("node->cmd.args[%d]: %p\n", i, node->cmd.args[i]);
-			printf("\t%s\n", node->cmd.args[i]);
+			printf("\t'%s'\n", node->cmd.args[i]);
+		}
+	}
+	if (node->rdr.args)
+	{
+		printf("Arguments (%p):\n", node->rdr.args);
+		i = -1;
+		while (node->rdr.args[++i])
+		{
+			printf("node->rdr.args[%d]: %p\n", i, node->rdr.args[i]);
+			printf("\t'%s'\n", node->rdr.args[i]);
 		}
 	}
 	if (node->type == NODE_CMD)

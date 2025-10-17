@@ -29,9 +29,9 @@ t_token	*get_token_at_index(t_token **list, int index)
 void	print_token_type(t_t_type type);
 t_n_type	convert_types(t_t_type type)
 {
-	printf("In convert_types() with type ");
-	print_token_type(type);
-	printf("\n");
+//	printf("In convert_types() with type ");
+//	print_token_type(type);
+//	printf("\n");
 	if (type == REDIR_APPEND)
 		return (NODE_REDIR_APPEND);
 	else if (type == REDIR_OUT)

@@ -75,9 +75,9 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 	i = -1;
 	while (node->children[++i])
 		continue ;
-	printf("About to create node of type ");
-	print_node_type(type);
-	printf(" for child %d\n", i);
+//	printf("About to create node of type ");
+//	print_node_type(type);
+//	printf(" for child %d\n", i);
 	node->children[i] = create_node(shell, type);
 	if (!node->children[i])
 	{

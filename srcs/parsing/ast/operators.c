@@ -49,7 +49,7 @@ int	find_op_precedence(t_token **list, int start, int end)
 	int		lvl;
 	int		res;
 
-	printf("In find_op_precedence() with start = %d and end = %d\n", start, end);
+//	printf("In find_op_precedence() with start = %d and end = %d\n", start, end);
 	res = -1;
 	prec = 2147483647;
 	lvl = 0;

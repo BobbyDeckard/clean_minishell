@@ -24,6 +24,8 @@ static int	is_arg_token(t_t_type type)
 		return (1);
 	else if (type == SINGLE_QUOTE)
 		return (1);
+	else if (type == WHITESPACE)
+		return (1);
 	return (0);
 }
 
@@ -31,13 +33,14 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 {
 	int	len;
 
-	if (current->type == WORD)
+	if (current->content)
 	{
 		len = ft_strlen(current->content) + 1;
 		node->cmd.args[i] = (char *) malloc(len * sizeof(char));
 		if (!node->cmd.args[i])
 			return (1);
 		ft_strlcpy(node->cmd.args[i], current->content, len);
+		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
 	{
@@ -48,6 +51,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 			ft_strlcpy(node->cmd.args[i], "'", 2);
 		else
 			ft_strlcpy(node->cmd.args[i], "\"", 2);
+		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	return (0);
 }

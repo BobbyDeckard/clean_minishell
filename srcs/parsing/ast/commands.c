@@ -117,15 +117,16 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	t_ast	*node;
 	int		count;
 
+	printf("In parse_command() with start = %d and end = %d\n", start, end);
 	count = count_redirs(list, start, end) + 1;
-	printf("parse_command() counted %d redirs\n", count);
+	printf("parse_command() counted %d redirs\n", count - 1);
 	if (is_lone_redir(list, start, end))
 		return (parse_lone_redirs(shell, list, start, end));
 	node = create_cmd_node(shell, count);
 	set_root(shell, node);
 	parse_redirs(shell, node, start, end);
-	count = count_args(list, start, end) + 1;
-	printf("parse_command() counted %d args\n", count);
+	count = count_args(list, start, end);
+	printf("parse_command() counted %d args\n", count - 1);
 	init_cmd(shell, node, count);
 	parse_args(shell, node, start, end);
 	return (node);
