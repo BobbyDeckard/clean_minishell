@@ -101,7 +101,7 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 {
 	int	i;
 
-	if (count == 1)
+	if (!count)
 		return ;
 	node->cmd.args = (char **) malloc(count * sizeof(char *));
 	if (!node->cmd.args)
