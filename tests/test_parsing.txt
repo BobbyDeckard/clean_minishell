@@ -3,4 +3,27 @@ echo """"""''''''"""""
 <file cat|grep foo           | wc 	-w>outfile>out
 (cat file && echo ok && echo bibiboup>>file)|| weyoo | mama | boubou | bibi | tructutr>file
 echo "$USER"cestchiant$PATH,okdakor				youpi '				woaaaaaaa '
-
+(cmd1 && cm2) || ((cmd3 || cmd4) && cmd5)
+	Token 0 --> Type: PAREN_OPEN, Content: '(null)'
+	Token 1 --> Type: WORD, Content: 'cmd1'
+	Token 2 --> Type: WHITESPACE, Content: ' '
+	Token 3 --> Type: AND, Content: '(null)'
+	Token 4 --> Type: WHITESPACE, Content: ' '
+	Token 5 --> Type: WORD, Content: 'cm2'
+	Token 6 --> Type: PAREN_CLOSE, Content: '(null)'
+	Token 7 --> Type: WHITESPACE, Content: ' '
+	Token 8 --> Type: OR, Content: '(null)'
+	Token 9 --> Type: WHITESPACE, Content: ' '
+	Token 10 --> Type: PAREN_OPEN, Content: '(null)'
+	Token 11 --> Type: PAREN_OPEN, Content: '(null)'
+	Token 12 --> Type: WORD, Content: 'cmd3'
+	Token 13 --> Type: WHITESPACE, Content: ' '
+	Token 14 --> Type: OR, Content: '(null)'
+	Token 15 --> Type: WHITESPACE, Content: ' '
+	Token 16 --> Type: WORD, Content: 'cmd4'
+	Token 17 --> Type: PAREN_CLOSE, Content: '(null)'
+	Token 18 --> Type: WHITESPACE, Content: ' '
+	Token 19 --> Type: AND, Content: '(null)'
+	Token 20 --> Type: WHITESPACE, Content: ' '
+	Token 21 --> Type: WORD, Content: 'cmd5'
+	Token 22 --> Type: PAREN_CLOSE, Content: '(null)'
