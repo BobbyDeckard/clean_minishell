@@ -103,10 +103,10 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 
 	if (!count)
 		return ;
-	node->cmd.args = (char **) malloc(count * sizeof(char *));
+	node->cmd.args = (char **) malloc((count + 1) * sizeof(char *));
 	if (!node->cmd.args)
 		malloc_error(shell->root, shell, shell->tokens);
-	printf("In init_cmd(), allocated %d pointers for args\n", count);
+	printf("In init_cmd(), allocated %d pointers for args\n", count + 1);
 	i = -1;
 	while (++i < count)
 		node->cmd.args[i] = NULL;

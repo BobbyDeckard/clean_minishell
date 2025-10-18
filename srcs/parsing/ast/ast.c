@@ -33,12 +33,17 @@ static int	count_tokens(t_token **list)
 	return (count);
 }
 
-static t_ast	*parse_list_portion(t_shell *shell, t_token **list, int start, int end)
+static t_ast	*parse_non_op(t_shell *shell, t_token **list, int start, int end)
 {
 	t_token	*token;
 
 	printf("In parse_list_portion() with start = %d and end = %d\n", start, end);
 	token = get_token_at_index(list, start);
+	while (token && token->type == WHITESPACE)
+	{
+		token = token->next;
+		start++;
+	}
 	if (start < end && token && token->type == PAREN_OPEN)
 		return (parse_parentheses(shell, list, start, end));
 	return (parse_command(shell, list, start, end));
@@ -56,7 +61,7 @@ t_ast	*parse_sequence(t_shell *shell, t_token **list, int start, int end)
 	operator = find_op_precedence(list, start, end);
 	printf("Found operator at position %d\n", operator);
 	if (operator == -1)
-		return (parse_list_portion(shell, list, start, end));
+		return (parse_non_op(shell, list, start, end));
 	return (parse_operator(shell, start, end, operator));
 }
 

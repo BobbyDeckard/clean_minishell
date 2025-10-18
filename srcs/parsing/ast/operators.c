@@ -49,34 +49,35 @@ int	find_op_precedence(t_token **list, int start, int end)
 	int		lvl;
 	int		res;
 
-//	printf("In find_op_precedence() with start = %d and end = %d\n", start, end);
+	printf("\nIn find_op_precedence() with start = %d and end = %d\n", start, end);
 	res = -1;
 	prec = 2147483647;
 	lvl = 0;
 	while (start <= end)
 	{
 		current = get_token_at_index(list, start);
-//		printf("Checking token at index %d\n", start);
+		printf("Checking token at index %d\n", start);
 		if (!current)
 			break ;
-//		else if (current->content)
-//			printf("Current has content '%s'\n", current->content);
-//		else
-//			printf("Current has no content\n");
+		else if (current->content)
+			printf("Current has content '%s'\n", current->content);
+		else
+			printf("Current has no content\n");
 		if (current->type == PAREN_OPEN)
 		{
 			lvl++;
-//			printf("Found paren_open token, lvl = %d\n",lvl);
+			printf("Found paren_open token, lvl = %d\n",lvl);
 		}
 		else if (current->type == PAREN_CLOSE)
 		{
 			lvl--;
-//			printf("Found paren_close token, lvl = %d\n", lvl);
+			printf("Found paren_close token, lvl = %d\n", lvl);
 		}
 		if (!lvl && (current->type == PIPE || current->type == AND || current->type == OR))
 			check_precedence(current, &res, &prec, start);
 		start++;
 	}
+	printf("\n");
 	return (res);
 }
 

@@ -50,7 +50,7 @@ static int	check_paren_prev(t_token *prev)
 	if (!prev)
 		return (0);
 	type = prev->type;
-	if (type != AND && type != OR)
+	if (type != AND && type != OR && type != PAREN_OPEN)
 		return (1);
 	return (0);
 }
@@ -64,7 +64,7 @@ static int	check_paren_next(t_token *next)
 	if (!next)
 		return (0);
 	type = next->type;
-	if (type != AND && type != OR)
+	if (type != AND && type != OR && type != PAREN_CLOSE)
 		return (1);
 	return (0);
 }

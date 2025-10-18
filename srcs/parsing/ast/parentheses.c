@@ -85,8 +85,10 @@ t_ast	*parse_parentheses(t_shell *shell, t_token **list, int start, int end)
 	t_ast	*node;
 	int		closing;
 
+	printf("In parse_parentheses()\n");
 	node = NULL;
 	closing = find_matching_paren(list, start, end);
+	printf("Found closing parenthesis to be %d\n", closing);
 	if (closing > start && closing <= end)
 		node = parse_sequence(shell, list, ++start, --closing);
 	return (node);
