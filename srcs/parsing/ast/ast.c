@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:15:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 07:47:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:33:54 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end);
 t_ast	*parse_operator(t_shell *shell, int start, int end, int operator);
 t_ast	*parse_parentheses(t_shell *shell, t_token **list, int start, int end);
+void	clean_tokens(t_token **list);
 int		find_op_precedence(t_token **list, int start, int end);
 int		paren_pair(t_token **list, int start, int end);
 
@@ -73,5 +74,6 @@ t_ast	*create_ast(t_shell *shell, t_token **list)
 	count = count_tokens(list);
 //	printf("In create_ast(), counted %d tokens\n", count);
 	root = parse_sequence(shell, list, 0, --count);
+	clean_tokens(list);
 	return (root);
 }
