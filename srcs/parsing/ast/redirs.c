@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:45:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 08:38:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:57:57 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int	count_redir_args(t_token *current)
 
 	if (!current)
 		return (0);
-	printf("In count_redir_args()\n");
+//	printf("In count_redir_args()\n");
 	count = 0;
 	while (current && is_redir_arg(current))
 	{
-		if (current->content)
-			printf("Current token has content '%s'\n", current->content);
+//		if (current->content)
+//			printf("Current token has content '%s'\n", current->content);
 		current = current->next;
 		count++;
 	}
@@ -68,12 +68,17 @@ static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *
 	int			i;
 	int			j;
 
-	printf("In parse_redir()\n");
+//	printf("In parse_redir()\n");
 	if (!current)
 		return (NULL);
 	type = current->type;
 	current = current->next;
 	(*start)++;
+	while (current->type == WHITESPACE)
+	{
+		current = current->next;
+		(*start)++;
+	}
 	count = count_redir_args(current) + 1;
 	i = create_redir_node(shell, node, convert_types(type), count);
 	j = -1;
@@ -94,7 +99,7 @@ void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 {
 	t_token	*current;
 
-	printf("In parse_redirs()\n");
+//	printf("In parse_redirs()\n");
 	if (!node->children)
 		return ;
 	current = get_token_at_index(shell->tokens, start);

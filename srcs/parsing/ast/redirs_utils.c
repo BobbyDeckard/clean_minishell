@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:29:38 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 09:07:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 15:55:12 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	alloc_redir_args(t_shell *shell, t_ast *node, int count, int i)
 {
 	char	**args;
 
-	printf("In alloc_redir_args() with count = %d\n", count);
+//	printf("In alloc_redir_args() with count = %d\n", count);
 	args = (char **) malloc(count * sizeof(char *));
 	if (!args)
 	{
@@ -71,7 +71,7 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 {
 	int	i;
 
-	printf("In create_redir_node()\n");
+//	printf("In create_redir_node()\n");
 	i = -1;
 	while (node->children[++i])
 		continue ;
@@ -87,6 +87,6 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 		malloc_error(shell->root, shell, shell->tokens);
 	}
 	alloc_redir_args(shell, node, count, i);
-	printf("About to return i = %d\n", i);
+//	printf("About to return i = %d\n", i);
 	return (i);
 }
