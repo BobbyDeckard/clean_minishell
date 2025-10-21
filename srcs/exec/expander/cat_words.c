@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 19:48:37 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:56:18 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void	cat_args(t_ast *node, t_cmd *cmd, int i)
 	char	*new;
 	int		len;
 
-	printf("In cat_args()\n");
-	printf("\targ[%d]: '%s'\n", i, cmd->args[i]);
-	printf("\targ[%d]: '%s'\n", i + 1, cmd->args[i + 1]);
+//	printf("In cat_args()\n");
+//	printf("\targ[%d]: '%s'\n", i, cmd->args[i]);
+//	printf("\targ[%d]: '%s'\n", i + 1, cmd->args[i + 1]);
 	len = ft_strlen(cmd->args[i]) + ft_strlen(cmd->args[i + 1]) + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)

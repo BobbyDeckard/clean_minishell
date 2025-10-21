@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:40:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 18:35:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:57:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,25 @@ static void	link_token(t_token **list, t_token *token)
 {
 	t_token	*current;
 
-	printf("\nIn link_token()\n");
+//	printf("\nIn link_token()\n");
 	if (!*list)
 	{
-		printf("Setting initial token: %p\n", token);
+//		printf("Setting initial token: %p\n", token);
 		*list = token;
 		return ;
 	}
-	printf("Token list: %p\n", list);
+//	printf("Token list: %p\n", list);
 	current = *list;
-	printf("Initial token: %p\n", current);
+//	printf("Initial token: %p\n", current);
 	while (current->next)
 	{
-		printf("Current->next: %p\n", current->next);
+//		printf("Current->next: %p\n", current->next);
 		current = current->next;
 	}
 	current->next = token;
-	printf("Set %p->next to %p\n", current, token);
+//	printf("Set %p->next to %p\n", current, token);
 	token->prev = current;
-	printf("Set %p->prev to %p\n", token, current);
+//	printf("Set %p->prev to %p\n", token, current);
 }
 
 static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_token *token)
@@ -101,8 +101,8 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 
 //	printf("In extract_token() with remaining command '%s'\n", *command);
 	new = init_token(shell, list);
-	printf("\nNew token: %p\n", new);
-	printf("\tRemaining command: '%s'\n", *command);
+//	printf("\nNew token: %p\n", new);
+//	printf("\tRemaining command: '%s'\n", *command);
 	new = make_token(shell, command, list, new);
 	if (new)
 		link_token(list, new);
@@ -114,7 +114,7 @@ t_token	**tokenize_command(t_shell *shell, char *command)
 	t_token		**tokens;
 	
 	tokens = (t_token **) malloc(sizeof(t_token *));
-	printf("Token list: %p\n", tokens);
+//	printf("Token list: %p\n", tokens);
 	if (!tokens)
 		malloc_error(NULL, shell, NULL);
 	*tokens = NULL;

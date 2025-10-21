@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:28:37 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 18:46:43 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:02:28 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 {
 	int	len;
 
-	printf("In parse_arg()\n");
+//	printf("In parse_arg()\n");
 	if (current->content)
 	{
-		printf("Current has content '%s'\n", current->content);
+//		printf("Current has content '%s'\n", current->content);
 		len = ft_strlen(current->content) + 1;
 		node->cmd.args[i] = (char *) malloc(len * sizeof(char));
 		if (!node->cmd.args[i])

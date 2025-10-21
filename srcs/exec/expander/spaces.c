@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:20:19 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:21:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:19:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,35 @@ static int	get_last_non_space(const char *str)
 static int	get_shortened_len(const char *str, int count, int space)
 {
 	int	last_nonsp;
+	int	start;
 	int	i;
 
 	i = -1;
+	start = (*str == ' ');
 	last_nonsp = get_last_non_space(str);
 	while (str[++i])
 	{
 		if (str[i] == ' ' && i > last_nonsp)
 			break ;
-		else if (str[i] == ' ' && !space)
+		else if (str[i] == ' ' && !space && !start)
 		{
 			space = !space;
 			count++;
+//			printf("str[%d] is space and space is off, count = %d\n", i, count);
 		}
 		else if (str[i] != ' ' && space)
 		{
 			space = !space;
 			count++;
+//			printf("str[%d] is nonspace and space is on, count = %d\n", i, count);
 		}
 		else if (str[i] != ' ')
+		{
+//			printf("str[%d] is nonspace, count = %d\n", i, count);
 			count++;
+			if (start)
+				start = !start;
+		}
 	}
 	return (count);
 }
@@ -82,12 +91,14 @@ static void	make_new_entry(char *str, char *old, int len)
 
 	i = -1;
 	j = -1;
+//	printf("Making new entry: '");
 	while (old[++i] && j + 2 < len)
 	{
 		if (old[i] == ' ' && !space)
 		{
 			space = !space;
 			str[++j] = old[i];
+//			printf("%c", str[j]);
 		}
 		else if (old[i] == ' ')
 			continue ;
@@ -96,8 +107,10 @@ static void	make_new_entry(char *str, char *old, int len)
 			if (space)
 				space = !space;
 			str[++j] = old[i];
+//			printf("%c", str[j]);
 		}
 	}
+//	printf("'\n");
 }
 
 char	*filter_spaces(t_ast *node, char *entry)
@@ -105,7 +118,10 @@ char	*filter_spaces(t_ast *node, char *entry)
 	char	*new;
 	int		len;
 
+//	printf("In filter_spaces()\n");
+//	printf("Entry: '%s'\n", entry);
 	len = get_shortened_len(entry, 0, 0) + 1;
+//	printf("About to malloc with len = %d\n", len);
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);

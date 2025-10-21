@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 19:44:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 20:08:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 
 //	if (!ft_strncmp(cmd->args[0], "export", 7))
 //		return ;
-	printf("\nTree before expander:\n\n");
-	print_tree(node->root);
+//	printf("\nTree before expander:\n\n");
+//	print_tree(node->root);
 	i = -1;
 	while (cmd->args[++i])
 	{
@@ -112,21 +112,21 @@ void	expander(t_ast *node, t_cmd *cmd)
 		else if (contains_dol(cmd->args[i]))
 			expand(node, cmd, node->shell->envp, i);
 	}
-	printf("\nTree before cat and space management:\n\n");
-	print_tree(node->root);
+//	printf("\nTree before cat and space management:\n\n");
+//	print_tree(node->root);
 	i = -1;
 	while (cmd->args[++i])
 	{
-		printf("Checking arg[%d]: '%s'\n", i, cmd->args[i]);
+//		printf("Checking arg[%d]: '%s'\n", i, cmd->args[i]);
 		if (!is_whitespace(cmd->args[i]) && cmd->args[i + 1]
 			&& !is_whitespace(cmd->args[i + 1]))
 			cat_args(node, cmd, i);
 		else if (is_whitespace(cmd->args[i]))
 		{
-			printf("About to remove args[%d]: '%s' (%p) for being a whitespace\n", i, cmd->args[i], cmd->args[i]);
+//			printf("About to remove args[%d]: '%s' (%p) for being a whitespace\n", i, cmd->args[i], cmd->args[i]);
 			remove_arg(cmd, i--);
 		}
 	}
-	printf("\nTree after cat and space management:\n\n");
-	print_tree(node->root);
+//	printf("\nTree after cat and space management:\n\n");
+//	print_tree(node->root);
 }
