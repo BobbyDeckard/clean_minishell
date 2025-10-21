@@ -12,6 +12,18 @@
 
 #include "../../../incl/minishell.h"
 
+void	close_all_redirs(t_ast *node);
+void	close_redirs(t_cmd *cmd);
+void	unlink_heredoc(t_ast *node);
+int		cd(t_ast *node, int in_pipe);
+int		echo(t_ast *node, int in_pipe);
+int		exit_bltn(t_ast *node, int in_pipe);
+int		export_bltn(t_ast *node, int in_pipe);
+int		has_equal(const char *str);
+int		make_redirs(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+int		unset(t_ast *node, int in_pipe);
+
 static int	env(t_ast *node, int in_pipe)
 {
 	char	**envp;
@@ -19,7 +31,7 @@ static int	env(t_ast *node, int in_pipe)
 
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-	envp = node->data->envp;
+	envp = node->shell->envp;
 	i = -1;
 	while (envp[++i])
 	{

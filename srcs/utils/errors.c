@@ -12,8 +12,9 @@
 
 #include "../../incl/minishell.h"
 
-void	clean_tokens(t_token **tokens);
+void	cleanup(t_ast *node);
 void	clean_ast(t_ast *root);
+void	clean_tokens(t_token **tokens);
 
 void	malloc_error(t_ast *ast, t_shell *shell, t_token **tokens)
 {
@@ -33,5 +34,26 @@ void	malloc_error(t_ast *ast, t_shell *shell, t_token **tokens)
 		clean_ast(ast->root);
 		printf("malloc_error() successfully cleaned ast\n");
 	}
+	exit(1);
+}
+
+int	fork_error(void)
+{
+	perror("fork");
+	return (1);
+}
+
+// Function can only be called from within child processes, hence the exit()
+void	dup2_error(t_ast *node)
+{
+	perror("dup2");
+	cleanup(node);
+	exit(1);
+}
+
+void	getcwd_error(t_ast *node)
+{
+	perror("getcwd");
+	cleanup(node);
 	exit(1);
 }

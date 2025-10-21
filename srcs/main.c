@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:00:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:30:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*read_command(t_shell *shell);
 void	clean_ast(t_ast *ast);
 void	setup_execution_signals(char *command, t_shell *shell);
 void	setup_interactive_signals(t_shell *shell);
+int		exec_ast(t_ast *node);
 
 void	print_tree(t_ast *ast);
 static t_shell	process_command(char *command, t_shell shell)
@@ -35,7 +36,7 @@ static t_shell	process_command(char *command, t_shell shell)
 	{
 		printf("\nAST:\n");
 		print_tree(ast);
-//		shell.exit_status = exec_ast(ast);
+		shell.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		shell.root = NULL;
 	}
@@ -58,11 +59,14 @@ int	main(int ac, char **av, char **envp)
 	t_shell	shell;
 	char	*command;
 
-	if (ac != 1)
-		return (1);
+//	if (ac != 1)
+//		return (1);
+	int	iterations = 2147483647;
+	if (ac == 2)
+		iterations = atoi(av[1]);
 	(void) av;
 	shell = init_shell(envp);
-	while (1)
+	while (1 && --iterations >= 0)
 	{
 		setup_interactive_signals(&shell);
 		command = read_command(&shell);

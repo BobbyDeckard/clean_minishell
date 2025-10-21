@@ -6,11 +6,29 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:51:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/08 16:07:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:26:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	cleanup(t_ast *node);
+void	clean_exit(t_ast *node, int status);
+void	close_all_redirs(t_ast *node);
+void	close_pipes(int fd[2][2], int i, int count);
+void	dup_fds(t_ast *node);
+void	exec_cmd(t_ast *node, t_cmd cmd);
+void	link_pipe(t_ast *cmd1, t_ast *cmd2, int fd[2][2], int i);
+void	prep_cmd(t_ast *node);
+void	setup_child_signals(t_ast *node);
+int		*init_pids(t_ast *root, int count);
+int		count_nodes(t_ast **children);
+int		exec_builtin(t_ast *node, int in_pipe);
+int		is_builtin(t_cmd cmd);
+int		is_lone_redir_node(t_ast *node);
+int		make_fork(void);
+int		make_pipe(int fd[2]);
+int		waitpids(t_ast *node, int *pids, int cmd_count);
 
 /*
 static void	print_open_fds(const char *name)
@@ -24,7 +42,7 @@ static void	print_open_fds(const char *name)
 
 static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
 {
-	if (is_lone_redir(node))
+	if (is_lone_redir_node(node))
 		clean_exit(node->root, 0);
 	dup_fds(node);
 	close_pipes(fd, i, count);

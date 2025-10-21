@@ -6,11 +6,21 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:26:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 11:26:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 09:49:16 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+char	*copy_env_entry(t_ast *node, char **arr, int i);
+void	close_all_redirs(t_ast *node);
+void	export_expander(t_ast *node);
+void	free_char_array(char **arr);
+int		char_arr_len(char **arr);
+int		create_env(t_ast *node);
+int		handle_export_args(t_ast *node, int size);
+int		make_redirs(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
 
 int	has_equal(const char *str)
 {
@@ -77,9 +87,9 @@ static int	export_print(t_ast *node, int size)
 
 	abc = (char **) ft_calloc(size + 1, sizeof(char *));
 	if (!abc)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = -1;
-	while (node->data->envp[++i])
+	while (node->shell->envp[++i])
 		abc[i] = copy_env_entry(node, abc, i);
 	order(abc);
 	print_export(node, abc);
@@ -97,8 +107,8 @@ int	export_bltn(t_ast *node, int in_pipe)
 	status = 0;
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-	export_expander(node);
-	size = char_arr_len(node->data->envp);
+//	export_expander(node);
+	size = char_arr_len(node->shell->envp);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
 	else if (size == -1)

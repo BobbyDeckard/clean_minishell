@@ -6,11 +6,21 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 11:34:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:07:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	cat_args(t_ast *node, t_cmd *cmd, int i);
+void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
+void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start);
+int		get_name_len(const char *str);
+int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
+int		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
+int		is_whitespace(const char *str);
+int		remove_arg(t_cmd *cmd, int i);
+int		remove_var(t_ast *node, t_cmd *cmd, int index);
 
 int	contains_dol(const char *str)
 {
@@ -38,7 +48,7 @@ char	*get_name(t_ast *node, const char *str)
 	len = get_name_len(str) + 1;
 	name = (char *) malloc(len * sizeof(char));
 	if (!name)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = 1;
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 	{
@@ -74,7 +84,7 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	return (remove_var(node, cmd, index));
 }
 
-static void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
+void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
 	while (contains_dol(cmd->args[index]))
 	{
@@ -87,13 +97,25 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	if (!ft_strncmp(cmd->args[0], "export", 7))
-		return ;
+//	if (!ft_strncmp(cmd->args[0], "export", 7))
+//		return ;
 	i = -1;
 	while (cmd->args[++i])
 	{
-		if (cmd->exp[i] && contains_dol(cmd->args[i]))
-			expand(node, cmd, node->data->envp, i);
+		if (!ft_strncmp(cmd->args[i], "'", 2))
+			handle_single_quotes(node, cmd, i);
+		else if (!ft_strncmp(cmd->args[i], "\"", 2))
+			handle_double_quotes(node, cmd, i);
+		else if (contains_dol(cmd->args[i]))
+			expand(node, cmd, node->shell->envp, i);
 	}
-	cat_words(node, cmd);
+	i = -1;
+	while (cmd->args[++i])
+	{
+		if (!is_whitespace(cmd->args[i]) && cmd->args[i + 1]
+			&& !is_whitespace(cmd->args[i + 1]))
+			cat_args(node, cmd, i);
+		else if (is_whitespace(cmd->args[i]))
+			remove_arg(cmd, i);
+	}
 }

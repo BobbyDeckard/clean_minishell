@@ -6,23 +6,27 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:54:04 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:05:37 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	make_file_name(t_ast *node);
+void	make_heredoc(t_ast *node, t_cmd *cmd);
+int		check_redirs(t_ast *node, t_cmd *cmd);
 
 static void	redir_error(t_ast *node)
 {
 	char	*str;
 	int		len;
 
-	len = ft_strlen(node->file) + 12;
+	len = ft_strlen(node->rdr.file) + 12;
 	str = (char *) malloc(len * sizeof(char));
 	if (!str)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(str, "minishell: ", len);
-	ft_strlcat(str, node->file, len);
+	ft_strlcat(str, node->rdr.file, len);
 	perror(str);
 	free(str);
 }
@@ -34,12 +38,11 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
-	if (!node->file)
-		make_file_name(node);
-	if (access(node->file, F_OK) || access(node->file, R_OK))
+	make_file_name(node);
+	if (access(node->rdr.file, F_OK) || access(node->rdr.file, R_OK))
 		cmd->fd_in = -1;
 	else
-		cmd->fd_in = open(node->file, O_RDONLY);
+		cmd->fd_in = open(node->rdr.file, O_RDONLY);
 	if (cmd->fd_in < 0)
 	{
 		redir_error(node);
@@ -55,12 +58,11 @@ static int	make_redir_out(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-	if (!node->file)
-		make_file_name(node);
-	if (!access(node->file, F_OK) && access(node->file, W_OK))
+	make_file_name(node);
+	if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
 		cmd->fd_out = -1;
 	else
-		cmd->fd_out = open(node->file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
+		cmd->fd_out = open(node->rdr.file, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (cmd->fd_out < 0)
 	{
 		redir_error(node);
@@ -76,12 +78,11 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-	if (!node->file)
-		make_file_name(node);
-	if (!access(node->file, F_OK) && access(node->file, W_OK))
+	make_file_name(node);
+	if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
 		cmd->fd_out = -1;
 	else
-		cmd->fd_out = open(node->file, O_APPEND | O_WRONLY | O_CREAT, 0644);
+		cmd->fd_out = open(node->rdr.file, O_APPEND | O_WRONLY | O_CREAT, 0644);
 	if (cmd->fd_out < 0)
 	{
 		redir_error(node);
@@ -92,7 +93,7 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 
 int	make_redirs(t_ast *node)
 {
-	t_node_type	type;
+	t_n_type	type;
 	int			i;
 
 	i = -1;
@@ -108,7 +109,7 @@ int	make_redirs(t_ast *node)
 		else if (type == NODE_REDIR_APPEND
 			&& make_redir_append(node->children[i], &node->cmd))
 			break ;
-		else if ((type == NODE_HEREDOC || type == NODE_HEREDOC_EXP))
+		else if (type == NODE_HEREDOC)
 			make_heredoc(node->children[i], &node->cmd);
 	}
 	return (check_redirs(node, &node->cmd));

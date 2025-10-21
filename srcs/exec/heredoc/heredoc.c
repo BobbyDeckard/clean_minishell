@@ -6,11 +6,21 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:25:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:51:27 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+char	*copy_delimiter(t_ast *node);
+char	*expand_line(t_ast *node, char **envp, char *line);
+void	cleanup(t_ast *node);
+void	init_sp_handler_sig(t_ast *node, struct sigaction *new,
+		struct sigaction *old);
+void	heredoc_end(t_ast *node, struct sigaction *old,
+		int stdin_bu);
+void	make_del(t_ast *node);
+int		open_temp(t_ast *node, t_cmd *cmd);
 
 static void	heredoc_error(t_ast *node, char *del)
 {
@@ -27,7 +37,7 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu)
 		close(*stdin_bu);
 		if (close(cmd->fd_in))
 			perror("close");
-		unlink(node->file);
+		unlink(node->rdr.file);
 		cmd->fd_in = -1;
 		write(STDOUT_FILENO, "\n", 1);
 	}
@@ -52,8 +62,8 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 			free(line);
 			break ;
 		}
-		if (node->type == NODE_HEREDOC_EXP)
-			line = expand_line(node, node->data->envp, line);
+		if (node->rdr.type == RDR_HEREDOC_EXP)
+			line = expand_line(node, node->shell->envp, line);
 		ft_putstr_fd(line, cmd->fd_in);
 		ft_putchar_fd('\n', cmd->fd_in);
 		free(line);
@@ -66,9 +76,9 @@ static void	heredoc_end_end(t_ast *node, t_cmd *cmd, char *del)
 	{
 		if (close(cmd->fd_in))
 			perror("close");
-		cmd->fd_in = open(node->file, O_RDONLY);
+		cmd->fd_in = open(node->rdr.file, O_RDONLY);
 		if (cmd->fd_in < 0)
-			perror(node->file);
+			perror(node->rdr.file);
 	}
 	free(del);
 }
@@ -85,9 +95,10 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
+	make_del(node);
 	del = copy_delimiter(node);
-	free(node->file);
-	node->file = NULL;
+	free(node->rdr.file);
+	node->rdr.file = NULL;
 	if (!open_temp(node, cmd))
 		heredoc_error(node, del);
 	stdin_backup = dup(STDIN_FILENO);

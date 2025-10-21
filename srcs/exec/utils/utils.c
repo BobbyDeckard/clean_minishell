@@ -12,6 +12,8 @@
 
 #include "../../../incl/minishell.h"
 
+void	dup2_error(t_ast *node);
+
 void	invalid_name(t_cmd *cmd, char *name)
 {
 	cmd->path = NULL;
@@ -44,6 +46,6 @@ void	dup_fds(t_ast *node)
 
 int	set_exit_status(t_ast *node, int status)
 {
-	node->data->exit_status = status;
+	node->shell->exit_status = status;
 	return (status);
 }

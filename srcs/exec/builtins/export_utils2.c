@@ -12,14 +12,16 @@
 
 #include "../../../incl/minishell.h"
 
+char	*get_name(t_ast *node, const char *str);
+
 static int	calc_exit_status_len(t_ast *node)
 {
 	char	*exit_status;
 	int		len;
 
-	exit_status = ft_itoa(node->data->exit_status);
+	exit_status = ft_itoa(node->shell->exit_status);
 	if (!exit_status)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	len = ft_strlen(exit_status) - 2;
 	free(exit_status);
 	return (len);

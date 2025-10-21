@@ -108,7 +108,7 @@ char	*filter_spaces(t_ast *node, char *entry)
 	len = get_shortened_len(entry, 0, 0) + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	make_new_entry(new, entry, len);
 	return (new);
 }

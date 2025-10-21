@@ -12,6 +12,13 @@
 
 #include "../../../incl/minishell.h"
 
+char	*copy_env_entry(t_ast *node, char **arr, int i);
+void	close_all_redirs(t_ast *node);
+void	free_char_array(char **arr);
+int		char_arr_len(char **arr);
+int		make_redirs(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+
 static int	is_cmd_arg(char **args, char *entry)
 {
 	int		i;
@@ -75,21 +82,21 @@ int	unset(t_ast *node, int in_pipe)
 
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-	if (char_arr_len(node->data->envp) == -1)
+	if (char_arr_len(node->shell->envp) == -1)
 		return (nothing_to_unset(node, in_pipe));
-	len = char_arr_len(node->data->envp) + 1;
+	len = char_arr_len(node->shell->envp) + 1;
 	new = (char **) ft_calloc(len, sizeof(char *));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = 0;
 	while (node->cmd.args[++i])
 	{
 		if (!ft_strncmp(node->cmd.args[i], "PATH", 5))
-			remove_paths(node->data);
+			remove_paths(node->shell);
 	}
-	filter_and_copy(node, node->data->envp, new, node->cmd.args);
-	free_char_array(node->data->envp);
-	node->data->envp = new;
+	filter_and_copy(node, node->shell->envp, new, node->cmd.args);
+	free_char_array(node->shell->envp);
+	node->shell->envp = new;
 	if (!in_pipe)
 		close_all_redirs(node);
 	return (set_exit_status(node, 0));

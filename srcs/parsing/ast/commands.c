@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:21:28 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 11:45:37 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 17:04:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_ast	*create_node(t_shell *shell, t_n_type type);
 t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end);
+void	find_cmd_scope(t_ast *node, t_token **list, int *start, int *end);
 void	parse_args(t_shell *shell, t_ast *node, int start, int end);
 void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int		is_lone_redir(t_token **list, int start, int end);
@@ -112,6 +113,8 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 		node->cmd.args[i] = NULL;
 }
 
+//	find_cmd_scope() is unnecessary... bash does receive args even if the command name
+//	and its arguments are separated by a redir...
 t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 {
 	t_ast	*node;
@@ -125,6 +128,7 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	node = create_cmd_node(shell, count);
 	set_root(shell, node);
 	parse_redirs(shell, node, start, end);
+//	find_cmd_scope(node, list, &start, &end);
 	count = count_args(list, start, end);
 	printf("parse_command() counted %d args\n", count - 1);
 	init_cmd(shell, node, count);

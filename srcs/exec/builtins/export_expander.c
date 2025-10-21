@@ -12,6 +12,9 @@
 
 #include "../../../incl/minishell.h"
 
+char	*get_name(t_ast *node, const char *str);
+int		get_arg_len(t_ast *node, char **envp, const char *arg);
+
 char	*get_entry(char **envp, const char *name)
 {
 	int		i;
@@ -36,7 +39,7 @@ static int	exp_var(t_ast *node, char *new, const char *arg, int len_and_i[2])
 
 	name = get_name(node, arg + len_and_i[1]);
 	len_and_i[1] += ft_strlen(name);
-	entry = get_entry(node->data->envp, name);
+	entry = get_entry(node->shell->envp, name);
 	ft_strlcat(new, entry, len_and_i[0]);
 	free(name);
 	return (ft_strlen(entry));
@@ -73,10 +76,10 @@ static void	expand_arg(t_ast *node, const char *arg, int index)
 	char	*new;
 	int		len;
 
-	len = get_arg_len(node, node->data->envp, arg) + 1;
+	len = get_arg_len(node, node->shell->envp, arg) + 1;
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	make_new_arg(node, arg, new, len);
 	free(node->cmd.args[index]);
 	node->cmd.args[index] = new;

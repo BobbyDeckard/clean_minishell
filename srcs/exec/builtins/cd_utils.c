@@ -12,6 +12,11 @@
 
 #include "../../../incl/minishell.h"
 
+char	*get_entry(char **envp, const char *name);
+void	close_all_redirs(t_ast *node);
+void	getcwd_error(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+
 int	too_many_args_cd(t_ast *node, int in_pipe)
 {
 	ft_putstr_fd("minishell: cd: too many arguments\n", 2);
@@ -24,7 +29,7 @@ int	cd_home(t_ast *node, int in_pipe)
 {
 	char	*home;
 
-	home = get_entry(node->data->envp, "HOME");
+	home = get_entry(node->shell->envp, "HOME");
 	if (!home)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
@@ -39,7 +44,7 @@ int	cd_home(t_ast *node, int in_pipe)
 		set_exit_status(node, 0);
 	if (!in_pipe)
 		close_all_redirs(node);
-	return (node->data->exit_status);
+	return (node->shell->exit_status);
 }
 
 char	*cd_error(t_ast *node, int arg)
@@ -52,7 +57,7 @@ char	*cd_error(t_ast *node, int arg)
 	len = ft_strlen(cmd.args[arg]) + 5;
 	msg = (char *) malloc(len * sizeof(char));
 	if (!msg)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(msg, "cd: ", len);
 	ft_strlcat(msg, cmd.args[arg], len);
 	return (msg);
@@ -67,7 +72,7 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 	int		len;
 
 	free(oldpwd);
-	envp = node->data->envp;
+	envp = node->shell->envp;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
 		getcwd_error(node);
@@ -77,7 +82,7 @@ void	update_pwd(t_ast *node, int i, char *oldpwd)
 	if (!envp[i])
 	{
 		free(cwd);
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	}
 	ft_strlcpy(envp[i], "PWD=", len);
 	ft_strlcat(envp[i], cwd, len);
@@ -96,14 +101,14 @@ void	update_oldpwd(t_ast *node, int i, char *oldpwd)
 	char	**envp;
 	int		len;
 
-	envp = node->data->envp;
+	envp = node->shell->envp;
 	free(envp[i]);
 	len = ft_strlen(oldpwd) + 8;
 	envp[i] = (char *) malloc(len * sizeof(char));
 	if (!envp[i])
 	{
 		free(oldpwd);
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	}
 	ft_strlcpy(envp[i], "OLDPWD=", len);
 	ft_strlcat(envp[i], oldpwd, len);

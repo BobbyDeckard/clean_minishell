@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:30:24 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 15:33:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:28:32 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		check_operators(t_token **list);
 int		check_parentheses(t_token **list);
 int		check_pipes(t_token **list);
 int		check_quotes(t_shell *shell, t_token **list);
-int		check_redirs(t_token **list);
+int		check_redirections(t_token **list);
 
 static int	check_syntax(t_shell *shell, t_token **list)
 {
@@ -32,7 +32,7 @@ static int	check_syntax(t_shell *shell, t_token **list)
 		return (3);
 	else if (check_pipes(list))
 		return (4);
-	else if (check_redirs(list))
+	else if (check_redirections(list))
 		return (5);
 	else if (check_parentheses(list))
 		return (6);

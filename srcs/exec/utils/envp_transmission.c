@@ -12,6 +12,9 @@
 
 #include "../../../incl/minishell.h"
 
+char	*copy_env_entry(t_ast *node, char **arr, int i);
+int		char_arr_len(char **arr);
+
 static int	contains_equal(const char *str)
 {
 	int	i;
@@ -54,7 +57,7 @@ static char	**remove_uninit_vars(t_ast *node, char **envp)
 	len = char_arr_len(envp) - count + 1;
 	new = (char **) ft_calloc(len, sizeof(char *));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = -1;
 	j = -1;
 	while (envp[++i])
@@ -71,7 +74,7 @@ void	exec_minishell(t_ast *node, t_cmd cmd)
 	char	**envp;
 	int		i;
 
-	envp = remove_uninit_vars(node, node->data->envp);
+	envp = remove_uninit_vars(node, node->shell->envp);
 	if (envp)
 	{
 		if (execve(cmd.path, cmd.args, envp) == -1)
@@ -83,7 +86,7 @@ void	exec_minishell(t_ast *node, t_cmd cmd)
 	}
 	else
 	{
-		if (execve(cmd.path, cmd.args, node->data->envp) == -1)
+		if (execve(cmd.path, cmd.args, node->shell->envp) == -1)
 			perror("execve");
 	}
 }

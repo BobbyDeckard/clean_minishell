@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:17:09 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/14 11:25:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:29:16 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_redir_next(t_token *next)
 	return (0);
 }
 
-int	check_redirs(t_token **list)
+int	check_redirections(t_token **list)
 {
 	t_token	*current;
 

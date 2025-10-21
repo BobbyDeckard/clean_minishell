@@ -12,6 +12,13 @@
 
 #include "../../../incl/minishell.h"
 
+char	*copy_env_entry(t_ast *node, char **arr, int i);
+void	close_all_redirs(t_ast *node);
+void	create_env_error(t_ast *node, char **new, int i);
+int		get_entry_index(const char *name, char **envp);
+int		set_exit_status(t_ast *node, int status);
+int		var_exists(char *name, char **envp);
+
 int	create_env(t_ast *node)
 {
 	char	**new;
@@ -23,7 +30,7 @@ int	create_env(t_ast *node)
 		continue ;
 	new = (char **) ft_calloc(i, sizeof(char *));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = -1;
 	while (node->cmd.args[++i + 1])
 	{
@@ -34,7 +41,7 @@ int	create_env(t_ast *node)
 		ft_strlcpy(new[i], node->cmd.args[i + 1], len);
 	}
 	new[i] = NULL;
-	node->data->envp = new;
+	node->shell->envp = new;
 	close_all_redirs(node);
 	return (0);
 }
@@ -48,15 +55,15 @@ static char	**make_new_env(t_ast *node, int size)
 
 	new = (char **) ft_calloc(size, sizeof(char *));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = -1;
-	while (node->data->envp[++i])
+	while (node->shell->envp[++i])
 		new[i] = copy_env_entry(node, new, i);
 	new[i] = NULL;
 	i = -1;
-	while (node->data->envp[++i])
-		free(node->data->envp[i]);
-	free(node->data->envp);
+	while (node->shell->envp[++i])
+		free(node->shell->envp[i]);
+	free(node->shell->envp);
 	return (new);
 }
 
@@ -70,7 +77,7 @@ static char	*get_var_name(t_ast *node, int arg)
 		i++;
 	name = (char *) malloc(++i * sizeof(char));
 	if (!name)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	name[--i] = 0;
 	while (--i >= 0)
 		name[i] = node->cmd.args[arg][i];
@@ -81,15 +88,15 @@ int	create_var(t_ast *node, int size, int arg)
 {
 	int	len;
 
-	if (var_exists(node->cmd.args[arg], node->data->envp))
+	if (var_exists(node->cmd.args[arg], node->shell->envp))
 		return (set_exit_status(node, 0));
 	len = ft_strlen(node->cmd.args[arg]) + 1;
-	node->data->envp = make_new_env(node, size + 2);
-	node->data->envp[size] = (char *) malloc(len * sizeof(char));
-	if (!node->data->envp[size])
-		malloc_error(node, node->data, NULL);
-	ft_strlcpy(node->data->envp[size], node->cmd.args[arg], len);
-	node->data->envp[++size] = NULL;
+	node->shell->envp = make_new_env(node, size + 2);
+	node->shell->envp[size] = (char *) malloc(len * sizeof(char));
+	if (!node->shell->envp[size])
+		malloc_error(node, node->shell, NULL);
+	ft_strlcpy(node->shell->envp[size], node->cmd.args[arg], len);
+	node->shell->envp[++size] = NULL;
 	close_all_redirs(node);
 	return (set_exit_status(node, 0));
 }
@@ -102,15 +109,15 @@ int	assign_var(t_ast *node, int size, int arg)
 
 	name = get_var_name(node, arg);
 	len = ft_strlen(name);
-	i = get_entry_index(name, node->data->envp);
-	if (node->data->envp[i])
+	i = get_entry_index(name, node->shell->envp);
+	if (node->shell->envp[i])
 	{
-		free(node->data->envp[i]);
+		free(node->shell->envp[i]);
 		len = ft_strlen(node->cmd.args[arg]) + 1;
-		node->data->envp[i] = (char *) malloc(len * sizeof(char));
-		if (!node->data->envp[i])
-			malloc_error(node, node->data, NULL);
-		ft_strlcpy(node->data->envp[i], node->cmd.args[arg], len);
+		node->shell->envp[i] = (char *) malloc(len * sizeof(char));
+		if (!node->shell->envp[i])
+			malloc_error(node, node->shell, NULL);
+		ft_strlcpy(node->shell->envp[i], node->cmd.args[arg], len);
 		free(name);
 		close_all_redirs(node);
 		return (set_exit_status(node, 0));

@@ -12,6 +12,10 @@
 
 #include "../../../incl/minishell.h"
 
+void	close_redirs(t_cmd *cmd);
+void	unlink_heredoc(t_ast *node);
+int		fork_error(void);
+
 void	close_all_redirs(t_ast *node)
 {
 	close_redirs(&node->cmd);
@@ -64,7 +68,7 @@ int	waitpids(t_ast *node, int *pids, int cmd_count)
 			if (WIFEXITED(status))
 				status = WEXITSTATUS(status);
 		}
-		node->data->exit_status = status;
+		node->shell->exit_status = status;
 	}
 	return (status);
 }

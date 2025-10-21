@@ -12,6 +12,10 @@
 
 #include "../../../incl/minishell.h"
 
+void	close_all_redirs(t_ast *node);
+int		make_redirs(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+
 static int	check_flag(const char *str)
 {
 	int	i;

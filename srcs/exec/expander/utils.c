@@ -6,11 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/09 15:21:42 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:00:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+char	*filter_spaces(t_ast *node, char *entry);
+int		contains_contig_spaces(const char *str);
 
 int	get_name_len(const char *str)
 {
@@ -29,9 +32,9 @@ int	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 	int		len;
 	int		i;
 
-	exit_status = ft_itoa(node->data->exit_status);
+	exit_status = ft_itoa(node->shell->exit_status);
 	if (!exit_status)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	i = 0;
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
@@ -40,7 +43,7 @@ int	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 	if (!new)
 	{
 		free(exit_status);
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	}
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, exit_status, len);
@@ -62,12 +65,12 @@ int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
 	name_len = get_name_len(cmd->args[index] + i);
-	if (cmd->exp[index] == 1 && contains_contig_spaces(entry))
+	if (contains_contig_spaces(entry))
 		entry = filter_spaces(node, entry);
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
@@ -76,23 +79,14 @@ int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	return (0);
 }
 
-static int	remove_arg(t_cmd *cmd, int index)
+int	remove_arg(t_cmd *cmd, int i)
 {
-	int	i;
-
-	free(cmd->args[index]);
-	i = index;
-	while (i < cmd->arg_count)
+	free(cmd->args[i]);
+	while (cmd->args[i])
 	{
 		cmd->args[i] = cmd->args[i + 1];
-		if (i + 1 < cmd->arg_count)
-		{
-			cmd->exp[i] = cmd->exp[i + 1];
-			cmd->cat[i] = cmd->cat[i + 1];
-		}
 		i++;
 	}
-	cmd->arg_count--;
 	return (1);
 }
 
@@ -107,13 +101,12 @@ int	remove_var(t_ast *node, t_cmd *cmd, int index)
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
 	name_len = get_name_len(cmd->args[index] + i);
-	if (cmd->exp[index] == 1 && i == 0
-		&& (int) ft_strlen(cmd->args[index]) == name_len)
+	if (i == 0 && (int) ft_strlen(cmd->args[index]) == name_len)
 		return (remove_arg(cmd, index));
 	len = ft_strlen(cmd->args[index]) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
 	free(cmd->args[index]);

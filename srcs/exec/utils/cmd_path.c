@@ -6,11 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:42:40 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:35:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:27:16 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
+
+void	invalid_name(t_cmd *cmd, char *name);
+int		is_lone_redir_node(t_ast *node);
 
 //	This function is only called when trying to update _= env var.
 //	Thus, the i given is the index of the _ env var entry in our envp.
@@ -58,16 +61,16 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path)
 	cmd->path = ft_strdup(path);
 	free(path);
 	if (!cmd->path)
-		malloc_error(node, node->data, NULL);
-	update_(node->data, cmd->path);
+		malloc_error(node, node->shell, NULL);
+	update_(node->shell, cmd->path);
 }
 
 static void	absolute_path(t_ast *node, t_cmd *cmd, char *path)
 {
 	cmd->path = ft_strdup(path);
 	if (!cmd->path)
-		malloc_error(node, node->data, NULL);
-	update_(node->data, cmd->path);
+		malloc_error(node, node->shell, NULL);
+	update_(node->shell, cmd->path);
 }
 
 void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
@@ -91,7 +94,7 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 		free(full_path);
 	}
 	cmd->path = NULL;
-	if (!is_lone_redir(node))
+	if (!is_lone_redir_node(node))
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(name, 2);

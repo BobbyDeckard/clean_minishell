@@ -12,6 +12,11 @@
 
 #include "../../../incl/minishell.h"
 
+void	cleanup(t_ast *node);
+void	close_all_redirs(t_ast *node);
+int		make_redirs(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+
 static void	check_digits(t_ast *node, char *arg)
 {
 	int	i;
@@ -72,7 +77,7 @@ int	exit_bltn(t_ast *node, int in_pipe)
 	}
 	else
 	{
-		n = node->data->exit_status % 256;
+		n = node->shell->exit_status % 256;
 		cleanup(node);
 		exit(n);
 	}

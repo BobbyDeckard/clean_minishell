@@ -6,12 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:18:20 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 16:00:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 13:51:24 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
+/*
 static void	cat_args(t_ast *node, t_cmd *cmd, int i)
 {
 	char	*new;
@@ -22,7 +23,7 @@ static void	cat_args(t_ast *node, t_cmd *cmd, int i)
 	len = ft_strlen(cmd->args[i - 1]) + ft_strlen(cmd->args[i]) + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(new, cmd->args[i - 1], len);
 	ft_strlcat(new, cmd->args[i], len);
 	free(cmd->args[i - 1]);
@@ -40,7 +41,36 @@ static void	cat_args(t_ast *node, t_cmd *cmd, int i)
 	}
 	cmd->arg_count--;
 }
+*/
 
+int		remove_arg(t_cmd *cmd, int i);
+
+int	is_whitespace(const char *str)
+{
+	if (ft_strlen(str) != 1)
+		return (0);
+	else if (*str >= 9 && *str <= 13)
+		return (1);
+	else if (*str == 32)
+		return (1);
+	return (0);
+}
+
+void	cat_args(t_ast *node, t_cmd *cmd, int i)
+{
+	char	*new;
+	int		len;
+
+	len = ft_strlen(cmd->args[i]) + ft_strlen(cmd->args[i] + 1) + 1;
+	new = (char *) malloc(len * sizeof(char));
+	if (!new)
+		malloc_error(node, node->shell, NULL);
+	ft_strlcpy(new, cmd->args[i], len);
+	ft_strlcat(new, cmd->args[i + 1], len);
+	remove_arg(cmd, i + 1);
+}
+
+/*
 void	cat_words(t_ast *node, t_cmd *cmd)
 {
 	int	i;
@@ -52,3 +82,4 @@ void	cat_words(t_ast *node, t_cmd *cmd)
 			cat_args(node, cmd, i--);
 	}
 }
+*/

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 15:29:38 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 15:55:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 16:38:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,19 @@ static void	alloc_redir_args(t_shell *shell, t_ast *node, int count, int i)
 	node->children[i]->rdr.args = args;
 }
 
+static t_r_type	convert_rdr_type(t_n_type type)
+{
+	if (type == NODE_HEREDOC)
+		return (RDR_HEREDOC_EXP);
+	else if (type == NODE_REDIR_APPEND)
+		return (RDR_APPEND);
+	else if (type == NODE_REDIR_OUT)
+		return (RDR_OUT);
+	else if (type == NODE_REDIR_IN)
+		return (RDR_IN);
+	return (-1);
+}
+
 void	print_node_type(t_n_type type);
 int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 {
@@ -86,6 +99,7 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 		clean_ast(node);
 		malloc_error(shell->root, shell, shell->tokens);
 	}
+	node->rdr.type = convert_rdr_type(type);
 	alloc_redir_args(shell, node, count, i);
 //	printf("About to return i = %d\n", i);
 	return (i);

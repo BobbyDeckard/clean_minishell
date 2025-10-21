@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/10 16:38:38 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/21 16:52:24 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_PATH = srcs/
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
 			 $(DEBUG) \
+			 $(EXEC) \
 			 $(PARS) \
 			 $(PTHS) \
 			 $(SIGS) \
@@ -39,6 +40,65 @@ OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 
 # SOURCES SUBDIRECTORIES
 
+# EXEC
+EXEC = $(addprefix exec/, $(EXEC_FILES))
+EXEC_FILES = exec.c \
+			 exec2.c \
+			 $(BLTN) \
+			 $(XPDR) \
+			 $(HRDC) \
+			 $(PIPE) \
+			 $(RDRS) \
+			 $(XUTL)
+
+BLTN = $(addprefix builtins/, $(BLTN_FILES))
+BLTN_FILES = builtins.c \
+			 cd.c \
+			 cd_utils.c \
+			 echo.c \
+			 exit.c \
+			 export.c \
+			 export_expander.c \
+			 export_utils.c \
+			 export_utils2.c \
+			 export_var.c \
+			 unset.c \
+			 unset_utils.c
+
+XPDR = $(addprefix expander/, $(XPDR_FILES))
+XPDR_FILES = cat_words.c \
+			 double_quotes.c \
+			 expander.c \
+			 quotes.c \
+			 spaces.c \
+			 utils.c
+
+HRDC = $(addprefix heredoc/, $(HRDC_FILES))
+HRDC_FILES = heredoc.c \
+			 heredoc_expander.c \
+			 heredoc_expander_utils.c \
+			 heredoc_parser.c \
+			 heredoc_parser_utils.c \
+			 heredoc_utils.c
+
+PIPE = $(addprefix pipe/, $(PIPE_FILES))
+PIPE_FILES = link_pipes.c \
+			 pipe.c \
+			 pipe_utils.c \
+			 pipe_utils2.c
+
+RDRS = $(addprefix redirs/, $(RDRS_FILES))
+RDRS_FILES = redir_double_expander.c \
+			 redir_expander.c \
+			 redir_expander_utils.c \
+			 redirs.c \
+			 redirs_utils.c
+
+XUTL = $(addprefix utils/, $(XUTL_FILES))
+XUTL_FILES = cmd_path.c \
+			 envp_transmission.c \
+			 utils.c
+
 # PARSING
 PARS = $(addprefix parsing/, $(PARS_FILES))
 PARS_FILES = parsing.c \
@@ -46,9 +106,11 @@ PARS_FILES = parsing.c \
 			 $(SHLL) \
 			 $(SNTX) \
 			 $(TKNS)
+
 AST = $(addprefix ast/, $(AST_FILES))
 AST_FILES = ast.c \
 			ast_utils.c \
+			command_scope.c \
 			commands.c \
 			commands_utils.c \
 			lone_redirs.c \
@@ -57,11 +119,13 @@ AST_FILES = ast.c \
 			pipes.c \
 			redirs.c \
 			redirs_utils.c
+
 SHLL = $(addprefix shell/, $(SHLL_FILES))
 SHLL_FILES = copy_env.c \
 			 create_env.c \
 			 env_errors.c \
 			 shell.c
+
 SNTX = $(addprefix syntax/, $(SNTX_FILES))
 SNTX_FILES = operators.c \
 			 parentheses.c \
@@ -69,6 +133,7 @@ SNTX_FILES = operators.c \
 			 pipes.c \
 			 quotes.c \
 			 redirs.c
+
 TKNS = $(addprefix tokenization/, $(TKNS_FILES))
 TKNS_FILES = char_checks.c \
 			 errors.c \
@@ -91,7 +156,8 @@ SIGS_FILES = setup_execution.c \
 
 # UTILS
 UTLS = $(addprefix utils/, $(UTLS_FILES))
-UTLS_FILES = cleanup.c \
+UTLS_FILES = char_arr.c \
+			 cleanup.c \
 			 errors.c \
 			 read_command.c \
 			 utils.c

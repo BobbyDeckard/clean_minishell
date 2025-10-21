@@ -12,6 +12,8 @@
 
 #include "../../../incl/minishell.h"
 
+int		get_name_len(const char *str);
+
 char	*get_name_bis(t_ast *node, char *line)
 {
 	char	*name;
@@ -27,7 +29,7 @@ char	*get_name_bis(t_ast *node, char *line)
 	if (!name)
 	{
 		free(line);
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	}
 	i = 0;
 	while (line[++i] && (ft_isalnum(line[i]) || line[i] == '_'))
@@ -49,5 +51,5 @@ int	dol_pos(const char *str)
 void	expand_heredoc_error(t_ast *node, char *line)
 {
 	free(line);
-	malloc_error(node, node->data, NULL);
+	malloc_error(node, node->shell, NULL);
 }

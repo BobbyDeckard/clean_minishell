@@ -6,12 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/06 15:53:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 09:57:14 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
-#include <unistd.h>
+
+void	redir_expander(t_ast *node, t_rdr *rdr);
+void	unlink_heredoc(t_ast *node);
 
 void	make_file_name(t_ast *node)
 {
@@ -19,19 +21,19 @@ void	make_file_name(t_ast *node)
 	int		len;
 	int		i;
 
-	expander(node, &node->cmd);
+	redir_expander(node, &node->rdr);
 	len = 1;
 	i = -1;
-	while (node->cmd.args[++i])
-		len += ft_strlen(node->cmd.args[i]);
+	while (node->rdr.args[++i])
+		len += ft_strlen(node->rdr.args[i]);
 	file = (char *) malloc(len * sizeof(char));
 	if (!file)
-		malloc_error(node, node->data, NULL);
-	ft_strlcpy(file, node->cmd.args[0], len);
+		malloc_error(node, node->shell, NULL);
+	ft_strlcpy(file, node->rdr.args[0], len);
 	i = 0;
-	while (node->cmd.args[++i])
-		ft_strlcat(file, node->cmd.args[i], len);
-	node->file = file;
+	while (node->rdr.args[++i])
+		ft_strlcat(file, node->rdr.args[i], len);
+	node->rdr.file = file;
 }
 
 void	close_redirs(t_cmd *cmd)

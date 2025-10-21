@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 16:27:45 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/04 19:18:23 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/20 21:05:24 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	check_and_open(char *name, t_ast *node, t_cmd *cmd)
 	if (access(name, F_OK) == 0)
 		return (0);
 	cmd->fd_in = open(name, O_WRONLY | O_CREAT, 0644);
-	node->file = name;
+	node->rdr.file = name;
 	if (cmd->fd_in < 0)
-		perror(node->file);
+		perror(node->rdr.file);
 	return (1);
 }
 
@@ -53,7 +53,7 @@ int	open_temp(t_ast *node, t_cmd *cmd)
 
 	name = (char *) malloc(7 * sizeof(char));
 	if (!name)
-		malloc_error(node, node->data, NULL);
+		malloc_error(node, node->shell, NULL);
 	ft_strlcpy(name, "temp", 7);
 	name[4] = 0;
 	name[5] = 0;
@@ -68,17 +68,17 @@ char	*copy_delimiter(t_ast *node)
 	char	*del;
 	int		len;
 
-	len = ft_strlen(node->file) + 1;
+	len = ft_strlen(node->rdr.file) + 1;
 	del = (char *) malloc(len * sizeof(char));
 	if (!del)
-		malloc_error(node, node->data, NULL);
-	ft_strlcpy(del, node->file, len);
+		malloc_error(node, node->shell, NULL);
+	ft_strlcpy(del, node->rdr.file, len);
 	return (del);
 }
 
 void	unlink_heredoc(t_ast *node)
 {
-	t_node_type	type;
+	t_n_type	type;
 	int			i;
 
 	if (!node->children)
@@ -87,7 +87,7 @@ void	unlink_heredoc(t_ast *node)
 	while (node->children[++i])
 	{
 		type = node->children[i]->type;
-		if (type == NODE_HEREDOC || type == NODE_HEREDOC_EXP)
-			unlink(node->children[i]->file);
+		if (type == NODE_HEREDOC)
+			unlink(node->children[i]->rdr.file);
 	}
 }

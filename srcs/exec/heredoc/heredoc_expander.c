@@ -12,6 +12,12 @@
 
 #include "../../../incl/minishell.h"
 
+char	*get_name_bis(t_ast *node, char *line);
+void	expand_heredoc_error(t_ast *node, char *line);
+int		contains_dol(const char *str);
+int		dol_pos(const char *str);
+int		get_name_len(const char *str);
+
 static char	*expand_exit_status(t_ast *node, char *line)
 {
 	char	*exit_status;
@@ -19,7 +25,7 @@ static char	*expand_exit_status(t_ast *node, char *line)
 	int		len;
 	int		i;
 
-	exit_status = ft_itoa(node->data->exit_status);
+	exit_status = ft_itoa(node->shell->exit_status);
 	if (!exit_status)
 		expand_heredoc_error(node, line);
 	i = dol_pos(line);

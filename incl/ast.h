@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:16:09 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 07:45:52 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 09:53:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_n_type
 
 typedef enum e_r_type
 {
+	RDR_HEREDOC_EXP,
 	RDR_HEREDOC,
 	RDR_APPEND,
 	RDR_OUT,
