@@ -1,3 +1,14 @@
-o	Check export's parsing with quotes (both single and double quotes)
-o	Concatenation of contiguous args is not working
+TODO
+o	echo $"USER" behaves strangely
+o	Check exit issue with exit [numeric] [alphabetic]:
+	=> [alphabetic] is printed in front of the prompt..?
+o	Dive into heredoc problems
+	=> To begin with, make it so that the delimiter works...
+o	Battery testing
+o	Chase those leaks (and conditional moves on unset variables ??)
+
+DONE
+x	Check export's parsing with quotes (both single and double quotes)
+x	Concatenation of contiguous args is not working
 	=> Which is obviously why export is not working
+x	Weird stuff: echo hey  there (only removes one space)
