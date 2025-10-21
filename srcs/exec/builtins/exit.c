@@ -52,7 +52,6 @@ static void	check_length(t_ast *node, char *arg)
 static int	too_many_args(t_ast *node, int in_pipe)
 {
 	ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-	ft_putstr_fd(node->cmd.args[2], 2);
 	if (!in_pipe)
 		close_all_redirs(node);
 	return (set_exit_status(node, 1));
