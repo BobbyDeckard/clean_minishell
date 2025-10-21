@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:58:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:55:39 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:59:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	find_op_precedence(t_token **list, int start, int end)
 //		printf("Checking token at index %d\n", start);
 		if (!current)
 			break ;
-		else if (current->content)
+//		else if (current->content)
 //			printf("Current has content '%s'\n", current->content);
-		else
+//		else
 //			printf("Current has no content\n");
-		if (current->type == PAREN_OPEN)
+		else if (current->type == PAREN_OPEN)
 		{
 			lvl++;
 //			printf("Found paren_open token, lvl = %d\n",lvl);
