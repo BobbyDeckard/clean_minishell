@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 17:07:51 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:46:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 	}
 }
 
+void	print_tree(t_ast *ast);
 void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
@@ -109,6 +110,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 		else if (contains_dol(cmd->args[i]))
 			expand(node, cmd, node->shell->envp, i);
 	}
+	printf("Tree before cat and space management:\n");
+	print_tree(node->root);
 	i = -1;
 	while (cmd->args[++i])
 	{
@@ -118,4 +121,6 @@ void	expander(t_ast *node, t_cmd *cmd)
 		else if (is_whitespace(cmd->args[i]))
 			remove_arg(cmd, i);
 	}
+	printf("Tree after cat and space management:\n");
+	print_tree(node->root);
 }

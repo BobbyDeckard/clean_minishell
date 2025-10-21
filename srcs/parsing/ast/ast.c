@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:15:22 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 15:33:54 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:51:34 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_ast	*parse_non_op(t_shell *shell, t_token **list, int start, int end)
 {
 	t_token	*token;
 
-	printf("In parse_list_portion() with start = %d and end = %d\n", start, end);
+//	printf("In parse_list_portion() with start = %d and end = %d\n", start, end);
 	token = get_token_at_index(list, start);
 	while (token && token->type == WHITESPACE)
 	{
@@ -54,13 +54,13 @@ t_ast	*parse_sequence(t_shell *shell, t_token **list, int start, int end)
 {
 	int	operator;
 
-	printf("In parse_sequence with start = %d and end = %d\n", start, end);
+//	printf("In parse_sequence with start = %d and end = %d\n", start, end);
 	if (start > end)
 		return (NULL);
 	else if (paren_pair(list, start, end))
 			return (parse_sequence(shell, list, start + 1, end - 1));	// seems excessively speficic..?
 	operator = find_op_precedence(list, start, end);
-	printf("Found operator at position %d\n", operator);
+//	printf("Found operator at position %d\n", operator);
 	if (operator == -1)
 		return (parse_non_op(shell, list, start, end));
 	return (parse_operator(shell, start, end, operator));

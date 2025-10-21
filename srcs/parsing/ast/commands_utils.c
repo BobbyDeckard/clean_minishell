@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:28:37 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/14 16:51:12 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:50:44 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 		if (!node->cmd.args[i])
 			return (1);
 		ft_strlcpy(node->cmd.args[i], current->content, len);
-		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
+//		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
 	{
@@ -51,7 +51,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 			ft_strlcpy(node->cmd.args[i], "'", 2);
 		else
 			ft_strlcpy(node->cmd.args[i], "\"", 2);
-		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
+//		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	return (0);
 }
@@ -70,20 +70,20 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 
 	i = -1;
 	current = get_token_at_index(shell->tokens, start);
-	printf("parse_args() fetched token at index %d with content '%s'\n", start, current->content);
+//	printf("parse_args() fetched token at index %d with content '%s'\n", start, current->content);
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
 		{
-			printf("Found redir token, start = %d\n", start);
+//			printf("Found redir token, start = %d\n", start);
 			current = skip_redir(shell->tokens, &start, end);
-			printf("Skipped redir, start = %d\n", start);
-			if (current && current->content)
-				printf("Current has content '%s'\n", current->content);
-			else if (current)
-				printf("Current has no content\n");
-			else
-				printf("No current\n");
+//			printf("Skipped redir, start = %d\n", start);
+//			if (current && current->content)
+//				printf("Current has content '%s'\n", current->content);
+//			else if (current)
+//				printf("Current has no content\n");
+//			else
+//				printf("No current\n");
 		}
 		else if (is_arg_token(current->type))
 		{

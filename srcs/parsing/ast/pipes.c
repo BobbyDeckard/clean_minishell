@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:22:30 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 11:16:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:49:40 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	count_commands(t_token **list, int start)
 	t_token	*current;
 	int		count;
 
-	printf("In count_commands()\n");
+//	printf("In count_commands()\n");
 	current = get_token_at_index(list, start);
 	if (!current)
 		return (0);
@@ -71,7 +71,7 @@ static t_ast	*create_pipe_node(t_shell *shell, int count)
 	t_ast	*node;
 	int		i;
 
-	printf("In create_pipe_node()\n");
+//	printf("In create_pipe_node()\n");
 	node = create_node(shell, NODE_PIPE);
 	if (!node)
 		malloc_error(shell->root, shell, shell->tokens);
@@ -90,7 +90,7 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 	t_token	*current;
 	int		end;
 	
-	printf("In parse_pipe_command() with i = %d and start = %d\n", i, start);
+//	printf("In parse_pipe_command() with i = %d and start = %d\n", i, start);
 	current = get_token_at_index(shell->tokens, start);
 	if (!current)
 		return (-1);
@@ -129,9 +129,9 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 	int		count;
 	int		i;
 
-	printf("In parse_pipe() with start = %d and end = %d\n", start, end);
+//	printf("In parse_pipe() with start = %d and end = %d\n", start, end);
 	count = count_commands(list, start) + 1;
-	printf("Counted %d commands\n", count - 1);
+//	printf("Counted %d commands\n", count - 1);
 	if (!count)
 		return (NULL);	// Ah ?
 	node = create_pipe_node(shell, count);
@@ -140,7 +140,7 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 	while (++i + 1 < count && start <= end)
 	{
 		start = parse_pipe_command(shell, node, i, start);
-		printf("start after parse_pipe_command(): %d\n", start);
+//		printf("start after parse_pipe_command(): %d\n", start);
 		if (start == -1)
 			parse_pipe_error(shell, node);
 	}

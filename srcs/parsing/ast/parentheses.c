@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:33:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/14 14:41:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 17:48:00 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ t_ast	*parse_parentheses(t_shell *shell, t_token **list, int start, int end)
 	t_ast	*node;
 	int		closing;
 
-	printf("In parse_parentheses()\n");
+//	printf("In parse_parentheses()\n");
 	node = NULL;
 	closing = find_matching_paren(list, start, end);
-	printf("Found closing parenthesis to be %d\n", closing);
+//	printf("Found closing parenthesis to be %d\n", closing);
 	if (closing > start && closing <= end)
 		node = parse_sequence(shell, list, ++start, --closing);
 	return (node);
