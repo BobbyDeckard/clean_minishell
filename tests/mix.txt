@@ -1,0 +1,14 @@
+(cat file | grep something) && echo ok || echo fail
+cat file | grep something && echo ok > out.txt
+cat file | grep something || echo "error: $USER" >> log.txt
+(cat missing | grep x) && echo ok || echo fail
+(cat file && echo ok) | grep o
+cat file | (grep something && echo ok) || echo fail
+cat file | grep "$USER" && echo found || echo notfound
+(cat file | grep something) > result.txt
+(cat file | grep something) > result.txt 2> err.txt
+cat < in.txt | grep "$USER" | sort > "$HOME"/out.txt
+echo "$USER" | cat | grep "$USER" > result.txt
+(cat file && echo ok) || (grep x file && echo found)
+(cat file && echo "$USER ok") || echo "$USER fail"
+echo "$USER" | grep "$HOME" || echo "no match"

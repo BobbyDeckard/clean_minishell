@@ -1,0 +1,13 @@
+(echo hello)
+(echo hello && echo world)
+(echo "$USER" && (echo one || echo two))
+(echo "a" && (echo "b" || (echo "c" && echo "d")))
+(((echo deep)))
+(cat file && echo ok) || (echo fail)
+(echo hello && echo world) | cat
+(cat file) && (echo done)
+(cat file && (echo ok && (echo deep)))
+(echo "$USER" && echo "$HOME")
+(echo "$USER" || echo "$HOME")
+(echo one && echo two) || (echo three && echo four)
+(echo start && (echo mid && (echo end)))

@@ -1,0 +1,17 @@
+true && echo ok
+false && echo ok
+true || echo fail
+false || echo fail
+echo a && echo b && echo c
+echo a || echo b || echo c
+cat file && echo ok
+cat file || echo fail
+cat missing && echo ok || echo fail
+cat file && echo ok || echo fail
+(cat file && echo ok) || echo fail
+(cat missing && echo ok) || echo fail
+(cat file && (echo ok || echo maybe)) || echo fail
+cat file && (echo ok || echo fail)
+echo ok && (echo "$USER" || echo "$HOME")
+echo "$USER" && echo "$HOME"
+echo "$USER" || echo "$HOME"

@@ -1,0 +1,19 @@
+echo "a"b"c"
+echo 'a'b'c'
+echo "a"'b'"c"
+echo "a""b""c"
+echo 'a''b''c'
+echo "hello""world"
+echo "hello"'world'
+echo 'hello'"world"
+echo "a" "b" "c"
+echo "a"" b"" c"
+echo 'a b'" c"
+echo "one"'two'"three"
+echo "mix"'ed'"quotes'
+echo "" "empty" ""
+echo "double 'inside' quotes"
+echo 'single "inside" quotes'
+echo "text 'quoted part' more"
+echo 'text "quoted part" more'
+
