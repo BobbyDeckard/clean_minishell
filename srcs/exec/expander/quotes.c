@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:45:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 19:35:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,28 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	int		end;
 	int		i;
 
-	expand_inside_double(node, cmd, start);
+	printf("\nIn handle_double_quotes\n");
 	len = 0;
 	end = start;
+	expand_inside_double(node, cmd, start);
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "\"", 2))
 		len += ft_strlen(cmd->args[end]);
+	remove_arg(cmd, start);
 	if (!len)
-	{
 		remove_arg(cmd, start);
-		remove_arg(cmd, start);
-	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
 	i = start;
 	while (++i < end)
 	{
-		ft_strlcat(new, cmd->args[start + 1], len);
-		remove_arg(cmd, start + 1);
+		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
+		ft_strlcat(new, cmd->args[start], len);
+		printf("New argument after strlcat: '%s'\n", new);
+		remove_arg(cmd, start);
 	}
+	printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
 	free(cmd->args[start]);
 	cmd->args[start] = new;
+	printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
 }

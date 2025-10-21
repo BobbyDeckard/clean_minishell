@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:28:37 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:50:44 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:46:43 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 {
 	int	len;
 
+	printf("In parse_arg()\n");
 	if (current->content)
 	{
+		printf("Current has content '%s'\n", current->content);
 		len = ft_strlen(current->content) + 1;
 		node->cmd.args[i] = (char *) malloc(len * sizeof(char));
 		if (!node->cmd.args[i])
@@ -42,17 +44,17 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 		ft_strlcpy(node->cmd.args[i], current->content, len);
 //		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
-	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
-	{
-		node->cmd.args[i] = (char *) malloc(2 * sizeof(char));
-		if (!node->cmd.args[i])
-			return (1);
-		if (current->type == SINGLE_QUOTE)
-			ft_strlcpy(node->cmd.args[i], "'", 2);
-		else
-			ft_strlcpy(node->cmd.args[i], "\"", 2);
+//	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
+//	{
+//		node->cmd.args[i] = (char *) malloc(2 * sizeof(char));
+//		if (!node->cmd.args[i])
+//			return (1);
+//		if (current->type == SINGLE_QUOTE)
+//			ft_strlcpy(node->cmd.args[i], "'", 2);
+//		else
+//			ft_strlcpy(node->cmd.args[i], "\"", 2);
 //		printf("node->cmd.args[%d]: '%s'\n", i, node->cmd.args[i]);
-	}
+//	}
 	return (0);
 }
 

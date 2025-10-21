@@ -6,13 +6,13 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/21 16:52:24 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/21 18:06:52 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -g
 LFLAGS = -lreadline
 RM = rm
 RMFLAGS = -f

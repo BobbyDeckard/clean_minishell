@@ -6,14 +6,15 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 13:40:50 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/14 10:30:08 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/21 18:35:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
 t_token	*tokenize_and(char **command, t_token *token);
-t_token	*tokenize_double_quote(char **command, t_token *token);
+t_token	*tokenize_double_quote(t_shell *shell, char **command, t_token **list,
+t_token *token);
 t_token	*tokenize_heredoc(char **command, t_token *token);
 t_token	*tokenize_or(char **command, t_token *token);
 t_token	*tokenize_paren_close(char **command, t_token *token);
@@ -22,7 +23,8 @@ t_token	*tokenize_pipe(char **command, t_token *token);
 t_token	*tokenize_redir_append(char **command, t_token *token);
 t_token	*tokenize_redir_in(char **command, t_token *token);
 t_token	*tokenize_redir_out(char **command, t_token *token);
-t_token	*tokenize_single_quote(char **command, t_token *token);
+t_token	*tokenize_single_quote(t_shell *shell, char **command, t_token **list,
+t_token *token);
 t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list, t_token *token);
 t_token	*tokenize_word(t_shell *shell, char **command, t_token **list, t_token *token);
 
@@ -43,16 +45,25 @@ static void	link_token(t_token **list, t_token *token)
 {
 	t_token	*current;
 
+	printf("\nIn link_token()\n");
 	if (!*list)
 	{
+		printf("Setting initial token: %p\n", token);
 		*list = token;
 		return ;
 	}
+	printf("Token list: %p\n", list);
 	current = *list;
+	printf("Initial token: %p\n", current);
 	while (current->next)
+	{
+		printf("Current->next: %p\n", current->next);
 		current = current->next;
+	}
 	current->next = token;
+	printf("Set %p->next to %p\n", current, token);
 	token->prev = current;
+	printf("Set %p->prev to %p\n", token, current);
 }
 
 static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_token *token)
@@ -68,9 +79,9 @@ static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_tok
 	else if (**command == ')')
 		return (tokenize_paren_close(command, token));
 	else if (**command == '"')
-		return (tokenize_double_quote(command, token));
+		return (tokenize_double_quote(shell, command, list, token));
 	else if (**command == '\'')
-		return (tokenize_single_quote(command, token));
+		return (tokenize_single_quote(shell, command, list, token));
 	else if (**command == '<' && *(*command + 1) && *(*command + 1) == '<')
 		return (tokenize_heredoc(command, token));
 	else if (**command == '<')
@@ -90,6 +101,8 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 
 //	printf("In extract_token() with remaining command '%s'\n", *command);
 	new = init_token(shell, list);
+	printf("\nNew token: %p\n", new);
+	printf("\tRemaining command: '%s'\n", *command);
 	new = make_token(shell, command, list, new);
 	if (new)
 		link_token(list, new);
@@ -101,6 +114,7 @@ t_token	**tokenize_command(t_shell *shell, char *command)
 	t_token		**tokens;
 	
 	tokens = (t_token **) malloc(sizeof(t_token *));
+	printf("Token list: %p\n", tokens);
 	if (!tokens)
 		malloc_error(NULL, shell, NULL);
 	*tokens = NULL;
