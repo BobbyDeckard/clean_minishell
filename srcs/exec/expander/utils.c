@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 15:39:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:57:48 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	remove_arg(t_cmd *cmd, int i)
 		printf("New arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		i++;
 	}
-	printf("Last arg = %d: '%s'\n", i - 1, cmd->args[i - 1]);
+//	printf("Last arg = %d: '%s'\n", i - 1, cmd->args[i - 1]);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 16:33:38 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 16:51:35 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	int		end;
 	int		i;
 
-	printf("\nIn handle_double_quotes\n");
+//	printf("\nIn handle_double_quotes\n");
 	len = 0;
 	end = start;
 	expand_inside_double(node, cmd, start);
@@ -77,9 +77,9 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	i = start;
 	while (++i < end)
 	{
-		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
+//		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
 		ft_strlcat(new, cmd->args[start], len);
-		printf("New argument after strlcat: '%s'\n", new);
+//		printf("New argument after strlcat: '%s'\n", new);
 		remove_arg(cmd, start);
 	}
 	//	This condition prevents an empty string to be added as argument,
@@ -90,9 +90,9 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
 		free(cmd->args[start]);
 		cmd->args[start] = new;
-		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
+//		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
 	}
 	else
 		free(new);
-	printf("End of handle_double_quotes\n\n");
+//	printf("End of handle_double_quotes\n\n");
 }
