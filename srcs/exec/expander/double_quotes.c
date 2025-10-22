@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:40:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:43:10 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:12:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_name(t_ast *node, const char *str);
 int		contains_dol(const char *str);
 int		get_name_len(const char *str);
 int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
-int		remove_var(t_ast *node, t_cmd *cmd, int *index);
+int		remove_var(t_ast *node, t_cmd *cmd, int index);
 
 static int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 {
@@ -63,7 +63,7 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 		}
 	}
 	free(name);
-	return (remove_var(node, cmd, &index));
+	return (remove_var(node, cmd, index));
 }
 
 void	double_expand(t_ast *node, t_cmd *cmd, char **envp, int index)

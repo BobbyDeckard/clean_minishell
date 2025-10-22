@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:18:46 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 20:08:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 15:02:08 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	*get_name(t_ast *node, const char *str)
 	return (name);
 }
 
+/*
 static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int *index)
 {
 	char	*name;
@@ -143,3 +144,4 @@ void	expander(t_ast *node, t_cmd *cmd)
 	while (cmd->args[++i])
 		printf("arg[%d]:\t'%s'\t(%p)\n", i, cmd->args[i], cmd->args[i]);
 }
+*/

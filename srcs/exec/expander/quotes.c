@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 20:01:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:14:42 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	//	This condition prevents an empty string to be added as argument,
 	//	but we maybe want to still get an empty string for example for
 	//	exit "" ?
-	if (*new)
-	{
+//	if (*new)
+//	{
 //		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
-		free(cmd->args[start]);
-		cmd->args[start] = new;
+	free(cmd->args[start]);
+	cmd->args[start] = new;
 //		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
-	}
-	else
-		free(new);
+//	}
+//	else
+//		free(new);
 }

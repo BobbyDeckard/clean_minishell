@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/21 18:06:52 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/22 15:02:32 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ XPDR = $(addprefix expander/, $(XPDR_FILES))
 XPDR_FILES = cat_words.c \
 			 double_quotes.c \
 			 expander.c \
+			 new_expander.c \
 			 quotes.c \
 			 spaces.c \
 			 utils.c
