@@ -73,7 +73,10 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);
 	if (!len)
+	{
 		remove_arg(cmd, start);
+		return ;
+	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
