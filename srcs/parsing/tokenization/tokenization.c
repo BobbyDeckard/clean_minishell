@@ -90,7 +90,7 @@ static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_tok
 		return (tokenize_redir_append(command, token));
 	else if (**command == '>')
 		return (tokenize_redir_out(command, token));
-	else if (**command == ' ' || **command == 9)
+	else if (**command == ' ' || (**command >= 9 && **command <= 13))
 		return (tokenize_whitespace(shell, command, list, token));
 	return (tokenize_word(shell, command, list, token));
 }
