@@ -81,6 +81,7 @@ static char	*cat_arg(t_ast *node, char *str, char *arg)
 	ft_strlcat(new, arg, len);
 	if (str)
 		free(str);
+	free(arg);
 	return (new);
 }
 
@@ -134,11 +135,11 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-//	printf("Args before expansion:\n");
-//	i = -1;
-//	while (cmd->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-//	printf("\n");
+	printf("Args before expansion:\n");
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{

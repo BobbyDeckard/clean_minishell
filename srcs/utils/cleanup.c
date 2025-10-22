@@ -63,13 +63,13 @@ static void	clean_args(char **args)
 {
 	int	i;
 
-//	printf("\nIn clean_args\n");
+	printf("\nIn clean_args\n");
 	i = -1;
 	while (args[++i])
 	{
 		if (args[i])
 		{
-//			printf("About to free %p\n", args[i]);
+			printf("About to free %p\n", args[i]);
 			free(args[i]);
 		}
 	}
