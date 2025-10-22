@@ -1,4 +1,7 @@
 TODO
+o	Apply expander changes to all variations
+o	get_name_len gives us 1 too much ?
+	=> only when first getting name ?
 o	Be absolutely sure the second stage parsing in expander works properly!
 	x	echo "$USR" still has extra arg ?
 	x	echo $"USER" works ?
