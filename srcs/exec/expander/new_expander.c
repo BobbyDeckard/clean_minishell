@@ -97,8 +97,11 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 	char	*new;
 
 	new = NULL;
-	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
+	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && ((cmd->args[i + 1] && is_whitespace(cmd->args[i + 1])) || !cmd->args[i + 1]))
+	{
+		printf("Skipping new arg making\n");
 		return (cmd->args[i]);
+	}
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
 	{
 		if (!ft_strncmp(cmd->args[i], "'", 2))
@@ -111,7 +114,9 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 				continue ;
 		}
 		new = cat_arg(node, new, cmd->args[i]);
+		printf("In make_new_arg, about to remove arg[%d] after making new: '%s'\n", i, new);
 		remove_arg(cmd, i);
+		printf("Arg successfully removed\n");
 	}
 	return (new);
 }
