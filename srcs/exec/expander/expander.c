@@ -66,8 +66,8 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int *index)
 	int		j;
 
 	name = get_name(node, cmd->args[*index]);
-	printf("\nIn expand_cat() with arg: '%s'\n", cmd->args[*index]);
-	printf("Found name to be '%s'\n", name);
+//	printf("\nIn expand_cat() with arg: '%s'\n", cmd->args[*index]);
+//	printf("Found name to be '%s'\n", name);
 	if (!name)
 		return (handle_exit_status(node, cmd, *index));
 	i = -1;
@@ -117,6 +117,7 @@ void	expander(t_ast *node, t_cmd *cmd)
 			handle_double_quotes(node, cmd, i);
 		else if (contains_dol(cmd->args[i]))
 			expand(node, cmd, node->shell->envp, &i);
+		printf("Same arg (%d) at end of loop: '%s'\n", i, cmd->args[i]);
 	}
 	i = -1;
 	while (cmd->args[++i])
