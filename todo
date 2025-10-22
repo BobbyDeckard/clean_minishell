@@ -1,4 +1,9 @@
 TODO
+o	Be absolutely sure the second stage parsing in expander works properly!
+	x	echo "$USR" still has extra arg ?
+	x	echo $"USER" works ?
+o	Check how bash behaves with different types of contiguous whitespaces
+	=> We currently only filter regular spaces (=32)
 o	echo $"USER" behaves strangely
 	=> bash 3.2 on MacOS only prints USER, check on school's computers
 o	Dive into heredoc problems
