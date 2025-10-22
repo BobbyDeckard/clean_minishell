@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:36:29 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 15:19:16 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:11:41 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ static void	clean_args(char **args)
 {
 	int	i;
 
-	printf("\nIn clean_args\n");
+//	printf("\nIn clean_args\n");
 	i = -1;
 	while (args[++i])
 	{
 		if (args[i])
 		{
-			printf("About to free %p\n", args[i]);
+//			printf("About to free %p\n", args[i]);
 			free(args[i]);
 		}
 	}

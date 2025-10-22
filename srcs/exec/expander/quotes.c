@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 16:51:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:10:04 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	//	exit "" ?
 	if (*new)
 	{
-		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
+//		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
 		free(cmd->args[start]);
 		cmd->args[start] = new;
 //		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:30:44 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 16:57:48 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:11:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int	remove_arg(t_cmd *cmd, int i)
 		return (0);
 //	printf("About to remove and free arg[%d]: '%s'\n", i, cmd->args[i]);
 //	printf("\t  %p\n", cmd->args[i]);
-	printf("In remove_arg, about to free %p\n", cmd->args[i]);
+//	printf("In remove_arg, about to free %p\n", cmd->args[i]);
 	free(cmd->args[i]);
 	while (cmd->args[i])
 	{
-		printf("Replacing args[%d], %p by %p\n", i, cmd->args[i], cmd->args[i + 1]);
+//		printf("Replacing args[%d], %p by %p\n", i, cmd->args[i], cmd->args[i + 1]);
 //		if (cmd->args[i + 1])
 		cmd->args[i] = cmd->args[i + 1];
 //		else
@@ -97,7 +97,7 @@ int	remove_arg(t_cmd *cmd, int i)
 //			cmd->args[i] = NULL;
 //			break ;
 //		}
-		printf("New arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+//		printf("New arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		i++;
 	}
 //	printf("Last arg = %d: '%s'\n", i - 1, cmd->args[i - 1]);

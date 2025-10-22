@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:00:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/22 17:02:07 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/22 17:10:50 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 //	printf("In make_new_arg starting with arg[%d]: '%s'\n", i, cmd->args[i]);
 //	while (cmd->args[++j])
 //		printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
-	printf("Skipping make_new_arg?\n");
+//	printf("Skipping make_new_arg?\n");
 	if (cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
 		return (cmd->args[i]);
-	printf("Yes we are\n");
+//	printf("Yes we are\n");
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
 	{
 //		printf("Making new (%s), checking arg[%d]: '%s'\n", new, i, cmd->args[i]);
@@ -119,7 +119,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 				continue ;
 		}
 		new = cat_arg(node, new, cmd->args[i]);
-		printf("About to remove arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+//		printf("About to remove arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		remove_arg(cmd, i);
 //		printf("About to free arg[%d]: %p\n", i, cmd->args[i]);
 //		free(cmd->args[i]);
@@ -134,31 +134,31 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	printf("Args before expansion:\n");
-	i = -1;
-	while (cmd->args[++i])
-		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-	printf("\n");
+//	printf("Args before expansion:\n");
+//	i = -1;
+//	while (cmd->args[++i])
+//		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+//	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
-		printf("\nExpanding arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+//		printf("\nExpanding arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		if (is_whitespace(cmd->args[i]))
 		{
-			printf("Detected whitespace, about to remove arg[%d]\n", i);
+//			printf("Detected whitespace, about to remove arg[%d]\n", i);
 			remove_arg(cmd, i);
 		}
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
-			printf("Made new arg[%d]: '%s'\n", i, cmd->args[i]);
+//			printf("Made new arg[%d]: '%s'\n", i, cmd->args[i]);
 			i++;
 		}
-		printf("\nArgs at end of loop iteration:\n");
-		int j = -1;
-		while (cmd->args[++j])
-			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
-		printf("\n");
+//		printf("\nArgs at end of loop iteration:\n");
+//		int j = -1;
+//		while (cmd->args[++j])
+//			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
+//		printf("\n");
 	}
 	printf("Args after expansion:\n");
 	i = -1;
