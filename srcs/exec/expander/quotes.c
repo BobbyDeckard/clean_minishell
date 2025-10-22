@@ -77,13 +77,21 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	i = start;
 	while (++i < end)
 	{
-//		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
+		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
 		ft_strlcat(new, cmd->args[start], len);
-//		printf("New argument after strlcat: '%s'\n", new);
+		printf("New argument after strlcat: '%s'\n", new);
 		remove_arg(cmd, start);
 	}
-//	printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
-	free(cmd->args[start]);
-	cmd->args[start] = new;
-//	printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
+	//	This condition prevents an empty string to be added as argument,
+	//	but we maybe want to still get an empty string for example for
+	//	exit "" ?
+	if (*new)
+	{
+		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
+		free(cmd->args[start]);
+		cmd->args[start] = new;
+		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
+	}
+	else
+		free(new);
 }

@@ -83,8 +83,8 @@ int	remove_arg(t_cmd *cmd, int i)
 {
 	if (!cmd->args[i])
 		return (0);
-//	printf("About to remove arg[%d]: '%s'\n", i, cmd->args[i]);
-//	printf("\t  %p\n", cmd->args[i]);
+	printf("About to remove and free arg[%d]: '%s'\n", i, cmd->args[i]);
+	printf("\t  %p\n", cmd->args[i]);
 	free(cmd->args[i]);
 	while (cmd->args[i])
 	{
@@ -99,10 +99,11 @@ int	remove_arg(t_cmd *cmd, int i)
 //		printf("cmd->args[%d]: '%s' (%p)\n", i, cmd->args[i], cmd->args[i]);
 		i++;
 	}
+	printf("Last arg = %d: '%s'\n", i - 1, cmd->args[i - 1]);
 	return (1);
 }
 
-int	remove_var(t_ast *node, t_cmd *cmd, int index)
+int	remove_var(t_ast *node, t_cmd *cmd, int *index)
 {
 	char	*new;
 	int		name_len;
@@ -110,18 +111,25 @@ int	remove_var(t_ast *node, t_cmd *cmd, int index)
 	int		i;
 
 	i = 0;
-	while (cmd->args[index][i] && cmd->args[index][i] != '$')
+	while (cmd->args[*index][i] && cmd->args[*index][i] != '$')
 		i++;
-	name_len = get_name_len(cmd->args[index] + i);
-	if (i == 0 && (int) ft_strlen(cmd->args[index]) == name_len)
-		return (remove_arg(cmd, index));
-	len = ft_strlen(cmd->args[index]) - name_len + 1;
+	name_len = get_name_len(cmd->args[*index] + i);
+//	printf("\nIn remove_var\n");
+	if (i == 0 && (int) ft_strlen(cmd->args[*index]) == name_len)
+	{
+		i = *index;
+		(*index)--;
+		return (remove_arg(cmd, i));
+	}
+	len = ft_strlen(cmd->args[*index]) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
-	ft_strlcpy(new, cmd->args[index], i + 1);
-	ft_strlcat(new, cmd->args[index] + i + name_len, len);
-	free(cmd->args[index]);
-	cmd->args[index] = new;
+	ft_strlcpy(new, cmd->args[*index], i + 1);
+	ft_strlcat(new, cmd->args[*index] + i + name_len, len);
+//	printf("Arg before: '%s'\n", cmd->args[index]);
+//	printf("Arg after: '%s'\n", new);
+	free(cmd->args[*index]);
+	cmd->args[*index] = new;
 	return (0);
 }

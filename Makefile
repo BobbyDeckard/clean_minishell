@@ -136,7 +136,6 @@ SNTX_FILES = operators.c \
 
 TKNS = $(addprefix tokenization/, $(TKNS_FILES))
 TKNS_FILES = char_checks.c \
-			 errors.c \
 			 tokenization.c \
 			 tokenize.c \
 			 tokenize_operators.c \

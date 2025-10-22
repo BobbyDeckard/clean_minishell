@@ -20,7 +20,7 @@ int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 int		is_whitespace(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
-int		remove_var(t_ast *node, t_cmd *cmd, int index);
+int		remove_var(t_ast *node, t_cmd *cmd, int *index);
 
 int	contains_dol(const char *str)
 {
@@ -59,15 +59,17 @@ char	*get_name(t_ast *node, const char *str)
 	return (name);
 }
 
-static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
+static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int *index)
 {
 	char	*name;
 	int		i;
 	int		j;
 
-	name = get_name(node, cmd->args[index]);
+	name = get_name(node, cmd->args[*index]);
+	printf("\nIn expand_cat() with arg: '%s'\n", cmd->args[*index]);
+	printf("Found name to be '%s'\n", name);
 	if (!name)
-		return (handle_exit_status(node, cmd, index));
+		return (handle_exit_status(node, cmd, *index));
 	i = -1;
 	while (envp[++i])
 	{
@@ -77,16 +79,16 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 		if (envp[i][j] == '=' && !name[j])
 		{
 			free(name);
-			return (handle_var(node, cmd, envp[i] + j + 1, index));
+			return (handle_var(node, cmd, envp[i] + j + 1, *index));
 		}
 	}
 	free(name);
 	return (remove_var(node, cmd, index));
 }
 
-void	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
+static void	expand(t_ast *node, t_cmd *cmd, char **envp, int *index)
 {
-	while (contains_dol(cmd->args[index]))
+	while (contains_dol(cmd->args[*index]))
 	{
 		if (expand_cat(node, cmd, envp, index))
 			return ;
@@ -104,14 +106,21 @@ void	expander(t_ast *node, t_cmd *cmd)
 //	print_tree(node->root);
 	i = -1;
 	while (cmd->args[++i])
+		printf("arg[%d]:\t'%s'\t(%p)\n", i, cmd->args[i], cmd->args[i]);
+	i = -1;
+	while (cmd->args[++i])
 	{
+		printf("Checking arg %d: '%s'\n", i, cmd->args[i]);
 		if (!ft_strncmp(cmd->args[i], "'", 2))
 			handle_single_quotes(node, cmd, i);
 		else if (!ft_strncmp(cmd->args[i], "\"", 2))
 			handle_double_quotes(node, cmd, i);
 		else if (contains_dol(cmd->args[i]))
-			expand(node, cmd, node->shell->envp, i);
+			expand(node, cmd, node->shell->envp, &i);
 	}
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d]:\t'%s'\t(%p)\n", i, cmd->args[i], cmd->args[i]);
 //	printf("\nTree before cat and space management:\n\n");
 //	print_tree(node->root);
 	i = -1;
@@ -129,4 +138,7 @@ void	expander(t_ast *node, t_cmd *cmd)
 	}
 //	printf("\nTree after cat and space management:\n\n");
 //	print_tree(node->root);
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d]:\t'%s'\t(%p)\n", i, cmd->args[i], cmd->args[i]);
 }
