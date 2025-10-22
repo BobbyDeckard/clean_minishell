@@ -73,6 +73,11 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 	i = -1;
 	current = get_token_at_index(shell->tokens, start);
 //	printf("parse_args() fetched token at index %d with content '%s'\n", start, current->content);
+	while (current && current->type == WHITESPACE && start <= end)
+	{
+		current = current->next;
+		start++;
+	}
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
