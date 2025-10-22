@@ -2,13 +2,12 @@ TODO
 o	Be absolutely sure the second stage parsing in expander works properly!
 	x	echo "$USR" still has extra arg ?
 	x	echo $"USER" works ?
-	o	echo hello"$USER"world
+	x	echo hello"$USER"world
 		=> world is not cat
-	o	Find a way to correctly parse echo hello " " there without removing the quoted space
+	x	Find a way to correctly parse echo hello " " there without removing the quoted space
 o	Check how bash behaves with different types of contiguous whitespaces
 	=> We currently only filter regular spaces (=32)
-o	echo $"USER" behaves strangely
-	=> bash 3.2 on MacOS only prints USER, check on school's computers
+o	Check that echo $"USER" behaves the same on school's bash
 o	Dive into heredoc problems
 	o	To begin with, make it so that the delimiter works...
 o	Battery testing
@@ -21,3 +20,4 @@ x	Concatenation of contiguous args is not working
 x	Weird stuff: echo hey  there (only removes one space)
 x	Check exit issue with exit [numeric] [alphabetic]:
 	=> [alphabetic] is printed in front of the prompt..?
+x	echo $"USER" behaves strangely
