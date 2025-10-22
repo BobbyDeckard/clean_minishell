@@ -103,7 +103,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 //	while (cmd->args[++j])
 //		printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
 //	printf("Skipping make_new_arg?\n");
-	if (cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
+	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
 		return (cmd->args[i]);
 //	printf("Yes we are\n");
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
@@ -134,15 +134,15 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-//	printf("Args before expansion:\n");
-//	i = -1;
-//	while (cmd->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-//	printf("\n");
+	printf("Args before expansion:\n");
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
-//		printf("\nExpanding arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+		printf("\nExpanding arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		if (is_whitespace(cmd->args[i]))
 		{
 //			printf("Detected whitespace, about to remove arg[%d]\n", i);
@@ -154,11 +154,11 @@ void	expander(t_ast *node, t_cmd *cmd)
 //			printf("Made new arg[%d]: '%s'\n", i, cmd->args[i]);
 			i++;
 		}
-//		printf("\nArgs at end of loop iteration:\n");
-//		int j = -1;
-//		while (cmd->args[++j])
-//			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
-//		printf("\n");
+		printf("\nArgs at end of loop iteration:\n");
+		int j = -1;
+		while (cmd->args[++j])
+			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
+		printf("\n");
 	}
 	printf("Args after expansion:\n");
 	i = -1;
