@@ -2,6 +2,9 @@ TODO
 o	Be absolutely sure the second stage parsing in expander works properly!
 	x	echo "$USR" still has extra arg ?
 	x	echo $"USER" works ?
+	o	echo hello"$USER"world
+		=> world is not cat
+	o	Find a way to correctly parse echo hello " " there without removing the quoted space
 o	Check how bash behaves with different types of contiguous whitespaces
 	=> We currently only filter regular spaces (=32)
 o	echo $"USER" behaves strangely
