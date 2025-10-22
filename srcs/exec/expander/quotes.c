@@ -55,6 +55,10 @@ static void	expand_inside_double(t_ast *node, t_cmd *cmd, int i)
 	}
 }
 
+//	Following comment is about if (*new) condition further below.
+//	This condition prevents an empty string to be added as argument,
+//	but we maybe want to still get an empty string for example for
+//	exit "" ?
 void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 {
 	char	*new;
@@ -62,7 +66,6 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	int		end;
 	int		i;
 
-//	printf("\nIn handle_double_quotes\n");
 	len = 0;
 	end = start;
 	expand_inside_double(node, cmd, start);
@@ -77,9 +80,7 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	i = start;
 	while (++i < end)
 	{
-//		printf("About to cat args[%d]: '%s'\n", start, cmd->args[start]);
 		ft_strlcat(new, cmd->args[start], len);
-//		printf("New argument after strlcat: '%s'\n", new);
 		if (cmd->args[start + 1] && ft_strncmp(cmd->args[start + 1], "\"", 2))
 			remove_arg(cmd, start);
 		else if (*new)
@@ -90,17 +91,4 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 		else
 			free(new);
 	}
-	//	This condition prevents an empty string to be added as argument,
-	//	but we maybe want to still get an empty string for example for
-	//	exit "" ?
-//	if (*new)
-//	{
-//		printf("About to free args[%d]: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
-//		free(cmd->args[start]);
-//		cmd->args[start] = new;
-//		printf("Set args[%d] to new: '%s' (%p)\n", start, cmd->args[start], cmd->args[start]);
-//	}
-//	else
-//		free(new);
-//	printf("End of handle_double_quotes\n\n");
 }

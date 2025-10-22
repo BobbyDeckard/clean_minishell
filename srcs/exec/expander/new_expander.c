@@ -29,8 +29,6 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 	int		j;
 
 	name = get_name(node, cmd->args[index]);
-//	printf("\nIn expand_cat() with arg: '%s'\n", cmd->args[*index]);
-//	printf("Found name to be '%s'\n", name);
 	if (!name)
 		return (handle_exit_status(node, cmd, index));
 	i = -1;
@@ -99,17 +97,10 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 	char	*new;
 
 	new = NULL;
-//	int j = -1;
-//	printf("In make_new_arg starting with arg[%d]: '%s'\n", i, cmd->args[i]);
-//	while (cmd->args[++j])
-//		printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
-//	printf("Skipping make_new_arg?\n");
 	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
 		return (cmd->args[i]);
-//	printf("Yes we are\n");
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
 	{
-//		printf("Making new (%s), checking arg[%d]: '%s'\n", new, i, cmd->args[i]);
 		if (!ft_strncmp(cmd->args[i], "'", 2))
 			handle_single_quotes(node, cmd, i);
 		else if (!ft_strncmp(cmd->args[i], "\"", 2))
@@ -120,13 +111,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 				continue ;
 		}
 		new = cat_arg(node, new, cmd->args[i]);
-//		printf("About to remove arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		remove_arg(cmd, i);
-//		printf("About to free arg[%d]: %p\n", i, cmd->args[i]);
-//		free(cmd->args[i]);
-//		i++;
-//		printf("Calling remove_arg from make_new_arg\n");
-//		remove_arg(cmd, i);
 	}
 	return (new);
 }
@@ -135,35 +120,15 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	printf("Args before expansion:\n");
-	i = -1;
-	while (cmd->args[++i])
-		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
-//		printf("\nExpanding arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		if (is_whitespace(cmd->args[i]))
-		{
-//			printf("Detected whitespace, about to remove arg[%d]\n", i);
 			remove_arg(cmd, i);
-		}
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
-//			printf("Made new arg[%d]: '%s'\n", i, cmd->args[i]);
 			i++;
 		}
-//		printf("\nArgs at end of loop iteration:\n");
-//		int j = -1;
-//		while (cmd->args[++j])
-//			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
-//		printf("\n");
 	}
-	printf("Args after expansion:\n");
-	i = -1;
-	while (cmd->args[++i])
-		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-	printf("\n");
 }
