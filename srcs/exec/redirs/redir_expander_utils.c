@@ -21,6 +21,7 @@ int	rdr_remove_arg(t_rdr *rdr, int i)
 {
 	if (!rdr->args[i])
 		return (0);
+	printf("About to remove arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
 	free(rdr->args[i]);
 	while (rdr->args[i])
 	{

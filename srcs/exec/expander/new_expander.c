@@ -121,15 +121,28 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
+	i = -1;
+	printf("Args before expansion:\n");
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
 		if (is_whitespace(cmd->args[i]))
+		{
+			printf("Found arg[%d] to be a whitespace, removing\n", i);
 			remove_arg(cmd, i);
+		}
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
 			i++;
 		}
 	}
+	i = -1;
+	printf("Args after expansion:\n");
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 }
