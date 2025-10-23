@@ -30,9 +30,9 @@ static void	uninterpret_token(t_shell *shell, t_token **list, t_token *token)
 	if (token->type == WHITESPACE)
 		token->type = WORD;
 	else if (token->type == SINGLE_QUOTE)
-		retokenize_word(shell, list, token, "'");
+		token->type = WORD;
 	else if (token->type == DOUBLE_QUOTE)
-		retokenize_word(shell, list, token, "\"");
+		token->type = WORD;
 	else if (token->type == PAREN_CLOSE)
 		retokenize_word(shell, list, token, ")");
 	else if (token->type == PAREN_OPEN)
