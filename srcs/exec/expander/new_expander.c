@@ -132,4 +132,9 @@ void	expander(t_ast *node, t_cmd *cmd)
 			i++;
 		}
 	}
+	printf("Final args:\n");
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 }

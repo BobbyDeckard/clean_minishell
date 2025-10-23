@@ -28,10 +28,11 @@ void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 	end = start;
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "'", 2))
 		len += ft_strlen(cmd->args[end]);
+	remove_arg(cmd, start);
 	if (!len)
 	{
 		remove_arg(cmd, start);
-		remove_arg(cmd, start);
+		return ;
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -39,11 +40,19 @@ void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 	i = start;
 	while (++i < end)
 	{
-		ft_strlcat(new, cmd->args[start + 1], len);
-		remove_arg(cmd, start + 1);
+		ft_strlcat(new, cmd->args[start], len);
+		if (cmd->args[start + 1] && ft_strncmp(cmd->args[start + 1], "'", 2))
+			remove_arg(cmd, start);
+		else if (*new)
+		{
+			free(cmd->args[start]);
+			cmd->args[start] = new;
+			remove_arg(cmd, start + 1);
+			break ;
+		}
+		else
+			free(new);
 	}
-	free(cmd->args[start]);
-	cmd->args[start] = new;
 }
 
 static void	expand_inside_double(t_ast *node, t_cmd *cmd, int i)
