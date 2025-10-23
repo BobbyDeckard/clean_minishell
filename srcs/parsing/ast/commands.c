@@ -109,13 +109,17 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 
 	if (!count)
 		return ;
+	printf("Allocating %d elements to cmd.args\n", count + 1);
 	node->cmd.args = (char **) malloc((count + 1) * sizeof(char *));
 	if (!node->cmd.args)
 		malloc_error(shell->root, shell, shell->tokens);
 //	printf("In init_cmd(), allocated %d pointers for args\n", count + 1);
 	i = -1;
-	while (++i < count)
+	while (++i <= count)
+	{
 		node->cmd.args[i] = NULL;
+		printf("Set node->cmd.args[%d] to NULL\n", i);
+	}
 }
 
 //	find_cmd_scope() is unnecessary... bash does receive args even if the command name
