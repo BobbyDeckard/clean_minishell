@@ -19,6 +19,8 @@ int		get_name_len(const char *str);
 
 int	rdr_remove_arg(t_rdr *rdr, int i)
 {
+	if (!rdr->args[i])
+		return (0);
 	free(rdr->args[i]);
 	while (rdr->args[i])
 	{

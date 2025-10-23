@@ -28,10 +28,11 @@ static void	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 	end = start;
 	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "'", 2))
 		len += ft_strlen(rdr->args[end]);
+	rdr_remove_arg(rdr, start);
 	if (!len)
 	{
 		rdr_remove_arg(rdr, start);
-		rdr_remove_arg(rdr, start);
+		return ;
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -39,11 +40,19 @@ static void	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 	i = start;
 	while (++i < end)
 	{
-		ft_strlcat(new, rdr->args[start + 1], len);
-		rdr_remove_arg(rdr, start + 1);
+		ft_strlcat(new, rdr->args[start], len);
+		if (rdr->args[start + 1] && ft_strncmp(rdr->args[start + 1], "'", 2))
+			rdr_remove_arg(rdr, start);
+		else if (*new)
+		{
+			free(rdr->args[start]);
+			rdr->args[start] = new;
+			rdr_remove_arg(rdr, start + 1);
+			break ;
+		}
+		else
+			free(new);
 	}
-	free(rdr->args[start]);
-	rdr->args[start] = new;
 }
 
 static void	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
@@ -76,10 +85,11 @@ static void	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 	end = start;
 	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "\"", 2))
 		len += ft_strlen(rdr->args[end]);
+	rdr_remove_arg(rdr, start);
 	if (!len)
 	{
 		rdr_remove_arg(rdr, start);
-		rdr_remove_arg(rdr, start);
+		return ;
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -87,11 +97,19 @@ static void	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 	i = start;
 	while (++i < end)
 	{
-		ft_strlcat(new, rdr->args[start + 1], len);
-		rdr_remove_arg(rdr, start + 1);
+		ft_strlcat(new, rdr->args[start], len);
+		if (rdr->args[start + 1] && ft_strncmp(rdr->args[start + 1], "\"", 2))
+			rdr_remove_arg(rdr, start);
+		else if (*new)
+		{
+			free(rdr->args[start]);
+			rdr->args[start] = new;
+			rdr_remove_arg(rdr, start + 1);
+			break ;
+		}
+		else
+			free(new);
 	}
-	free(rdr->args[start]);
-	rdr->args[start] = new;
 }
 
 void	redir_expander(t_ast *node, t_rdr *rdr)
