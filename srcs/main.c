@@ -59,14 +59,11 @@ int	main(int ac, char **av, char **envp)
 	t_shell	shell;
 	char	*command;
 
-//	if (ac != 1)
-//		return (1);
-	int	iterations = 2147483647;
-	if (ac == 2)
-		iterations = atoi(av[1]);
+	if (ac != 1)
+		return (1);
 	(void) av;
 	shell = init_shell(envp);
-	while (1 && --iterations >= 0)
+	while (1)
 	{
 		setup_interactive_signals(&shell);
 		command = read_command(&shell);
