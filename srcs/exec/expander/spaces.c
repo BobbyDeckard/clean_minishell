@@ -94,10 +94,12 @@ static void	make_new_entry(char *str, char *old, int len)
 //	printf("Making new entry: '");
 	while (old[++i] && j + 2 < len)
 	{
+		printf("Checking old[%d] = %c\n", i, old[i]);
 		if (old[i] == ' ' && !space)
 		{
 			space = !space;
 			str[++j] = old[i];
+			printf("Putting %c in str[%d], str: '%s'\n", old[i], j, str);
 //			printf("%c", str[j]);
 		}
 		else if (old[i] == ' ')
@@ -107,6 +109,7 @@ static void	make_new_entry(char *str, char *old, int len)
 			if (space)
 				space = !space;
 			str[++j] = old[i];
+			printf("Putting %c in str[%d], str: '%s'\n", old[i], j, str);
 //			printf("%c", str[j]);
 		}
 	}
@@ -121,10 +124,11 @@ char	*filter_spaces(t_ast *node, char *entry)
 //	printf("In filter_spaces()\n");
 //	printf("Entry: '%s'\n", entry);
 	len = get_shortened_len(entry, 0, 0) + 1;
-//	printf("About to malloc with len = %d\n", len);
-	new = (char *) malloc(len * sizeof(char));
+	printf("About to allocate %d elements to filtered string\n", len);
+	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
 	make_new_entry(new, entry, len);
+	printf("Filtered entry: '%s', actual len is %d\n", new, (int) ft_strlen(new));
 	return (new);
 }
