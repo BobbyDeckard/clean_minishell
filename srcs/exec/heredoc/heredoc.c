@@ -96,6 +96,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 			perror("close");
 	}
 	make_del(node);
+	printf("Made delimiter: '%s'\n", node->rdr.file);
 	del = copy_delimiter(node);
 	free(node->rdr.file);
 	node->rdr.file = NULL;

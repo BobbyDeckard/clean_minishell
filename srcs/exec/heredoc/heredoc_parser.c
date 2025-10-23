@@ -57,6 +57,7 @@ static char	*init_del(t_ast *node, int *len)
 		else
 			*len += ft_strlen(node->rdr.args[i]);
 	}
+	printf("In init_del, about to allocate %d chars for del\n", *len);
 	file = (char *) ft_calloc(*len, sizeof(char));
 	if (!file)
 		malloc_error(node, node->shell, NULL);
@@ -74,6 +75,7 @@ void	make_del(t_ast *node)
 	i = -1;
 	while (node->rdr.args[++i])
 	{
+		printf("Extracting arg[%d]: '%s'\n", i, node->rdr.args[i]);
 		if (!ft_strncmp(node->rdr.args[i], "\"", 2))
 			i = get_double_body(&node->rdr, file, i, len);
 		else if (!ft_strncmp(node->rdr.args[i], "'", 2))
@@ -81,4 +83,5 @@ void	make_del(t_ast *node)
 		else
 			ft_strlcat(file, node->rdr.args[i], len);
 	}
+	node->rdr.file = file;
 }
