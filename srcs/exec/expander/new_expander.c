@@ -100,7 +100,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 	new = NULL;
 	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && ((cmd->args[i + 1] && is_whitespace(cmd->args[i + 1])) || !cmd->args[i + 1]) && !contains_dol(cmd->args[i]))
 	{
-		printf("Skipping new arg making\n");
+		printf("Skipping new arg making for arg[%d]: '%s'\n", i, cmd->args[i]);
 		return (cmd->args[i]);
 	}
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
@@ -115,9 +115,11 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 				continue ;
 		}
 		new = cat_arg(node, new, cmd->args[i]);
-		printf("In make_new_arg, about to remove arg[%d] after making new: '%s'\n", i, new);
+//		printf("In make_new_arg, about to remove arg[%d] after making new: '%s'\n", i, new);
 		remove_arg(cmd, i);
-		printf("Arg successfully removed\n");
+		printf("Arg about to be checked for loop condition in make_new_arg:\n");
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+//		printf("Arg successfully removed\n");
 	}
 	return (new);
 }
@@ -129,12 +131,20 @@ void	expander(t_ast *node, t_cmd *cmd)
 	i = 0;
 	while (cmd->args[i])
 	{
+		printf("Expander is checking arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 		if (is_whitespace(cmd->args[i]))
+		{
+			printf("Removing whitespace (arg[%d])\n", i);
 			remove_arg(cmd, i);
+		}
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
 			i++;
 		}
 	}
+	printf("\nArgs after expander:\n");
+	i = -1;
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 }

@@ -68,6 +68,7 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 
 	len = 0;
 	end = start;
+	printf("Entering handle_double_quotes\n");
 	expand_inside_double(node, cmd, start);
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "\"", 2))
 		len += ft_strlen(cmd->args[end]);
@@ -88,10 +89,20 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 			remove_arg(cmd, start);
 		else if (*new)
 		{
+			printf("Replacing arg[%d] (%p): '%s' by", start, cmd->args[start], cmd->args[start]);
+			printf(" '%s'\n", new);
 			free(cmd->args[start]);
 			cmd->args[start] = new;
+			remove_arg(cmd, start + 1);
+			break ;
 		}
 		else
 			free(new);
+		printf("Args after iteration in handle_double_quotes\n");
+		int j = -1;
+		while (cmd->args[++j])
+			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
+		printf("\n");
 	}
+	printf("Exiting handle_double_quotes\n");
 }
