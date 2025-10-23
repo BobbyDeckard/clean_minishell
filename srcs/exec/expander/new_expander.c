@@ -128,6 +128,14 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
+	printf("\nArgs before expander:\n");
+	i = -1;
+	while (cmd->args[++i])
+	{
+		printf("About to try accessing cmd->args[%d]\n", i);
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	}
+	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
@@ -147,4 +155,5 @@ void	expander(t_ast *node, t_cmd *cmd)
 	i = -1;
 	while (cmd->args[++i])
 		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 }
