@@ -64,17 +64,14 @@ static int	get_shortened_len(const char *str, int count, int space)
 		{
 			space = !space;
 			count++;
-//			printf("str[%d] is space and space is off, count = %d\n", i, count);
 		}
 		else if (str[i] != ' ' && space)
 		{
 			space = !space;
 			count++;
-//			printf("str[%d] is nonspace and space is on, count = %d\n", i, count);
 		}
 		else if (str[i] != ' ')
 		{
-//			printf("str[%d] is nonspace, count = %d\n", i, count);
 			count++;
 			if (start)
 				start = !start;
@@ -91,16 +88,12 @@ static void	make_new_entry(char *str, char *old, int len)
 
 	i = -1;
 	j = -1;
-//	printf("Making new entry: '");
 	while (old[++i] && j + 2 < len)
 	{
-		printf("Checking old[%d] = %c\n", i, old[i]);
 		if (old[i] == ' ' && !space)
 		{
 			space = !space;
 			str[++j] = old[i];
-			printf("Putting %c in str[%d], str: '%s'\n", old[i], j, str);
-//			printf("%c", str[j]);
 		}
 		else if (old[i] == ' ')
 			continue ;
@@ -109,11 +102,8 @@ static void	make_new_entry(char *str, char *old, int len)
 			if (space)
 				space = !space;
 			str[++j] = old[i];
-			printf("Putting %c in str[%d], str: '%s'\n", old[i], j, str);
-//			printf("%c", str[j]);
 		}
 	}
-//	printf("'\n");
 }
 
 char	*filter_spaces(t_ast *node, char *entry)
@@ -121,14 +111,10 @@ char	*filter_spaces(t_ast *node, char *entry)
 	char	*new;
 	int		len;
 
-//	printf("In filter_spaces()\n");
-//	printf("Entry: '%s'\n", entry);
 	len = get_shortened_len(entry, 0, 0) + 1;
-	printf("About to allocate %d elements to filtered string\n", len);
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
 	make_new_entry(new, entry, len);
-	printf("Filtered entry: '%s', actual len is %d\n", new, (int) ft_strlen(new));
 	return (new);
 }
