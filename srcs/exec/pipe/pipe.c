@@ -96,7 +96,10 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 			prep_cmd(child[i]);
 		pids[i] = make_fork();
 		if (pids[i] == 0)
+		{
+			free(pids);
 			exec_pipe_child(child[i], fd, i, count);
+		}
 		if (child[i]->type == NODE_CMD)
 			close_all_redirs(child[i]);
 	}
