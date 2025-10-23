@@ -1,368 +1,252 @@
-==1060278== Memcheck, a memory error detector
-==1060278== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1060278== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
-==1060278== Command: ./minishell
-==1060278== Parent PID: 1060225
-==1060278== 
---1060278-- 
---1060278-- Valgrind options:
---1060278--    --leak-check=full
---1060278--    --show-leak-kinds=all
---1060278--    --track-origins=yes
---1060278--    --verbose
---1060278--    --track-fds=yes
---1060278--    --log-file=logs/env_vars.log
---1060278--    --suppressions=ignore_readline_leaks.supp
---1060278-- Contents of /proc/version:
---1060278--   Linux version 6.6.72-x64v3-t2-jammy-xanmod1 (root@fv-az1245-313) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #xanmod1 SMP PREEMPT_DYNAMIC Sat Jan 18 01:41:53 UTC 2025
---1060278-- 
---1060278-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
---1060278-- Page sizes: currently 4096, max supported 4096
---1060278-- Valgrind library directory: /usr/libexec/valgrind
---1060278-- Reading syms from /home/imeulema/cursus/clean_minishell/minishell
---1060278-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
---1060278--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
---1060278--   .. build-id is valid
---1060278-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
---1060278--    object doesn't have a symbol table
---1060278--    object doesn't have a dynamic symbol table
---1060278-- Scheduler: using generic scheduler lock implementation.
---1060278-- Reading suppressions file: ignore_readline_leaks.supp
---1060278-- Reading suppressions file: /usr/libexec/valgrind/default.supp
-==1060278== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-1060278-by-imeulema-on-???
-==1060278== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-1060278-by-imeulema-on-???
-==1060278== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-1060278-by-imeulema-on-???
-==1060278== 
-==1060278== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==1060278== don't want to do, unless you know exactly what you're doing,
-==1060278== or are doing some strange experiment):
-==1060278==   /usr/bin/vgdb --pid=1060278 ...command...
-==1060278== 
-==1060278== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==1060278==   /path/to/gdb ./minishell
-==1060278== and then give GDB the following command
-==1060278==   target remote | /usr/bin/vgdb --pid=1060278
-==1060278== --pid is optional if only one valgrind process is running
-==1060278== 
---1060278-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
---1060278-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
---1060278-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
---1060278--    object doesn't have a symbol table
---1060278-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
---1060278--    object doesn't have a symbol table
-==1060278== WARNING: new redirection conflicts with existing -- ignoring it
---1060278--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
---1060278--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
---1060278-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
---1060278-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
---1060278-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
---1060278--    object doesn't have a symbol table
---1060278-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
---1060278--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
---1060278--   .. build-id is valid
-==1060278== WARNING: new redirection conflicts with existing -- ignoring it
---1060278--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---1060278--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==1060278== WARNING: new redirection conflicts with existing -- ignoring it
---1060278--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---1060278--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
-==1060278== WARNING: new redirection conflicts with existing -- ignoring it
---1060278--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---1060278--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==1060278== WARNING: new redirection conflicts with existing -- ignoring it
---1060278--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---1060278--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
---1060278-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
---1060278--    object doesn't have a symbol table
---1060278-- REDIR: 0x4970720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49709e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49702e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x498ecd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49716d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x498d540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x498d370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49715a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
-==1060278== Preferring higher priority redirection:
---1060278--     old: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
---1060278--     new: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
---1060278-- REDIR: 0x498d3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49719e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x498d9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x498d470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49701d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4979570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4973010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49706a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49708d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49713f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4970b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49717d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4972f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49707a0 (libc.so.6:strncat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x49fc2f0 (libc.so.6:__memcpy_chk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4971310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---1060278-- REDIR: 0x4a65690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
---1060278-- REDIR: 0x496d0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
---1060278-- REDIR: 0x496d3e0 (libc.so.6:free) redirected to 0x484b210 (free)
---1060278-- REDIR: 0x4a65860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
---1060278-- REDIR: 0x4a60e00 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
---1060278-- REDIR: 0x4a68840 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
---1060278-- REDIR: 0x4a65480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
---1060278-- REDIR: 0x490d150 (libc.so.6:setenv) redirected to 0x48542d0 (setenv)
---1060278-- REDIR: 0x4a65200 (libc.so.6:__strchr_avx2) redirected to 0x484e9f0 (index)
---1060278-- REDIR: 0x496d740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
---1060278-- REDIR: 0x4a68800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
---1060278-- REDIR: 0x4a609c0 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
---1060278-- REDIR: 0x496e520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
---1060278-- REDIR: 0x4a659e0 (libc.so.6:__strnlen_avx2) redirected to 0x484ecb0 (strnlen)
---1060278-- REDIR: 0x4a66d30 (libc.so.6:__strcpy_avx2) redirected to 0x484ee60 (strcpy)
---1060278-- REDIR: 0x4970fc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
---1060278-- REDIR: 0x4a68810 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4853940 (__memcpy_chk)
---1060278-- REDIR: 0x4a69000 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
---1060278-- REDIR: 0x4a670c0 (libc.so.6:__strncpy_avx2) redirected to 0x484efe0 (strncpy)
---1060278-- REDIR: 0x4a61340 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
---1060278-- REDIR: 0x4a67a20 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
---1060278-- REDIR: 0x4a621b0 (libc.so.6:__strcasecmp_avx) redirected to 0x484f560 (strcasecmp)
---1060278-- REDIR: 0x4a63830 (libc.so.6:__strncasecmp_avx) redirected to 0x484f640 (strncasecmp)
---1060278-- REDIR: 0x4a61b00 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x40BCB4: check_paren_syntax (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40BAA1: check_parentheses (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40C1A1: valid_syntax (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4081BD: parse (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40149D: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x40BAD0: get_last_close (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4070D7: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406F33: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x407060: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x40712F: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406F33: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x407060: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4100E2: ft_strlen (ft_strlen.c:22)
-==1060278==    by 0x407508: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a heap allocation
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x406EFF: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4100E2: ft_strlen (ft_strlen.c:22)
-==1060278==    by 0x40FF0F: ft_strlcat (ft_strlcat.c:23)
-==1060278==    by 0x407583: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a heap allocation
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x406EFF: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 
-==1060278== FILE DESCRIPTORS: 6 open (3 std) at exit.
-==1060278== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==1060278==    <inherited from parent>
-==1060278== 
-==1060278== Open file descriptor 41: /home/imeulema/.config/Code/logs/20251010T135525/ptyhost.log
-==1060278==    <inherited from parent>
-==1060278== 
-==1060278== Open file descriptor 3: /home/imeulema/cursus/clean_minishell/logs/env_vars.log
-==1060278==    <inherited from parent>
-==1060278== 
-==1060278== 
-==1060278== HEAP SUMMARY:
-==1060278==     in use at exit: 209,106 bytes in 272 blocks
-==1060278==   total heap usage: 1,480 allocs, 1,208 frees, 279,355 bytes allocated
-==1060278== 
-==1060278== Searching for pointers to 272 not-freed blocks
-==1060278== Checked 249,448 bytes
-==1060278== 
-==1060278== 17 bytes in 1 blocks are definitely lost in loss record 10 of 68
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x406EFF: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 160 bytes in 4 blocks are definitely lost in loss record 22 of 68
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x40DA8C: create_token (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40DA21: extract_token (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40D88E: tokenize_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40816C: parse (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40149D: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== LEAK SUMMARY:
-==1060278==    definitely lost: 177 bytes in 5 blocks
-==1060278==    indirectly lost: 0 bytes in 0 blocks
-==1060278==      possibly lost: 0 bytes in 0 blocks
-==1060278==    still reachable: 0 bytes in 0 blocks
-==1060278==         suppressed: 208,929 bytes in 267 blocks
-==1060278== 
-==1060278== ERROR SUMMARY: 59 errors from 7 contexts (suppressed: 0 from 0)
-==1060278== 
-==1060278== 1 errors in context 1 of 7:
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4100E2: ft_strlen (ft_strlen.c:22)
-==1060278==    by 0x40FF0F: ft_strlcat (ft_strlcat.c:23)
-==1060278==    by 0x407583: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a heap allocation
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x406EFF: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 
-==1060278== 1 errors in context 2 of 7:
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4100E2: ft_strlen (ft_strlen.c:22)
-==1060278==    by 0x407508: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a heap allocation
-==1060278==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1060278==    by 0x406EFF: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 
-==1060278== 5 errors in context 3 of 7:
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x4070D7: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406F33: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x407060: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 
-==1060278== 14 errors in context 4 of 7:
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x40712F: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406F33: filter_spaces (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4074E3: handle_var (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406DDD: expand_cat (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C77: expand (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x406C0F: expander (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401663: run_cmd (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x401582: exec_ast (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4014B5: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x407060: make_new_entry (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
-==1060278== 
-==1060278== 36 errors in context 5 of 7:
-==1060278== Conditional jump or move depends on uninitialised value(s)
-==1060278==    at 0x40BCB4: check_paren_syntax (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40BAA1: check_parentheses (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40C1A1: valid_syntax (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4081BD: parse (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x40149D: process_command (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==    by 0x4013CD: main (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278==  Uninitialised value was created by a stack allocation
-==1060278==    at 0x40BAD0: get_last_close (in /home/imeulema/cursus/clean_minishell/minishell)
-==1060278== 
---1060278-- 
---1060278-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,147 bytes in 221 blocks
---1060278-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,782 bytes in 46 blocks
-==1060278== 
-==1060278== ERROR SUMMARY: 59 errors from 7 contexts (suppressed: 0 from 0)
+==189769== Memcheck, a memory error detector
+==189769== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==189769== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==189769== Command: ./minishell
+==189769== Parent PID: 189703
+==189769== 
+--189769-- 
+--189769-- Valgrind options:
+--189769--    --leak-check=full
+--189769--    --show-leak-kinds=all
+--189769--    --track-origins=yes
+--189769--    --verbose
+--189769--    --track-fds=yes
+--189769--    --log-file=logs/env_vars.log
+--189769--    --suppressions=ignore_readline_leaks.supp
+--189769-- Contents of /proc/version:
+--189769--   Linux version 6.6.72-x64v3-t2-jammy-xanmod1 (root@fv-az1245-313) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #xanmod1 SMP PREEMPT_DYNAMIC Sat Jan 18 01:41:53 UTC 2025
+--189769-- 
+--189769-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--189769-- Page sizes: currently 4096, max supported 4096
+--189769-- Valgrind library directory: /usr/libexec/valgrind
+--189769-- Reading syms from /home/imeulema/cursus/minishell/minishell
+--189769-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--189769--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
+--189769--   .. build-id is valid
+--189769-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--189769--    object doesn't have a symbol table
+--189769--    object doesn't have a dynamic symbol table
+--189769-- Scheduler: using generic scheduler lock implementation.
+--189769-- Reading suppressions file: ignore_readline_leaks.supp
+--189769-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==189769== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-189769-by-imeulema-on-???
+==189769== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-189769-by-imeulema-on-???
+==189769== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-189769-by-imeulema-on-???
+==189769== 
+==189769== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==189769== don't want to do, unless you know exactly what you're doing,
+==189769== or are doing some strange experiment):
+==189769==   /usr/bin/vgdb --pid=189769 ...command...
+==189769== 
+==189769== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==189769==   /path/to/gdb ./minishell
+==189769== and then give GDB the following command
+==189769==   target remote | /usr/bin/vgdb --pid=189769
+==189769== --pid is optional if only one valgrind process is running
+==189769== 
+--189769-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--189769-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--189769-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--189769--    object doesn't have a symbol table
+--189769-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--189769--    object doesn't have a symbol table
+==189769== WARNING: new redirection conflicts with existing -- ignoring it
+--189769--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--189769--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--189769-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--189769-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--189769-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+--189769--    object doesn't have a symbol table
+--189769-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--189769--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
+--189769--   .. build-id is valid
+==189769== WARNING: new redirection conflicts with existing -- ignoring it
+--189769--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--189769--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==189769== WARNING: new redirection conflicts with existing -- ignoring it
+--189769--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--189769--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==189769== WARNING: new redirection conflicts with existing -- ignoring it
+--189769--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--189769--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==189769== WARNING: new redirection conflicts with existing -- ignoring it
+--189769--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--189769--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--189769-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
+--189769--    object doesn't have a symbol table
+--189769-- REDIR: 0x4970720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49709e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49702e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x498ecd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49716d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x498d540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x498d370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49715a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==189769== Preferring higher priority redirection:
+--189769--     old: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--189769--     new: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--189769-- REDIR: 0x498d3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49719e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x498d9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x498d470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49701d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4979570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4973010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49706a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49708d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49713f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4970b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49717d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4972f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49707a0 (libc.so.6:strncat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x49fc2f0 (libc.so.6:__memcpy_chk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4971310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--189769-- REDIR: 0x4a65690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--189769-- REDIR: 0x496d0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--189769-- REDIR: 0x496d3e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--189769-- REDIR: 0x4a65860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--189769-- REDIR: 0x4a60e00 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
+--189769-- REDIR: 0x4a68840 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--189769-- REDIR: 0x4a65480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+--189769-- REDIR: 0x490d150 (libc.so.6:setenv) redirected to 0x48542d0 (setenv)
+--189769-- REDIR: 0x4a65200 (libc.so.6:__strchr_avx2) redirected to 0x484e9f0 (index)
+--189769-- REDIR: 0x496d740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
+--189769-- REDIR: 0x4a68800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--189769-- REDIR: 0x4a609c0 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
+--189769-- REDIR: 0x496e520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
+--189769-- REDIR: 0x4a659e0 (libc.so.6:__strnlen_avx2) redirected to 0x484ecb0 (strnlen)
+--189769-- REDIR: 0x4a66d30 (libc.so.6:__strcpy_avx2) redirected to 0x484ee60 (strcpy)
+--189769-- REDIR: 0x4970fc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--189769-- REDIR: 0x4a68810 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4853940 (__memcpy_chk)
+--189769-- REDIR: 0x4a69000 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
+--189769-- REDIR: 0x4a670c0 (libc.so.6:__strncpy_avx2) redirected to 0x484efe0 (strncpy)
+--189769-- REDIR: 0x4a61340 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
+--189769-- REDIR: 0x4a67a20 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
+--189769-- REDIR: 0x4a621b0 (libc.so.6:__strcasecmp_avx) redirected to 0x484f560 (strcasecmp)
+--189769-- REDIR: 0x4a63830 (libc.so.6:__strncasecmp_avx) redirected to 0x484f640 (strncasecmp)
+--189769-- REDIR: 0x4a61b00 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
+==189769== Conditional jump or move depends on uninitialised value(s)
+==189769==    at 0x406537: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x406354: filter_spaces (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x40692D: handle_var (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405D2D: expand_cat (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405937: expand (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405889: make_new_arg (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405B3C: expander (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401DB3: run_cmd (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401CD1: exec_ast (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401464: process_command (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x4013B0: main (in /home/imeulema/cursus/minishell/minishell)
+==189769==  Uninitialised value was created by a stack allocation
+==189769==    at 0x4064C0: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769== 
+==189769== Conditional jump or move depends on uninitialised value(s)
+==189769==    at 0x40658F: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x406354: filter_spaces (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x40692D: handle_var (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405D2D: expand_cat (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405937: expand (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405889: make_new_arg (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405B3C: expander (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401DB3: run_cmd (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401CD1: exec_ast (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401464: process_command (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x4013B0: main (in /home/imeulema/cursus/minishell/minishell)
+==189769==  Uninitialised value was created by a stack allocation
+==189769==    at 0x4064C0: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769== 
+==189769== 
+==189769== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==189769== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==189769==    <inherited from parent>
+==189769== 
+==189769== Open AF_UNIX socket 41: <unknown>
+==189769==    <inherited from parent>
+==189769== 
+==189769== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
+==189769==    <inherited from parent>
+==189769== 
+==189769== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/env_vars.log
+==189769==    <inherited from parent>
+==189769== 
+==189769== 
+==189769== HEAP SUMMARY:
+==189769==     in use at exit: 208,983 bytes in 268 blocks
+==189769==   total heap usage: 1,554 allocs, 1,286 frees, 280,447 bytes allocated
+==189769== 
+==189769== Searching for pointers to 268 not-freed blocks
+==189769== Checked 249,512 bytes
+==189769== 
+==189769== 16 bytes in 1 blocks are definitely lost in loss record 8 of 67
+==189769==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==189769==    by 0x4110DD: ft_calloc (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x406320: filter_spaces (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x40692D: handle_var (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405D2D: expand_cat (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405937: expand (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405889: make_new_arg (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405B3C: expander (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401DB3: run_cmd (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401CD1: exec_ast (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401464: process_command (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x4013B0: main (in /home/imeulema/cursus/minishell/minishell)
+==189769== 
+==189769== LEAK SUMMARY:
+==189769==    definitely lost: 16 bytes in 1 blocks
+==189769==    indirectly lost: 0 bytes in 0 blocks
+==189769==      possibly lost: 0 bytes in 0 blocks
+==189769==    still reachable: 0 bytes in 0 blocks
+==189769==         suppressed: 208,967 bytes in 267 blocks
+==189769== 
+==189769== ERROR SUMMARY: 20 errors from 3 contexts (suppressed: 0 from 0)
+==189769== 
+==189769== 5 errors in context 1 of 3:
+==189769== Conditional jump or move depends on uninitialised value(s)
+==189769==    at 0x406537: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x406354: filter_spaces (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x40692D: handle_var (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405D2D: expand_cat (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405937: expand (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405889: make_new_arg (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405B3C: expander (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401DB3: run_cmd (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401CD1: exec_ast (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401464: process_command (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x4013B0: main (in /home/imeulema/cursus/minishell/minishell)
+==189769==  Uninitialised value was created by a stack allocation
+==189769==    at 0x4064C0: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769== 
+==189769== 
+==189769== 14 errors in context 2 of 3:
+==189769== Conditional jump or move depends on uninitialised value(s)
+==189769==    at 0x40658F: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x406354: filter_spaces (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x40692D: handle_var (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405D2D: expand_cat (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405937: expand (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405889: make_new_arg (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x405B3C: expander (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401DB3: run_cmd (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401CD1: exec_ast (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x401464: process_command (in /home/imeulema/cursus/minishell/minishell)
+==189769==    by 0x4013B0: main (in /home/imeulema/cursus/minishell/minishell)
+==189769==  Uninitialised value was created by a stack allocation
+==189769==    at 0x4064C0: make_new_entry (in /home/imeulema/cursus/minishell/minishell)
+==189769== 
+--189769-- 
+--189769-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--189769-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,782 bytes in 46 blocks
+==189769== 
+==189769== ERROR SUMMARY: 20 errors from 3 contexts (suppressed: 0 from 0)
