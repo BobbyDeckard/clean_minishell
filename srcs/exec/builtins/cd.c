@@ -124,15 +124,15 @@ int	cd(t_ast *node, int in_pipe)
 
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-	oldpwd = getcwd(NULL, 0);
-	if (!oldpwd)
-		getcwd_error(node);
-	if (!node->cmd.args[1])
+	else if (!node->cmd.args[1])
 		return (cd_home(node, in_pipe));
 	else if (node->cmd.args[2])
 		return (too_many_args_cd(node, in_pipe));
-	if (!ft_strncmp(node->cmd.args[1], "-", 2))
+	else if (!ft_strncmp(node->cmd.args[1], "-", 2))
 		return (!print_oldpwd(node, node->shell->envp, in_pipe));
+	oldpwd = getcwd(NULL, 0);
+	if (!oldpwd)
+		getcwd_error(node);
 	else if (chdir(node->cmd.args[1]) < 0)
 		return (chdir_error(node, oldpwd, 1, in_pipe));
 	make_updates(node, oldpwd);
