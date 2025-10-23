@@ -98,7 +98,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 	char	*new;
 
 	new = NULL;
-	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && ((cmd->args[i + 1] && is_whitespace(cmd->args[i + 1])) || !cmd->args[i + 1]))
+	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2) && ((cmd->args[i + 1] && is_whitespace(cmd->args[i + 1])) || !cmd->args[i + 1]) && !contains_dol(cmd->args[i]))
 	{
 		printf("Skipping new arg making\n");
 		return (cmd->args[i]);
