@@ -69,15 +69,23 @@ static char	*cat_arg(t_ast *node, char *str, char *arg)
 	int		len;
 
 	len = ft_strlen(str) + ft_strlen(arg) + 1;
-	new = (char *) malloc(len * sizeof(char));
+	printf("In cat_arg, about to allocate %d elements to new arg\n", len);
+	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 	{
 		if (str)
 			free(str);
 		malloc_error(node, node->shell, NULL);
 	}
-	ft_strlcpy(new, str, len);
+	if (str)
+	{
+		printf("About to cpy '%s' to new\n", str);
+		ft_strlcpy(new, str, len);
+	}
+	printf("About to cat '%s' to new\n", arg);
 	ft_strlcat(new, arg, len);
+	printf("Actual len of new arg: %d\n", (int) ft_strlen(new));
+	printf("New: '%s'\n", new);
 	if (str)
 		free(str);
 //	free(arg);

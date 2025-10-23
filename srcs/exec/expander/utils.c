@@ -68,12 +68,15 @@ int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	if (contains_contig_spaces(entry))
 		entry = filter_spaces(node, entry);
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
+	printf("Allocating %d elements for expanded string\n", len);
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
+	printf("Expanded string address: %p\n", new);
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
+	printf("Actual len of expanded string: %d\n", (int) ft_strlen(new));
 	free(cmd->args[index]);
 	cmd->args[index] = new;
 	return (0);
