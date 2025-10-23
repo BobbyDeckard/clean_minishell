@@ -72,14 +72,15 @@ static char	*cat_arg(t_ast *node, char *str, char *arg)
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
 	{
-		free(str);
+		if (str)
+			free(str);
 		malloc_error(node, node->shell, NULL);
 	}
 	ft_strlcpy(new, str, len);
 	ft_strlcat(new, arg, len);
 	if (str)
 		free(str);
-	free(arg);
+//	free(arg);
 	return (new);
 }
 
