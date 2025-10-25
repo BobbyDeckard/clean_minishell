@@ -12,8 +12,21 @@
 
 #include "../../incl/minishell.h"
 
+void	close_redirs(t_cmd *cmd);
 void	exec_minishell(t_ast *node, t_cmd cmd);
+void	unlink_heredoc(t_ast *node);
+int		make_redirs(t_ast *node);
 int		is_lone_redir_node(t_ast *node);
+int		set_exit_status(t_ast *node, int status);
+
+int	exec_solo_redirs(t_ast *node)
+{
+	if (make_redirs(node))
+		return (set_exit_status(node, 1));
+	close_redirs(&node->cmd);
+	unlink_heredoc(node);
+	return (set_exit_status(node, 0));
+}
 
 void	exec_cmd(t_ast *node, t_cmd cmd)
 {

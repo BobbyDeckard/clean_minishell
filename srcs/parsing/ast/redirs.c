@@ -49,12 +49,14 @@ int	count_redir_args(t_token *current)
 
 	if (!current)
 		return (0);
-//	printf("In count_redir_args()\n");
+	printf("In count_redir_args()\n");
+	if (current->content)
+		printf("Current token has content '%s'\n", current->content);
+	while (current && current->type == WHITESPACE)
+		current = current->next;
 	count = 0;
 	while (current && is_redir_arg(current))
 	{
-//		if (current->content)
-//			printf("Current token has content '%s'\n", current->content);
 		current = current->next;
 		count++;
 	}

@@ -15,7 +15,6 @@
 t_token	**tokenize_command(t_shell *shell, char *command);
 t_ast	*create_ast(t_shell *shell, t_token **list);
 void	clean_tokens(t_token **list);
-void	print_token_list(t_token **token_list);
 int		check_operators(t_token **list);
 int		check_parentheses(t_token **list);
 int		check_pipes(t_token **list);
@@ -58,6 +57,8 @@ static t_ast	*invalid_syntax(t_token **list, int err)
 	return (NULL);
 }
 
+void	print_token_list(t_token **token_list);
+void	print_tree(t_ast *ast);
 t_ast	*parse(char *command, t_shell *shell)
 {
 	t_token	**list;
@@ -73,8 +74,9 @@ t_ast	*parse(char *command, t_shell *shell)
 	err = check_syntax(shell, list);
 	if (err)
 		return (invalid_syntax(list, err));
-//	print_token_list(list);
+	print_token_list(list);
 	shell->tokens = list;
 	ast = create_ast(shell, list);
+	print_tree(ast);
 	return (ast);
 }

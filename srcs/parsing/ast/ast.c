@@ -60,7 +60,7 @@ t_ast	*parse_sequence(t_shell *shell, t_token **list, int start, int end)
 	else if (paren_pair(list, start, end))
 			return (parse_sequence(shell, list, start + 1, end - 1));	// seems excessively speficic..?
 	operator = find_op_precedence(list, start, end);
-//	printf("Found operator at position %d\n", operator);
+	printf("Found operator at position %d\n", operator);
 	if (operator == -1)
 		return (parse_non_op(shell, list, start, end));
 	return (parse_operator(shell, start, end, operator));

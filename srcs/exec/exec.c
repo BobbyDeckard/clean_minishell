@@ -22,6 +22,7 @@ void	unlink_heredoc(t_ast *node);
 int		exec_ast(t_ast *node);
 int		exec_builtin(t_ast *node, int in_pipe);
 int		exec_pipe(t_ast **children);
+int		exec_solo_redirs(t_ast *node);
 int		fork_error(void);
 int		is_builtin(t_cmd cmd);
 int		is_lone_redir_node(t_ast *node);
@@ -100,5 +101,7 @@ int	exec_ast(t_ast *node)
 		return (exec_or_if(node->children));
 	else if (node->type == NODE_PIPE && node->children)
 		return (exec_pipe(node->children));
+	else if (node->type == NODE_SOLO_REDIR && node->children)
+		return (exec_solo_redirs(node));
 	return (1);
 }

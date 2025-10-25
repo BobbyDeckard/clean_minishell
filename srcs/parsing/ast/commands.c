@@ -117,9 +117,9 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	t_ast	*node;
 	int		count;
 
-	count = count_redirs(list, start, end) + 1;
 	if (is_lone_redir(list, start, end))
 		return (parse_lone_redirs(shell, list, start, end));
+	count = count_redirs(list, start, end) + 1;
 	node = create_cmd_node(shell, count);
 	set_root(shell, node);
 	parse_redirs(shell, node, start, end);

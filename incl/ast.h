@@ -19,6 +19,7 @@ typedef struct s_ast	t_ast;
 typedef enum e_n_type
 {
 	NODE_REDIR_APPEND,
+	NODE_SOLO_REDIR,
 	NODE_REDIR_OUT,
 	NODE_REDIR_IN,
 	NODE_HEREDOC,
