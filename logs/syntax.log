@@ -1,349 +1,349 @@
-==194139== Memcheck, a memory error detector
-==194139== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==194139== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
-==194139== Command: ./minishell
-==194139== Parent PID: 194076
-==194139== 
---194139-- 
---194139-- Valgrind options:
---194139--    --leak-check=full
---194139--    --show-leak-kinds=all
---194139--    --track-origins=yes
---194139--    --verbose
---194139--    --track-fds=yes
---194139--    --log-file=logs/syntax.log
---194139--    --suppressions=ignore_readline_leaks.supp
---194139-- Contents of /proc/version:
---194139--   Linux version 6.6.72-x64v3-t2-jammy-xanmod1 (root@fv-az1245-313) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #xanmod1 SMP PREEMPT_DYNAMIC Sat Jan 18 01:41:53 UTC 2025
---194139-- 
---194139-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
---194139-- Page sizes: currently 4096, max supported 4096
---194139-- Valgrind library directory: /usr/libexec/valgrind
---194139-- Reading syms from /home/imeulema/cursus/minishell/minishell
---194139-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
---194139--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
---194139--   .. build-id is valid
---194139-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
---194139--    object doesn't have a symbol table
---194139--    object doesn't have a dynamic symbol table
---194139-- Scheduler: using generic scheduler lock implementation.
---194139-- Reading suppressions file: ignore_readline_leaks.supp
---194139-- Reading suppressions file: /usr/libexec/valgrind/default.supp
-==194139== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-194139-by-imeulema-on-???
-==194139== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-194139-by-imeulema-on-???
-==194139== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-194139-by-imeulema-on-???
-==194139== 
-==194139== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==194139== don't want to do, unless you know exactly what you're doing,
-==194139== or are doing some strange experiment):
-==194139==   /usr/bin/vgdb --pid=194139 ...command...
-==194139== 
-==194139== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==194139==   /path/to/gdb ./minishell
-==194139== and then give GDB the following command
-==194139==   target remote | /usr/bin/vgdb --pid=194139
-==194139== --pid is optional if only one valgrind process is running
-==194139== 
---194139-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
---194139-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
---194139-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
---194139--    object doesn't have a symbol table
---194139-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
---194139--    object doesn't have a symbol table
-==194139== WARNING: new redirection conflicts with existing -- ignoring it
---194139--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
---194139--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
---194139-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
---194139-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
---194139-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
---194139--    object doesn't have a symbol table
---194139-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
---194139--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
---194139--   .. build-id is valid
-==194139== WARNING: new redirection conflicts with existing -- ignoring it
---194139--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---194139--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==194139== WARNING: new redirection conflicts with existing -- ignoring it
---194139--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---194139--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
-==194139== WARNING: new redirection conflicts with existing -- ignoring it
---194139--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---194139--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==194139== WARNING: new redirection conflicts with existing -- ignoring it
---194139--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---194139--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
---194139-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
---194139--    object doesn't have a symbol table
---194139-- REDIR: 0x4970720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49709e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49702e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x498ecd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49716d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x498d540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x498d370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49715a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
-==194139== Preferring higher priority redirection:
---194139--     old: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
---194139--     new: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
---194139-- REDIR: 0x498d3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49719e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x498d9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x498d470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49701d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4979570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4973010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49706a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49708d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49713f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4970b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49717d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4972f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49707a0 (libc.so.6:strncat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x49fc2f0 (libc.so.6:__memcpy_chk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4971310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---194139-- REDIR: 0x4a65690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
---194139-- REDIR: 0x496d0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
---194139-- REDIR: 0x496d3e0 (libc.so.6:free) redirected to 0x484b210 (free)
---194139-- REDIR: 0x4a65860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
---194139-- REDIR: 0x4a60e00 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
---194139-- REDIR: 0x4a68840 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
---194139-- REDIR: 0x4a65480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
---194139-- REDIR: 0x490d150 (libc.so.6:setenv) redirected to 0x48542d0 (setenv)
---194139-- REDIR: 0x4a65200 (libc.so.6:__strchr_avx2) redirected to 0x484e9f0 (index)
---194139-- REDIR: 0x496d740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
---194139-- REDIR: 0x4a68800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
---194139-- REDIR: 0x4a609c0 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
---194139-- REDIR: 0x496e520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
---194139-- REDIR: 0x4a659e0 (libc.so.6:__strnlen_avx2) redirected to 0x484ecb0 (strnlen)
---194139-- REDIR: 0x4a66d30 (libc.so.6:__strcpy_avx2) redirected to 0x484ee60 (strcpy)
---194139-- REDIR: 0x4970fc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
---194139-- REDIR: 0x4a68810 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4853940 (__memcpy_chk)
---194139-- REDIR: 0x4a69000 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
---194139-- REDIR: 0x4a670c0 (libc.so.6:__strncpy_avx2) redirected to 0x484efe0 (strncpy)
---194139-- REDIR: 0x4a61340 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
---194139-- REDIR: 0x4a67a20 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
---194139-- REDIR: 0x4a621b0 (libc.so.6:__strcasecmp_avx) redirected to 0x484f560 (strcasecmp)
---194139-- REDIR: 0x4a63830 (libc.so.6:__strncasecmp_avx) redirected to 0x484f640 (strncasecmp)
---194139-- REDIR: 0x4a61b00 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
-==194140== 
-==194140== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194140== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194140==    <inherited from parent>
-==194140== 
-==194140== Open AF_UNIX socket 41: <unknown>
-==194140==    <inherited from parent>
-==194140== 
-==194140== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194140==    <inherited from parent>
-==194140== 
-==194140== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194140==    <inherited from parent>
-==194140== 
-==194140== 
-==194140== HEAP SUMMARY:
-==194140==     in use at exit: 208,637 bytes in 255 blocks
-==194140==   total heap usage: 641 allocs, 386 frees, 235,951 bytes allocated
-==194140== 
-==194140== Searching for pointers to 255 not-freed blocks
-==194140== Checked 249,560 bytes
-==194140== 
-==194140== LEAK SUMMARY:
-==194140==    definitely lost: 0 bytes in 0 blocks
-==194140==    indirectly lost: 0 bytes in 0 blocks
-==194140==      possibly lost: 0 bytes in 0 blocks
-==194140==    still reachable: 0 bytes in 0 blocks
-==194140==         suppressed: 208,637 bytes in 255 blocks
-==194140== 
-==194140== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194140-- 
---194140-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194140-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,452 bytes in 34 blocks
-==194140== 
-==194140== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==194141== 
-==194141== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194141== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194141==    <inherited from parent>
-==194141== 
-==194141== Open AF_UNIX socket 41: <unknown>
-==194141==    <inherited from parent>
-==194141== 
-==194141== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194141==    <inherited from parent>
-==194141== 
-==194141== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194141==    <inherited from parent>
-==194141== 
-==194141== 
-==194141== HEAP SUMMARY:
-==194141==     in use at exit: 208,676 bytes in 258 blocks
-==194141==   total heap usage: 655 allocs, 397 frees, 236,227 bytes allocated
-==194141== 
-==194141== Searching for pointers to 258 not-freed blocks
-==194141== Checked 249,600 bytes
-==194141== 
-==194141== LEAK SUMMARY:
-==194141==    definitely lost: 0 bytes in 0 blocks
-==194141==    indirectly lost: 0 bytes in 0 blocks
-==194141==      possibly lost: 0 bytes in 0 blocks
-==194141==    still reachable: 0 bytes in 0 blocks
-==194141==         suppressed: 208,676 bytes in 258 blocks
-==194141== 
-==194141== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194141-- 
---194141-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194141-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,491 bytes in 37 blocks
-==194141== 
-==194141== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==194142== 
-==194142== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194142== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194142==    <inherited from parent>
-==194142== 
-==194142== Open AF_UNIX socket 41: <unknown>
-==194142==    <inherited from parent>
-==194142== 
-==194142== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194142==    <inherited from parent>
-==194142== 
-==194142== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194142==    <inherited from parent>
-==194142== 
-==194142== 
-==194142== HEAP SUMMARY:
-==194142==     in use at exit: 208,714 bytes in 261 blocks
-==194142==   total heap usage: 669 allocs, 408 frees, 236,499 bytes allocated
-==194142== 
-==194142== Searching for pointers to 261 not-freed blocks
-==194142== Checked 249,640 bytes
-==194142== 
-==194142== LEAK SUMMARY:
-==194142==    definitely lost: 0 bytes in 0 blocks
-==194142==    indirectly lost: 0 bytes in 0 blocks
-==194142==      possibly lost: 0 bytes in 0 blocks
-==194142==    still reachable: 0 bytes in 0 blocks
-==194142==         suppressed: 208,714 bytes in 261 blocks
-==194142== 
-==194142== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194142-- 
---194142-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194142-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,529 bytes in 40 blocks
-==194142== 
-==194142== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==194155== 
-==194155== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194155== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194155==    <inherited from parent>
-==194155== 
-==194155== Open AF_UNIX socket 41: <unknown>
-==194155==    <inherited from parent>
-==194155== 
-==194155== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194155==    <inherited from parent>
-==194155== 
-==194155== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194155==    <inherited from parent>
-==194155== 
-==194155== 
-==194155== HEAP SUMMARY:
-==194155==     in use at exit: 208,865 bytes in 270 blocks
-==194155==   total heap usage: 752 allocs, 482 frees, 238,158 bytes allocated
-==194155== 
-==194155== Searching for pointers to 270 not-freed blocks
-==194155== Checked 249,816 bytes
-==194155== 
-==194155== LEAK SUMMARY:
-==194155==    definitely lost: 0 bytes in 0 blocks
-==194155==    indirectly lost: 0 bytes in 0 blocks
-==194155==      possibly lost: 0 bytes in 0 blocks
-==194155==    still reachable: 0 bytes in 0 blocks
-==194155==         suppressed: 208,865 bytes in 270 blocks
-==194155== 
-==194155== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194155-- 
---194155-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194155-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,680 bytes in 49 blocks
-==194155== 
-==194155== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==194156== 
-==194156== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194156== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194156==    <inherited from parent>
-==194156== 
-==194156== Open AF_UNIX socket 41: <unknown>
-==194156==    <inherited from parent>
-==194156== 
-==194156== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194156==    <inherited from parent>
-==194156== 
-==194156== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194156==    <inherited from parent>
-==194156== 
-==194156== 
-==194156== HEAP SUMMARY:
-==194156==     in use at exit: 208,865 bytes in 270 blocks
-==194156==   total heap usage: 752 allocs, 482 frees, 238,158 bytes allocated
-==194156== 
-==194156== Searching for pointers to 270 not-freed blocks
-==194156== Checked 249,816 bytes
-==194156== 
-==194156== LEAK SUMMARY:
-==194156==    definitely lost: 0 bytes in 0 blocks
-==194156==    indirectly lost: 0 bytes in 0 blocks
-==194156==      possibly lost: 0 bytes in 0 blocks
-==194156==    still reachable: 0 bytes in 0 blocks
-==194156==         suppressed: 208,865 bytes in 270 blocks
-==194156== 
-==194156== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194156-- 
---194156-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194156-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,680 bytes in 49 blocks
-==194156== 
-==194156== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==194139== 
-==194139== FILE DESCRIPTORS: 7 open (3 std) at exit.
-==194139== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
-==194139==    <inherited from parent>
-==194139== 
-==194139== Open AF_UNIX socket 41: <unknown>
-==194139==    <inherited from parent>
-==194139== 
-==194139== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251023T144819/ptyhost.log
-==194139==    <inherited from parent>
-==194139== 
-==194139== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
-==194139==    <inherited from parent>
-==194139== 
-==194139== 
-==194139== HEAP SUMMARY:
-==194139==     in use at exit: 208,955 bytes in 276 blocks
-==194139==   total heap usage: 822 allocs, 546 frees, 239,544 bytes allocated
-==194139== 
-==194139== Searching for pointers to 276 not-freed blocks
-==194139== Checked 249,480 bytes
-==194139== 
-==194139== LEAK SUMMARY:
-==194139==    definitely lost: 0 bytes in 0 blocks
-==194139==    indirectly lost: 0 bytes in 0 blocks
-==194139==      possibly lost: 0 bytes in 0 blocks
-==194139==    still reachable: 0 bytes in 0 blocks
-==194139==         suppressed: 208,955 bytes in 276 blocks
-==194139== 
-==194139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
---194139-- 
---194139-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
---194139-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,770 bytes in 55 blocks
-==194139== 
-==194139== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169196== Memcheck, a memory error detector
+==2169196== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2169196== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==2169196== Command: ./minishell
+==2169196== Parent PID: 2169139
+==2169196== 
+--2169196-- 
+--2169196-- Valgrind options:
+--2169196--    --leak-check=full
+--2169196--    --show-leak-kinds=all
+--2169196--    --track-origins=yes
+--2169196--    --verbose
+--2169196--    --track-fds=yes
+--2169196--    --log-file=logs/syntax.log
+--2169196--    --suppressions=ignore_readline_leaks.supp
+--2169196-- Contents of /proc/version:
+--2169196--   Linux version 6.6.72-x64v3-t2-jammy-xanmod1 (root@fv-az1245-313) (gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #xanmod1 SMP PREEMPT_DYNAMIC Sat Jan 18 01:41:53 UTC 2025
+--2169196-- 
+--2169196-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--2169196-- Page sizes: currently 4096, max supported 4096
+--2169196-- Valgrind library directory: /usr/libexec/valgrind
+--2169196-- Reading syms from /home/imeulema/cursus/minishell/minishell
+--2169196-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--2169196--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
+--2169196--   .. build-id is valid
+--2169196-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--2169196--    object doesn't have a symbol table
+--2169196--    object doesn't have a dynamic symbol table
+--2169196-- Scheduler: using generic scheduler lock implementation.
+--2169196-- Reading suppressions file: ignore_readline_leaks.supp
+--2169196-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==2169196== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-2169196-by-imeulema-on-???
+==2169196== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-2169196-by-imeulema-on-???
+==2169196== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-2169196-by-imeulema-on-???
+==2169196== 
+==2169196== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==2169196== don't want to do, unless you know exactly what you're doing,
+==2169196== or are doing some strange experiment):
+==2169196==   /usr/bin/vgdb --pid=2169196 ...command...
+==2169196== 
+==2169196== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==2169196==   /path/to/gdb ./minishell
+==2169196== and then give GDB the following command
+==2169196==   target remote | /usr/bin/vgdb --pid=2169196
+==2169196== --pid is optional if only one valgrind process is running
+==2169196== 
+--2169196-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--2169196-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--2169196-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--2169196--    object doesn't have a symbol table
+--2169196-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--2169196--    object doesn't have a symbol table
+==2169196== WARNING: new redirection conflicts with existing -- ignoring it
+--2169196--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--2169196--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--2169196-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--2169196-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--2169196-- Reading syms from /usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+--2169196--    object doesn't have a symbol table
+--2169196-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--2169196--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
+--2169196--   .. build-id is valid
+==2169196== WARNING: new redirection conflicts with existing -- ignoring it
+--2169196--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2169196--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==2169196== WARNING: new redirection conflicts with existing -- ignoring it
+--2169196--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2169196--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==2169196== WARNING: new redirection conflicts with existing -- ignoring it
+--2169196--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2169196--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==2169196== WARNING: new redirection conflicts with existing -- ignoring it
+--2169196--     old: 0x0496dc60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--2169196--     new: 0x0496dc60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--2169196-- Reading syms from /usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
+--2169196--    object doesn't have a symbol table
+--2169196-- REDIR: 0x4970720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49709e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49702e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x498ecd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49716d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x498d540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971c10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x498d370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49715a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==2169196== Preferring higher priority redirection:
+--2169196--     old: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--2169196--     new: 0x04a68840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--2169196-- REDIR: 0x498d3f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49719e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x498d9b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971a70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x498d470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49701d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971b60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4979570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4973010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971b10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49706a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49708d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49713f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4970b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49717d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971ac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4972f80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49707a0 (libc.so.6:strncat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x49fc2f0 (libc.so.6:__memcpy_chk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4971310 (libc.so.6:strstr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--2169196-- REDIR: 0x4a65690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--2169196-- REDIR: 0x496d0a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--2169196-- REDIR: 0x496d3e0 (libc.so.6:free) redirected to 0x484b210 (free)
+--2169196-- REDIR: 0x4a65860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--2169196-- REDIR: 0x4a60e00 (libc.so.6:__strncmp_avx2) redirected to 0x484f3e0 (strncmp)
+--2169196-- REDIR: 0x4a68840 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4852880 (memmove)
+--2169196-- REDIR: 0x4a65480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+--2169196-- REDIR: 0x490d150 (libc.so.6:setenv) redirected to 0x48542d0 (setenv)
+--2169196-- REDIR: 0x4a65200 (libc.so.6:__strchr_avx2) redirected to 0x484e9f0 (index)
+--2169196-- REDIR: 0x496d740 (libc.so.6:realloc) redirected to 0x484dc50 (realloc)
+--2169196-- REDIR: 0x4a68800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--2169196-- REDIR: 0x4a609c0 (libc.so.6:__strcmp_avx2) redirected to 0x484fbd0 (strcmp)
+--2169196-- REDIR: 0x496e520 (libc.so.6:calloc) redirected to 0x484d9d0 (calloc)
+--2169196-- REDIR: 0x4a659e0 (libc.so.6:__strnlen_avx2) redirected to 0x484ecb0 (strnlen)
+--2169196-- REDIR: 0x4a66d30 (libc.so.6:__strcpy_avx2) redirected to 0x484ee60 (strcpy)
+--2169196-- REDIR: 0x4970fc0 (libc.so.6:__GI_strstr) redirected to 0x4853ae0 (__strstr_sse2)
+--2169196-- REDIR: 0x4a68810 (libc.so.6:__memcpy_chk_avx_unaligned_erms) redirected to 0x4853940 (__memcpy_chk)
+--2169196-- REDIR: 0x4a69000 (libc.so.6:__memset_avx2_unaligned_erms) redirected to 0x4852770 (memset)
+--2169196-- REDIR: 0x4a670c0 (libc.so.6:__strncpy_avx2) redirected to 0x484efe0 (strncpy)
+--2169196-- REDIR: 0x4a61340 (libc.so.6:__memchr_avx2) redirected to 0x484fd50 (memchr)
+--2169196-- REDIR: 0x4a67a20 (libc.so.6:__stpcpy_avx2) redirected to 0x4852130 (stpcpy)
+--2169196-- REDIR: 0x4a621b0 (libc.so.6:__strcasecmp_avx) redirected to 0x484f560 (strcasecmp)
+--2169196-- REDIR: 0x4a63830 (libc.so.6:__strncasecmp_avx) redirected to 0x484f640 (strncasecmp)
+--2169196-- REDIR: 0x4a61b00 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4852010 (bcmp)
+==2169197== 
+==2169197== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169197== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169197==    <inherited from parent>
+==2169197== 
+==2169197== Open AF_UNIX socket 41: <unknown>
+==2169197==    <inherited from parent>
+==2169197== 
+==2169197== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169197==    <inherited from parent>
+==2169197== 
+==2169197== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169197==    <inherited from parent>
+==2169197== 
+==2169197== 
+==2169197== HEAP SUMMARY:
+==2169197==     in use at exit: 208,637 bytes in 255 blocks
+==2169197==   total heap usage: 643 allocs, 388 frees, 236,030 bytes allocated
+==2169197== 
+==2169197== Searching for pointers to 255 not-freed blocks
+==2169197== Checked 249,608 bytes
+==2169197== 
+==2169197== LEAK SUMMARY:
+==2169197==    definitely lost: 0 bytes in 0 blocks
+==2169197==    indirectly lost: 0 bytes in 0 blocks
+==2169197==      possibly lost: 0 bytes in 0 blocks
+==2169197==    still reachable: 0 bytes in 0 blocks
+==2169197==         suppressed: 208,637 bytes in 255 blocks
+==2169197== 
+==2169197== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169197-- 
+--2169197-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169197-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,452 bytes in 34 blocks
+==2169197== 
+==2169197== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169198== 
+==2169198== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169198== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169198==    <inherited from parent>
+==2169198== 
+==2169198== Open AF_UNIX socket 41: <unknown>
+==2169198==    <inherited from parent>
+==2169198== 
+==2169198== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169198==    <inherited from parent>
+==2169198== 
+==2169198== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169198==    <inherited from parent>
+==2169198== 
+==2169198== 
+==2169198== HEAP SUMMARY:
+==2169198==     in use at exit: 208,676 bytes in 258 blocks
+==2169198==   total heap usage: 657 allocs, 399 frees, 236,306 bytes allocated
+==2169198== 
+==2169198== Searching for pointers to 258 not-freed blocks
+==2169198== Checked 249,648 bytes
+==2169198== 
+==2169198== LEAK SUMMARY:
+==2169198==    definitely lost: 0 bytes in 0 blocks
+==2169198==    indirectly lost: 0 bytes in 0 blocks
+==2169198==      possibly lost: 0 bytes in 0 blocks
+==2169198==    still reachable: 0 bytes in 0 blocks
+==2169198==         suppressed: 208,676 bytes in 258 blocks
+==2169198== 
+==2169198== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169198-- 
+--2169198-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169198-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,491 bytes in 37 blocks
+==2169198== 
+==2169198== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169199== 
+==2169199== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169199== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169199==    <inherited from parent>
+==2169199== 
+==2169199== Open AF_UNIX socket 41: <unknown>
+==2169199==    <inherited from parent>
+==2169199== 
+==2169199== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169199==    <inherited from parent>
+==2169199== 
+==2169199== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169199==    <inherited from parent>
+==2169199== 
+==2169199== 
+==2169199== HEAP SUMMARY:
+==2169199==     in use at exit: 208,714 bytes in 261 blocks
+==2169199==   total heap usage: 671 allocs, 410 frees, 236,578 bytes allocated
+==2169199== 
+==2169199== Searching for pointers to 261 not-freed blocks
+==2169199== Checked 249,688 bytes
+==2169199== 
+==2169199== LEAK SUMMARY:
+==2169199==    definitely lost: 0 bytes in 0 blocks
+==2169199==    indirectly lost: 0 bytes in 0 blocks
+==2169199==      possibly lost: 0 bytes in 0 blocks
+==2169199==    still reachable: 0 bytes in 0 blocks
+==2169199==         suppressed: 208,714 bytes in 261 blocks
+==2169199== 
+==2169199== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169199-- 
+--2169199-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169199-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,529 bytes in 40 blocks
+==2169199== 
+==2169199== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169200== 
+==2169200== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169200== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169200==    <inherited from parent>
+==2169200== 
+==2169200== Open AF_UNIX socket 41: <unknown>
+==2169200==    <inherited from parent>
+==2169200== 
+==2169200== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169200==    <inherited from parent>
+==2169200== 
+==2169200== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169200==    <inherited from parent>
+==2169200== 
+==2169200== 
+==2169200== HEAP SUMMARY:
+==2169200==     in use at exit: 208,865 bytes in 270 blocks
+==2169200==   total heap usage: 754 allocs, 484 frees, 238,237 bytes allocated
+==2169200== 
+==2169200== Searching for pointers to 270 not-freed blocks
+==2169200== Checked 249,864 bytes
+==2169200== 
+==2169200== LEAK SUMMARY:
+==2169200==    definitely lost: 0 bytes in 0 blocks
+==2169200==    indirectly lost: 0 bytes in 0 blocks
+==2169200==      possibly lost: 0 bytes in 0 blocks
+==2169200==    still reachable: 0 bytes in 0 blocks
+==2169200==         suppressed: 208,865 bytes in 270 blocks
+==2169200== 
+==2169200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169200-- 
+--2169200-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169200-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,680 bytes in 49 blocks
+==2169200== 
+==2169200== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169201== 
+==2169201== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169201== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169201==    <inherited from parent>
+==2169201== 
+==2169201== Open AF_UNIX socket 41: <unknown>
+==2169201==    <inherited from parent>
+==2169201== 
+==2169201== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169201==    <inherited from parent>
+==2169201== 
+==2169201== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169201==    <inherited from parent>
+==2169201== 
+==2169201== 
+==2169201== HEAP SUMMARY:
+==2169201==     in use at exit: 208,865 bytes in 270 blocks
+==2169201==   total heap usage: 754 allocs, 484 frees, 238,237 bytes allocated
+==2169201== 
+==2169201== Searching for pointers to 270 not-freed blocks
+==2169201== Checked 249,864 bytes
+==2169201== 
+==2169201== LEAK SUMMARY:
+==2169201==    definitely lost: 0 bytes in 0 blocks
+==2169201==    indirectly lost: 0 bytes in 0 blocks
+==2169201==      possibly lost: 0 bytes in 0 blocks
+==2169201==    still reachable: 0 bytes in 0 blocks
+==2169201==         suppressed: 208,865 bytes in 270 blocks
+==2169201== 
+==2169201== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169201-- 
+--2169201-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169201-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,680 bytes in 49 blocks
+==2169201== 
+==2169201== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2169196== 
+==2169196== FILE DESCRIPTORS: 7 open (3 std) at exit.
+==2169196== Open file descriptor 103: /usr/share/code/v8_context_snapshot.bin
+==2169196==    <inherited from parent>
+==2169196== 
+==2169196== Open AF_UNIX socket 41: <unknown>
+==2169196==    <inherited from parent>
+==2169196== 
+==2169196== Open file descriptor 40: /home/imeulema/.config/Code/logs/20251025T131629/ptyhost.log
+==2169196==    <inherited from parent>
+==2169196== 
+==2169196== Open file descriptor 3: /home/imeulema/cursus/minishell/logs/syntax.log
+==2169196==    <inherited from parent>
+==2169196== 
+==2169196== 
+==2169196== HEAP SUMMARY:
+==2169196==     in use at exit: 208,955 bytes in 276 blocks
+==2169196==   total heap usage: 824 allocs, 548 frees, 239,623 bytes allocated
+==2169196== 
+==2169196== Searching for pointers to 276 not-freed blocks
+==2169196== Checked 249,528 bytes
+==2169196== 
+==2169196== LEAK SUMMARY:
+==2169196==    definitely lost: 0 bytes in 0 blocks
+==2169196==    indirectly lost: 0 bytes in 0 blocks
+==2169196==      possibly lost: 0 bytes in 0 blocks
+==2169196==    still reachable: 0 bytes in 0 blocks
+==2169196==         suppressed: 208,955 bytes in 276 blocks
+==2169196== 
+==2169196== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+--2169196-- 
+--2169196-- used_suppression:     62 ignore_readline_leaks ignore_readline_leaks.supp:3 suppressed: 204,185 bytes in 221 blocks
+--2169196-- used_suppression:      4 ignore_rl_history_leaks ignore_readline_leaks.supp:10 suppressed: 4,770 bytes in 55 blocks
+==2169196== 
+==2169196== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
