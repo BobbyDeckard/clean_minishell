@@ -83,10 +83,12 @@ int	remove_arg(t_cmd *cmd, int i)
 {
 	if (!cmd->args[i])
 		return (0);
-//	printf("About to remove arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("About to remove arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 	free(cmd->args[i]);
+	printf("Freed arg[%d] (%p)\n", i, cmd->args[i]);
 	while (cmd->args[i])
 	{
+//		printf("Replacing arg[%d] (%p): '%s' by arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i], i + 1, cmd->args[i + 1], cmd->args[i + 1]);
 		cmd->args[i] = cmd->args[i + 1];
 		i++;
 	}

@@ -112,7 +112,13 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 				continue ;
 		}
 		new = cat_arg(node, new, cmd->args[i]);
-		remove_arg(cmd, i);
+		if (cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
+		{
+			free(cmd->args[i]);
+			break ;
+		}
+		else
+			remove_arg(cmd, i);
 	}
 	return (new);
 }
@@ -122,27 +128,34 @@ void	expander(t_ast *node, t_cmd *cmd)
 	int	i;
 
 	i = -1;
-//	printf("Args before expansion:\n");
-//	while (cmd->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-//	printf("\n");
+	printf("Args before expansion:\n");
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 	i = 0;
 	while (cmd->args[i])
 	{
+		printf("Handling arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+		printf("Current args:\n");
+		int j = -1;
+		while (cmd->args[++j])
+			printf("arg[%d] (%p): '%s'\n", j, cmd->args[j], cmd->args[j]);
 		if (is_whitespace(cmd->args[i]))
 		{
-//			printf("Found arg[%d] to be a whitespace, removing\n", i);
+			printf("Found arg[%d] to be a whitespace, removing\n", i);
 			remove_arg(cmd, i);
 		}
 		else
 		{
+			printf("About to replace arg[%d] (%p): '%s'\n\n", i, cmd->args[i], cmd->args[i]);
 			cmd->args[i] = make_new_arg(node, cmd, i);
+			printf("\nNew arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
 			i++;
 		}
 	}
-//	i = -1;
-//	printf("Args after expansion:\n");
-//	while (cmd->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
-//	printf("\n");
+	i = -1;
+	printf("Args after expansion:\n");
+	while (cmd->args[++i])
+		printf("arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i]);
+	printf("\n");
 }
