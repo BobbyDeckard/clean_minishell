@@ -34,15 +34,11 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu)
 	if (!isatty(STDIN_FILENO))
 	{
 		dup2(*stdin_bu, STDIN_FILENO);
-		printf("About to close stdin backup\n");
 		if (close(*stdin_bu))
 			perror("close");
 		*stdin_bu = -1;
-		printf("Closed stdin backup\n");
-		printf("About to close cmd->fd_in\n");
 		if (close(cmd->fd_in))
 			perror("close");
-		printf("Closed cmd->fd_in\n");
 		unlink(node->rdr.file);
 		cmd->fd_in = -1;
 		write(STDOUT_FILENO, "\n", 1);
@@ -80,10 +76,8 @@ static void	heredoc_end_end(t_ast *node, t_cmd *cmd, char *del)
 {
 	if (cmd->fd_in >= 0)
 	{
-		printf("About to close cmd->fd_in\n");
 		if (close(cmd->fd_in))
 			perror("close");
-		printf("Closed cmd->fd_in\n");
 		cmd->fd_in = open(node->rdr.file, O_RDONLY);
 		if (cmd->fd_in < 0)
 			perror(node->rdr.file);
@@ -103,15 +97,8 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
-	printf("In make_heredoc, type is: ");
-	if (node->rdr.type == RDR_HEREDOC_EXP)
-		printf("heredoc_exp\n");
-	else if (node->rdr.type == RDR_HEREDOC)
-		printf("heredoc\n");
-	else
-		printf("wrong type\n");
 	make_del(node);
-	printf("Made delimiter: '%s'\n", node->rdr.file);
+//	printf("Made delimiter: '%s'\n", node->rdr.file);
 	del = copy_delimiter(node);
 	free(node->rdr.file);
 	node->rdr.file = NULL;

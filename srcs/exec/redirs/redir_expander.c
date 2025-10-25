@@ -116,11 +116,11 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 {
 	int	i;
 
-	printf("Redir args before expansion:\n");
-	i = -1;
-	while (rdr->args[++i])
-		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
-	printf("\n");
+//	printf("Redir args before expansion:\n");
+//	i = -1;
+//	while (rdr->args[++i])
+//		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
+//	printf("\n");
 	i = -1;
 	while (rdr->args[++i])
 	{
@@ -131,11 +131,11 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 		else if (contains_dol(rdr->args[i]))
 			rdr_expand(node, rdr, node->shell->envp, i);
 	}
-	printf("Redir args after expansion:\n");
-	i = -1;
-	while (rdr->args[++i])
-		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
-	printf("\n");
+//	printf("Redir args after expansion:\n");
+//	i = -1;
+//	while (rdr->args[++i])
+//		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
+//	printf("\n");
 	/*
 	i = -1;
 	len = 0;
