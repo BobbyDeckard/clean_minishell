@@ -16,8 +16,10 @@ void	sigint_heredoc_handler(int sig)
 {
 	(void) sig;
 	g_signal_received = SIGINT;
+	printf("About to close stdin\n");
 	if (close(STDIN_FILENO))
 		perror("close");
+	printf("Closed stdin\n");
 }
 
 void	init_sp_handler_sig(t_ast *node, struct sigaction *new,
@@ -36,8 +38,10 @@ int stdin_bu)
 	sigaction(SIGINT, old, NULL);
 	if (stdin_bu >= 0)
 	{
+		printf("About to close stdin backup\n");
 		if (close(stdin_bu))
 			perror("close");
+		printf("Closed stdin backup\n");
 	}
 	node->shell->state = INTERACTIVE;
 	g_signal_received = 0;

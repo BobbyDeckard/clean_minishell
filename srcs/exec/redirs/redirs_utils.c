@@ -38,6 +38,7 @@ void	make_file_name(t_ast *node)
 
 void	close_redirs(t_cmd *cmd)
 {
+	printf("In close_redirs\n");
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
 		if (close(cmd->fd_in))
@@ -50,6 +51,7 @@ void	close_redirs(t_cmd *cmd)
 			perror("close");
 		cmd->fd_out = STDOUT_FILENO;
 	}
+	printf("Exiting close_redirs\n");
 }
 
 int	check_redirs(t_ast *node, t_cmd *cmd)

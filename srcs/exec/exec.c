@@ -57,7 +57,9 @@ static int	run_cmd(t_ast *node)
 		return (fork_error());
 	else if (pid == 0)
 		run_child_process(node);
+	printf("About to call close_redirs from command execution\n");
 	close_redirs(&node->cmd);
+	printf("Closed redirs from command execution\n");
 	waitpid(pid, &status, 0);
 	unlink_heredoc(node);
 	if (WIFEXITED(status))

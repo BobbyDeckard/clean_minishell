@@ -34,9 +34,15 @@ static void	loop_sigint(t_ast *node, t_cmd *cmd, int *stdin_bu)
 	if (!isatty(STDIN_FILENO))
 	{
 		dup2(*stdin_bu, STDIN_FILENO);
-		close(*stdin_bu);
+		printf("About to close stdin backup\n");
+		if (close(*stdin_bu))
+			perror("close");
+		*stdin_bu = -1;
+		printf("Closed stdin backup\n");
+		printf("About to close cmd->fd_in\n");
 		if (close(cmd->fd_in))
 			perror("close");
+		printf("Closed cmd->fd_in\n");
 		unlink(node->rdr.file);
 		cmd->fd_in = -1;
 		write(STDOUT_FILENO, "\n", 1);
@@ -74,8 +80,10 @@ static void	heredoc_end_end(t_ast *node, t_cmd *cmd, char *del)
 {
 	if (cmd->fd_in >= 0)
 	{
+		printf("About to close cmd->fd_in\n");
 		if (close(cmd->fd_in))
 			perror("close");
+		printf("Closed cmd->fd_in\n");
 		cmd->fd_in = open(node->rdr.file, O_RDONLY);
 		if (cmd->fd_in < 0)
 			perror(node->rdr.file);
