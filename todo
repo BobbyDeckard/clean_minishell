@@ -5,7 +5,6 @@ o	get_name_len gives us 1 too much ?
 o	Check how bash behaves with different types of contiguous whitespaces
 	=> We currently only filter regular spaces (=32)
 o	Check that echo $"USER" behaves the same on school's bash
-o	Dive into heredoc problems
 o	Battery testing
 o	Chase those leaks (and conditional moves on unset variables ??)
 
@@ -24,3 +23,5 @@ x	Be absolutely sure the second stage parsing in expander works properly!
 		=> world is not cat
 	x	Find a way to correctly parse echo hello " " there without removing the quoted space
 x	Apply expander changes to all variations
+x	Dive into heredoc problems
+	x	Heredoc expansion fails to be called
