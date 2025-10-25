@@ -99,7 +99,7 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 		clean_ast(node);
 		malloc_error(shell->root, shell, shell->tokens);
 	}
-	node->rdr.type = convert_rdr_type(type);
+	node->children[i]->rdr.type = convert_rdr_type(type);
 	alloc_redir_args(shell, node, count, i);
 //	printf("About to return i = %d\n", i);
 	return (i);

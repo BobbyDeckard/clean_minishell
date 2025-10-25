@@ -103,6 +103,13 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
+	printf("In make_heredoc, type is: ");
+	if (node->rdr.type == RDR_HEREDOC_EXP)
+		printf("heredoc_exp\n");
+	else if (node->rdr.type == RDR_HEREDOC)
+		printf("heredoc\n");
+	else
+		printf("wrong type\n");
 	make_del(node);
 	printf("Made delimiter: '%s'\n", node->rdr.file);
 	del = copy_delimiter(node);
