@@ -59,7 +59,7 @@ static char	*reinit_oldpwd(char **env_cpy, int i)
 {
 	char	*new;
 
-	new = (char *) malloc(7 * sizeof(char));
+	new = (char *) ft_calloc(7, sizeof(char));
 	if (!new)
 		env_cpy_malloc_error(env_cpy, i);
 	ft_strlcpy(new, "OLDPWD", 7);
@@ -84,7 +84,7 @@ static char	**init_env_cpy(char **envp, int entries)
 			continue ;
 		}
 		len = ft_strlen(envp[i]) + 1;
-		env_cpy[i] = (char *) malloc(len * sizeof(char));
+		env_cpy[i] = (char *) ft_calloc(len, sizeof(char));
 		if (!env_cpy[i])
 			env_cpy_malloc_error(env_cpy, i);
 		ft_strlcpy(env_cpy[i], envp[i], len);

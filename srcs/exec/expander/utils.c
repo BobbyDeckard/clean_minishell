@@ -12,7 +12,7 @@
 
 #include "../../../incl/minishell.h"
 
-char	*filter_spaces(t_ast *node, char *entry);
+char	*filter_spaces(t_ast *node, char *entry, int *flag);
 int		contains_contig_spaces(const char *str);
 
 int	get_name_len(const char *str)
@@ -57,16 +57,18 @@ int	handle_exit_status(t_ast *node, t_cmd *cmd, int index)
 int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 {
 	char	*new;
+	int		filtered_spaces;
 	int		name_len;
 	int		len;
 	int		i;
 
 	i = 0;
+	filtered_spaces = 0;
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
 	name_len = get_name_len(cmd->args[index] + i);
 	if (contains_contig_spaces(entry))
-		entry = filter_spaces(node, entry);
+		entry = filter_spaces(node, entry, &filtered_spaces);
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
@@ -74,6 +76,8 @@ int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
+	if (filtered_spaces)
+		free(entry);
 	free(cmd->args[index]);
 	cmd->args[index] = new;
 	return (0);

@@ -88,6 +88,7 @@ static void	make_new_entry(char *str, char *old, int len)
 
 	i = -1;
 	j = -1;
+	space = 1;
 	while (old[++i] && j + 2 < len)
 	{
 		if (old[i] == ' ' && !space)
@@ -106,7 +107,7 @@ static void	make_new_entry(char *str, char *old, int len)
 	}
 }
 
-char	*filter_spaces(t_ast *node, char *entry)
+char	*filter_spaces(t_ast *node, char *entry, int *flag)
 {
 	char	*new;
 	int		len;
@@ -116,5 +117,6 @@ char	*filter_spaces(t_ast *node, char *entry)
 	if (!new)
 		malloc_error(node, node->shell, NULL);
 	make_new_entry(new, entry, len);
+	*flag = 1;
 	return (new);
 }
