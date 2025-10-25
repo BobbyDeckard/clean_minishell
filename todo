@@ -4,9 +4,7 @@ o	get_name_len gives us 1 too much ?
 	=> only when first getting name ?
 o	Check how bash behaves with different types of contiguous whitespaces
 	=> We currently only filter regular spaces (=32)
-o	Check that echo $"USER" behaves the same on school's bash
 o	Battery testing
-o	Chase those leaks (and conditional moves on unset variables ??)
 
 DONE
 x	Check export's parsing with quotes (both single and double quotes)
@@ -25,3 +23,5 @@ x	Be absolutely sure the second stage parsing in expander works properly!
 x	Apply expander changes to all variations
 x	Dive into heredoc problems
 	x	Heredoc expansion fails to be called
+x	Check that echo $"USER" behaves the same on school's bash
+x	Chase those leaks (and conditional moves on unset variables ??)
