@@ -32,6 +32,7 @@ elif [ $option = "6" ]; then
 	test=syntax
 elif [ $option = "7" ]; then
 	filename+=parsing.txt
+	test=parsing
 elif [ $option = "8" ]; then
 	filename+=mix.txt
 	test=mix
