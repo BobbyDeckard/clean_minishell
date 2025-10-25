@@ -13,7 +13,7 @@
 #include "../../../incl/minishell.h"
 
 char	*get_name(t_ast *node, const char *str);
-char	*filter_spaces(t_ast *node, char *entry);
+char	*filter_spaces(t_ast *node, char *entry, int *flag);
 int		contains_contig_spaces(const char *str);
 int		get_name_len(const char *str);
 
@@ -58,16 +58,18 @@ int	rdr_remove_var(t_ast *node, t_rdr *rdr, int index)
 static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 {
 	char	*new;
+	int		filtered_spaces;
 	int		name_len;
 	int		len;
 	int		i;
 
 	i = 0;
+	filtered_spaces = 0;
 	while (rdr->args[index][i] && rdr->args[index][i] != '$')
 		i++;
 	name_len = get_name_len(rdr->args[index] + i);
 	if (contains_contig_spaces(entry))
-		entry = filter_spaces(node, entry);
+		entry = filter_spaces(node, entry, &filtered_spaces);
 	len = ft_strlen(rdr->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) malloc(len * sizeof(char));
 	if (!new)
