@@ -74,9 +74,7 @@ t_ast	*parse(char *command, t_shell *shell)
 	err = check_syntax(shell, list);
 	if (err)
 		return (invalid_syntax(list, err));
-	print_token_list(list);
 	shell->tokens = list;
 	ast = create_ast(shell, list);
-	print_tree(ast);
 	return (ast);
 }
