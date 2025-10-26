@@ -89,7 +89,7 @@ int	get_entry_index(const char *name, char **envp)
 		j = 0;
 		while (name[j] && name[j] == envp[i][j])
 			j++;
-		if (envp[i][j] == '=' && !name[j])
+		if ((envp[i][j] == '=' || !envp[i][j]) && !name[j])
 			break ;
 	}
 	return (i);
