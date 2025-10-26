@@ -21,6 +21,22 @@ int		check_pipes(t_token **list);
 int		check_quotes(t_shell *shell, t_token **list);
 int		check_redirections(t_token **list);
 
+static int	check_words(t_token **list)
+{
+	t_token	*current;
+	int		word;
+
+	word = 0;
+	current = *list;
+	while (current)
+	{
+		if (current->type == WORD)
+			word = 1;
+		current = current->next;
+	}
+	return (!word);
+}
+
 static int	check_syntax(t_shell *shell, t_token **list)
 {
 	if (!*list)
@@ -35,12 +51,15 @@ static int	check_syntax(t_shell *shell, t_token **list)
 		return (5);
 	else if (check_parentheses(list))
 		return (6);
+	if (check_words(list))
+		return (7);
 	return (0);
 }
 
 static t_ast	*invalid_syntax(t_token **list, int err)
 {
-	ft_putstr_fd("minishell: syntax error in command (", 2);
+	if (err != 7)
+		ft_putstr_fd("minishell: syntax error in command (", 2);
 	if (err == 1)
 		ft_putstr_fd("unexpected tokenization error)\n", 2);
 	else if (err == 2)
