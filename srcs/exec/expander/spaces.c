@@ -80,6 +80,15 @@ static int	get_shortened_len(const char *str, int count, int space)
 	return (count);
 }
 
+static int	is_whitespace_char(const char c)
+{
+	if (c >= 9 && c <= 13)
+		return (1);
+	else if (c == 32)
+		return (1);
+	return (0);
+}
+
 static void	make_new_entry(char *str, char *old, int len)
 {
 	int	space;
@@ -91,12 +100,12 @@ static void	make_new_entry(char *str, char *old, int len)
 	space = 1;
 	while (old[++i] && j + 2 < len)
 	{
-		if (old[i] == ' ' && !space)
+		if (is_whitespace_char(old[i]) && !space)
 		{
 			space = !space;
-			str[++j] = old[i];
+			str[++j] = ' ';
 		}
-		else if (old[i] == ' ')
+		else if (is_whitespace_char(old[i]))
 			continue ;
 		else
 		{
@@ -105,6 +114,8 @@ static void	make_new_entry(char *str, char *old, int len)
 			str[++j] = old[i];
 		}
 	}
+	if (str[j] == ' ')
+		str[j] = 0;
 }
 
 char	*filter_spaces(t_ast *node, char *entry, int *flag)
