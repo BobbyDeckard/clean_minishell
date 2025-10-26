@@ -43,6 +43,7 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 			return (handle_var(node, cmd, envp[i] + j + 1, index));
 		}
 	}
+	printf("About to remove var of name '%s'\n", name);
 	free(name);
 	return (remove_var(node, cmd, index));
 }
