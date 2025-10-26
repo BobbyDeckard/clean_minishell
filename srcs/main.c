@@ -60,7 +60,10 @@ int	main(int ac, char **av, char **envp)
 	char	*command;
 
 	if (ac != 1)
+	{
+		ft_putstr_fd("Minishell doesn't take any argument.\n", 2);
 		return (1);
+	}
 	(void) av;
 	shell = init_shell(envp);
 	while (1)
