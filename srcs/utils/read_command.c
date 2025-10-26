@@ -23,7 +23,7 @@ static void	truncate_cwd(char cwd[256], char full[256])
 		i--;
 	i++;
 	ft_strlcpy(cwd, "\e[1;32m", 256);
-	if (ft_strlen(full + i) + 13 < 256)
+	if (ft_strncmp(full, "/", 2) && ft_strlen(full + i) + 13 < 256)
 		ft_strlcat(cwd, full + i, 256);
 	else
 		ft_strlcat(cwd, "minishell", 256);
