@@ -45,8 +45,5 @@ char	*read_command(t_shell *shell)
 	}
 	truncate_cwd(cwd, full);
 	command = readline(cwd);
-//	(void) cwd;
-//	(void) shell;
-//	command = readline("> ");
 	return (command);
 }
