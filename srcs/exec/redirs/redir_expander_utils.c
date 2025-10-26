@@ -132,6 +132,17 @@ int	rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
 			return (rdr_handle_var(node, rdr, envp[i] + j + 1, index));
 		}
 	}
+	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
+	{
+		if (index == 0 && !rdr->args[1])
+		{
+			ft_putstr_fd("minishell: $", 2);
+			ft_putstr_fd(name, 2);
+			ft_putstr_fd(": ambiguous redirect\n", 2);
+		}
+		free(name);
+		return (rdr_remove_arg(rdr, index));
+	}
 	free(name);
 	return (rdr_remove_var(node, rdr, index));
 }

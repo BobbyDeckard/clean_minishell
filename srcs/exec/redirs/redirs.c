@@ -21,7 +21,10 @@ static void	redir_error(t_ast *node)
 	char	*str;
 	int		len;
 
-	len = ft_strlen(node->rdr.file) + 12;
+	if (node->rdr.file)
+		len = ft_strlen(node->rdr.file) + 12;
+	else
+		return ;
 	str = (char *) malloc(len * sizeof(char));
 	if (!str)
 		malloc_error(node, node->shell, NULL);
@@ -79,6 +82,8 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 			perror("close");
 	}
 	make_file_name(node);
+	if (!node->rdr.file)
+		cmd->fd_out = -1;
 	if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
 		cmd->fd_out = -1;
 	else

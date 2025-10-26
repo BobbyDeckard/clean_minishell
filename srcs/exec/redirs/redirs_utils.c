@@ -22,6 +22,8 @@ void	make_file_name(t_ast *node)
 	int		i;
 
 	redir_expander(node, &node->rdr);
+	if (!node->rdr.args[0])
+		return ;
 	len = 1;
 	i = -1;
 	while (node->rdr.args[++i])
