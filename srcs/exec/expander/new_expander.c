@@ -43,8 +43,14 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 			return (handle_var(node, cmd, envp[i] + j + 1, index));
 		}
 	}
-	printf("About to remove var of name '%s'\n", name);
+	if (ft_strlen(name) + 1 == ft_strlen(cmd->args[index]))
+	{
+		free(name);
+		printf("About to remove arg\n");
+		return (remove_arg(cmd, index));
+	}
 	free(name);
+	printf("About to remove var\n");
 	return (remove_var(node, cmd, index));
 }
 
@@ -56,10 +62,20 @@ static int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index)
 //	variable was removed but the rest of the argument remains.
 static int	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 {
+	int	i = -1;
+	printf("\nArgs before expansion\n");
+	while (cmd->args[++i])
+		printf("arg[%d]: '%s'\n", i, cmd->args[i]);
 	while (contains_dol(cmd->args[index]))
 	{
 		if (expand_cat(node, cmd, envp, index))
+		{
+			i = -1;
+			printf("\nArgs after expansion\n");
+			while (cmd->args[++i])
+				printf("arg[%d]: '%s'\n", i, cmd->args[i]);
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -103,6 +119,11 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 		return (cmd->args[i]);
 	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
 	{
+		int	j = -1;
+		printf("Args at beginning of loop in make_new_arg:\n");
+		while (cmd->args[++j])
+			printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+		printf("Current arg being handled: arg[%d]: '%s'\n", i, cmd->args[i]);
 		if (!ft_strncmp(cmd->args[i], "'", 2))
 			handle_single_quotes(node, cmd, i);
 		else if (!ft_strncmp(cmd->args[i], "\"", 2))
@@ -121,6 +142,8 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 		else
 			remove_arg(cmd, i);
 	}
+	if (!new && is_whitespace(cmd->args[i]))
+		return (cmd->args[i]);
 	return (new);
 }
 
@@ -136,6 +159,12 @@ void	expander(t_ast *node, t_cmd *cmd)
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
+			int j = -1;
+			printf("Args after making new arg[%d]: '%s'\n", i, cmd->args[i]);
+			while (cmd->args[++j])
+				printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+			if (is_whitespace(cmd->args[i]))
+	   			remove_arg(cmd, i);
 			i++;
 		}
 	}

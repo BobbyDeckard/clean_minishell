@@ -87,10 +87,10 @@ int	remove_arg(t_cmd *cmd, int i)
 {
 	if (!cmd->args[i])
 		return (0);
+	printf("Removing arg[%d]\n", i);
 	free(cmd->args[i]);
 	while (cmd->args[i])
 	{
-//		printf("Replacing arg[%d] (%p): '%s' by arg[%d] (%p): '%s'\n", i, cmd->args[i], cmd->args[i], i + 1, cmd->args[i + 1], cmd->args[i + 1]);
 		cmd->args[i] = cmd->args[i + 1];
 		i++;
 	}
@@ -104,6 +104,7 @@ int	remove_var(t_ast *node, t_cmd *cmd, int index)
 	int		len;
 	int		i;
 
+	printf("\nIn remove_var()\n");
 	i = 0;
 	while (cmd->args[index][i] && cmd->args[index][i] != '$')
 		i++;
