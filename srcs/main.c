@@ -22,7 +22,6 @@ void	setup_execution_signals(char *command, t_shell *shell);
 void	setup_interactive_signals(t_shell *shell);
 int		exec_ast(t_ast *node);
 
-void	print_tree(t_ast *ast);
 static t_shell	process_command(char *command, t_shell shell)
 {
 	t_ast	*ast;
