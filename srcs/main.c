@@ -34,8 +34,6 @@ static t_shell	process_command(char *command, t_shell shell)
 	ast = parse(command, &shell);
 	if (ast)
 	{
-//		printf("\nAST:\n");
-//		print_tree(ast);
 		shell.exit_status = exec_ast(ast);
 		clean_ast(ast);
 		shell.root = NULL;

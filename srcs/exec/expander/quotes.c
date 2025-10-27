@@ -84,7 +84,6 @@ int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	remove_arg(cmd, start);
 	if (!len)
 	{
-		printf("Found empty double quotes\n");
 		remove_arg(cmd, start);
 		return (1);
 	}

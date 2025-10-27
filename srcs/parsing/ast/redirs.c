@@ -19,7 +19,6 @@ int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count);
 
 int	is_redir_arg(t_token *token)
 {
-//	printf("In is_redir_arg()\n");
 	if (token->type == WORD)
 		return (1);
 	else if (token->type == DOUBLE_QUOTE)
@@ -49,9 +48,6 @@ int	count_redir_args(t_token *current)
 
 	if (!current)
 		return (0);
-//	printf("In count_redir_args()\n");
-//	if (current->content)
-//		printf("Current token has content '%s'\n", current->content);
 	while (current && current->type == WHITESPACE)
 		current = current->next;
 	count = 0;
@@ -70,7 +66,6 @@ static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *
 	int			i;
 	int			j;
 
-//	printf("In parse_redir()\n");
 	if (!current)
 		return (NULL);
 	type = current->type;
@@ -95,13 +90,10 @@ static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *
 	return (current);
 }
 
-//	Where do we attribute the type of redir ?
-//	Make sure we still handle single redirs
 void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 {
 	t_token	*current;
 
-//	printf("In parse_redirs()\n");
 	if (!node->children)
 		return ;
 	current = get_token_at_index(shell->tokens, start);

@@ -68,7 +68,6 @@ static int	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
 
 static void	expand_inside_double(t_ast *node, t_rdr *rdr, int i)
 {
-	// make sure replacing if by while for contains_dol works...
 	while (rdr->args[++i] && ft_strncmp(rdr->args[i], "\"", 2))
 	{
 		while (contains_dol(rdr->args[i]))
@@ -120,11 +119,6 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 {
 	int	i;
 
-//	printf("Redir args before expansion:\n");
-//	i = -1;
-//	while (rdr->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
-//	printf("\n");
 	i = -1;
 	while (rdr->args[++i])
 	{
@@ -135,23 +129,4 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 		else if (contains_dol(rdr->args[i]))
 			i -= rdr_expand(node, rdr, node->shell->envp, i);
 	}
-//	printf("Redir args after expansion:\n");
-//	i = -1;
-//	while (rdr->args[++i])
-//		printf("arg[%d] (%p): '%s'\n", i, rdr->args[i], rdr->args[i]);
-//	printf("\n");
-	/*
-	i = -1;
-	len = 0;
-	while (rdr->args[++i])
-		len += ft_strlen(rdr->args[i]);
-	if (!len)
-		return ;
-	rdr->file = (char *) ft_calloc(++len, sizeof(char));
-	if (!rdr->file)
-		malloc_error(node, node->shell, NULL);
-	i = -1;
-	while (rdr->args[++i])
-		ft_strlcat(rdr->file, rdr->args[i], len);
-	*/
 }
