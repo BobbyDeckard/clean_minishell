@@ -17,7 +17,7 @@ int		contains_dol(const char *str);
 int		rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index);
 int		rdr_remove_arg(t_rdr *rdr, int i);
 
-static void	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
+static int	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 {
 	char	*new;
 	int		len;
@@ -32,7 +32,7 @@ static void	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 	if (!len)
 	{
 		rdr_remove_arg(rdr, start);
-		return ;
+		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -53,43 +53,46 @@ static void	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 		else
 			free(new);
 	}
+	return (0);
 }
 
-static void	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
+static int	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
 {
 	while (contains_dol(rdr->args[index]))
 	{
 		if (rdr_expand_cat(node, rdr, envp, index))
-			return ;
+			return (1);
 	}
+	return (0);
 }
 
 static void	expand_inside_double(t_ast *node, t_rdr *rdr, int i)
 {
+	// make sure replacing if by while for contains_dol works...
 	while (rdr->args[++i] && ft_strncmp(rdr->args[i], "\"", 2))
 	{
-		if (contains_dol(rdr->args[i]))
+		while (contains_dol(rdr->args[i]))
 			rdr_double_expand(node, rdr, node->shell->envp, i);
 	}
 }
 
-static void	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
+static int	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 {
 	char	*new;
 	int		len;
 	int		end;
 	int		i;
 
-	expand_inside_double(node, rdr, start);
 	len = 0;
 	end = start;
+	expand_inside_double(node, rdr, start);
 	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "\"", 2))
 		len += ft_strlen(rdr->args[end]);
 	rdr_remove_arg(rdr, start);
 	if (!len)
 	{
 		rdr_remove_arg(rdr, start);
-		return ;
+		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -110,6 +113,7 @@ static void	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 		else
 			free(new);
 	}
+	return (0);
 }
 
 void	redir_expander(t_ast *node, t_rdr *rdr)
@@ -125,11 +129,11 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 	while (rdr->args[++i])
 	{
 		if (!ft_strncmp(rdr->args[i], "'", 2))
-			handle_single_quotes(node, rdr, i);
+			i -= handle_single_quotes(node, rdr, i);
 		else if (!ft_strncmp(rdr->args[i], "\"", 2))
-			handle_double_quotes(node, rdr, i);
+			i -= handle_double_quotes(node, rdr, i);
 		else if (contains_dol(rdr->args[i]))
-			rdr_expand(node, rdr, node->shell->envp, i);
+			i -= rdr_expand(node, rdr, node->shell->envp, i);
 	}
 //	printf("Redir args after expansion:\n");
 //	i = -1;

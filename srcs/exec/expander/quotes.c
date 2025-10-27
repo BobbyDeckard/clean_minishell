@@ -17,7 +17,7 @@ void	expand(t_ast *node, t_cmd *cmd, char **envp, int index);
 int		contains_dol(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
 
-void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
+int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 {
 	char	*new;
 	int		len;
@@ -32,7 +32,7 @@ void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 	if (!len)
 	{
 		remove_arg(cmd, start);
-		return ;
+		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -53,6 +53,7 @@ void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 		else
 			free(new);
 	}
+	return (0);
 }
 
 static void	expand_inside_double(t_ast *node, t_cmd *cmd, int i)
@@ -68,7 +69,7 @@ static void	expand_inside_double(t_ast *node, t_cmd *cmd, int i)
 //	This condition prevents an empty string to be added as argument,
 //	but we maybe want to still get an empty string for example for
 //	exit "" ?
-void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
+int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 {
 	char	*new;
 	int		len;
@@ -83,8 +84,9 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	remove_arg(cmd, start);
 	if (!len)
 	{
+		printf("Found empty double quotes\n");
 		remove_arg(cmd, start);
-		return ;
+		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -105,4 +107,5 @@ void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 		else
 			free(new);
 	}
+	return (0);
 }

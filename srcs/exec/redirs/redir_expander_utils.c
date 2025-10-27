@@ -77,6 +77,8 @@ static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 	ft_strlcpy(new, rdr->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, rdr->args[index] + i + name_len, len);
+	if (filtered_spaces)
+		free(entry);
 	free(rdr->args[index]);
 	rdr->args[index] = new;
 	return (0);

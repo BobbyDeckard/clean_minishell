@@ -16,6 +16,7 @@ char	*get_name(t_ast *node, const char *str);
 int		contains_dol(const char *str);
 int		get_name_len(const char *str);
 int		rdr_handle_exit_status(t_ast *node, t_rdr *rdr, int index);
+int		rdr_remove_arg(t_rdr *rdr, int i);
 int		rdr_remove_var(t_ast *node, t_rdr *rdr, int index);
 
 static int	rdr_double_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
@@ -61,6 +62,11 @@ static int	rdr_double_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index
 			free(name);
 			return (rdr_double_handle_var(node, rdr, envp[i] + j + 1, index));
 		}
+	}
+	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
+	{
+		free(name);
+		return (rdr_remove_arg(rdr, index));
 	}
 	free(name);
 	return (rdr_remove_var(node, rdr, index));

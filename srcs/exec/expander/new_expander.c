@@ -13,9 +13,9 @@
 #include "../../../incl/minishell.h"
 
 char	*get_name(t_ast *node, const char *str);
-void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
 void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start);
 int		contains_dol(const char *str);
+int		handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
 int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 int		is_whitespace(const char *str);
@@ -127,19 +127,31 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 		if (!ft_strncmp(cmd->args[i], "'", 2))
 			handle_single_quotes(node, cmd, i);
 		else if (!ft_strncmp(cmd->args[i], "\"", 2))
-			handle_double_quotes(node, cmd, i);
+		{
+			if (handle_double_quotes(node, cmd, i))
+				continue ;
+		}
 		else if (contains_dol(cmd->args[i]))
 		{
 			if (expand(node, cmd, node->shell->envp, i))
 				continue ;
 		}
+		printf("args after handling quotes:\n");
+		j = -1;
+		while (cmd->args[++j])
+			printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+		printf("About to cat_arg '%s' into new\n", cmd->args[i]);
+		// would have loved to simply add a ft_strncmp with " and with ' to prevent it being
+		// cat'ed into new, but if the argument is something like "'", it would delete a valid
+		// argument.
+		// Maybe, if we find empty quotes, manually cat nothing into new and continue ?
 		new = cat_arg(node, new, cmd->args[i]);
 		if (cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
 		{
 			free(cmd->args[i]);
 			break ;
 		}
-		else
+		else if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2))
 			remove_arg(cmd, i);
 	}
 	if (!new && is_whitespace(cmd->args[i]))
