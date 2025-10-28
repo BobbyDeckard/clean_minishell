@@ -14,7 +14,6 @@
 
 void	cmd_not_found(t_ast *node, char *name);
 void	invalid_name(t_cmd *cmd, char *name);
-int		is_lone_redir_node(t_ast *node);
 
 //	This function is only called when trying to update _= env var.
 //	Thus, the i given is the index of the _ env var entry in our envp.
@@ -98,10 +97,4 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	}
 	cmd->path = NULL;
 	cmd_not_found(node, name);
-	if (!is_lone_redir_node(node))
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(name, 2);
-		ft_putstr_fd(": command not found\n", 2);
-	}
 }
