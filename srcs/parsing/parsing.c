@@ -20,6 +20,7 @@ int		check_parentheses(t_token **list);
 int		check_pipes(t_token **list);
 int		check_quotes(t_shell *shell, t_token **list);
 int		check_redirections(t_token **list);
+int		is_redir_token(t_t_type type);
 
 static int	check_words(t_token **list)
 {
@@ -31,6 +32,8 @@ static int	check_words(t_token **list)
 	while (current)
 	{
 		if (current->type == WORD)
+			word = 1;
+		else if (is_redir_token(current->type))
 			word = 1;
 		current = current->next;
 	}
