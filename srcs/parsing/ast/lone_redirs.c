@@ -15,7 +15,6 @@
 static t_ast	*check_remaining_lone_redirs(t_shell *shell, t_ast *node,
 					int start, int end);
 t_n_type		convert_types(t_t_type type);
-t_token			*skip_spaces(t_token **list, int *start, int end);
 t_ast			*create_node(t_shell *shell, t_n_type type);
 char			*make_arg(t_shell *shell, t_ast *node, t_token *current);
 void			alloc_redir_args(t_shell *shell, t_ast *node, int count);

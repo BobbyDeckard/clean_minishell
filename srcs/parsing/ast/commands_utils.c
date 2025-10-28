@@ -13,7 +13,6 @@
 #include "../../../incl/minishell.h"
 
 t_token	*skip_redir(t_token **list, int *start, int end);
-void	clean_ast(t_ast *ast);
 int		is_redir_token(t_t_type type);
 
 static int	is_arg_token(t_t_type type)

@@ -15,12 +15,9 @@
 int	contains_dol(const char *str);
 int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index);
 int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
-int	handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start);
-int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
 int	is_whitespace(const char *str);
 int	remove_arg(t_cmd *cmd, int i);
-int	remove_var(t_ast *node, t_cmd *cmd, int index);
 
 //	If the environment variable exists, expand_cat always returns 0.
 //	If the environment variable doesn't exist,

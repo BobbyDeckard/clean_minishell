@@ -13,13 +13,9 @@
 #include "../../../incl/minishell.h"
 
 char	*get_name(t_ast *node, const char *str);
-void	cat_args(t_ast *node, t_cmd *cmd, int i);
-void	handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
-void	handle_single_quotes(t_ast *node, t_cmd *cmd, int start);
 int		get_name_len(const char *str);
 int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
 int		handle_var(t_ast *node, t_cmd *cmd, char *entry, int index);
-int		is_whitespace(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
 int		remove_var(t_ast *node, t_cmd *cmd, int index);
 

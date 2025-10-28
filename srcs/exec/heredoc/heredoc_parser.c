@@ -14,7 +14,6 @@
 
 int	get_double_body(t_rdr *rdr, char *file, int i, int len);
 int	get_single_body(t_rdr *rdr, char *file, int i, int len);
-int	is_whitespace(const char *str);
 
 static int	count_double_body(t_rdr *rdr, int i)
 {

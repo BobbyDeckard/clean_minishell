@@ -12,7 +12,6 @@
 
 #include "../../../incl/minishell.h"
 
-int	contains_contig_spaces(const char *str);
 int	is_whitespace_char(const char c);
 
 static int	get_last_non_space(const char *str)

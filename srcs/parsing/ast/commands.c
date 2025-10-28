@@ -14,7 +14,6 @@
 
 t_ast	*create_node(t_shell *shell, t_n_type type);
 t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end);
-void	find_cmd_scope(t_ast *node, t_token **list, int *start, int *end);
 void	parse_args(t_shell *shell, t_ast *node, int start, int end);
 void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int		count_redirs(t_token **list, int start, int end);

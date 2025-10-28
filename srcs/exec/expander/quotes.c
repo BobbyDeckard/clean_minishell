@@ -13,7 +13,6 @@
 #include "../../../incl/minishell.h"
 
 void	double_expand(t_ast *node, t_cmd *cmd, char **envp, int index);
-void	expand(t_ast *node, t_cmd *cmd, char **envp, int index);
 int		contains_dol(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
 
