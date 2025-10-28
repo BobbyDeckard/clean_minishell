@@ -77,7 +77,7 @@ void	clean_ast(t_ast *ast)
 {
 	int	i;
 
-//	close_all_redirs(ast);
+	close_all_redirs(ast);
 	if (ast->children)
 	{
 		i = -1;
