@@ -67,6 +67,7 @@ int index)
 	}
 	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
 	{
+		printf("About to remove arg[%d] in rdr_double_expand_cat\n", index);
 		free(name);
 		return (rdr_remove_arg(rdr, index));
 	}
