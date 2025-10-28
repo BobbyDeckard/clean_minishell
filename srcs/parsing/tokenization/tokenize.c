@@ -44,7 +44,8 @@ t_token *token)
 	return (token);
 }
 
-t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list, t_token *token)
+t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list,
+t_token *token)
 {
 	token->type = WHITESPACE;
 	token->content = (char *) malloc(2 * sizeof(char));
@@ -58,7 +59,8 @@ t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list, t_t
 	return (token);
 }
 
-t_token	*tokenize_word(t_shell *shell, char **command, t_token **list, t_token *token)
+t_token	*tokenize_word(t_shell *shell, char **command, t_token **list,
+t_token *token)
 {
 	int	len;
 

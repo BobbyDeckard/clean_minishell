@@ -14,7 +14,7 @@
 
 t_token	*tokenize_and(char **command, t_token *token);
 t_token	*tokenize_double_quote(t_shell *shell, char **command, t_token **list,
-t_token *token);
+			t_token *token);
 t_token	*tokenize_heredoc(char **command, t_token *token);
 t_token	*tokenize_or(char **command, t_token *token);
 t_token	*tokenize_paren_close(char **command, t_token *token);
@@ -24,9 +24,11 @@ t_token	*tokenize_redir_append(char **command, t_token *token);
 t_token	*tokenize_redir_in(char **command, t_token *token);
 t_token	*tokenize_redir_out(char **command, t_token *token);
 t_token	*tokenize_single_quote(t_shell *shell, char **command, t_token **list,
-t_token *token);
-t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list, t_token *token);
-t_token	*tokenize_word(t_shell *shell, char **command, t_token **list, t_token *token);
+			t_token *token);
+t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list,
+			t_token *token);
+t_token	*tokenize_word(t_shell *shell, char **command, t_token **list,
+			t_token *token);
 
 static t_token	*init_token(t_shell *shell, t_token **tokens)
 {
@@ -57,7 +59,8 @@ static void	link_token(t_token **list, t_token *token)
 	token->prev = current;
 }
 
-static t_token	*make_token(t_shell *shell, char **command, t_token **list, t_token *token)
+static t_token	*make_token(t_shell *shell, char **command, t_token **list,
+t_token *token)
 {
 	if (**command == '|' && *(*command + 1) && *(*command + 1) == '|')
 		return (tokenize_or(command, token));
@@ -100,7 +103,7 @@ static t_token	**extract_token(t_shell *shell, char **command, t_token **list)
 t_token	**tokenize_command(t_shell *shell, char *command)
 {
 	t_token		**tokens;
-	
+
 	tokens = (t_token **) malloc(sizeof(t_token *));
 	if (!tokens)
 		malloc_error(NULL, shell, NULL);
