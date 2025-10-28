@@ -16,6 +16,8 @@ t_ast	*create_node(t_shell *shell, t_n_type type);
 t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end);
 void	clean_ast(t_ast *root);
 void	cleanup(t_ast *node);
+int		count_commands(t_token **list, int start);
+int		is_command_token(t_t_type type);
 int		is_redir_token(t_t_type type);
 
 static t_ast	*create_pipe_node(t_shell *shell, int count)

@@ -14,6 +14,7 @@
 
 t_token	*skip_redir(t_token **list, int *start, int end);
 void	clean_ast(t_ast *ast);
+int		is_redir_token(t_t_type type);
 
 static int	is_arg_token(t_t_type type)
 {
@@ -54,7 +55,7 @@ t_token	*skip_spaces(t_token **list, int *start, int end)
 {
 	t_token	*current;
 
-	current = get_token_at_index(list, start);
+	current = get_token_at_index(list, *start);
 	while (current && current->type == WHITESPACE && *start <= end)
 	{
 		current = current->next;

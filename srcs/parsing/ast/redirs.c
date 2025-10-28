@@ -13,6 +13,7 @@
 #include "../../../incl/minishell.h"
 
 t_n_type	convert_types(t_t_type type);
+t_token		*skip_spaces(t_token **list, int *start, int end);
 char		*extract_content(t_token *token);
 void		parse_redir_error(t_shell *shell, t_ast *node, int i);
 int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type,

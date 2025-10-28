@@ -12,6 +12,10 @@
 
 #include "../../../incl/minishell.h"
 
+t_token	*skip_spaces(t_token **list, int *start, int end);
+int		is_redir_arg(t_token *token);
+int		is_redir_token(t_t_type type);
+
 int	is_lone_redir(t_token **list, int start, int end)
 {
 	t_token	*current;

@@ -19,7 +19,9 @@ t_token			*skip_spaces(t_token **list, int *start, int end);
 t_ast			*create_node(t_shell *shell, t_n_type type);
 char			*make_arg(t_shell *shell, t_ast *node, t_token *current);
 void			alloc_redir_args(t_shell *shell, t_ast *node, int count);
+void			parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int				count_redir_args(t_token *current);
+int				count_redirs(t_token **list, int start, int end);
 int				is_redir_arg(t_token *token);
 int				is_redir_token(t_t_type type);
 

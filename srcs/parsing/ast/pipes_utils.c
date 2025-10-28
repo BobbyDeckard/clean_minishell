@@ -12,6 +12,8 @@
 
 #include "../../../incl/minishell.h"
 
+int	is_redir_token(t_t_type type);
+
 static int	is_logop(t_t_type type)
 {
 	if (type == AND || type == OR)
@@ -26,7 +28,7 @@ static int	is_paren(t_t_type type)
 	return (0);
 }
 
-static int	is_command_token(t_t_type type)
+int	is_command_token(t_t_type type)
 {
 	if (type == WORD)
 		return (1);
@@ -39,7 +41,7 @@ static int	is_command_token(t_t_type type)
 	return (0);
 }
 
-static int	count_commands(t_token **list, int start)
+int	count_commands(t_token **list, int start)
 {
 	t_token	*current;
 	int		count;
