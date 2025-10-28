@@ -60,10 +60,9 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 {
 	if (!ft_strncmp(cmd->args[i], "'", 2))
 	{
-		handle_single_quotes(node, cmd, i);
-		if (!cmd->args[i])
-			return (0);
-		return (1);
+		if (handle_single_quotes(node, cmd, i))
+			return (1);
+		return (0);
 	}
 	else if (!ft_strncmp(cmd->args[i], "\"", 2))
 	{
