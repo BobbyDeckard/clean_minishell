@@ -30,40 +30,66 @@ int		make_fork(void);
 int		make_pipe(int fd[2]);
 int		waitpids(t_ast *node, int *pids, int cmd_count);
 
-/*
 static void	print_open_fds(const char *name)
 {
 	fprintf(stderr, "%d\tPrinting open fds for %s\n", getpid(), name);
 	for (int fd = 0; fd < 1024; fd++)
     	if (fcntl(fd, F_GETFD) != -1)
         	fprintf(stderr, "%d\thas fd %d open\n", getpid(), fd);
+	fprintf(stderr, "\n");
 }
-*/
 
-static void	exec_pipe_cmd(t_ast *node, int fd[2][2], int i, int count)
+static void	exec_pipe_cmd(t_ast **child, int fd[2][2], int i, int count)
 {
-	if (is_lone_redir_node(node))
-		clean_exit(node->root, 0);
-	dup_fds(node);
+	int	fd_in;
+
+	if (is_lone_redir_node(child[i]))
+		clean_exit(child[i]->root, 0);
+	dup_fds(child[i]);
+	fprintf(stderr, "%d\tOpen fds after dup call:\n", getpid());
+	print_open_fds(child[i]->cmd.args[0]);
 	close_pipes(fd, i, count);
-	exec_cmd(node, node->cmd);
-	clean_exit(node->root, 1);
+	fprintf(stderr, "%d\tOpen fds after close_pipes call:\n", getpid());
+	print_open_fds(child[i]->cmd.args[0]);
+	exec_cmd(child[i], child[i]->cmd);
+	if (child[i + 1])
+	{
+		fd_in = child[i + 1]->cmd.fd_in;
+		fprintf(stderr, "%d\tAttempting manual cleanup.\n\tfd_in set to: %d\n", getpid(), fd_in);
+		if (fd_in != STDIN_FILENO && fd_in > 0)
+		{
+//			char *str = (char *) malloc(512);
+//			str = ft_itoa(getpid());
+//			ft_strlcat(str, "\tclose", 512);
+//			if (close(fd_in))
+//				perror(str);
+//			free(str);
+			child[i + 1]->cmd.fd_in = STDIN_FILENO;
+		}
+	}
+	fprintf(stderr, "%d\tOpen fds before call to clean_exit:\n", getpid());
+	print_open_fds(child[i]->cmd.args[0]);
+	clean_exit(child[i]->root, 1);
 }
 
-void	exec_pipe_child(t_ast *node, int fd[2][2], int i, int count)
+void	exec_pipe_child(t_ast **child, int fd[2][2], int i, int count)
 {
 	int	status;
 
-	setup_child_signals(node);
+	setup_child_signals(child[i]);
 	status = 1;
-	if (node->type == NODE_CMD && !is_builtin(node->cmd))
-		exec_pipe_cmd(node, fd, i, count);
-	else if (node->type == NODE_CMD)
+	fprintf(stderr, "%d\tOpen fds before dup call:\n", getpid());
+	print_open_fds(child[i]->cmd.args[0]);
+	if (child[i]->type == NODE_CMD && !is_builtin(child[i]->cmd))
+		exec_pipe_cmd(child, fd, i, count);
+	else if (child[i]->type == NODE_CMD)
 	{
-		dup_fds(node);
-		status = exec_builtin(node, 1);
+		dup_fds(child[i]);
+		fprintf(stderr, "%d\tOpen fds after dup call:\n", getpid());
+		status = exec_builtin(child[i], 1);
 	}
-	cleanup(node);
+	cleanup(child[i]);
+	fprintf(stderr, "%d\tOpen fds after cleanup:\n", getpid());
 	exit(status);
 }
 
@@ -94,11 +120,13 @@ static int	run_pipe(t_ast **child, int *pids, int count)
 			return (waitpids(*child, pids, count));
 		if (child[i]->type == NODE_CMD)
 			prep_cmd(child[i]);
+		fprintf(stderr, "%d\tPipe run %d about to fork. Open fds:\n", getpid(), i);
+		print_open_fds("main");
 		pids[i] = make_fork();
 		if (pids[i] == 0)
 		{
 			free(pids);
-			exec_pipe_child(child[i], fd, i, count);
+			exec_pipe_child(child, fd, i, count);
 		}
 		if (child[i]->type == NODE_CMD)
 			close_all_redirs(child[i]);

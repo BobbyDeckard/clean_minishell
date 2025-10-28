@@ -40,7 +40,7 @@ static char	*cat_arg(t_ast *node, char *str, char *arg)
 	char	*new;
 	int		len;
 
-	printf("In cat_arg, str = '%s', arg = '%s'\n", str, arg);
+//	printf("In cat_arg, str = '%s', arg = '%s'\n", str, arg);
 	len = ft_strlen(str) + ft_strlen(arg) + 1;
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
@@ -69,7 +69,7 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	{
 		if(handle_double_quotes(node, cmd, i))
 			return (1);
-		printf("Handled double quotes, arg[%d]: '%s'\n", i, cmd->args[i]);
+//		printf("Handled double quotes, arg[%d]: '%s'\n", i, cmd->args[i]);
 //		if (!cmd->args[i])
 //			return (0);
 		return (0);
@@ -94,7 +94,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 {
 	char	*new;
 
-	printf("In make_new_arg with arg[%d]: '%s'\n", i, cmd->args[i]);
+//	printf("In make_new_arg with arg[%d]: '%s'\n", i, cmd->args[i]);
 	new = NULL;
 	if (ft_strncmp(cmd->args[i], "'", 2) && ft_strncmp(cmd->args[i], "\"", 2)
 		&& ((cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
@@ -114,7 +114,7 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 			&& ft_strncmp(cmd->args[i], "\"", 2))
 			remove_arg(cmd, i);
 	}
-	printf("Made new arg: '%s'\n", new);
+//	printf("Made new arg: '%s'\n", new);
 	if (!new && is_whitespace(cmd->args[i]))
 		return (cmd->args[i]);
 	return (new);
@@ -124,9 +124,9 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	int j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	i = 0;
 	while (cmd->args[i])
 	{
@@ -137,13 +137,13 @@ void	expander(t_ast *node, t_cmd *cmd)
 			cmd->args[i] = make_new_arg(node, cmd, i);
 			if (is_whitespace(cmd->args[i]))
 			{
-				printf("Whitespace after making new arg\n");
+//				printf("Whitespace after making new arg\n");
 //				remove_arg(cmd, i);
 			}
 			i++;
 		}
 	}
-	j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

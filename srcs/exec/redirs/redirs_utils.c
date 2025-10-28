@@ -42,8 +42,12 @@ void	close_redirs(t_cmd *cmd)
 {
 	if (cmd->fd_in != STDIN_FILENO && cmd->fd_in >= 0)
 	{
+		char *str = (char *) malloc(512);
+		str = ft_itoa(getpid());
+		ft_strlcat(str, "\tclose", 512);
 		if (close(cmd->fd_in))
-			perror("close");
+			perror(str);
+		free(str);
 		cmd->fd_in = STDIN_FILENO;
 	}
 	if (cmd->fd_out != STDOUT_FILENO && cmd->fd_out >= 0)
