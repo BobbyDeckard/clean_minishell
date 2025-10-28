@@ -46,7 +46,7 @@ typedef struct s_cmd
 	int		fd_out;
 }	t_cmd;
 
-typedef struct	s_rdr
+typedef struct s_rdr
 {
 	t_r_type	type;
 	char		**args;
