@@ -79,8 +79,6 @@ static t_ast	*invalid_syntax(t_token **list, int err)
 	return (NULL);
 }
 
-void	print_token_list(t_token **token_list);
-void	print_tree(t_ast *ast);
 t_ast	*parse(char *command, t_shell *shell)
 {
 	t_token	**list;
