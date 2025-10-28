@@ -64,16 +64,21 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	if (!ft_strncmp(cmd->args[i], "'", 2))
 	{
 		handle_single_quotes(node, cmd, i);
-		if (!ft_strncmp(cmd->args[i], "'", 2))
-			return (1);
-		return (0);
+//		if (!ft_strncmp(cmd->args[i], "'", 2))
+//			return (1);
+		if (!cmd->args[i])
+			return (0);
+		return (1);
 	}
 	else if (!ft_strncmp(cmd->args[i], "\"", 2))
 	{
 		handle_double_quotes(node, cmd, i);
-		if (!ft_strncmp(cmd->args[i], "\"", 2))
-			return (1);
-		return (0);
+		printf("Arg after handling double quotes: '%s'\n", cmd->args[i]);
+//		if (!ft_strncmp(cmd->args[i], "\"", 2))
+//			return (1);
+		if (!cmd->args[i])
+			return (0);
+		return (1);
 	}
 	else if (contains_dol(cmd->args[i]))
 		return (expand(node, cmd, node->shell->envp, i));

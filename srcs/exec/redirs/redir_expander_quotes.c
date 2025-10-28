@@ -34,16 +34,20 @@ static int	check_arg(t_ast *node, t_rdr *rdr, int index)
 	if (!ft_strncmp(rdr->args[index], "'", 2))
 	{
 		rdr_handle_single_quotes(node, rdr, index);
-		if (!ft_strncmp(rdr->args[index], "'", 2))
-			return (1);
-		return (0);
+//		if (!ft_strncmp(rdr->args[index], "'", 2))
+//			return (1);
+		if (!rdr->args[index])
+			return (0);
+		return (1);
 	}
 	else if (!ft_strncmp(rdr->args[index], "\"", 2))
 	{
 		rdr_handle_double_quotes(node, rdr, index);
-		if (!ft_strncmp(rdr->args[index], "\"", 2))
-			return (1);
-		return (0);
+//		if (!ft_strncmp(rdr->args[index], "\"", 2))
+//			return (1);
+		if (!rdr->args[index])
+			return (0);
+		return (1);
 	}
 	else if (contains_dol(rdr->args[index]))
 		return (rdr_expand(node, rdr, node->shell->envp, index));
