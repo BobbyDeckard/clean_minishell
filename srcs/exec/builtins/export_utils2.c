@@ -14,6 +14,23 @@
 
 char	*get_name(t_ast *node, const char *str);
 
+char	*get_entry(char **envp, const char *name)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (envp[++i])
+	{
+		j = 0;
+		while (name[j] && name[j] == envp[i][j])
+			j++;
+		if (envp[i][j] == '=' && !name[j])
+			return (envp[i] + j + 1);
+	}
+	return (NULL);
+}
+
 static int	calc_exit_status_len(t_ast *node)
 {
 	char	*exit_status;
