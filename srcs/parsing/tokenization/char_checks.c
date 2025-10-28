@@ -28,7 +28,9 @@ int	ispar(const char c)
 
 int	iswhitespace(const char c)
 {
-	if (c == ' ')	// To enhance
+	if (c == ' ')
+		return (1);
+	else if (c >= 9 && c <= 13)
 		return (1);
 	return (0);
 }

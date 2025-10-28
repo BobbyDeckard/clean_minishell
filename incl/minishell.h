@@ -36,6 +36,6 @@ extern volatile sig_atomic_t	g_signal_received;
 extern void	rl_replace_line(const char *str, int i);
 
 /* General use functions */
-void	malloc_error(t_ast *node, t_shell *shell, t_token **tokens);
+void		malloc_error(t_ast *node, t_shell *shell, t_token **tokens);
 
 #endif

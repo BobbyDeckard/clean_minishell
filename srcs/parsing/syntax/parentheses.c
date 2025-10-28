@@ -14,7 +14,8 @@
 
 t_token	*get_last_close(t_token **list);
 
-static int	check_match(t_token *current, t_token *last_close, int end, int open)
+static int	check_match(t_token *current, t_token *last_close, int end,
+int open)
 {
 	int	start;
 
@@ -75,7 +76,8 @@ static int	check_paren_syntax(t_token *current)
 	{
 		if (current->type == PAREN_OPEN && check_paren_prev(current->prev))
 			return (1);
-		else if (current->type == PAREN_CLOSE && check_paren_next(current->next))
+		else if (current->type == PAREN_CLOSE
+			&& check_paren_next(current->next))
 			return (1);
 		current = current->next;
 	}

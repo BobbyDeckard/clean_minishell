@@ -21,7 +21,8 @@ static int	check_pipe_prev(t_token *prev)
 	if (!prev)
 		return (1);
 	type = prev->type;
-	if (type == AND || type == OR || type == PIPE || type == PAREN_CLOSE || type == PAREN_OPEN)
+	if (type == AND || type == OR || type == PIPE || type == PAREN_CLOSE
+		|| type == PAREN_OPEN)
 		return (1);
 	return (0);
 }
@@ -35,7 +36,8 @@ static int	check_pipe_next(t_token *next)
 	if (!next)
 		return (1);
 	type = next->type;
-	if (type == AND || type == OR || type == PIPE || type == PAREN_CLOSE || type == PAREN_OPEN)
+	if (type == AND || type == OR || type == PIPE || type == PAREN_CLOSE
+		|| type == PAREN_OPEN)
 		return (1);
 	return (0);
 }

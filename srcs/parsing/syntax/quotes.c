@@ -12,7 +12,7 @@
 
 #include "../../../incl/minishell.h"
 
-static void retokenize_word(t_shell *shell, t_token **list, t_token *token,
+static void	retokenize_word(t_shell *shell, t_token **list, t_token *token,
 char *content)
 {
 	int	len;
