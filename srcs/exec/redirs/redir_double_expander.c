@@ -52,7 +52,7 @@ int index)
 		return (rdr_remove_arg(rdr, index));
 	}
 	free(name);
-	return(rdr_remove_var(node, rdr, index));
+	return (rdr_remove_var(node, rdr, index));
 }
 
 static int	rdr_double_expand_cat(t_ast *node, t_rdr *rdr, char **envp,
