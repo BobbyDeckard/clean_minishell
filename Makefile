@@ -58,7 +58,6 @@ BLTN_FILES = builtins.c \
 			 echo.c \
 			 exit.c \
 			 export.c \
-			 export_expander.c \
 			 export_utils.c \
 			 export_utils2.c \
 			 export_var.c \

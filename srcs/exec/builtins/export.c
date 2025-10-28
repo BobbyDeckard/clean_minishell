@@ -14,7 +14,6 @@
 
 char	*copy_env_entry(t_ast *node, char **arr, int i);
 void	close_all_redirs(t_ast *node);
-void	export_expander(t_ast *node);
 void	free_char_array(char **arr);
 int		char_arr_len(char **arr);
 int		create_env(t_ast *node);
