@@ -123,6 +123,7 @@ AST_FILES = ast.c \
 			operators.c \
 			parentheses.c \
 			pipes.c \
+			pipes_utils.c \
 			redirs.c \
 			redirs_utils.c \
 			utils.c

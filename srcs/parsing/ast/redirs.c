@@ -15,7 +15,8 @@
 t_n_type	convert_types(t_t_type type);
 char		*extract_content(t_token *token);
 void		parse_redir_error(t_shell *shell, t_ast *node, int i);
-int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count);
+int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type,
+				int count);
 
 int	is_redir_arg(t_token *token)
 {
@@ -28,7 +29,6 @@ int	is_redir_arg(t_token *token)
 	return (0);
 }
 
-void	print_token_type(t_t_type type);
 int	is_redir_token(t_t_type type)
 {
 	if (type == REDIR_IN)
@@ -59,7 +59,8 @@ int	count_redir_args(t_token *current)
 	return (count);
 }
 
-static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *start)
+static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current,
+int *start)
 {
 	t_t_type	type;
 	int			count;
@@ -71,11 +72,7 @@ static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current, int *
 	type = current->type;
 	current = current->next;
 	(*start)++;
-	while (current->type == WHITESPACE)
-	{
-		current = current->next;
-		(*start)++;
-	}
+	current = skip_spaces(shell->tokens, start, 2147483647);
 	count = count_redir_args(current) + 1;
 	i = create_redir_node(shell, node, convert_types(type), count);
 	j = -1;

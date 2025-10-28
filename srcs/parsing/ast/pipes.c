@@ -18,53 +18,6 @@ void	clean_ast(t_ast *root);
 void	cleanup(t_ast *node);
 int		is_redir_token(t_t_type type);
 
-static int	is_logop(t_t_type type)
-{
-	if (type == AND || type == OR)
-		return (1);
-	return (0);
-}
-
-static int	is_paren(t_t_type type)
-{
-	if (type == PAREN_OPEN || type == PAREN_CLOSE)
-		return (1);
-	return (0);
-}
-
-static int	is_command_token(t_t_type type)
-{
-	if (type == WORD)
-		return (1);
-	else if (is_redir_token(type))
-		return (1);
-	else if (type == DOUBLE_QUOTE || type == SINGLE_QUOTE)
-		return (1);
-	else if (type == WHITESPACE)
-		return (1);
-	return (0);
-}
-
-static int	count_commands(t_token **list, int start)
-{
-	t_token	*current;
-	int		count;
-
-	current = get_token_at_index(list, start);
-	if (!current)
-		return (0);
-	count = 1;
-	while (current)
-	{
-		if (current->type == PIPE)
-			count++;
-		else if (is_logop(current->type) || is_paren(current->type))
-			return (count);
-		current = current->next;
-	}
-	return (count);
-}
-
 static t_ast	*create_pipe_node(t_shell *shell, int count)
 {
 	t_ast	*node;
@@ -87,7 +40,7 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 {
 	t_token	*current;
 	int		end;
-	
+
 	current = get_token_at_index(shell->tokens, start);
 	if (!current)
 		return (-1);
@@ -128,7 +81,7 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 
 	count = count_commands(list, start) + 1;
 	if (!count)
-		return (NULL);	// Ah ?
+		return (NULL);
 	node = create_pipe_node(shell, count);
 	set_root(shell, node);
 	i = -1;

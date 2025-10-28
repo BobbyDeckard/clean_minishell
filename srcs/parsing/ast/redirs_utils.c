@@ -78,7 +78,6 @@ static t_r_type	convert_rdr_type(t_n_type type)
 	return (-1);
 }
 
-void	print_node_type(t_n_type type);
 int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 {
 	int	i;

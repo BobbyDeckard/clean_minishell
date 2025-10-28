@@ -32,7 +32,8 @@ static void	init_lone_redir_child(t_shell *shell, t_ast *node, t_n_type type)
 	node->children[1] = NULL;
 }
 
-static t_ast	*parse_lone_redir(t_shell *shell, t_ast *node, int start, int end)
+static t_ast	*parse_lone_redir(t_shell *shell, t_ast *node, int start,
+int end)
 {
 	t_token	*current;
 	int		count;
@@ -54,7 +55,8 @@ static t_ast	*parse_lone_redir(t_shell *shell, t_ast *node, int start, int end)
 	return (check_remaining_lone_redirs(shell, node, start, end));
 }
 
-static t_ast *check_remaining_lone_redirs(t_shell *shell, t_ast *node, int start, int end)
+static t_ast	*check_remaining_lone_redirs(t_shell *shell, t_ast *node,
+int start, int end)
 {
 	t_token	*current;
 
@@ -64,7 +66,7 @@ static t_ast *check_remaining_lone_redirs(t_shell *shell, t_ast *node, int start
 		if (!current)
 			return (node);
 		else if (is_redir_token(current->type))
-		   current = current->next;
+			current = current->next;
 		while (current && current->type == WHITESPACE && start++ <= end)
 			current = current->next;
 		init_lone_redir_child(shell, node, convert_types(current->type));
@@ -72,9 +74,6 @@ static t_ast *check_remaining_lone_redirs(t_shell *shell, t_ast *node, int start
 	}
 	return (node);
 }
-
-void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
-int		count_redirs(t_token **list, int start, int end);
 
 static t_ast	*create_solo_redir_node(t_shell *shell, int redirs)
 {

@@ -19,12 +19,12 @@ t_ast		*parse_pipe(t_shell *shell, t_token **list, int start, int end);
 t_ast		*parse_sequence(t_shell *shell, t_token **list, int start, int end);
 void		clean_ast(t_ast *ast);
 
-static int get_op_precedence(t_t_type type)
+static int	get_op_precedence(t_t_type type)
 {
 	if (type == AND || type == OR)
 		return (1);
 	else if (type == PIPE)
-			return (2);
+		return (2);
 	return (3);
 }
 
@@ -59,7 +59,8 @@ int	find_op_precedence(t_token **list, int start, int end)
 			lvl++;
 		else if (current->type == PAREN_CLOSE)
 			lvl--;
-		if (!lvl && (current->type == PIPE || current->type == AND || current->type == OR))
+		if (!lvl && (current->type == PIPE || current->type == AND
+				|| current->type == OR))
 			check_precedence(current, &res, &prec, start);
 		start++;
 	}
@@ -97,7 +98,8 @@ t_ast	*parse_operator(t_shell *shell, int start, int end, int operator)
 	type = convert_types(current->type);
 	node = create_op_node(shell, type);
 	set_root(shell, node);
-	node->children[0] = parse_sequence(shell, shell->tokens, start, operator - 1);
+	node->children[0] = parse_sequence(shell, shell->tokens, start,
+			operator - 1);
 	node->children[1] = parse_sequence(shell, shell->tokens, operator + 1, end);
 	return (node);
 }

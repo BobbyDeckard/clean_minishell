@@ -31,8 +31,7 @@ static int	check_between_paren(t_token **list, int start, int end)
 		{
 			lvl--;
 			if (!lvl && start != end)
-				return (0);	// why tf would we return 0 here ?
-							// what if another paren opens later on ?
+				return (0);
 		}
 		start++;
 	}
@@ -65,9 +64,9 @@ static int	find_matching_paren(t_token **list, int start, int end)
 	i = start;
 	while (++i <= end)
 	{
-		current = get_token_at_index(list, i);	// replace witha  normal list iteration ffs, elsewhere too, search by grep to correct
+		current = get_token_at_index(list, i);
 		if (!current)
-			break;
+			break ;
 		else if (current->type == PAREN_OPEN)
 			lvl++;
 		else if (current->type == PAREN_CLOSE)
