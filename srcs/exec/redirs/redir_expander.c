@@ -32,10 +32,9 @@ static int	check_arg(t_ast *node, t_rdr *rdr, int index)
 {
 	if (!ft_strncmp(rdr->args[index], "'", 2))
 	{
-		rdr_handle_single_quotes(node, rdr, index);
-		if (!rdr->args[index])
-			return (0);
-		return (1);
+		if (rdr_handle_single_quotes(node, rdr, index))
+			return (1);
+		return (0);
 	}
 	else if (!ft_strncmp(rdr->args[index], "\"", 2))
 	{
