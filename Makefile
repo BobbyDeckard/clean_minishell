@@ -6,13 +6,13 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/22 15:02:32 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/27 20:09:12 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wextra -Wall -Werror
+CFLAGS = -Wextra -Wall -Werror -g
 LFLAGS = -lreadline
 RM = rm
 RMFLAGS = -f
@@ -69,9 +69,10 @@ XPDR = $(addprefix expander/, $(XPDR_FILES))
 XPDR_FILES = cat_words.c \
 			 double_quotes.c \
 			 expander.c \
-			 new_expander.c \
+			 expander_utils.c \
 			 quotes.c \
 			 spaces.c \
+			 spaces_utils.c \
 			 utils.c
 
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
@@ -91,7 +92,9 @@ PIPE_FILES = link_pipes.c \
 RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redir_double_expander.c \
 			 redir_expander.c \
+			 redir_expander_quotes.c \
 			 redir_expander_utils.c \
+			 redir_expander_utils2.c \
 			 redirs.c \
 			 redirs_utils.c
 
