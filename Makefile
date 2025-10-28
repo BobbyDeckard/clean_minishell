@@ -119,6 +119,7 @@ AST_FILES = ast.c \
 			commands.c \
 			commands_utils.c \
 			lone_redirs.c \
+			lone_redirs_utils.c \
 			operators.c \
 			parentheses.c \
 			pipes.c \

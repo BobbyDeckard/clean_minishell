@@ -12,86 +12,16 @@
 
 #include "../../../incl/minishell.h"
 
-static t_ast *check_remaining_lone_redirs(t_shell *shell, t_ast *node, int start, int end);
-t_n_type	convert_types(t_t_type type);
-t_ast		*create_node(t_shell *shell, t_n_type type);
-int			count_redir_args(t_token *current);
-int			is_redir_arg(t_token *token);
-int			is_redir_token(t_t_type type);
-
-int	is_lone_redir(t_token **list, int start, int end)
-{
-	t_token	*current;
-
-	current = get_token_at_index(list, start);
-	if (!is_redir_token(current->type))
-		return (0);
-	current = current->next;
-	start++;
-	while (current && current->type == WHITESPACE && start <= end)
-	{
-		current = current->next;
-		start++;
-	}
-	while (current && is_redir_arg(current) && start <= end)
-	{
-		current = current->next;
-		start++;
-	}
-	while (current && current->type == WHITESPACE && start <= end)
-	{
-		current = current->next;
-		start++;
-	}
-	if (current && is_redir_token(current->type))
-		return (is_lone_redir(list, start, end));
-	else if (current)
-		return (0);
-	return (1);
-}
-
-static void	alloc_redir_args(t_shell *shell, t_ast *node, int count)
-{
-	node->rdr.args = (char **) malloc(count * sizeof(char *));
-	if (!node->rdr.args)
-		malloc_error(shell->root, shell, shell->tokens);
-	while (--count >= 0)
-		node->rdr.args[count] = NULL;
-}
-
-static void	make_arg_error(t_shell *shell, t_ast *node)
-{
-	if (!node->rdr.args[0])
-		free(node->rdr.args);
-	malloc_error(shell->root, shell, shell->tokens);
-}
-
-static char	*make_arg(t_shell *shell, t_ast *node, t_token *current)
-{
-	char	*str;
-	int		len;
-
-	str = NULL;
-	if (current->content)
-	{
-		len = ft_strlen(current->content) + 1;
-		str = (char *) malloc(len * sizeof(char));
-		if (!str)
-			make_arg_error(shell, node);
-		ft_strlcpy(str, current->content, len);
-	}
-	else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
-	{
-		str = (char *) malloc(2 * sizeof(char));
-		if (!str)
-			make_arg_error(shell, node);
-		if (current->type == SINGLE_QUOTE)
-			ft_strlcpy(str, "'", 2);
-		else
-			ft_strlcpy(str, "\"", 2);
-	}
-	return (str);
-}
+static t_ast	*check_remaining_lone_redirs(t_shell *shell, t_ast *node,
+					int start, int end);
+t_n_type		convert_types(t_t_type type);
+t_token			*skip_spaces(t_token **list, int *start, int end);
+t_ast			*create_node(t_shell *shell, t_n_type type);
+char			*make_arg(t_shell *shell, t_ast *node, t_token *current);
+void			alloc_redir_args(t_shell *shell, t_ast *node, int count);
+int				count_redir_args(t_token *current);
+int				is_redir_arg(t_token *token);
+int				is_redir_token(t_t_type type);
 
 static void	init_lone_redir_child(t_shell *shell, t_ast *node, t_n_type type)
 {

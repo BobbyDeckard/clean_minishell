@@ -13,25 +13,7 @@
 #include "../../../incl/minishell.h"
 
 t_token	*skip_redir(t_token **list, int *start, int end);
-void	clean_ast(t_ast *ast);;
-int		is_redir_token(t_t_type type);
-
-int	count_redirs(t_token **list, int start, int end)
-{
-	t_token	*current;
-	int		count;
-
-	count = 0;
-	current = get_token_at_index(list, start);
-	while (current && start <= end)
-	{
-		if (is_redir_token(current->type))
-			count++;
-		current = current->next;
-		start++;
-	}
-	return (count);
-}
+void	clean_ast(t_ast *ast);
 
 static int	is_arg_token(t_t_type type)
 {
@@ -68,11 +50,11 @@ static void	parse_args_error(t_shell *shell, t_ast *node)
 	malloc_error(shell->root, shell, shell->tokens);
 }
 
-static t_token	*skip_spaces(t_shell *shell, int *start, int end)
+t_token	*skip_spaces(t_token **list, int *start, int end)
 {
 	t_token	*current;
 
-	current = get_token_at_index(shell->tokens, start);
+	current = get_token_at_index(list, start);
 	while (current && current->type == WHITESPACE && *start <= end)
 	{
 		current = current->next;
@@ -87,7 +69,7 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 	int		i;
 
 	i = -1;
-	current = skip_spaces(shell, &start, end);
+	current = skip_spaces(shell->tokens, &start, end);
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
