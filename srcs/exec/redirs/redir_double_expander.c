@@ -43,6 +43,18 @@ int index)
 	return (0);
 }
 
+static int	rdr_double_expand_cat_end(t_ast *node, t_rdr *rdr, char *name,
+int index)
+{
+	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
+	{
+		free(name);
+		return (rdr_remove_arg(rdr, index));
+	}
+	free(name);
+	return(rdr_remove_var(node, rdr, index));
+}
+
 static int	rdr_double_expand_cat(t_ast *node, t_rdr *rdr, char **envp,
 int index)
 {
@@ -65,14 +77,7 @@ int index)
 			return (rdr_double_handle_var(node, rdr, envp[i] + j + 1, index));
 		}
 	}
-	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
-	{
-		if (index == 1)
-			free(name);
-		return (rdr_remove_arg(rdr, index));
-	}
-	free(name);
-	return (rdr_remove_var(node, rdr, index));
+	return (rdr_double_expand_cat_end(node, rdr, name, index));
 }
 
 void	rdr_double_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
