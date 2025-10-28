@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:07:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:50:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/27 20:08:13 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,16 @@
 
 void	rdr_double_expand(t_ast *node, t_rdr *rdr, char **envp, int index);
 int		contains_dol(const char *str);
-int		rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index);
 int		rdr_remove_arg(t_rdr *rdr, int i);
 
-static int	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
+static void	single_quotes_loop(t_rdr *rdr, char *new, int st_end[2], int len)
 {
-	char	*new;
-	int		len;
-	int		end;
-	int		i;
+	int	start;
+	int	end;
+	int	i;
 
-	len = 0;
-	end = start;
-	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "'", 2))
-		len += ft_strlen(rdr->args[end]);
-	rdr_remove_arg(rdr, start);
-	if (!len)
-	{
-		rdr_remove_arg(rdr, start);
-		return (1);
-	}
-	new = (char *) ft_calloc(++len, sizeof(char));
-	if (!new)
-		malloc_error(node, node->shell, NULL);
+	start = st_end[0];
+	end = st_end[1];
 	i = start;
 	while (++i < end)
 	{
@@ -53,16 +40,31 @@ static int	handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 		else
 			free(new);
 	}
-	return (0);
 }
 
-static int	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
+int	rdr_handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 {
-	while (contains_dol(rdr->args[index]))
+	char	*new;
+	int		st_end[2];
+	int		len;
+	int		end;
+
+	len = 0;
+	end = start;
+	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "'", 2))
+		len += ft_strlen(rdr->args[end]);
+	rdr_remove_arg(rdr, start);
+	if (!len)
 	{
-		if (rdr_expand_cat(node, rdr, envp, index))
-			return (1);
+		rdr_remove_arg(rdr, start);
+		return (1);
 	}
+	new = (char *) ft_calloc(++len, sizeof(char));
+	if (!new)
+		malloc_error(node, node->shell, NULL);
+	st_end[0] = start;
+	st_end[1] = end;
+	single_quotes_loop(rdr, new, st_end, len);
 	return (0);
 }
 
@@ -75,27 +77,14 @@ static void	expand_inside_double(t_ast *node, t_rdr *rdr, int i)
 	}
 }
 
-static int	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
+static void	double_quotes_loop(t_rdr *rdr, char *new, int st_end[2], int len)
 {
-	char	*new;
-	int		len;
-	int		end;
-	int		i;
+	int	start;
+	int	end;
+	int	i;
 
-	len = 0;
-	end = start;
-	expand_inside_double(node, rdr, start);
-	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "\"", 2))
-		len += ft_strlen(rdr->args[end]);
-	rdr_remove_arg(rdr, start);
-	if (!len)
-	{
-		rdr_remove_arg(rdr, start);
-		return (1);
-	}
-	new = (char *) ft_calloc(++len, sizeof(char));
-	if (!new)
-		malloc_error(node, node->shell, NULL);
+	start = st_end[0];
+	end = st_end[1];
 	i = start;
 	while (++i < end)
 	{
@@ -112,21 +101,31 @@ static int	handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 		else
 			free(new);
 	}
-	return (0);
 }
 
-void	redir_expander(t_ast *node, t_rdr *rdr)
+int	rdr_handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 {
-	int	i;
+	char	*new;
+	int		st_end[2];
+	int		len;
+	int		end;
 
-	i = -1;
-	while (rdr->args[++i])
+	len = 0;
+	end = start;
+	expand_inside_double(node, rdr, start);
+	while (rdr->args[++end] && ft_strncmp(rdr->args[end], "\"", 2))
+		len += ft_strlen(rdr->args[end]);
+	rdr_remove_arg(rdr, start);
+	if (!len)
 	{
-		if (!ft_strncmp(rdr->args[i], "'", 2))
-			i -= handle_single_quotes(node, rdr, i);
-		else if (!ft_strncmp(rdr->args[i], "\"", 2))
-			i -= handle_double_quotes(node, rdr, i);
-		else if (contains_dol(rdr->args[i]))
-			i -= rdr_expand(node, rdr, node->shell->envp, i);
+		rdr_remove_arg(rdr, start);
+		return (1);
 	}
+	new = (char *) ft_calloc(++len, sizeof(char));
+	if (!new)
+		malloc_error(node, node->shell, NULL);
+	st_end[0] = start;
+	st_end[1] = end;
+	double_quotes_loop(rdr, new, st_end, len);
+	return (0);
 }

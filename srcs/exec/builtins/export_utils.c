@@ -18,39 +18,6 @@ int		char_arr_len(char **arr);
 int		create_var(t_ast *node, int size, int arg);
 int		has_equal(const char *str);
 
-/*
-static int	name_is_invalid(char *arg)
-{
-	ft_putstr_fd("minishell: '", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd("': not a valid identifier\n", 2);
-	return (0);
-}
-*/
-/*
-static int	valid_name(char *arg)
-{
-	int	alpha;
-	int	i;
-
-	i = 0;
-	alpha = 0;
-	while (arg[i] && arg[i] != '=')
-	{
-		if (!ft_isalpha(arg[i]) && arg[i] != '_' && !alpha)
-			return (name_is_invalid(arg));
-		else if (ft_isalpha(arg[i]) && !alpha)
-			alpha = 1;
-		else if (!ft_isalnum(arg[i]) && arg[i] != '_')
-			return (name_is_invalid(arg));
-		i++;
-	}
-	if (!i)
-		return (name_is_invalid(arg));
-	return (1);
-}
-*/
-
 int	handle_export_args(t_ast *node, int size)
 {
 	int	status;
@@ -60,12 +27,6 @@ int	handle_export_args(t_ast *node, int size)
 	status = 0;
 	while (node->cmd.args[++i])
 	{
-
-//		if (node->cmd.exp[i] != 2 && !valid_name(node->cmd.args[i]))
-//		{
-//			status = 1;
-//			continue ;
-//		}
 		if (!ft_strncmp(node->cmd.args[i], "PATH=", 5))
 			update_paths(node, node->shell, node->cmd.args[i] + 5);
 		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))

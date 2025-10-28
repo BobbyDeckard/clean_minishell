@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 17:05:37 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/27 20:22:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 			perror("close");
 	}
 	make_file_name(node);
+	if (node->rdr.file)
+		printf("File: '%s'\n", node->rdr.file);
+	else
+		printf("No file\n");
+	int i = -1;
+	while (node->rdr.args[++i])
+		printf("rdr.arg[%d]: '%s'\n", i, node->rdr.args[i]);
+	if (!node->rdr.args)
+		printf("No args either\n");
+	else if (node->rdr.args)
+		printf("Args are there!!!!!\n");
 	if (access(node->rdr.file, F_OK) || access(node->rdr.file, R_OK))
 		cmd->fd_in = -1;
 	else

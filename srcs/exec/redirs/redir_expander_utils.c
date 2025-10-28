@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 20:29:00 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:49:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:49:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,8 @@ char	*get_name(t_ast *node, const char *str);
 char	*filter_spaces(t_ast *node, char *entry, int *flag);
 int		contains_contig_spaces(const char *str);
 int		get_name_len(const char *str);
-
-int	rdr_remove_arg(t_rdr *rdr, int i)
-{
-	if (!rdr->args[i])
-		return (0);
-	free(rdr->args[i]);
-	while (rdr->args[i])
-	{
-		rdr->args[i] = rdr->args[i + 1];
-		i++;
-	}
-	return (1);
-}
-
-int	rdr_remove_var(t_ast *node, t_rdr *rdr, int index)
-{
-	char	*new;
-	int		name_len;
-	int		len;
-	int		i;
-
-	i = 0;
-	while (rdr->args[index][i] && rdr->args[index][i] != '$')
-		i++;
-	name_len = get_name_len(rdr->args[index] + i);
-	if (i == 0 && (int) ft_strlen(rdr->args[index]) == name_len)
-		return (rdr_remove_arg(rdr, index));
-	len = ft_strlen(rdr->args[index]) - name_len + 1;
-	new = (char *) malloc(len * sizeof(char));
-	if (!new)
-		malloc_error(node, node->shell, NULL);
-	ft_strlcpy(new, rdr->args[index], i + 1);
-	ft_strlcat(new, rdr->args[index] + i + name_len, len);
-	free(rdr->args[index]);
-	rdr->args[index] = new;
-	return (0);
-}
+int		rdr_remove_arg(t_rdr *rdr, int i);
+int		rdr_remove_var(t_ast *node, t_rdr *rdr, int index);
 
 static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 {
@@ -112,6 +77,23 @@ int	rdr_handle_exit_status(t_ast *node, t_rdr *rdr, int index)
 	return (0);
 }
 
+static int	rdr_expand_cat_end(t_ast *node, t_rdr *rdr, char *name, int index)
+{
+	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
+	{
+		if (index == 0 && !rdr->args[1])
+		{
+			ft_putstr_fd("minishell: $", 2);
+			ft_putstr_fd(name, 2);
+			ft_putstr_fd(": ambiguous redirect\n", 2);
+		}
+		free(name);
+		return (rdr_remove_arg(rdr, index));
+	}
+	free(name);
+	return (rdr_remove_var(node, rdr, index));
+}
+
 int	rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
 {
 	char	*name;
@@ -133,17 +115,5 @@ int	rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
 			return (rdr_handle_var(node, rdr, envp[i] + j + 1, index));
 		}
 	}
-	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
-	{
-		if (index == 0 && !rdr->args[1])
-		{
-			ft_putstr_fd("minishell: $", 2);
-			ft_putstr_fd(name, 2);
-			ft_putstr_fd(": ambiguous redirect\n", 2);
-		}
-		free(name);
-		return (rdr_remove_arg(rdr, index));
-	}
-	free(name);
-	return (rdr_remove_var(node, rdr, index));
+	return (rdr_expand_cat_end(node, rdr, name, index));
 }

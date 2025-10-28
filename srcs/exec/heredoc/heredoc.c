@@ -16,9 +16,9 @@ char	*copy_delimiter(t_ast *node);
 char	*expand_line(t_ast *node, char **envp, char *line);
 void	cleanup(t_ast *node);
 void	init_sp_handler_sig(t_ast *node, struct sigaction *new,
-		struct sigaction *old);
+			struct sigaction *old);
 void	heredoc_end(t_ast *node, struct sigaction *old,
-		int stdin_bu);
+			int stdin_bu);
 void	make_del(t_ast *node);
 int		open_temp(t_ast *node, t_cmd *cmd);
 

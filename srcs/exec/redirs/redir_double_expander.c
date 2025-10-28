@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:45:19 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:48:45 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/27 20:02:51 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		rdr_handle_exit_status(t_ast *node, t_rdr *rdr, int index);
 int		rdr_remove_arg(t_rdr *rdr, int i);
 int		rdr_remove_var(t_ast *node, t_rdr *rdr, int index);
 
-static int	rdr_double_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
+static int	rdr_double_handle_var(t_ast *node, t_rdr *rdr, char *entry,
+int index)
 {
 	char	*new;
 	int		name_len;
@@ -42,7 +43,8 @@ static int	rdr_double_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index
 	return (0);
 }
 
-static int	rdr_double_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
+static int	rdr_double_expand_cat(t_ast *node, t_rdr *rdr, char **envp,
+int index)
 {
 	char	*name;
 	int		i;

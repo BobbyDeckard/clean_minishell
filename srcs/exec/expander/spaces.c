@@ -6,30 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 15:20:19 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 20:19:46 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/27 19:14:23 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-int	contains_contig_spaces(const char *str)
-{
-	int	space;
-	int	i;
-
-	i = -1;
-	space = 0;
-	while (str[++i])
-	{
-		if (str[i] == ' ' && !space)
-			space = !space;
-		else if (str[i] == ' ')
-			return (1);
-		else if (space)
-			space = !space;
-	}
-	return (0);
-}
+int	contains_contig_spaces(const char *str);
+int	is_whitespace_char(const char c);
 
 static int	get_last_non_space(const char *str)
 {
@@ -47,6 +31,12 @@ static int	get_last_non_space(const char *str)
 	return (last_nonsp);
 }
 
+static int	invert_space(int space, int *count)
+{
+	(*count)++;
+	return (!space);
+}
+
 static int	get_shortened_len(const char *str, int count, int space)
 {
 	int	last_nonsp;
@@ -61,15 +51,9 @@ static int	get_shortened_len(const char *str, int count, int space)
 		if (str[i] == ' ' && i > last_nonsp)
 			break ;
 		else if (str[i] == ' ' && !space && !start)
-		{
-			space = !space;
-			count++;
-		}
+			space = invert_space(space, &count);
 		else if (str[i] != ' ' && space)
-		{
-			space = !space;
-			count++;
-		}
+			space = invert_space(space, &count);
 		else if (str[i] != ' ')
 		{
 			count++;
@@ -78,15 +62,6 @@ static int	get_shortened_len(const char *str, int count, int space)
 		}
 	}
 	return (count);
-}
-
-static int	is_whitespace_char(const char c)
-{
-	if (c >= 9 && c <= 13)
-		return (1);
-	else if (c == 32)
-		return (1);
-	return (0);
 }
 
 static void	make_new_entry(char *str, char *old, int len)

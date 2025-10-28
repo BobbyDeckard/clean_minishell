@@ -107,7 +107,6 @@ int	export_bltn(t_ast *node, int in_pipe)
 	status = 0;
 	if (!in_pipe && make_redirs(node))
 		return (set_exit_status(node, 1));
-//	export_expander(node);
 	size = char_arr_len(node->shell->envp);
 	if (node->cmd.args[1] && size == -1)
 		return (create_env(node));
