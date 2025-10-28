@@ -20,7 +20,6 @@ int	rdr_remove_arg(t_rdr *rdr, int i);
 
 static int	rdr_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
 {
-	printf("In redir expand\n");
 	while (contains_dol(rdr->args[index]))
 	{
 		if (rdr_expand_cat(node, rdr, envp, index))
@@ -34,8 +33,6 @@ static int	check_arg(t_ast *node, t_rdr *rdr, int index)
 	if (!ft_strncmp(rdr->args[index], "'", 2))
 	{
 		rdr_handle_single_quotes(node, rdr, index);
-//		if (!ft_strncmp(rdr->args[index], "'", 2))
-//			return (1);
 		if (!rdr->args[index])
 			return (0);
 		return (1);
@@ -43,8 +40,6 @@ static int	check_arg(t_ast *node, t_rdr *rdr, int index)
 	else if (!ft_strncmp(rdr->args[index], "\"", 2))
 	{
 		rdr_handle_double_quotes(node, rdr, index);
-//		if (!ft_strncmp(rdr->args[index], "\"", 2))
-//			return (1);
 		if (!rdr->args[index])
 			return (0);
 		return (1);
@@ -84,7 +79,6 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 	new = NULL;
 	while (rdr->args[i])
 	{
-		printf("Obviously here....\n");
 		if (check_arg(node, rdr, i))
 			continue ;
 		new = cat_arg(node, new, rdr->args[i]);
@@ -94,33 +88,4 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 	}
 	free(rdr->args[i]);
 	rdr->args[i] = new;
-
-	/*
-	i = -1;
-	while (rdr->args[++i])
-	{
-		printf("Args at the beginning of redir_expander loop:\n");
-		int j = -1;
-		while (rdr->args[++j])
-			printf("arg[%d]: '%s'\n", j, rdr->args[j]);
-		if (!ft_strncmp(rdr->args[i], "'", 2))
-		{
-			i -= rdr_handle_single_quotes(node, rdr, i);
-//			if (!ft_strncmp(rdr->args[i], "'", 2))
-//				i--;
-		}
-		else if (!ft_strncmp(rdr->args[i], "\"", 2))
-		{
-			i -= rdr_handle_double_quotes(node, rdr, i);
-//			if (!ft_strncmp(rdr->args[i], "\"", 2))
-//				i--;
-		}
-		else if (contains_dol(rdr->args[i]))
-			i -= rdr_expand(node, rdr, node->shell->envp, i);
-		printf("Args at the end of redir_expander loop:\n");
-		j = -1;
-		while (rdr->args[++j])
-			printf("arg[%d]: '%s'\n", j, rdr->args[j]);
-	}
-	*/
 }

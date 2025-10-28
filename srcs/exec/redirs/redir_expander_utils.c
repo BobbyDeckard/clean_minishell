@@ -27,7 +27,6 @@ static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 	int		len;
 	int		i;
 
-	printf("In redir_handle_var\n");
 	i = 0;
 	filtered_spaces = 0;
 	while (rdr->args[index][i] && rdr->args[index][i] != '$')
@@ -46,7 +45,6 @@ static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 		free(entry);
 	free(rdr->args[index]);
 	rdr->args[index] = new;
-	printf("About to exit redir_handle_var\n");
 	return (0);
 }
 
@@ -83,7 +81,6 @@ static int	rdr_expand_cat_end(t_ast *node, t_rdr *rdr, char *name, int index)
 {
 	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
 	{
-		printf("Found env var to be alone in arg[%d]\n", index);
 		if (index == 0 && !rdr->args[1])
 		{
 			ft_putstr_fd("minishell: $", 2);
@@ -103,14 +100,12 @@ int	rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
 	int		i;
 	int		j;
 
-	printf("In rdr_expand_cat with arg[%d]: '%s'\n", index, rdr->args[index]);
 	name = get_name(node, rdr->args[index]);
 	if (!name)
 		return (rdr_handle_exit_status(node, rdr, index));
 	i = -1;
 	while (envp[++i])
 	{
-		printf("Are we stuck here...?\n");
 		j = 0;
 		while (name[j] && name[j] == envp[i][j])
 			j++;

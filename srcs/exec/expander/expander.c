@@ -64,8 +64,6 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	if (!ft_strncmp(cmd->args[i], "'", 2))
 	{
 		handle_single_quotes(node, cmd, i);
-//		if (!ft_strncmp(cmd->args[i], "'", 2))
-//			return (1);
 		if (!cmd->args[i])
 			return (0);
 		return (1);
@@ -73,9 +71,6 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	else if (!ft_strncmp(cmd->args[i], "\"", 2))
 	{
 		handle_double_quotes(node, cmd, i);
-		printf("Arg after handling double quotes: '%s'\n", cmd->args[i]);
-//		if (!ft_strncmp(cmd->args[i], "\"", 2))
-//			return (1);
 		if (!cmd->args[i])
 			return (0);
 		return (1);
@@ -110,7 +105,6 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 		if (check_arg(node, cmd, i))
 			continue ;
 		new = cat_arg(node, new, cmd->args[i]);
-		printf("New after cat_arg: '%s'\n", new);
 		if (cmd->args[i + 1] && is_whitespace(cmd->args[i + 1]))
 		{
 			free(cmd->args[i]);
@@ -120,10 +114,6 @@ char	*make_new_arg(t_ast *node, t_cmd *cmd, int i)
 			&& ft_strncmp(cmd->args[i], "\"", 2))
 			remove_arg(cmd, i);
 	}
-	int j = -1;
-	printf("Args after making new arg[%d]: '%s'\n", i, new);
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	if (!new && is_whitespace(cmd->args[i]))
 		return (cmd->args[i]);
 	return (new);
@@ -136,11 +126,6 @@ void	expander(t_ast *node, t_cmd *cmd)
 	i = 0;
 	while (cmd->args[i])
 	{
-		printf("Args before expander loop:\n");
-		int j = -1;
-		while (cmd->args[++j])
-			printf("arg[%d]: '%s'\n", j, cmd->args[j]);
-		printf("Checking arg[%d]\n", i);
 		if (is_whitespace(cmd->args[i]))
 			remove_arg(cmd, i);
 		else
@@ -151,8 +136,4 @@ void	expander(t_ast *node, t_cmd *cmd)
 			i++;
 		}
 	}
-	printf("cmd args after expansion:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }
