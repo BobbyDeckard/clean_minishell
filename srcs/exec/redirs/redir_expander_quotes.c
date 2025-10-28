@@ -84,9 +84,13 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 	new = NULL;
 	while (rdr->args[i])
 	{
-			if (check_arg(node, rdr, i))
-				continue ;
-			new = cat_arg(node, new, rdr->args[i]);
+		printf("Obviously here....\n");
+		if (check_arg(node, rdr, i))
+			continue ;
+		new = cat_arg(node, new, rdr->args[i]);
+		rdr_remove_arg(rdr, i);
+		if (!rdr->args[i + 1])
+			break ;
 	}
 	free(rdr->args[i]);
 	rdr->args[i] = new;

@@ -27,6 +27,7 @@ static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 	int		len;
 	int		i;
 
+	printf("In redir_handle_var\n");
 	i = 0;
 	filtered_spaces = 0;
 	while (rdr->args[index][i] && rdr->args[index][i] != '$')
@@ -45,6 +46,7 @@ static int	rdr_handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 		free(entry);
 	free(rdr->args[index]);
 	rdr->args[index] = new;
+	printf("About to exit redir_handle_var\n");
 	return (0);
 }
 
@@ -108,6 +110,7 @@ int	rdr_expand_cat(t_ast *node, t_rdr *rdr, char **envp, int index)
 	i = -1;
 	while (envp[++i])
 	{
+		printf("Are we stuck here...?\n");
 		j = 0;
 		while (name[j] && name[j] == envp[i][j])
 			j++;

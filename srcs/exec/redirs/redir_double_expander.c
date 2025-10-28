@@ -50,6 +50,7 @@ int index)
 	int		i;
 	int		j;
 
+	printf("In rdr_double_expand_cat\n");
 	name = get_name(node, rdr->args[index]);
 	if (!name)
 		return (rdr_handle_exit_status(node, rdr, index));
@@ -62,16 +63,20 @@ int index)
 		if (envp[i][j] == '=' && !name[j])
 		{
 			free(name);
+			printf("About to return rdr_double_handle_var\n");
 			return (rdr_double_handle_var(node, rdr, envp[i] + j + 1, index));
 		}
 	}
 	if (ft_strlen(name) + 1 == ft_strlen(rdr->args[index]))
 	{
 		printf("About to remove arg[%d] in rdr_double_expand_cat\n", index);
-		free(name);
+		if (index == 1)
+			free(name);
+		printf("About to return rdr_remove_arg\n");
 		return (rdr_remove_arg(rdr, index));
 	}
 	free(name);
+	printf("About to return rdr_remove_var\n");
 	return (rdr_remove_var(node, rdr, index));
 }
 
@@ -79,6 +84,7 @@ void	rdr_double_expand(t_ast *node, t_rdr *rdr, char **envp, int index)
 {
 	while (contains_dol(rdr->args[index]))
 	{
+		printf("Here?\n");
 		if (rdr_double_expand_cat(node, rdr, envp, index))
 			return ;
 	}
