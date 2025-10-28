@@ -12,6 +12,7 @@
 
 #include "../../../incl/minishell.h"
 
+void	cmd_not_found(t_ast *node, char *name);
 void	invalid_name(t_cmd *cmd, char *name);
 int		is_lone_redir_node(t_ast *node);
 
@@ -96,6 +97,7 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 		free(full_path);
 	}
 	cmd->path = NULL;
+	cmd_not_found(node, name);
 	if (!is_lone_redir_node(node))
 	{
 		ft_putstr_fd("minishell: ", 2);

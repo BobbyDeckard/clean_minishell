@@ -100,6 +100,7 @@ RDRS_FILES = redir_double_expander.c \
 
 XUTL = $(addprefix utils/, $(XUTL_FILES))
 XUTL_FILES = cmd_path.c \
+			 cmd_path_utils.c \
 			 envp_transmission.c \
 			 utils.c
 
