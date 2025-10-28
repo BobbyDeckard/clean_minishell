@@ -86,10 +86,12 @@ void	exec_pipe_child(t_ast **child, int fd[2][2], int i, int count)
 	{
 		dup_fds(child[i]);
 		fprintf(stderr, "%d\tOpen fds after dup call:\n", getpid());
+		print_open_fds(child[i]->cmd.args[0]);
 		status = exec_builtin(child[i], 1);
 	}
 	cleanup(child[i]);
 	fprintf(stderr, "%d\tOpen fds after cleanup:\n", getpid());
+	print_open_fds(child[i]->cmd.args[0]);
 	exit(status);
 }
 
