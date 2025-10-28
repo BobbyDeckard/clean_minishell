@@ -42,18 +42,12 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 			perror("close");
 	}
 	make_file_name(node);
-	if (node->rdr.file)
-		printf("File: '%s'\n", node->rdr.file);
-	else
-		printf("No file\n");
-	int i = -1;
-	while (node->rdr.args[++i])
-		printf("rdr.arg[%d]: '%s'\n", i, node->rdr.args[i]);
-	if (!node->rdr.args)
-		printf("No args either\n");
-	else if (node->rdr.args)
-		printf("Args are there!!!!!\n");
-	if (access(node->rdr.file, F_OK) || access(node->rdr.file, R_OK))
+	if (!node->rdr.file)
+	{
+		cmd->fd_out = -1;
+		return (1);
+	}
+	else if (access(node->rdr.file, F_OK) || access(node->rdr.file, R_OK))
 		cmd->fd_in = -1;
 	else
 		cmd->fd_in = open(node->rdr.file, O_RDONLY);
@@ -73,6 +67,11 @@ static int	make_redir_out(t_ast *node, t_cmd *cmd)
 			perror("close");
 	}
 	make_file_name(node);
+	if (!node->rdr.file)
+	{
+		cmd->fd_out = -1;
+		return (1);
+	}
 	if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
 		cmd->fd_out = -1;
 	else
@@ -94,8 +93,11 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 	}
 	make_file_name(node);
 	if (!node->rdr.file)
+	{
 		cmd->fd_out = -1;
-	if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
+		return (1);
+	}
+	else if (!access(node->rdr.file, F_OK) && access(node->rdr.file, W_OK))
 		cmd->fd_out = -1;
 	else
 		cmd->fd_out = open(node->rdr.file, O_APPEND | O_WRONLY | O_CREAT, 0644);

@@ -126,4 +126,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 			i++;
 		}
 	}
+	printf("cmd args after expansion:\n");
+	int j = -1;
+	while (cmd->args[++j])
+		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

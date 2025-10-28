@@ -22,6 +22,10 @@ void	make_file_name(t_ast *node)
 	int		i;
 
 	redir_expander(node, &node->rdr);
+	printf("Redir args after expansion:\n");
+	int j = -1;
+	while (node->rdr.args[++j])
+		printf("arg[%d]: '%s'\n", j, node->rdr.args[j]);
 	if (!node->rdr.args[0])
 		return ;
 	len = 1;

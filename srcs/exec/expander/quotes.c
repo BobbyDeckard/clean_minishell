@@ -92,7 +92,7 @@ static void	double_quotes_loop(t_cmd *cmd, char *new, int st_end[2], int len)
 		ft_strlcat(new, cmd->args[start], len);
 		if (cmd->args[start + 1] && ft_strncmp(cmd->args[start + 1], "\"", 2))
 			remove_arg(cmd, start);
-		else if (*new)
+		else if (new)
 		{
 			free(cmd->args[start]);
 			cmd->args[start] = new;
