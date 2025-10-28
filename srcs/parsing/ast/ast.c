@@ -34,7 +34,8 @@ static int	count_tokens(t_token **list)
 	return (count);
 }
 
-static t_ast	*parse_non_op(t_shell *shell, t_token **list, int start, int end)
+static t_ast	*parse_non_op(t_shell *shell, t_token **list, int start,
+int end)
 {
 	t_token	*token;
 
@@ -56,7 +57,7 @@ t_ast	*parse_sequence(t_shell *shell, t_token **list, int start, int end)
 	if (start > end)
 		return (NULL);
 	else if (paren_pair(list, start, end))
-			return (parse_sequence(shell, list, start + 1, end - 1));	// seems excessively speficic..?
+		return (parse_sequence(shell, list, start + 1, end - 1));
 	operator = find_op_precedence(list, start, end);
 	if (operator == -1)
 		return (parse_non_op(shell, list, start, end));

@@ -26,7 +26,6 @@ t_token	*get_token_at_index(t_token **list, int index)
 	return (current);
 }
 
-void	print_token_type(t_t_type type);
 t_n_type	convert_types(t_t_type type)
 {
 	if (type == REDIR_APPEND)

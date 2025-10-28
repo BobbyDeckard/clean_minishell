@@ -123,7 +123,8 @@ AST_FILES = ast.c \
 			parentheses.c \
 			pipes.c \
 			redirs.c \
-			redirs_utils.c
+			redirs_utils.c \
+			utils.c
 
 SHLL = $(addprefix shell/, $(SHLL_FILES))
 SHLL_FILES = copy_env.c \

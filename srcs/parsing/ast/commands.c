@@ -17,26 +17,10 @@ t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end);
 void	find_cmd_scope(t_ast *node, t_token **list, int *start, int *end);
 void	parse_args(t_shell *shell, t_ast *node, int start, int end);
 void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
+int		count_redirs(t_token **list, int start, int end);
 int		is_lone_redir(t_token **list, int start, int end);
 int		is_redir_arg(t_token *token);
 int		is_redir_token(t_t_type type);
-
-int	count_redirs(t_token **list, int start, int end)
-{
-	t_token	*current;
-	int		count;
-
-	count = 0;
-	current = get_token_at_index(list, start);
-	while (current && start <= end)
-	{
-		if (is_redir_token(current->type))
-			count++;
-		current = current->next;
-		start++;
-	}
-	return (count);
-}
 
 static t_ast	*create_cmd_node(t_shell *shell, int redirs)
 {
@@ -85,7 +69,7 @@ static int	count_args(t_token **list, int start, int end)
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
-	  		current = skip_redir(list, &start, end);
+			current = skip_redir(list, &start, end);
 		else
 		{
 			count++;
@@ -110,8 +94,6 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 		node->cmd.args[i] = NULL;
 }
 
-//	find_cmd_scope() is unnecessary... bash does receive args even if the command name
-//	and its arguments are separated by a redir...
 t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 {
 	t_ast	*node;
