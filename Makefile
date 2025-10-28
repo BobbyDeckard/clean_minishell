@@ -115,7 +115,6 @@ PARS_FILES = parsing.c \
 AST = $(addprefix ast/, $(AST_FILES))
 AST_FILES = ast.c \
 			ast_utils.c \
-			command_scope.c \
 			commands.c \
 			commands_utils.c \
 			lone_redirs.c \
