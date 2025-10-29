@@ -96,12 +96,11 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	char	*name;
 	int		i;
 
-	i = -1;
-	while (cmd->args[++i] && !*(cmd->args[i]))
-		continue ;
-	name = cmd->args[i];
+	name = cmd->args[0];
 	if (!name)
 		return ;
+	else if (!*name)
+		return (cmd_not_found(cmd, name));
 	if (!ft_strncmp(name, ".", 2) || !ft_strncmp(name, "..", 2)
 		|| !ft_strncmp(name, "/", 2))
 		return (invalid_name(cmd, name));
