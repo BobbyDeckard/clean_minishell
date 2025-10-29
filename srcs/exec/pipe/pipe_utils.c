@@ -48,7 +48,6 @@ int	make_pipe(int fd[2])
 		perror("pipe");
 		return (0);
 	}
-//	printf("%d\tMade pipe: fd[0] = %d, fd[1] = %d\n", getpid(), fd[0], fd[1]);
 	return (1);
 }
 
