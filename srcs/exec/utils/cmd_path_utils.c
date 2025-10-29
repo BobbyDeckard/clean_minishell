@@ -14,25 +14,25 @@
 
 int	is_lone_redir_node(t_ast *node);
 
-void	cmd_not_found(t_ast *node, char *name)
+void	cmd_not_found(t_cmd *cmd, char *name)
 {
-	if (!is_lone_redir_node(node))
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(name, 2);
-		ft_putstr_fd(": command not found\n", 2);
-	}
+	cmd->status = 127;
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
-void	cmd_permission(char *name)
+void	cmd_permission(t_cmd *cmd, char *name)
 {
+	cmd->status = 126;
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd(": Permission denied\n", 2);
 }
 
-void	is_a_dir(char *name)
+void	is_a_dir(t_cmd *cmd, char *name)
 {
+	cmd->status = 127;
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd(": Is a directory\n", 2);

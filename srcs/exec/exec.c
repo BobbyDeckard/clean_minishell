@@ -33,9 +33,9 @@ static void	run_child_process(t_ast *node)
 {
 	dup_fds(node);
 	exec_cmd(node, node->cmd);
-	if (is_lone_redir_node(node))
-		clean_exit(node->root, 0);
-	if (!node->cmd.path)
+	if (!node->cmd.path && node->cmd.status != -1)
+		clean_exit(node, node->cmd.status);
+	else if (!node->cmd.path)
 		clean_exit(node, 127);
 	clean_exit(node->root, 1);
 }

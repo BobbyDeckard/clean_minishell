@@ -74,6 +74,7 @@ t_ast	*create_node(t_shell *shell, t_n_type type)
 	node->cmd.path = NULL;
 	node->cmd.fd_in = STDIN_FILENO;
 	node->cmd.fd_out = STDOUT_FILENO;
+	node->cmd.status = -1;
 	node->rdr.args = NULL;
 	node->rdr.file = NULL;
 	node->rdr.fd = -1;

@@ -12,10 +12,10 @@
 
 #include "../../../incl/minishell.h"
 
-void	cmd_not_found(t_ast *node, char *name);
-void	cmd_permission(char *name);
+void	cmd_not_found(t_cmd *cmd, char *name);
+void	cmd_permission(t_cmd *cmd, char *name);
 void	invalid_name(t_cmd *cmd, char *name);
-void	is_a_dir(char *name);
+void	is_a_dir(t_cmd *cmd, char *name);
 int		is_dir(char *path);
 
 //	This function is only called when trying to update _= env var.
@@ -64,12 +64,12 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path, char *name)
 	if (access(path, X_OK))
 	{
 		free(path);
-		return (cmd_permission(name));
+		return (cmd_permission(cmd, name));
 	}
 	else if (is_dir(path))
 	{
 		free(path);
-		return (is_a_dir(name));
+		return (is_a_dir(cmd, name));
 	}
 	cmd->path = ft_strdup(path);
 	free(path);
@@ -81,9 +81,9 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path, char *name)
 static void	absolute_path(t_ast *node, t_cmd *cmd, char *path)
 {
 	if (access(path, X_OK))
-		return (cmd_permission(path));
+		return (cmd_permission(cmd, path));
 	else if (is_dir(path))
-		return (is_a_dir(path));
+		return (is_a_dir(cmd, path));
 	cmd->path = ft_strdup(path);
 	if (!cmd->path)
 		malloc_error(node, node->shell, NULL);
@@ -115,5 +115,5 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 			return (found_path(node, cmd, full_path, name));
 		free(full_path);
 	}
-	cmd_not_found(node, name);
+	cmd_not_found(cmd, name);
 }

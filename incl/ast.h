@@ -44,6 +44,7 @@ typedef struct s_cmd
 	char	*path;
 	int		fd_in;
 	int		fd_out;
+	int		status;
 }	t_cmd;
 
 typedef struct s_rdr
