@@ -14,6 +14,7 @@
 
 void	double_expand(t_ast *node, t_cmd *cmd, char **envp, int index);
 int		contains_dol(const char *str);
+int		is_whitespace(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
 
 static void	single_quotes_loop(t_cmd *cmd, char	*new, int st_end[2], int len)
@@ -117,12 +118,18 @@ int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	len = 0;
 	end = start;
 	expand_inside_double(node, cmd, start);
+	printf("Args afrer expand_inside_double:\n");
+	int j = -1;
+	while (cmd->args[++j])
+		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "\"", 2))
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);
 	if (!len)
 	{
 		remove_arg(cmd, start);
+		if (cmd->args[start] && is_whitespace(cmd->args[start]))
+			remove_arg(cmd, start);
 		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));

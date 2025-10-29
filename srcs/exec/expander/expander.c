@@ -30,7 +30,13 @@ static int	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 	while (contains_dol(cmd->args[index]))
 	{
 		if (expand_cat(node, cmd, envp, index))
+		{
+			printf("expand_cat returned 1, arg[%d]: '%s'\n", index, cmd->args[index]);
+			if (is_whitespace(cmd->args[index]))
+				remove_arg(cmd, index);
+			printf("New arg[%d]: '%s'\n", index, cmd->args[index]);
 			return (1);
+		}
 	}
 	return (0);
 }
@@ -124,9 +130,10 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-//	int j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+	printf("Args before expander:\n");
+	int j = -1;
+	while (cmd->args[++j])
+		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	i = 0;
 	while (cmd->args[i])
 	{
@@ -135,15 +142,16 @@ void	expander(t_ast *node, t_cmd *cmd)
 		else
 		{
 			cmd->args[i] = make_new_arg(node, cmd, i);
-			if (is_whitespace(cmd->args[i]))
-			{
+//			if (is_whitespace(cmd->args[i]))
+//			{
 //				printf("Whitespace after making new arg\n");
 //				remove_arg(cmd, i);
-			}
+//			}
 			i++;
 		}
 	}
-//	j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+	printf("Args after expander:\n");
+	j = -1;
+	while (cmd->args[++j])
+		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

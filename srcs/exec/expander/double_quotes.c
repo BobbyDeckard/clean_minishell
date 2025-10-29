@@ -16,6 +16,8 @@ char	*get_name(t_ast *node, const char *str);
 int		contains_dol(const char *str);
 int		get_name_len(const char *str);
 int		handle_exit_status(t_ast *node, t_cmd *cmd, int index);
+int		is_whitespace(const char *str);
+int		remove_arg(t_cmd *cmd, int i);
 int		remove_var(t_ast *node, t_cmd *cmd, int index);
 
 static int	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
