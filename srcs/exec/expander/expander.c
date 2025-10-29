@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:00:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/29 19:15:32 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:17:55 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,4 @@ void	expander(t_ast *node, t_cmd *cmd)
 			i++;
 		}
 	}
-	printf("Args after expander:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }
