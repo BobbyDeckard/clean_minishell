@@ -104,7 +104,7 @@ int	export_bltn(t_ast *node, int in_pipe)
 	int	size;
 
 	status = 0;
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	size = char_arr_len(node->shell->envp);
 	if (node->cmd.args[1] && size == -1)
@@ -114,6 +114,7 @@ int	export_bltn(t_ast *node, int in_pipe)
 	else if (!node->cmd.args[1])
 		return (export_print(node, size));
 	status = handle_export_args(node, size);
-	close_all_redirs(node);
+	if (!in_pipe)
+		close_all_redirs(node);
 	return (status);
 }

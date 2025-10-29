@@ -29,7 +29,7 @@ static int	env(t_ast *node, int in_pipe)
 	char	**envp;
 	int		i;
 
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	envp = node->shell->envp;
 	i = -1;
@@ -49,7 +49,7 @@ static int	pwd(t_ast *node, int in_pipe)
 {
 	char	*cwd;
 
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	cwd = getcwd(NULL, 0);
 	if (!cwd)

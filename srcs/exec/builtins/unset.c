@@ -80,7 +80,7 @@ int	unset(t_ast *node, int in_pipe)
 	int		len;
 	int		i;
 
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	if (char_arr_len(node->shell->envp) == -1)
 		return (nothing_to_unset(node, in_pipe));
