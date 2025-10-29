@@ -58,6 +58,8 @@ int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 	if (!len)
 	{
 		remove_arg(cmd, start);
+		if (cmd->args[start] && is_whitespace(cmd->args[start]))
+			remove_arg(cmd, start);
 		return (1);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
