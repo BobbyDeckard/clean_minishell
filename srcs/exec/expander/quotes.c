@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/27 20:08:01 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:22:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,6 @@ static void	double_quotes_loop(t_cmd *cmd, char *new, int st_end[2], int len)
 	}
 }
 
-//	Following comment is about if (*new) condition further below.
-//	This condition prevents an empty string to be added as argument,
-//	but we maybe want to still get an empty string for example for
-//	exit "" ?
 int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 {
 	char	*new;
@@ -120,10 +116,6 @@ int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	len = 0;
 	end = start;
 	expand_inside_double(node, cmd, start);
-//	printf("Args afrer expand_inside_double:\n");
-//	int j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "\"", 2))
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);
