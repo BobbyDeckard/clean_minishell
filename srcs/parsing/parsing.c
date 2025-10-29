@@ -33,6 +33,8 @@ static int	check_words(t_token **list)
 			return (0);
 		else if (is_redir_token(current->type))
 			return (0);
+		else if (current->type == SINGLE_QUOTE || current->type == DOUBLE_QUOTE)
+			return (0);
 		current = current->next;
 	}
 	return (1);
