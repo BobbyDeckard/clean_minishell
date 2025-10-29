@@ -60,6 +60,7 @@ BLTN_FILES = builtins.c \
 			 export.c \
 			 export_utils.c \
 			 export_utils2.c \
+			 export_utils3.c \
 			 export_var.c \
 			 unset.c \
 			 unset_utils.c

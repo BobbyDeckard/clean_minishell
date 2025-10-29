@@ -17,6 +17,37 @@ int		assign_var(t_ast *node, int size, int arg);
 int		char_arr_len(char **arr);
 int		create_var(t_ast *node, int size, int arg);
 int		has_equal(const char *str);
+int		invalid_identifier(const char *arg);
+
+static int	is_id_char(const char c)
+{
+	if (ft_isalpha(c))
+		return (1);
+	else if (c == '_')
+		return (1);
+	return (0);
+}
+
+static int	check_identifier(const char *arg)
+{
+	int	start;
+	int	i;
+
+	i = -1;
+	start = 1;
+	if (arg[0] == '=')
+		return (invalid_identifier(arg));
+	while (arg[++i] && arg[i] != '=')
+	{
+		if (!is_id_char(arg[i]) && start)
+			return (invalid_identifier(arg));
+		else if (is_id_char(arg[i]) && start)
+			start = !start;
+		else if (!start && !is_id_char(arg[i]) && !ft_isdigit(arg[i]))
+			return (invalid_identifier(arg));
+	}
+	return (0);
+}
 
 int	handle_export_args(t_ast *node, int size)
 {
@@ -27,6 +58,11 @@ int	handle_export_args(t_ast *node, int size)
 	status = 0;
 	while (node->cmd.args[++i])
 	{
+		if (check_identifier(node->cmd.args[i]))
+		{
+			status = 1;
+			continue ;
+		}
 		if (!ft_strncmp(node->cmd.args[i], "PATH=", 5))
 			update_paths(node, node->shell, node->cmd.args[i] + 5);
 		if (has_equal(node->cmd.args[i]) && assign_var(node, size, i))
