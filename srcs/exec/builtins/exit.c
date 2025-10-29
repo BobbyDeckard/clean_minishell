@@ -24,7 +24,7 @@ static void	check_digits(t_ast *node, char *arg)
 	i = -1;
 	while (arg[++i])
 	{
-		if (!ft_isdigit(arg[i]))
+		if (!ft_isdigit(arg[i]) && arg[i] != '+' && arg[i] != '-')
 		{
 			ft_putstr_fd("minishell: exit: ", 2);
 			ft_putstr_fd(arg, 2);
