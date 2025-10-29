@@ -97,7 +97,6 @@ static int	export_print(t_ast *node, int size)
 	return (set_exit_status(node, 0));
 }
 
-//	create_env() is never called [clown emoji]
 int	export_bltn(t_ast *node, int in_pipe)
 {
 	int	status;
