@@ -97,7 +97,6 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	int		i;
 
 	i = -1;
-	printf("Trying to get name from: '%s'\n", cmd->args[0]);
 	while (cmd->args[++i] && !*(cmd->args[i]))
 		continue ;
 	name = cmd->args[i];

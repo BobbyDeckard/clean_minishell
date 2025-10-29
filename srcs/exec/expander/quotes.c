@@ -120,10 +120,10 @@ int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 	len = 0;
 	end = start;
 	expand_inside_double(node, cmd, start);
-	printf("Args afrer expand_inside_double:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("Args afrer expand_inside_double:\n");
+//	int j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "\"", 2))
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);

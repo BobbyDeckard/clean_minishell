@@ -31,10 +31,8 @@ static int	expand(t_ast *node, t_cmd *cmd, char **envp, int index)
 	{
 		if (expand_cat(node, cmd, envp, index))
 		{
-			printf("expand_cat returned 1, arg[%d]: '%s'\n", index, cmd->args[index]);
 			if (is_whitespace(cmd->args[index]))
 				remove_arg(cmd, index);
-			printf("New arg[%d]: '%s'\n", index, cmd->args[index]);
 			return (1);
 		}
 	}
@@ -130,10 +128,10 @@ void	expander(t_ast *node, t_cmd *cmd)
 {
 	int	i;
 
-	printf("Args before expander:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("Args before expander:\n");
+//	int j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	i = 0;
 	while (cmd->args[i])
 	{
@@ -150,8 +148,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 			i++;
 		}
 	}
-	printf("Args after expander:\n");
-	j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("Args after expander:\n");
+//	j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

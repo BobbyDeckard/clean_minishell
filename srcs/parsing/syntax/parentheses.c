@@ -40,7 +40,6 @@ int open)
 		}
 		current = current->next;
 	}
-	printf("Open at end of check_match: %d\n", open);
 	return (open == 0);
 }
 
