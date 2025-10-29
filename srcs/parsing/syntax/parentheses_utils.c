@@ -12,6 +12,20 @@
 
 #include "../../../incl/minishell.h"
 
+int	paren_open(t_token **list)
+{
+	t_token	*current;
+
+	current = *list;
+	while (current)
+	{
+		if (current->type == PAREN_OPEN)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
 t_token	*get_last_close(t_token **list)
 {
 	t_token	*last_close;

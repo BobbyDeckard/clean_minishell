@@ -13,6 +13,7 @@
 #include "../../../incl/minishell.h"
 
 t_token	*get_last_close(t_token **list);
+int		paren_open(t_token **list);
 
 static int	check_match(t_token *current, t_token *last_close, int end,
 int open)
@@ -39,6 +40,7 @@ int open)
 		}
 		current = current->next;
 	}
+	printf("Open at end of check_match: %d\n", open);
 	return (open == 0);
 }
 
@@ -89,7 +91,9 @@ int	check_parentheses(t_token **list)
 	t_token	*last_close;
 
 	last_close = get_last_close(list);
-	if (!last_close)
+	if (paren_open(list) && !last_close)
+		return (1);
+	else if (!last_close)
 		return (0);
 	else if (!check_match(*list, last_close, 0, 0))
 		return (1);

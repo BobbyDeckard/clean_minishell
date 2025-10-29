@@ -30,12 +30,12 @@ static int	check_words(t_token **list)
 	while (current)
 	{
 		if (current->type == WORD)
-			return (1);
+			return (0);
 		else if (is_redir_token(current->type))
-			return (1);
+			return (0);
 		current = current->next;
 	}
-	return (0);
+	return (1);
 }
 
 static int	check_syntax(t_shell *shell, t_token **list)
