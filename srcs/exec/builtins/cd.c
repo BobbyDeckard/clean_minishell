@@ -122,7 +122,7 @@ int	cd(t_ast *node, int in_pipe)
 {
 	char	*oldpwd;
 
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	else if (!node->cmd.args[1])
 		return (cd_home(node, in_pipe));

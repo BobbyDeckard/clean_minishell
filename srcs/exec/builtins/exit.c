@@ -62,7 +62,7 @@ int	exit_bltn(t_ast *node, int in_pipe)
 	int	n;
 
 	ft_putstr_fd("exit\n", node->cmd.fd_out);
-	if (!in_pipe && make_redirs(node))
+	if (make_redirs(node))
 		return (set_exit_status(node, 1));
 	if (node->cmd.args[1])
 	{
