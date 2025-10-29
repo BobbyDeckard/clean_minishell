@@ -13,7 +13,10 @@
 #include "../../../incl/minishell.h"
 
 void	cmd_not_found(t_ast *node, char *name);
+void	cmd_permission(char *name);
 void	invalid_name(t_cmd *cmd, char *name);
+void	is_a_dir(char *name);
+int		is_dir(char *path);
 
 //	This function is only called when trying to update _= env var.
 //	Thus, the i given is the index of the _ env var entry in our envp.
@@ -56,8 +59,18 @@ static void	update_(t_shell *data, char *path)
 	}
 }
 
-static void	found_path(t_ast *node, t_cmd *cmd, char *path)
+static void	found_path(t_ast *node, t_cmd *cmd, char *path, char *name)
 {
+	if (access(path, X_OK))
+	{
+		free(path);
+		return (cmd_permission(name));
+	}
+	else if (is_dir(path))
+	{
+		free(path);
+		return (is_a_dir(name));
+	}
 	cmd->path = ft_strdup(path);
 	free(path);
 	if (!cmd->path)
@@ -67,6 +80,10 @@ static void	found_path(t_ast *node, t_cmd *cmd, char *path)
 
 static void	absolute_path(t_ast *node, t_cmd *cmd, char *path)
 {
+	if (access(path, X_OK))
+		return (cmd_permission(path));
+	else if (is_dir(path))
+		return (is_a_dir(path));
 	cmd->path = ft_strdup(path);
 	if (!cmd->path)
 		malloc_error(node, node->shell, NULL);
@@ -84,7 +101,7 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	while (cmd->args[++i] && !*(cmd->args[i]))
 		continue ;
 	name = cmd->args[i];
-	if (!name || !name[0])
+	if (!name)
 		return ;
 	if (!ft_strncmp(name, ".", 2) || !ft_strncmp(name, "..", 2)
 		|| !ft_strncmp(name, "/", 2))
@@ -96,9 +113,8 @@ void	get_cmd_path(t_ast *node, t_cmd *cmd, char **paths)
 	{
 		full_path = ft_strjoin(paths[i], name);
 		if (!access(full_path, F_OK))
-			return (found_path(node, cmd, full_path));
+			return (found_path(node, cmd, full_path, name));
 		free(full_path);
 	}
-	cmd->path = NULL;
 	cmd_not_found(node, name);
 }

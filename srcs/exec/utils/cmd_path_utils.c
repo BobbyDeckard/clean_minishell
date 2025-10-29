@@ -23,3 +23,28 @@ void	cmd_not_found(t_ast *node, char *name)
 		ft_putstr_fd(": command not found\n", 2);
 	}
 }
+
+void	cmd_permission(char *name)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": Permission denied\n", 2);
+}
+
+void	is_a_dir(char *name)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putstr_fd(": Is a directory\n", 2);
+}
+
+int	is_dir(char *path)
+{
+	struct stat	buf;
+
+	if (stat(path, &buf))
+		perror("stat");
+	if (S_ISDIR(buf.st_mode))
+		return (1);
+	return (0);
+}
