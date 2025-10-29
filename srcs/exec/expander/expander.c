@@ -70,7 +70,7 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	}
 	else if (!ft_strncmp(cmd->args[i], "\"", 2))
 	{
-		if(handle_double_quotes(node, cmd, i))
+		if (handle_double_quotes(node, cmd, i))
 			return (1);
 		return (0);
 	}
