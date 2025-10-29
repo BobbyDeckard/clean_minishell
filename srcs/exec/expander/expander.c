@@ -153,8 +153,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 	cmd->args[0] = (char *) ft_calloc(1, sizeof(char));
 	if (!cmd->args[0])
 		malloc_error(node, node->shell, NULL);
-	printf("Args after expander:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("Args after expander:\n");
+//	int j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }
