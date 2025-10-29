@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 18:19:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/10 16:13:58 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:13:02 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ void	close_all_redirs(t_ast *node);
 int		make_redirs(t_ast *node);
 int		set_exit_status(t_ast *node, int status);
 
+static void	num_arg(t_ast *node, char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
+	cleanup(node);
+	exit(2);
+}
+
 static void	check_digits(t_ast *node, char *arg)
 {
 	int	i;
@@ -24,15 +33,11 @@ static void	check_digits(t_ast *node, char *arg)
 	i = -1;
 	while (arg[++i])
 	{
-		if (!ft_isdigit(arg[i]) && arg[i] != '+' && arg[i] != '-')
-		{
-			ft_putstr_fd("minishell: exit: ", 2);
-			ft_putstr_fd(arg, 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-			cleanup(node);
-			exit(2);
-		}
+		if ((!ft_isdigit(arg[i]) && arg[i] != '+' && arg[i] != '-'))
+			num_arg(node, arg);
 	}
+	if (i == 0)
+		num_arg(node, arg);
 }
 
 static void	check_length(t_ast *node, char *arg)

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 19:59:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/27 20:02:02 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:06:03 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void	redir_expander(t_ast *node, t_rdr *rdr)
 			continue ;
 		new = cat_arg(node, new, rdr->args[i]);
 		rdr_remove_arg(rdr, i);
-		if (!rdr->args[i + 1])
-			break ;
 	}
 	free(rdr->args[i]);
 	rdr->args[i] = new;

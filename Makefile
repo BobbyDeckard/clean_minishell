@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/27 20:09:12 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/29 18:59:54 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRCS_PATH = srcs/
 # SOURCES
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_FILES))
 SRCS_FILES = main.c \
-			 $(DEBUG) \
 			 $(EXEC) \
 			 $(PARS) \
 			 $(PTHS) \
@@ -71,6 +70,7 @@ XPDR_FILES = cat_words.c \
 			 expander.c \
 			 expander_utils.c \
 			 quotes.c \
+			 quotes_utils.c \
 			 spaces.c \
 			 spaces_utils.c \
 			 utils.c
@@ -167,10 +167,6 @@ UTLS_FILES = char_arr.c \
 			 errors.c \
 			 read_command.c \
 			 utils.c
-
-# DEBUG
-DEBUG = $(addprefix debug_files/, $(DEBUG_FILES))
-DEBUG_FILES = print.c
 
 # INCLUDES
 HEADERS = incl/minishell.h

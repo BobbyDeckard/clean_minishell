@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/29 18:22:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:48:24 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	double_expand(t_ast *node, t_cmd *cmd, char **envp, int index);
 int		contains_dol(const char *str);
+int		handle_empty_quotes(t_cmd *cmd, int index);
 int		is_whitespace(const char *str);
 int		remove_arg(t_cmd *cmd, int i);
 
@@ -56,12 +57,7 @@ int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);
 	if (!len)
-	{
-		remove_arg(cmd, start);
-		if (cmd->args[start] && is_whitespace(cmd->args[start]))
-			remove_arg(cmd, start);
-		return (1);
-	}
+		return (handle_empty_quotes(cmd, start));
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
@@ -120,12 +116,7 @@ int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start)
 		len += ft_strlen(cmd->args[end]);
 	remove_arg(cmd, start);
 	if (!len)
-	{
-		remove_arg(cmd, start);
-		if (cmd->args[start] && is_whitespace(cmd->args[start]))
-			remove_arg(cmd, start);
-		return (1);
-	}
+		return (handle_empty_quotes(cmd, start));
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);

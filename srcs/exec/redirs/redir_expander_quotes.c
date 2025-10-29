@@ -6,13 +6,14 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 17:07:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/27 20:08:13 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:06:10 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
 void	rdr_double_expand(t_ast *node, t_rdr *rdr, char **envp, int index);
+void	rdr_handle_empty_quotes(t_rdr *rdr, int index);
 int		contains_dol(const char *str);
 int		rdr_remove_arg(t_rdr *rdr, int i);
 
@@ -56,8 +57,8 @@ int	rdr_handle_single_quotes(t_ast *node, t_rdr *rdr, int start)
 	rdr_remove_arg(rdr, start);
 	if (!len)
 	{
-		rdr_remove_arg(rdr, start);
-		return (1);
+		rdr->args[start][0] = 0;
+		return (0);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
@@ -118,8 +119,8 @@ int	rdr_handle_double_quotes(t_ast *node, t_rdr *rdr, int start)
 	rdr_remove_arg(rdr, start);
 	if (!len)
 	{
-		rdr_remove_arg(rdr, start);
-		return (1);
+		rdr->args[start][0] = 0;
+		return (0);
 	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
