@@ -25,19 +25,17 @@ int		is_redir_token(t_t_type type);
 static int	check_words(t_token **list)
 {
 	t_token	*current;
-	int		word;
 
-	word = 0;
 	current = *list;
 	while (current)
 	{
 		if (current->type == WORD)
-			word = 1;
+			return (1);
 		else if (is_redir_token(current->type))
-			word = 1;
+			return (1);
 		current = current->next;
 	}
-	return (!word);
+	return (0);
 }
 
 static int	check_syntax(t_shell *shell, t_token **list)
