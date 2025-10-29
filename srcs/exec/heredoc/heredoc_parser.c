@@ -79,6 +79,8 @@ void	make_del(t_ast *node)
 			i = get_single_body(&node->rdr, file, i, len);
 		else
 			ft_strlcat(file, node->rdr.args[i], len);
+		if (!node->rdr.args[i])
+			break ;
 	}
 	node->rdr.file = file;
 }

@@ -16,12 +16,12 @@ int	get_double_body(t_rdr *rdr, char *file, int i, int len)
 {
 	while (rdr->args[++i] && ft_strncmp(rdr->args[i], "\"", 2))
 		ft_strlcat(file, rdr->args[i], len);
-	return (++i);
+	return (i);
 }
 
 int	get_single_body(t_rdr *rdr, char *file, int i, int len)
 {
 	while (rdr->args[++i] && ft_strncmp(rdr->args[i], "'", 2))
 		ft_strlcat(file, rdr->args[i], len);
-	return (++i);
+	return (i);
 }
