@@ -32,7 +32,7 @@ void	cmd_permission(t_cmd *cmd, char *name)
 
 void	is_a_dir(t_cmd *cmd, char *name)
 {
-	cmd->status = 127;
+	cmd->status = 126;
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(name, 2);
 	ft_putstr_fd(": Is a directory\n", 2);
