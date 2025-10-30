@@ -6,13 +6,15 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:00:07 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/29 19:17:55 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 11:00:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
 int	contains_dol(const char *str);
+int	contains_double(const char *str);
+int	contains_single(const char *str);
 int	expand_cat(t_ast *node, t_cmd *cmd, char **envp, int index);
 int	handle_double_quotes(t_ast *node, t_cmd *cmd, int start);
 int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start);
@@ -65,6 +67,8 @@ static int	check_arg(t_ast *node, t_cmd *cmd, int i)
 	if (!ft_strncmp(cmd->args[i], "'", 2))
 	{
 		if (handle_single_quotes(node, cmd, i))
+			return (1);
+		else if (contains_double(cmd->args[i]))
 			return (1);
 		return (0);
 	}

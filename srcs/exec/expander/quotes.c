@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 13:05:21 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/29 18:48:24 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 10:32:46 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ int	handle_single_quotes(t_ast *node, t_cmd *cmd, int start)
 	end = start;
 	while (cmd->args[++end] && ft_strncmp(cmd->args[end], "'", 2))
 		len += ft_strlen(cmd->args[end]);
+	printf("len = %d\n", len);
 	remove_arg(cmd, start);
 	if (!len)
+	{
+		printf("len = %d\n", len);
 		return (handle_empty_quotes(cmd, start));
+	}
 	new = (char *) ft_calloc(++len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
