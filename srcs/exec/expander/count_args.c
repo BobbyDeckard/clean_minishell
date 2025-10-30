@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 16:05:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/30 16:07:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:48:22 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	skip_double(t_cmd *cmd, int i)
 	return (i);
 }
 
-static int	skip_single(t_cmd *cmd, int i)
+int	skip_single(t_cmd *cmd, int i)
 {
 	while (cmd->args[i] && ft_strncmp(cmd->args[i], "'", 2))
 		i++;
@@ -32,7 +32,7 @@ static int	skip_single(t_cmd *cmd, int i)
 	return (i);
 }
 
-static int	skip_whitespaces(t_cmd *cmd, int i)
+int	skip_whitespaces(t_cmd *cmd, int i)
 {
 	while (cmd->args[i] && is_whitespace(cmd->args[i]))
 		i++;

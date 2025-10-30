@@ -67,7 +67,8 @@ BLTN_FILES = builtins.c \
 XPDR = $(addprefix expander/, $(XPDR_FILES))
 XPDR_FILES = count_args.c \
 			 expander.c \
-			 expander_utils.c
+			 expander_utils.c \
+			 get_name.c
 
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
 HRDC_FILES = heredoc.c \
