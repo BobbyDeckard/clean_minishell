@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:21:56 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/27 20:22:36 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:26:36 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
-	make_file_name(node);
+//	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;
@@ -66,7 +66,7 @@ static int	make_redir_out(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-	make_file_name(node);
+//	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;
@@ -91,7 +91,7 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-	make_file_name(node);
+//	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;

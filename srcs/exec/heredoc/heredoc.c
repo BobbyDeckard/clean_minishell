@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:48:13 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 16:51:27 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:29:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	heredoc_loop(t_ast *node, t_cmd *cmd, char *del, int *stdin_backup)
 			free(line);
 			break ;
 		}
-		if (node->rdr.type == RDR_HEREDOC_EXP)
-			line = expand_line(node, node->shell->envp, line);
+//		if (node->rdr.type == RDR_HEREDOC_EXP)
+//			line = expand_line(node, node->shell->envp, line);
 		ft_putstr_fd(line, cmd->fd_in);
 		ft_putchar_fd('\n', cmd->fd_in);
 		free(line);
@@ -97,7 +97,7 @@ void	make_heredoc(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
-	make_del(node);
+//	make_del(node);
 	del = copy_delimiter(node);
 	free(node->rdr.file);
 	node->rdr.file = NULL;

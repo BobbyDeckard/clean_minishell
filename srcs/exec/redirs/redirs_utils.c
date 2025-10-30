@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 09:57:14 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 15:26:54 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	redir_expander(t_ast *node, t_rdr *rdr);
 void	unlink_heredoc(t_ast *node);
 
+/*
 void	make_file_name(t_ast *node)
 {
 	char	*file;
@@ -37,6 +38,7 @@ void	make_file_name(t_ast *node)
 		ft_strlcat(file, node->rdr.args[i], len);
 	node->rdr.file = file;
 }
+*/
 
 void	close_redirs(t_cmd *cmd)
 {
