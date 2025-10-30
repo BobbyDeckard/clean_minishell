@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/30 15:28:41 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/30 16:08:21 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,9 @@ BLTN_FILES = builtins.c \
 			 unset_utils.c
 
 XPDR = $(addprefix expander/, $(XPDR_FILES))
-XPDR_FILES = expander.c
+XPDR_FILES = count_args.c \
+			 expander.c \
+			 expander_utils.c
 
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
 HRDC_FILES = heredoc.c \

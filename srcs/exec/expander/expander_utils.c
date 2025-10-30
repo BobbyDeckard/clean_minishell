@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/30 12:12:02 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/30 16:07:49 by imeulema         ###   ########.fr       */
+/*   Created: 2025/10/30 16:07:30 by imeulema          #+#    #+#             */
+/*   Updated: 2025/10/30 16:07:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-int	count_args(t_cmd *cmd);
-
-void	expander(t_ast *node, t_cmd *cmd)
+int	is_whitespace(const char *str)
 {
-	int	count;
-
-	count = count_args(cmd);
-	printf("Args:\n");
-	int i = -1;
-	while (cmd->args[++i])
-		printf("arg[%d]: '%s'\n", i, cmd->args[i]);
-	printf("Counted %d arguments\n", count);
-	(void) node;
+	if (ft_strlen(str) != 1)
+		return (0);
+	else if (*str >= 9 && *str <= 13)
+		return (1);
+	else if (*str == 32)
+		return (1);
+	return (0);
 }
