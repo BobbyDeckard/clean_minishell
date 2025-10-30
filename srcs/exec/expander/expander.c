@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:12:02 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/30 15:50:23 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:04:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,51 @@ static int	skip_whitespaces(t_cmd *cmd, int i)
 	return (i);
 }
 
+static int	skip_arg(t_cmd *cmd, int i)
+{
+	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
+	{
+		if (!ft_strncmp(cmd->args[i], "\"", 2))
+			i = skip_double(cmd, ++i);
+		else if (!ft_strncmp(cmd->args[i], "'", 2))
+			i = skip_single(cmd, ++i);
+		else
+			i++;
+	}
+	return (i);
+}
+
+static int	count_args(t_cmd *cmd)
+{
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (cmd->args[i])
+	{
+		if (is_whitespace(cmd->args[i]))
+	  		i = skip_whitespaces(cmd, i);
+		else
+		{
+			count++;
+			i = skip_arg(cmd, i);
+		}
+	}
+	return (count);
+}
+
+/*
 static int	skip_word(t_cmd *cmd, int i)
 {
-	while (cmd->args[i] && ft_strncmp(cmd->args[i], "\"", 2)
-			&& ft_strncmp(cmd->args[i], "'", 2) && !is_whitespace(cmd->args[i]))
+	while (cmd->args[i] && !is_whitespace(cmd->args[i]))
+	{
+		if (!ft_strncmp(cmd->args[i], "\"", 2))
+			i = skip_double(cmd, ++i);
+		else if (!ft_strncmp(cmd->args[i], "'", 2))
+			i = skip_single(cmd, ++i);
 		i++;
+	}
 	return (i);
 }
 
@@ -76,6 +116,7 @@ static int	count_args(t_cmd *cmd)
 	}
 	return (count);
 }
+*/
 
 void	expander(t_ast *node, t_cmd *cmd)
 {
