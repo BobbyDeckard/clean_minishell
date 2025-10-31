@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 14:23:57 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/11 16:11:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/31 16:12:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void	truncate_cwd(char cwd[256], char full[256])
 	while (full[i] != '/')
 		i--;
 	i++;
-	ft_strlcpy(cwd, "\e[1;32m", 256);
+	ft_strlcpy(cwd, "\001\e[1;32m\002", 256);
 	if (ft_strncmp(full, "/", 2) && ft_strlen(full + i) + 13 < 256)
 		ft_strlcat(cwd, full + i, 256);
 	else
 		ft_strlcat(cwd, "minishell", 256);
-	ft_strlcat(cwd, "\x1b[0m", 256);
+	ft_strlcat(cwd, "\001\x1b[0m\002", 256);
 	ft_strlcat(cwd, " ", 256);
 }
 
