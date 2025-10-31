@@ -1,8 +1,0 @@
-/bin/echo hello
-/bin/echo "$USER"
-/bin/ls -l /usr/bin
-/bin/ls -l "$HOME"
-./myscript.sh && echo ok
-./myscript.sh || echo fail
-(cat ./input.txt | grep "$USER") && ./script.sh
-/bin/echo "done $USER"

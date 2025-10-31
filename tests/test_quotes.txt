@@ -1,6 +1,0 @@
-echo "hello world"
-echo 'hello wordl'
-echo "mix 'quotes'"
-echo 'mix " quotes'
-echo '"$USER"'
-echo "'$USER'"
