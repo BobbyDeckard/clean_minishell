@@ -1,0 +1,6 @@
+echo """"""''''''""""
+echo """"""''''''"""""
+<file cat|grep foo           | wc 	-w>outfile>out
+(cat file && echo ok && echo bibiboup>>file)|| weyoo | mama | boubou | bibi | tructutr>file
+echo "$USER"cestchiant$PATH,okdakor				youpi '				woaaaaaaa '
+(cmd1 && cm2) || ((cmd3 || cmd4) && cmd5)

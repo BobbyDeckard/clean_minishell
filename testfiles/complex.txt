@@ -1,0 +1,13 @@
+(echo "$USER" && cat "$HOME"/file.txt) || (echo fail && echo retry)
+(cat file1 | grep something && echo ok) || (cat file2 | grep else && echo alt)
+(echo start && (echo "$USER" && echo done)) | cat
+(((echo one && echo two) || echo three) && echo four)
+(echo a && (echo b && (echo c || echo d))) || echo e
+cat < in.txt | (grep x && echo found) || (echo missing && echo done)
+(cat < in.txt | grep "$USER" | sort > out.txt) && echo done
+echo "multi test" | cat | grep multi && echo ok || echo fail
+(echo first && (echo second || echo third)) && (echo fourth)
+(echo "$USER" && (cat "$HOME"/f1 | grep data)) || echo "no data"
+(echo one && echo two) | (echo three && echo four)
+((echo a && echo b) || (echo c && echo d)) && echo e
+(echo alpha && (echo beta && (echo gamma || echo delta)))

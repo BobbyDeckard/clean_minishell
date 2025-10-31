@@ -1,0 +1,18 @@
+export TEST="    this			is a      test      "
+export | grep TEST
+env
+echo $TEST
+echo "$TEST""      woaaaaaaaa">outfile
+cat < outfile | wc          -w
+unset TEST
+echo "$TEST"
+"$TEST"
+$TEST
+$TEST"hello"
+<nonexistent"file"<outfile cat
+cat< outfile>file3
+cat <outfile|grep woa |    grep test>file1>>file2 | echo>file1>>file2>>file3
+cat outfile
+cat file1
+cat file2
+cat file3

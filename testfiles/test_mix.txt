@@ -1,0 +1,150 @@
+echo hi
+echo hello world
+echo hello$USER
+echo "hello$USER"
+echo 'hello$USER'
+echo "$USER$HOME"
+echo "$USER"home
+echo "home"$USER
+echo $USER"home"
+echo "$USER""home"
+echo "before $USER after"
+echo "$USER is logged in"
+echo "the path is $HOME"
+echo '$USER is literal'
+echo "user:$USER, home:$HOME"
+echo "   $USER   "
+echo hello$USERworld
+echo "$USER"world
+echo "$USER" world
+echo hello "$USER"world
+echo hello"$USER"world
+echo "$USER"something
+echo "something$USER"
+echo "$USER"sometext
+echo sometext"$USER"
+echo "$USER""something"
+echo hello" "there
+echo "$NONEXISTENT"
+echo "$NONEXISTENT"something
+(echo "$USER" && cat "$HOME"/file.txt) || (echo fail && echo retry)
+(cat file1 | grep something && echo ok) || (cat file2 | grep else && echo alt)
+(echo start && (echo "$USER" && echo done)) | cat
+(((echo one && echo two) || echo three) && echo four)
+(echo a && (echo b && (echo c || echo d))) || echo e
+cat < in.txt | (grep x && echo found) || (echo missing && echo done)
+(cat < in.txt | grep "$USER" | sort > out.txt) && echo done
+echo "multi test" | cat | grep multi && echo ok || echo fail
+(echo first && (echo second || echo third)) && (echo fourth)
+(echo "$USER" && (cat "$HOME"/f1 | grep data)) || echo "no data"
+(echo one && echo two) | (echo three && echo four)
+((echo a && echo b) || (echo c && echo d)) && echo e
+(echo alpha && (echo beta && (echo gamma || echo delta)))
+/bin/echo hello
+/bin/echo "$USER"
+/bin/ls -l /usr/bin
+/bin/ls -l "$HOME"
+./myscript.sh && echo ok
+./myscript.sh || echo fail
+(cat ./input.txt | grep "$USER") && ./script.sh
+/bin/echo "done $USER"
+true && echo ok
+false && echo ok
+true || echo fail
+false || echo fail
+echo a && echo b && echo c
+echo a || echo b || echo c
+cat file && echo ok
+cat file || echo fail
+cat missing && echo ok || echo fail
+cat file && echo ok || echo fail
+(cat file && echo ok) || echo fail
+(cat missing && echo ok) || echo fail
+(cat file && (echo ok || echo maybe)) || echo fail
+cat file && (echo ok || echo fail)
+echo ok && (echo "$USER" || echo "$HOME")
+echo "$USER" && echo "$HOME"
+echo "$USER" || echo "$HOME"
+(cat file | grep something) && echo ok || echo fail
+cat file | grep something && echo ok > out.txt
+cat file | grep something || echo "error: $USER" >> log.txt
+(cat missing | grep x) && echo ok || echo fail
+(cat file && echo ok) | grep o
+cat file | (grep something && echo ok) || echo fail
+cat file | grep "$USER" && echo found || echo notfound
+(cat file | grep something) > result.txt
+(cat file | grep something) > result.txt 2> err.txt
+cat < in.txt | grep "$USER" | sort > "$HOME"/out.txt
+echo "$USER" | cat | grep "$USER" > result.txt
+(cat file && echo ok) || (grep x file && echo found)
+(cat file && echo "$USER ok") || echo "$USER fail"
+echo "$USER" | grep "$HOME" || echo "no match"
+(echo hello)
+(echo hello && echo world)
+(echo "$USER" && (echo one || echo two))
+(echo "a" && (echo "b" || (echo "c" && echo "d")))
+(((echo deep)))
+(cat file && echo ok) || (echo fail)
+(echo hello && echo world) | cat
+(cat file) && (echo done)
+(cat file && (echo ok && (echo deep)))
+(echo "$USER" && echo "$HOME")
+(echo "$USER" || echo "$HOME")
+(echo one && echo two) || (echo three && echo four)
+(echo start && (echo mid && (echo end)))
+echo hello | cat
+echo hello|cat
+echo hello | cat | grep h
+echo "hello $USER" | wc -c
+echo "hello $USER" | grep "$USER"
+echo "abc" | grep a | grep b
+echo "$USER" | cat | cat | cat
+cat file | grep something | sort | uniq
+cat file | grep something | sort
+cat < in.txt | grep word > out.txt
+cat file | (grep word | sort)
+(cat file | grep pattern) | wc -l
+echo "pipe test" | grep pipe
+echo "a"b"c"
+echo 'a'b'c'
+echo "a"'b'"c"
+echo "a""b""c"
+echo 'a''b''c'
+echo "hello""world"
+echo "hello"'world'
+echo 'hello'"world"
+echo "a" "b" "c"
+echo "a"" b"" c"
+echo 'a b'" c"
+echo "one"'two'"three"
+echo "mix"'ed'"quotes'
+echo "" "empty" ""
+echo "double 'inside' quotes"
+echo 'single "inside" quotes'
+echo "text 'quoted part' more"
+echo 'text "quoted part" more'
+
+echo '$USER$HOME'
+echo '$USER'home
+echo 'home'$USER
+echo $USER'home'
+echo '$USER''home'
+echo 'before $USER after'
+echo '$USER is logged in'
+echo 'the path is $HOME'
+echo '$USER is literal'
+echo 'user:$USER, home:$HOME'
+echo '   $USER   '
+echo hello$USERworld
+echo '$USER'world
+echo '$USER' world
+echo hello '$USER'world
+echo hello'$USER'world
+echo '$USER'something
+echo 'something$USER'
+echo '$USER'sometext
+echo sometext'$USER'
+echo '$USER''something'
+echo hello' 'there
+echo '$NONEXISTENT'
+echo '$NONEXISTENT'something

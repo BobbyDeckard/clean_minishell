@@ -1,0 +1,29 @@
+echo hi
+echo hello world
+echo hello$USER
+echo "hello$USER"
+echo 'hello$USER'
+echo "$USER$HOME"
+echo "$USER"home
+echo "home"$USER
+echo $USER"home"
+echo "$USER""home"
+echo "before $USER after"
+echo "$USER is logged in"
+echo "the path is $HOME"
+echo '$USER is literal'
+echo "user:$USER, home:$HOME"
+echo "   $USER   "
+echo hello$USERworld
+echo "$USER"world
+echo "$USER" world
+echo hello "$USER"world
+echo hello"$USER"world
+echo "$USER"something
+echo "something$USER"
+echo "$USER"sometext
+echo sometext"$USER"
+echo "$USER""something"
+echo hello" "there
+echo "$NONEXISTENT"
+echo "$NONEXISTENT"something
