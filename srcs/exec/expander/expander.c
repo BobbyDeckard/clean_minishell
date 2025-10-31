@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:12:02 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 15:38:29 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:22:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ static void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	if (contains_contig_spaces(entry) && ++spaces)
 		entry = filter_spaces(node, entry);
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
-	new = (char *) malloc(len * sizeof(char));
+	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
+	//	BEWARE, calling malloc_error here would not free everything...
+	//	args would leak
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);

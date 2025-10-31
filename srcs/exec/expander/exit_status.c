@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:31:19 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 14:31:35 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/31 22:52:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	expand_exit_status(t_ast *node, t_cmd *cmd, int index)
 	{
 		free(status);
 		malloc_error(node, node->shell, NULL);
+		//	Better protection...
 	}
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, status, len);
@@ -47,4 +48,33 @@ void	expand_exit_status(t_ast *node, t_cmd *cmd, int index)
 	free(status);
 	free(cmd->args[index]);
 	cmd->args[index] = new;
+}
+
+void	rdr_expand_exit_status(t_ast *node, t_rdr *rdr, int index)
+{
+	char	*status;
+	char	*new;
+	int		len;
+	int		i;
+
+	status = ft_itoa(node->shell->exit_status);
+	if (!status)
+		malloc_error(node, node->shell, NULL);
+	i = 0;
+	while (rdr->args[index][i] && rdr->args[index][i] != '$')
+		i++;
+	len = ft_strlen(rdr->args[index]) + ft_strlen(status) - 1;
+	new = (char *) malloc(len * sizeof(char));
+	if (!new)
+	{
+		free(status);
+		malloc_error(node, node->shell, NULL);
+		//	Need better protection...
+	}
+	ft_strlcpy(new, rdr->args[index], i + 1);
+	ft_strlcat(new, status, len);
+	ft_strlcat(new, rdr->args[index] + i + 2, len);
+	free(status);
+	free(rdr->args[index]);
+	rdr->args[index] = new;
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 14:33:55 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 15:32:18 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:02:38 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ static void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 		i++;
 	name_len = get_name_len(cmd->args[index] + i);
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
-	new = (char *) malloc(len * sizeof(char));
+	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
+	//	Better protection needed...
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);
