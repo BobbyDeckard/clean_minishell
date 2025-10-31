@@ -41,7 +41,7 @@ static int	make_redir_in(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_in))
 			perror("close");
 	}
-//	make_file_name(node);
+	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;
@@ -66,7 +66,7 @@ static int	make_redir_out(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-//	make_file_name(node);
+	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;
@@ -91,7 +91,7 @@ static int	make_redir_append(t_ast *node, t_cmd *cmd)
 		if (close(cmd->fd_out))
 			perror("close");
 	}
-//	make_file_name(node);
+	make_file_name(node);
 	if (!node->rdr.file)
 	{
 		cmd->fd_out = -1;
