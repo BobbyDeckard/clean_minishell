@@ -6,13 +6,13 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 22:29:31 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/10/31 23:54:33 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/minishell.h"
 
-void	redir_expander(t_ast *node, t_rdr *rdr);
+void	rdr_expander(t_ast *node, t_rdr *rdr);
 void	unlink_heredoc(t_ast *node);
 
 void	make_file_name(t_ast *node)
@@ -21,7 +21,7 @@ void	make_file_name(t_ast *node)
 	int		len;
 	int		i;
 
-//	redir_expander(node, &node->rdr);
+	rdr_expander(node, &node->rdr);
 	if (!node->rdr.args[0])
 		return ;
 	len = 1;

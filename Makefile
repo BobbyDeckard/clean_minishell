@@ -6,7 +6,7 @@
 #    By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 17:31:06 by imeulema          #+#    #+#              #
-#    Updated: 2025/10/31 15:17:05 by imeulema         ###   ########.fr        #
+#    Updated: 2025/10/31 23:51:01 by imeulema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,10 @@ PIPE_FILES = link_pipes.c \
 
 RDRS = $(addprefix redirs/, $(RDRS_FILES))
 RDRS_FILES = redirs.c \
+			 redirs_args_parsing.c \
+			 redirs_expand_double.c \
+			 redirs_expander.c \
+			 redirs_expander_utils.c \
 			 redirs_utils.c
 
 XUTL = $(addprefix utils/, $(XUTL_FILES))
