@@ -47,6 +47,7 @@ t_token *token)
 t_token	*tokenize_whitespace(t_shell *shell, char **command, t_token **list,
 t_token *token)
 {
+	printf("Tokenizing whitespace\n");
 	token->type = WHITESPACE;
 	token->content = (char *) malloc(2 * sizeof(char));
 	if (!token->content)
@@ -54,7 +55,10 @@ t_token *token)
 		free(token);
 		malloc_error(NULL, shell, list);
 	}
-	ft_strlcpy(token->content, *command, 2);
+	if (**command == -62)
+		ft_strlcpy(token->content, " ", 2);
+	else
+		ft_strlcpy(token->content, *command, 2);
 	*command += 1;
 	return (token);
 }
@@ -66,6 +70,7 @@ t_token *token)
 
 	token->type = WORD;
 	len = wordlen(*command) + 1;
+	printf("About to tokenize word from command '%s'\n", *command);
 	token->content = (char *) malloc(len * sizeof(char));
 	if (!token->content)
 	{

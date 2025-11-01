@@ -62,6 +62,7 @@ static void	link_token(t_token **list, t_token *token)
 static t_token	*make_token(t_shell *shell, char **command, t_token **list,
 t_token *token)
 {
+	printf("Filtering token, having a look at char '%c' (= %d)\n", **command, **command);
 	if (**command == '|' && *(*command + 1) && *(*command + 1) == '|')
 		return (tokenize_or(command, token));
 	else if (**command == '|')
@@ -84,7 +85,8 @@ t_token *token)
 		return (tokenize_redir_append(command, token));
 	else if (**command == '>')
 		return (tokenize_redir_out(command, token));
-	else if (**command == ' ' || (**command >= 9 && **command <= 13))
+	//	Remove -62 condition on school's computers
+	else if (**command == ' ' || (**command >= 9 && **command <= 13) || **command == -62)
 		return (tokenize_whitespace(shell, command, list, token));
 	return (tokenize_word(shell, command, list, token));
 }
@@ -109,6 +111,12 @@ t_token	**tokenize_command(t_shell *shell, char *command)
 		malloc_error(NULL, shell, NULL);
 	*tokens = NULL;
 	while (*command)
+	{
+		printf("Command: '%s'\n", command);
+		printf("Immediate char: '%c' (= %d)\n", *command, *command);
+		printf("Address of immediate char: %p\n", command);
+		printf("Next char: '%c' (=%d)\n", *(command + 1), *(command + 1));
 		tokens = extract_token(shell, &command, tokens);
+	}
 	return (tokens);
 }

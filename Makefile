@@ -34,7 +34,8 @@ SRCS_FILES = main.c \
 			 $(PARS) \
 			 $(PTHS) \
 			 $(SIGS) \
-			 $(UTLS)
+			 $(UTLS) \
+			 print.c
 OBJS = $(patsubst $(SRCS_PATH)%.c, $(OBJS_PATH)%.o, $(SRCS))
 
 # SOURCES SUBDIRECTORIES
