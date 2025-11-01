@@ -1,0 +1,111 @@
+echo hello
+     echo hello world      
+echo "hello" "world"
+echo "hello world"
+echo ""
+echo "" hello
+echo $USER
+echo "$USER"
+echo '$USER'
+echo $USERtest
+echo "$USERtest"
+echo '$USERtest'
+echo "$USER"test
+echo '$USER'test
+echo $EMPTY
+$EMPTY
+""
+''
+           
+	 	
+export ECHO=echo && $ECHO ok || echo fail
+$ECHO
+"$ECHO"
+$"ECHO"
+'$ECHO'
+echo "'"
+echo '"'
+echo "'"'"'"'"'"'"'"'"'
+echo "'"'"'"'"'"'"'"'"'"
+echo "'"'"'"'"'"'"'"'"'"'
+echo "'"'"'"'"'"'"'"'"'"'"""""""''''''''''''"""""""""'''''''""""""""""""''''''''''''''
+echo "'"'"'"'"'"'"'"'"'"'"""""""''''''''''''"""""""""'''''''""""""""""""'''''''''''''''"
+"'"'"'"'"'"'"'"'"'
+"'"'"'"'"'"'"'"'"'"
+"'"'"'"'"'"'"'"'"'"'
+"'"'"'"'"'"'"'"'"'"'"""""""''''''''''''"""""""""'''''''""""""""""""''''''''''''''
+"'"'"'"'"'"'"'"'"'"'"""""""''''''''''''"""""""""'''''''""""""""""""'''''''''''''''"
+$ECHO hello" "world
+echo hello"   "world
+echo hello"   "
+echo hello"   "''
+echo hello"   """
+echo hello"   "   
+echo "   "
+echo "   "''
+echo "   """
+echo "   "     
+"   "
+"   "''
+"   """
+"   "     
+echo hello"   "world'' 
+echo hello"   "world'' | cat -e
+$ECHO hello$USER
+"$ECHO" hello"$USER"world
+unset ECHO && ($ECHO fail || echo ok)
+echo foo > file
+< file cat | grep foo
+echo $?
+chmod 0 file
+< file cat | grep foo
+echo $?
+< file && echo ok?||echo "$?"
+cat<file&&echo ok? || echo '$?'=$?
+chmod 644 file && echo >>file bar && echo ok || ok fail
+< file grep foo >> file
+<file grep>>file foo
+cat file | wc -l
+< file cat | wc -w
+cat < file | wc > outfile && cat outfile || echo fail
+cat<file|wc>>outfile&&<outfile cat||echo fail          
+cat<file>out|cat && echo cat'ed || echo catn't
+cat<file>out|cat && echo "cat'ed" || echo "catn't"
+< file && echo ok
+< nonexistent || echo fail
+> testfile && echo ok || echo fail
+> fi"le"1>file$USER>>append"_"file && ls || echo fail
+rm append_file file file1 fileivo out outfile testfile
+export SPACE="     that   '   s       a         lot           of 			white 			spaces    	"&&echo $SPACE
+echo "$SPACE" | cat -e
+echo $SPACE | cat -e
+echo '$SPACE'
+true | true | false
+echo $?
+false | false | true
+echo $?
+echo -n nonewline-'>'
+echo -nnnnnnnnnnnn nonewline"->"
+echo -nanananannna newline!!!
+<< de"limiter" cat
+hey $USER,
+you're literal
+delimiter
+<<EOF<<end cat
+hey $USER,
+you're expanded!
+EOF
+$HOME is where the heart is
+end
+env | grep SHLVL
+minishell
+env | grep SHLVL
+export MINISHELL=$PWD && export | grep MINISHELL
+mkdir $MINISHELL/subdir && mkdir $MINISHELL/subdir/target && cd $MINISHELL/subdir/target
+rm -rf $MINISHELL/subdir
+env | grep SHLVL
+pwd
+cd ..
+exit 13 12
+echo $?
+exit 42
