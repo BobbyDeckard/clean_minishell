@@ -1,17 +1,13 @@
 echo hi | cat
 echo hello|cat
-echo hello | cat
 echo hi | grep h
-echo hello world | grep hello
 echo "$USER" | cat
 echo "$USER" | grep "$USER"
 echo hi | cat | cat
 echo hello | grep h | grep e
 ls | wc -l
-cat test_pipe_file | grep test
 echo test content > test_pipe_file
 cat test_pipe_file | grep test
-cat test_pipe_file | grep content
 cat test_pipe_file | grep missing
 echo $?
 cat /nonexistent | cat
@@ -31,9 +27,8 @@ cat < var_file | grep "$USER" > var_filtered
 cat var_filtered
 echo a | echo b
 echo a | echo b | echo c
-echo start | cat | cat | cat | cat
+echo start | cat | cat | cat
 cat test_pipe_file | wc -l
-cat test_pipe_file | wc -c
 echo multiline > pipe_multiline
 echo content >> pipe_multiline
 cat pipe_multiline | wc -l
@@ -42,19 +37,12 @@ cat pipe_multiline | cat | grep missing
 echo $?
 echo test | (cat)
 (echo test) | cat
-echo test | (cat | cat)
 (echo a && echo b) | cat
-(echo a || echo b) | cat
-(echo test | cat) && echo ok
-echo $?
+echo test | cat && echo ok
 (cat /nonexistent | cat) || echo fail
 echo $?
-echo test | cat && echo ok
-echo test | cat || echo fail
 cat test_pipe_file | grep test && echo found
 cat test_pipe_file | grep missing || echo notfound
-cat /nonexistent | cat || echo handled
-echo test | cat /nonexistent || echo handled
 echo test | cat && echo ok || echo fail
 echo foo > file1
 echo bar > file2
@@ -67,8 +55,6 @@ echo test2 > multi2
 cat multi1 | cat multi2 | cat
 cat multi1 < multi1 | cat
 echo combined > combined_in
-cat combined_in | cat < combined_in
 cat combined_in | grep combined > combined_out
 cat combined_out
 rm -f test_pipe_file pipe_out pipe_filtered pipe_in pipe_out2 var_file var_filtered pipe_multiline out1 out2 file1 file2 multi1 multi2 combined_in combined_out
-

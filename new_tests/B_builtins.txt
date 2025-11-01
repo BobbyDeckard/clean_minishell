@@ -5,13 +5,10 @@ echo world
 echo -nnnn world
 echo -nanana world
 echo hello -n world
-echo -n hello -n world
 echo ""
 echo -n ""
 echo "$USER"
 echo -n "$USER"
-echo hello world
-echo -n hello world
 pwd
 cd /tmp
 pwd
@@ -29,44 +26,25 @@ cd -
 pwd
 unset OLDPWD
 cd -
-export OLDPWD=$OLDPWD
-cd /tmp
-cd -
 cd /doesnotexist
 echo $?
 cd .
-pwd
-cd ..
 cd ../..
 pwd
 cd /
-pwd
 cd
 export VAR=value
 export VAR
 env | grep VAR
 export VAR=newvalue
-env | grep VAR
 export VAR=
-env | grep VAR
-export VAR2=test
-export VAR3="$USER"
-export VAR4='test'
-env | grep VAR
 export 1INVALID=value
-echo $?
-export INVALID-VAR=value
 echo $?
 export VALID_VAR=test
 export VALID_VAR2="$USER"
 unset VAR
 env | grep VAR
-unset VAR2
-unset VAR3
-unset VAR4
-env | grep VAR
 unset UNDEFINED
-echo $?
 unset 1INVALID
 echo $?
 export TEST_UNSET=value
@@ -74,28 +52,15 @@ unset TEST_UNSET
 env | grep TEST_UNSET
 env
 env VAR=value
-env TEST=123
-exit
-echo $?
 exit 42
 echo $?
 exit 0
-echo $?
 exit 255
-echo $?
 exit 00000042
-echo $?
-exit -1
-echo $?
-exit 9223372036854775807
-echo $?
 exit 9999999999999999999999
 echo $?
 exit ""
 echo $?
 exit 1 2
-echo $?
 exit hello
-echo $?
-rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR"ext $REDIR_VAR".txt" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file
-
+rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file

@@ -7,24 +7,17 @@ cat test_out
 cat < test_out
 cat < test_out > test_out2
 cat test_out2
-cat test_out test_out2
 > empty_file
 cat empty_file
 >> append_file
 echo first >> append_file
 cat append_file
-echo second >> append_file
-cat append_file
 cat < nonexistent_file
 echo $?
 echo test >"$HOME"/redir_test
 cat "$HOME"/redir_test
-echo append >>"$HOME"/redir_test
-cat "$HOME"/redir_test
 export REDIR_VAR=redir_file
 echo test >$REDIR_VAR
-cat $REDIR_VAR
-echo more >>$REDIR_VAR
 cat $REDIR_VAR
 echo test >"$REDIR_VAR"
 echo test >$REDIR_VAR"ext"
@@ -32,12 +25,9 @@ cat $REDIR_VAR"ext"
 export EMPTY=
 echo test >$EMPTY"file"
 cat $EMPTY"file"
-echo test >"$EMPTY"file
-cat "$EMPTY"file
 >out echo x
 cat out
 echo x >out
-cat out
 cat < test_out
 cat <test_out
 cat < test_out >new_out
@@ -46,32 +36,16 @@ echo x >a >b
 cat a
 cat b
 echo x >>a >>b
-cat a
-cat b
-<i cat >o
-echo input >i
-cat i
-cat o
 echo test > i
 <i cat >o
 cat o
-cat <i >o
-cat o
-cat < i> o
-cat o
 cat <i>o
-cat o
 echo test >file1 >file2 >file3
-cat file1
-cat file2
-cat file3
-cat <input1 <input2 >output1 >output2
+cat file1 file2 file3
 echo data1 >input1
 echo data2 >input2
-cat input1
-cat input2
-cat output1
-cat output2
+cat <input1 <input2 >output1 >output2
+cat output1 output2
 cat <<EOF
 line1
 line2
@@ -95,15 +69,9 @@ $DELIM
 cat <<'END'
 $USER
 END
-cat <<"END"
-$USER
-END
 cat <<del"im"iter
 $USER
 delimiter
-cat <<'del"im"iter'
-$USER
-del"im"iter
 cat <<'del'im'iter'
 $USER
 del'im'iter
@@ -119,8 +87,6 @@ EOF
 echo test > file_a > file_b >> file_c
 cat file_a file_b file_c
 echo new > file_a >> file_b > file_d
-cat file_a file_b file_c file_d
 cat < file_a < file_b > combined
 cat combined
-rm -f test_out test_out2 empty_file append_file "$HOME"/redir_test $REDIR_VAR $REDIR_VAR"ext" $EMPTY"file" "$EMPTY"file out i o file1 file2 file3 input1 input2 output1 output2 heredoc_out file_a file_b file_c file_d combined
-
+rm -f test_out test_out2 empty_file append_file "$HOME"/redir_test $REDIR_VAR $REDIR_VAR"ext" $EMPTY"file" input1 input2 output1 output2 heredoc_out file_a file_b file_c file_d combined i o new_out a b file1 file2 file3

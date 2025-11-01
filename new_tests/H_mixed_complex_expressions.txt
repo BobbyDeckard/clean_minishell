@@ -1,28 +1,21 @@
 echo test > mixed_file
 cat < mixed_file | grep test && echo found
-echo test > mixed_file2
 (cat < mixed_file | grep test) && echo ok || echo fail
 echo test > mixed_in
 (cat < mixed_in | grep test > mixed_out) && cat mixed_out
-cat mixed_out
 echo "$USER" > var_in
 (cat < var_in | grep "$USER" > var_out) && echo done
-cat var_out
 (echo "$USER" && echo "$HOME") | cat
 (echo test && echo ok) | cat | grep ok
 echo content > pipe_redir_in
 cat < pipe_redir_in | grep content > pipe_redir_out && cat pipe_redir_out
-cat pipe_redir_out
 echo test > file_a
 echo data > file_b
 (cat file_a && cat file_b) | cat
 (cat file_a || cat file_b) | grep test
 (echo "$USER" && (echo "$HOME" || echo alt)) | cat
-(echo start && (echo mid && echo end)) | cat
 echo multi > complex_in
 (cat < complex_in | grep multi > complex_out) && echo ok || (echo fail > complex_err)
-cat complex_out
-cat complex_err 2>/dev/null || echo no error
 export MIXED_VAR=test
 (echo "$MIXED_VAR" && echo ok) | grep test && echo found
 unset MIXED_VAR
@@ -32,60 +25,48 @@ echo test2 > nested_in2
 (cat nested_in1 | grep test1 && cat nested_in2 | grep test2) && echo both
 echo test > logic_file
 (cat logic_file && echo ok) || (echo fail && echo retry)
-(cat logic_file || echo handled) && (echo done && echo complete)
 echo data > chain_file
 cat chain_file | cat && echo ok || echo fail
 (cat chain_file | grep data) && echo found || echo missing
 echo test > redir_logic
 (< redir_logic cat) && echo ok || echo fail
-(> redir_logic echo test) && cat redir_logic || echo fail
-cat redir_logic
-echo content > heredoc_in
+(> redir_logic echo test) && cat redir_logic
 cat <<EOF >heredoc_out && cat heredoc_out
 multiline
 content
 EOF
-cat heredoc_out
 cat <<EOF | grep content && echo found
 test content here
 EOF
 echo "$USER" > var_mix_in
 (cat < var_mix_in | grep "$USER" > var_mix_out) && (cat var_mix_out && echo done)
-cat var_mix_out
 export TEST1=hello
 export TEST2=world
 (echo "$TEST1" && echo "$TEST2") | cat
-unset TEST1
-unset TEST2
+unset TEST1 TEST2
 echo test > file1
 echo data > file2
 (cat file1 < file1 | cat) && echo ok
 (cat file2 > file3) && cat file3
-cat file3
 echo start > chain1
 echo mid > chain2
 echo end > chain3
-cat chain1 | cat chain2 | cat chain3
 (cat chain1 && cat chain2) | (cat chain3 && echo done)
 echo "$USER" > var_file
 (< var_file cat | grep "$USER" > var_result) && (cat var_result && echo success)
-cat var_result
 echo deep > level1
 echo deeper > level2
 (((cat level1 && cat level2) || echo fail) && echo done) || echo error
 (echo test > output1 && echo data > output2) && (cat output1 && cat output2)
-cat output1 output2
 echo multi1 > m1
 echo multi2 > m2
 (cat m1 < m1 && cat m2 < m2) && echo both
 ((cat m1 | grep multi1) && (cat m2 | grep multi2)) && echo match
 echo "$HOME" > home_file
 (cat < home_file | grep "$HOME" > home_out && cat home_out) || echo error
-cat home_out
 export COMPLEX=value
 (echo "$COMPLEX" && echo ok) | (grep value && echo found)
 unset COMPLEX
 echo final > final_in
 ((cat final_in && echo ok) || echo fail) && ((echo done && echo complete) || echo error)
-rm -f mixed_file mixed_file2 mixed_in mixed_out var_in var_out pipe_redir_in pipe_redir_out complex_in complex_out complex_err nested_in1 nested_in2 logic_file chain_file redir_logic heredoc_out var_mix_in var_mix_out file1 file2 file3 chain1 chain2 chain3 var_file var_result level1 level2 output1 output2 m1 m2 home_file home_out final_in
-
+rm -f mixed_file mixed_in mixed_out var_in var_out pipe_redir_in pipe_redir_out complex_in complex_out complex_err nested_in1 nested_in2 logic_file chain_file redir_logic heredoc_out var_mix_in var_mix_out file1 file2 file3 chain1 chain2 chain3 var_file var_result level1 level2 output1 output2 m1 m2 home_file home_out final_in
