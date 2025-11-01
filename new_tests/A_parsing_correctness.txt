@@ -1,0 +1,69 @@
+echo    hello     world        
+   echo leading_space          
+echo trailing_space   	        
+echo"no_space"
+ 	echo midtabs	world         
+echo"space"after
+echo before"space"
+echo"multi"word"test"
+echo hello world    test
+	echo	test	tabs
+echo "double quotes"
+echo 'single quotes'
+echo ""
+echo ''
+echo "a"'b'"c"
+echo "a""b""c"
+echo 'a''b''c'
+echo "a" "b" "c"
+""
+''
+export TEST_SPACES=" leading middle trailing "
+echo $TEST_SPACES
+echo "$TEST_SPACES"
+echo '$TEST_SPACES'
+$TEST_SPACES
+"$TEST_SPACES"
+'$TEST_SPACES'
+export EMPTY=
+$EMPTY
+"$EMPTY"
+'$EMPTY'
+echo $EMPTY
+echo "$EMPTY"
+echo '$EMPTY'
+echo $USER
+echo "$USER"
+echo '$USER'
+echo $USERfoo
+echo foo$USERbar
+echo $EMPTYvar
+export VAR=value
+echo $VAR"text"
+echo "text"$VAR
+echo "$VAR""text"
+echo "text""$VAR"
+echo $VAR'text'
+echo 'text'$VAR
+echo '$VAR'"text"
+echo "text"'$VAR'
+echo $HOME/file
+echo "$HOME"/file
+echo $HOME"file"
+echo "$HOME"file
+echo ok >"$HOME"/test_file
+echo ok >$HOME"test_file"
+echo ok >"$HOME"test_file
+cat < file".txt" -e
+export REDIR_VAR=redirect_file
+echo test >$REDIR_VAR"ext"
+echo test >"$REDIR_VAR"ext
+echo test >$REDIR_VAR".txt"
+echo test >"$REDIR_VAR".txt
+cat <$REDIR_VAR".txt"
+cat <"$REDIR_VAR".txt
+export EMPTY_VAR=
+echo test >$EMPTY_VAR"file"
+echo test >"$EMPTY_VAR"file
+rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR"ext $REDIR_VAR".txt" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file
+

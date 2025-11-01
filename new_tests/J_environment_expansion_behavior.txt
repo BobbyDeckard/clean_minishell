@@ -1,0 +1,136 @@
+export VAR=42
+echo $VAR
+unset VAR
+echo $VAR
+export VAR=test
+env | grep VAR
+unset VAR
+env | grep VAR
+export EMPTY=
+echo $EMPTY
+echo "$EMPTY"
+export EMPTY2=
+echo $EMPTY2$EMPTY2
+echo "$EMPTY2""$EMPTY2"
+unset EMPTY
+unset EMPTY2
+echo $HOME
+echo "$HOME"
+echo '$HOME'
+echo $PWD
+echo "$PWD"
+cd /tmp
+echo $PWD
+echo "$PWD"
+cd -
+echo $OLDPWD
+echo "$OLDPWD"
+export TEST_VAR=before
+echo $TEST_VAR
+export TEST_VAR=after
+echo $TEST_VAR
+unset TEST_VAR
+echo $TEST_VAR
+false
+echo $?
+true
+echo $?
+cat /nonexistent
+echo $?
+cat /nonexistent || echo handled
+echo $?
+cat /nonexistent && echo skip
+echo $?
+false && echo skip
+echo $?
+true && echo ok
+echo $?
+false || echo handled
+echo $?
+true || echo skip
+echo $?
+(export VAR=inner && echo $VAR)
+echo $VAR
+export VAR=outer
+(export VAR=inner && echo $VAR)
+echo $VAR
+export VAR=test
+(echo $VAR && unset VAR && echo $VAR)
+echo $VAR
+export VAR=before
+unset VAR && echo ok
+echo $VAR
+export VAR=value
+(cd /tmp && echo $PWD) && echo $PWD
+echo test | cat
+echo $?
+false | true
+echo $?
+true | false
+echo $?
+(cat /nonexistent || echo handled) && echo done
+echo $?
+(cat /nonexistent && echo skip) || echo handled
+echo $?
+export VAR1=first
+export VAR2=second
+echo $VAR1$VAR2
+echo "$VAR1""$VAR2"
+unset VAR1
+echo $VAR1$VAR2
+unset VAR2
+export CHAIN=value
+echo $CHAIN
+unset CHAIN
+echo $CHAIN
+echo $?
+export TEST_UNSET=test
+unset TEST_UNSET
+echo $TEST_UNSET
+echo $?
+export TEST_UNSET=exists
+unset TEST_UNSET && echo removed
+echo $?
+unset NONEXISTENT && echo ok
+echo $?
+export EXPORT_TEST=original
+export EXPORT_TEST
+env | grep EXPORT_TEST
+export EXPORT_TEST=new
+env | grep EXPORT_TEST
+unset EXPORT_TEST
+export VAR_A=a
+export VAR_B=b
+export VAR_C=c
+echo $VAR_A$VAR_B$VAR_C
+unset VAR_A
+echo $VAR_A$VAR_B$VAR_C
+unset VAR_B
+echo $VAR_A$VAR_B$VAR_C
+unset VAR_C
+echo $VAR_A$VAR_B$VAR_C
+export NESTED_OUTER=outer
+(export NESTED_INNER=inner && echo $NESTED_OUTER && echo $NESTED_INNER)
+echo $NESTED_OUTER
+echo $NESTED_INNER
+unset NESTED_OUTER
+cd /tmp
+pwd
+echo $PWD
+cd -
+echo $OLDPWD
+cd
+echo $HOME
+echo $PWD
+export PATH_TEST=/bin
+echo $PATH_TEST
+unset PATH_TEST
+echo $PATH_TEST
+true && (export SET_IN_LOGIC=yes && echo $SET_IN_LOGIC)
+echo $SET_IN_LOGIC
+unset SET_IN_LOGIC
+false || (export SET_IN_LOGIC2=yes && echo $SET_IN_LOGIC2)
+echo $SET_IN_LOGIC2
+unset SET_IN_LOGIC2
+rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR"ext $REDIR_VAR".txt" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file
+

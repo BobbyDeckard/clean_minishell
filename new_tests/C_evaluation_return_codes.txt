@@ -1,0 +1,78 @@
+true
+echo $?
+false
+echo $?
+true && echo ok
+false && echo ok
+echo $?
+true || echo yes
+echo $?
+false || echo yes
+true || echo no
+echo $?
+false && echo no || echo yes
+true && echo ok && echo again
+false && echo skip || echo done
+true || echo skip && echo done
+(false && echo a) || echo b
+echo $?
+(false || true) && echo ok
+echo $?
+(true && false) || echo fail
+echo $?
+cat /nonexistent
+echo $?
+cat /nonexistent && echo ok
+echo $?
+cat /nonexistent || echo fail
+echo $?
+/bin/ls /nonexistent
+echo $?
+/bin/ls /nonexistent && echo ok || echo fail
+echo $?
+true && false && echo skip
+echo $?
+true || false && echo run
+echo $?
+false || true || echo skip
+echo $?
+(cat /nonexistent && echo ok) || echo fail
+echo $?
+(cat /nonexistent || echo handled) && echo done
+echo $?
+false | true
+echo $?
+cat /nonexistent | true
+echo $?
+true | cat /nonexistent
+echo $?
+cat /nonexistent | cat /nonexistent
+echo $?
+echo test | cat
+echo $?
+false | echo test
+echo $?
+true | false
+echo $?
+(cat /nonexistent | true) && echo ok
+echo $?
+(cat /nonexistent | true) || echo fail
+echo $?
+echo test | cat && echo ok
+echo $?
+echo test | cat || echo fail
+echo $?
+echo first && echo second && echo $?
+false && echo skip || echo done && echo $?
+true && echo ok || echo fail && echo $?
+(cd /nonexistent && echo ok) || echo fail && echo $?
+cd /tmp && pwd && echo $?
+cd /nonexistent 2>/dev/null || echo failed && echo $?
+export INVALID=test
+export 1VAR=test
+echo $?
+unset INVALID
+unset 1VAR
+echo $?
+rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR"ext $REDIR_VAR".txt" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file
+

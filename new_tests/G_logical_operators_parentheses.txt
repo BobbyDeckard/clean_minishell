@@ -1,0 +1,88 @@
+true && false
+echo $?
+false || true
+echo $?
+true && echo ok
+false && echo skip
+echo $?
+true || echo skip
+false || echo ok
+echo $?
+echo a && echo b && echo c
+echo a || echo b || echo c
+echo first && echo second && echo third
+echo first || echo second || echo third
+true && false && echo skip
+true || false && echo run
+false && true || echo done
+false || true && echo run
+(echo hello)
+(echo a && echo b)
+(echo a || echo b)
+(true && echo ok) || echo fail
+(false && echo skip) || echo fail
+(true && echo ok) && echo done
+(false || echo handled) && echo done
+(echo a && echo b) || echo c
+(echo a || echo b) && echo c
+((echo a && echo b) || echo c)
+((echo a || echo b) && echo c)
+(((echo deep)))
+((echo a && (echo b || echo c)))
+(echo a && (echo b && echo c))
+(echo a || (echo b || echo c))
+((echo one && echo two) || (echo three && echo four))
+(echo outer && (echo inner && echo nested))
+(echo start && (echo mid || echo alt)) && echo end
+(echo first || (echo second && echo third)) || echo fallback
+cat /nonexistent && echo ok || echo fail
+(cat /nonexistent && echo ok) || echo fail
+(cat /nonexistent || echo handled) && echo done
+(cat /nonexistent && echo skip) || (echo handled && echo done)
+(echo test && echo ok) || echo fail
+echo $?
+(echo test || echo alt) && echo done
+echo $?
+(cat /nonexistent || echo handled) || echo fail
+echo $?
+true && (false || true) && echo ok
+false || (true && echo ok) || echo fail
+(echo a && echo b) && (echo c && echo d)
+(echo a || echo b) || (echo c || echo d)
+(echo a && echo b) || (echo c && echo d)
+echo "$USER" && (echo "$HOME" || echo alt)
+(echo "$USER" && echo "$HOME") || echo fail
+(export TEST_VAR=value && echo $TEST_VAR) || echo fail
+unset TEST_VAR
+(cd /tmp && pwd) || echo fail
+(cd /nonexistent || echo handled) && echo done
+echo test > paren_out
+(echo ok > paren_out2) && cat paren_out2
+cat paren_out
+cat paren_out2
+(< paren_out cat) && echo done
+echo test > paren_in
+(< paren_in cat) || echo fail
+(< paren_in cat) && (cat paren_out2)
+echo test1 > paren_file1
+echo test2 > paren_file2
+(cat paren_file1 && cat paren_file2) || echo fail
+(cat paren_file1 || cat paren_file2) && echo done
+echo ok | (cat) && echo done
+(echo test) | cat && echo ok
+(echo a && echo b) | cat
+(echo test | cat) && echo ok
+(cat /nonexistent | cat) || echo handled
+echo $?
+< paren_in (cat) && echo done
+echo $?
+< paren_file1 (cat paren_file1) && echo done
+echo $?
+cat paren_file1 | (grep test && echo found)
+cat paren_file1 | (grep missing || echo notfound)
+(< paren_in cat > paren_out3) && cat paren_out3
+cat paren_out3
+(< paren_file1 cat | grep test > paren_filtered) && cat paren_filtered
+cat paren_filtered
+rm -f paren_out paren_out2 paren_in paren_file1 paren_file2 paren_out3 paren_filtered
+

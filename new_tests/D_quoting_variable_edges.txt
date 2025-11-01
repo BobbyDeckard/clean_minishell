@@ -1,0 +1,75 @@
+export EMPTY=
+echo "$EMPTY"
+echo ''
+echo ""
+echo "$EMPTY"world
+echo world"$EMPTY"
+echo "$EMPTY""$EMPTY"
+echo "$USER"world
+echo world"$USER"
+echo "$USER""$HOME"
+echo "$USER"$HOME
+echo $USER"$HOME"
+echo "$USER" "$HOME"
+echo "a'b'c"
+echo 'a"b"c'
+echo "text 'quoted' inside"
+echo 'text "quoted" inside'
+echo "outer 'inner \"double\"' end"
+echo 'outer "inner \'single\'" end'
+echo $"USER"
+echo '$USER'text
+echo text'$USER'
+echo '$USER''$HOME'
+echo '$USER'"$HOME"
+echo "$USER"'$HOME'
+export COMPLEX="  spaces  "
+echo $COMPLEX
+echo "$COMPLEX"
+echo '$COMPLEX'
+echo "$COMPLEX"text
+echo text"$COMPLEX"
+export VAR1=hello
+export VAR2=world
+echo "$VAR1"$VAR2
+echo $VAR1"$VAR2"
+echo "$VAR1""$VAR2"
+echo '$VAR1'"$VAR2"
+echo "$VAR1"'$VAR2'
+echo """"text""""
+echo ''''text''''
+echo """text"""
+echo '''text'''
+echo "a"b"c"d
+echo 'a'b'c'd
+echo "a"'b'"c"'d'
+export NESTED='outer "inner" text'
+echo "$NESTED"
+echo '$NESTED'
+export MULTI="part1""part2""part3"
+echo "$MULTI"
+echo "leading "$USER" trailing"
+echo 'leading '$USER' trailing'
+echo "start "$USER"middle"$HOME"end"
+echo 'start '$USER'middle'$HOME'end'
+export EDGE=""
+echo "$EDGE"
+echo ''"$EDGE"''
+echo "$EDGE"$EDGE
+echo "$EDGE""$EDGE"
+export EMPTY1=
+export EMPTY2=
+echo "$EMPTY1""$EMPTY2"
+echo $EMPTY1$EMPTY2
+echo "$EMPTY1"$EMPTY2
+echo $EMPTY1"$EMPTY2"
+unset EMPTY
+unset EMPTY1
+unset EMPTY2
+unset COMPLEX
+unset VAR1
+unset VAR2
+unset NESTED
+unset MULTI
+rm -f test_file redirect_fileext redirect_file.txt "$HOME"/test_file $REDIR_VAR"ext" "$REDIR_VAR"ext $REDIR_VAR".txt" "$REDIR_VAR".txt $EMPTY_VAR"file" "$EMPTY_VAR"file
+

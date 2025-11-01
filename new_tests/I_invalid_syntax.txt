@@ -1,0 +1,111 @@
+|
+||
+&&
+echo |
+echo >
+cat <
+<
+>
+<<
+>>
+echo hi | | ls
+echo hi >
+cat < file
+echo && 
+&& echo
+|| echo
+echo ||
+echo &&
+cat >>
+echo >>>
+cat <<<
+echo > file < file2
+<
+>
+cat <
+echo >
+|
+||
+&&
+(echo a
+echo a)
+((echo a)
+echo a))
+()
+(
+)
+echo "unterminated
+echo 'unterminated
+echo "start'end"
+echo 'start"end'
+echo | |
+echo && &&
+echo || ||
+cat > > file
+cat < < file
+echo > > file
+echo >> >> file
+cat << << EOF
+echo hi <<
+echo hi <<EOF
+< file (cat)
+> file (echo test)
+cat file | (echo test)
+(echo test) | cat file
+<<EOF (cat)
+<<EOF echo test
+(cat) < file
+(echo) > file
+echo ||| test
+cat &&& test
+echo > > > file
+cat < < < file
+(echo
+)
+(
+echo
+echo )
+(
+)
+()
+( )
+(( ))
+((( )))
+echo | && test
+echo && | test
+echo || | test
+cat > && file
+cat < || file
+echo > file && | test
+cat < file | && test
+echo "test'quote
+echo 'test"quote
+echo "test
+echo 'test
+echo test"
+echo test'
+(
+(echo
+)
+echo )
+((echo
+))
+((echo))
+(((()))))
+echo test | 
+| echo test
+&&
+||
+| 
+ | 
+echo && 
+&& && echo
+|| || echo
+echo | && ||
+cat >>>
+echo <<<
+< <
+> >
+<< <<
+>> >>
+
