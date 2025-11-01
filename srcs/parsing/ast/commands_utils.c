@@ -15,7 +15,7 @@
 t_token	*skip_redir(t_token **list, int *start, int end);
 int		is_redir_token(t_t_type type);
 
-static int	is_arg_token(t_t_type type)
+int	is_arg_token(t_t_type type)
 {
 	if (type == WORD)
 		return (1);
@@ -39,6 +39,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 		if (!node->cmd.args[i])
 			return (1);
 		ft_strlcpy(node->cmd.args[i], current->content, len);
+		printf("Made arg[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	return (0);
 }
@@ -75,7 +76,10 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
+		{
 			current = skip_redir(shell->tokens, &start, end);
+			printf("Current after skipping redir in make_args: '%s'\n", current->content);
+		}
 		else if (is_arg_token(current->type))
 		{
 			if (parse_arg(node, current, ++i))

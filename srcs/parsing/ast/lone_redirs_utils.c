@@ -13,6 +13,7 @@
 #include "../../../incl/minishell.h"
 
 t_token	*skip_spaces(t_token **list, int *start, int end);
+int		is_arg_token(t_t_type type);
 int		is_redir_arg(t_token *token);
 int		is_redir_token(t_t_type type);
 
@@ -20,35 +21,36 @@ int	is_lone_redir(t_token **list, int start, int end)
 {
 	t_token	*current;
 
+	printf("\nIn is_lone_redir for sequence: %d-%d\n", start, end);
 	current = get_token_at_index(list, start);
-//	printf("In is_lone_redir with content = '%s', start = %d, end = %d\n", current->content, start, end);
 	if (!is_redir_token(current->type))
 		return (0);
-//	printf("Token is redir\n");
+	printf("Confirmed token is redir\n");
 	current = current->next;
 	start++;
-//	printf("Skipped redir token, new start = %d\n", start);
+	printf("Skipped redir token, new sequence: %d-%d\n", start, end);
 	current = skip_spaces(list, &start, end);
-//	printf("Skipped spaces, new start = %d\n", start);
+	printf("Skipped spaces, new sequence %d-%d\n", start, end);
 	while (current && is_redir_arg(current) && start < end)
 	{
 		current = current->next;
 		start++;
 	}
-//	printf("Went over redir args, new start = %d\n", start);
+	printf("Skipped redir args, new sequence: %d-%d\n", start, end);
 	while (current && current->type == WHITESPACE && start < end)
 	{
 		current = current->next;
 		start++;
 	}
+	printf("Skipped spaces, new sequence: %d-%d\n", start, end);
 	if (current && is_redir_token(current->type))
 		return (is_lone_redir(list, start, end));
-	else if (current && start != end)
+	else if (current && is_arg_token(current->type))
 	{
-//		printf("Found current and start (%d) != end (%d), content: '%s'\n", start, end, current->content);
+		printf("Following command found, returning 0, sequence: %d-%d\n", start, end);
 		return (0);
 	}
-//	printf("Flagging lone redir\n");
+	printf("Flagging lone redir, sequence: %d-%d\n", start, end);
 	return (1);
 }
 
