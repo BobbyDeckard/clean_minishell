@@ -4,6 +4,8 @@ echo "hello" "world"
 echo "hello world"
 echo ""
 echo "" hello
+echo " " | cat -e
+echo hello " " there
 echo $USER
 echo "$USER"
 echo '$USER'
