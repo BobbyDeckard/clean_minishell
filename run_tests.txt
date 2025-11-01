@@ -55,7 +55,7 @@ echo hello"   "world''
 echo hello"   "world'' | cat -e
 $ECHO hello$USER
 "$ECHO" hello"$USER"world
-unset ECHO && ($ECHO fail || echo ok)
+unset ECHO && ($ECHO fail || echo ok)
 echo foo > file
 < file cat | grep foo
 echo $?
@@ -76,9 +76,9 @@ cat<file>out|cat && echo "cat'ed" || echo "catn't"
 < file && echo ok
 < file < nonexistent < file
 echo $?
-< nonexistent || echo fail
-> testfile && echo ok || echo fail
-> fi"le"1>file$USER>>append"_"file && ls || echo fail
+< nonexistent || echo fail
+> testfile && echo ok || echo fail
+> fi"le"1>file$USER>>append"_"file && ls || echo fail
 rm append_file file file1 fileivo out outfile testfile
 export SPACE="     that   '   s       a         lot           of 			white 			spaces    	"&&echo $SPACE
 echo "$SPACE" | cat -e
