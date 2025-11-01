@@ -77,6 +77,10 @@ XPDR_FILES = args_parsing.c \
 
 HRDC = $(addprefix heredoc/, $(HRDC_FILES))
 HRDC_FILES = heredoc.c \
+			 heredoc_expander.c \
+			 heredoc_expander_utils.c \
+			 heredoc_parser.c \
+			 heredoc_parser_utils.c \
 			 heredoc_utils.c
 
 PIPE = $(addprefix pipe/, $(PIPE_FILES))
