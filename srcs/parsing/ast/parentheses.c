@@ -20,6 +20,7 @@ static int	check_between_paren(t_token **list, int start, int end)
 	int		lvl;
 
 	lvl = 0;
+	//	Check start end condition
 	while (start <= end)
 	{
 		current = get_token_at_index(list, start);

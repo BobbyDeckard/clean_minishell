@@ -21,25 +21,34 @@ int	is_lone_redir(t_token **list, int start, int end)
 	t_token	*current;
 
 	current = get_token_at_index(list, start);
+//	printf("In is_lone_redir with content = '%s', start = %d, end = %d\n", current->content, start, end);
 	if (!is_redir_token(current->type))
 		return (0);
+//	printf("Token is redir\n");
 	current = current->next;
 	start++;
+//	printf("Skipped redir token, new start = %d\n", start);
 	current = skip_spaces(list, &start, end);
-	while (current && is_redir_arg(current) && start <= end)
+//	printf("Skipped spaces, new start = %d\n", start);
+	while (current && is_redir_arg(current) && start < end)
 	{
 		current = current->next;
 		start++;
 	}
-	while (current && current->type == WHITESPACE && start <= end)
+//	printf("Went over redir args, new start = %d\n", start);
+	while (current && current->type == WHITESPACE && start < end)
 	{
 		current = current->next;
 		start++;
 	}
 	if (current && is_redir_token(current->type))
 		return (is_lone_redir(list, start, end));
-	else if (current)
+	else if (current && start != end)
+	{
+//		printf("Found current and start (%d) != end (%d), content: '%s'\n", start, end, current->content);
 		return (0);
+	}
+//	printf("Flagging lone redir\n");
 	return (1);
 }
 

@@ -49,6 +49,7 @@ int	find_op_precedence(t_token **list, int start, int end)
 	res = -1;
 	prec = 2147483647;
 	lvl = 0;
+	//	Check start end condition
 	while (start <= end)
 	{
 		current = get_token_at_index(list, start);

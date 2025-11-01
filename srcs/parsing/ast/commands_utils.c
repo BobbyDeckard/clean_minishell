@@ -39,7 +39,6 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 		if (!node->cmd.args[i])
 			return (1);
 		ft_strlcpy(node->cmd.args[i], current->content, len);
-		printf("Just parsed arg[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	return (0);
 }
@@ -56,6 +55,7 @@ t_token	*skip_spaces(t_token **list, int *start, int end)
 	t_token	*current;
 
 	current = get_token_at_index(list, *start);
+	//	Check start end condition
 	while (current && current->type == WHITESPACE && *start <= end)
 	{
 		current = current->next;
@@ -71,6 +71,7 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 
 	i = -1;
 	current = skip_spaces(shell->tokens, &start, end);
+	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))

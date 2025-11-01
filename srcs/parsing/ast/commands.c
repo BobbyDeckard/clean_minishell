@@ -60,11 +60,13 @@ static int	count_args(t_token **list, int start, int end)
 
 	count = 0;
 	current = get_token_at_index(list, start);
+	//	Check start end condition
 	while (current && current->type == WHITESPACE && start <= end)
 	{
 		current = current->next;
 		start++;
 	}
+	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))

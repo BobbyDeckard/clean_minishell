@@ -47,6 +47,7 @@ int end)
 	alloc_redir_args(shell, node, count);
 	i = -1;
 	current = current->next;
+	//	Check start end condition
 	while (current && is_redir_arg(current) && start <= end)
 	{
 		node->rdr.args[++i] = make_arg(shell, node, current);

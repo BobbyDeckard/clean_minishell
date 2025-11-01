@@ -16,11 +16,7 @@
 t_token	*tokenize_or(char **command, t_token *token)
 {
 	token->type = OR;
-	printf("Address of *command before or tokenization: %p\n", *command);
-	printf("Content of *command + 2 before or tokenization: '%c' (=%d), '%s'\n", *(*command + 2), *(*command + 2), *command + 2);
 	*command += 2;
-	printf("Address of *command after or tokenization: %p\n", *command);
-	printf("Content after or tokenization: '%c' (= %d), '%s'\n", **command, **command, *command);
 	return (token);
 }
 

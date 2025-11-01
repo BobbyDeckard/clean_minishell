@@ -86,6 +86,7 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 	node = create_pipe_node(shell, count);
 	set_root(shell, node);
 	i = -1;
+	//	Make sure we really want start <= end and not start < end
 	while (++i + 1 < count && start <= end)
 	{
 		start = parse_pipe_command(shell, node, i, start);

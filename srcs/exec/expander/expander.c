@@ -122,20 +122,20 @@ void	expander(t_ast *node, t_cmd *cmd)
 	char	**args;
 	int		count;
 
-	printf("\nArgs before expansion:\n");
-	int j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("\nArgs before expansion:\n");
+//	int j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	expand(node, cmd);
-	printf("\nArgs after expansion:\n");
-	j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("\nArgs after expansion:\n");
+//	j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	count = count_args(cmd);
 	args = init_args(node, count + 1);
 	make_args(node, cmd, args, count);
-	printf("\nArgs after cat:\n");
-	j = -1;
-	while (cmd->args[++j])
-		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
+//	printf("\nArgs after cat:\n");
+//	j = -1;
+//	while (cmd->args[++j])
+//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

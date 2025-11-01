@@ -95,6 +95,7 @@ void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 	if (!node->children)
 		return ;
 	current = get_token_at_index(shell->tokens, start);
+	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
