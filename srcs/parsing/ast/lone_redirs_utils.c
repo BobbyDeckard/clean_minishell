@@ -21,36 +21,36 @@ int	is_lone_redir(t_token **list, int start, int end)
 {
 	t_token	*current;
 
-	printf("\nIn is_lone_redir for sequence: %d-%d\n", start, end);
+//	printf("\nIn is_lone_redir for sequence: %d-%d\n", start, end);
 	current = get_token_at_index(list, start);
 	if (!is_redir_token(current->type))
 		return (0);
-	printf("Confirmed token is redir\n");
+//	printf("Confirmed token is redir\n");
 	current = current->next;
 	start++;
-	printf("Skipped redir token, new sequence: %d-%d\n", start, end);
+//	printf("Skipped redir token, new sequence: %d-%d\n", start, end);
 	current = skip_spaces(list, &start, end);
-	printf("Skipped spaces, new sequence %d-%d\n", start, end);
+//	printf("Skipped spaces, new sequence %d-%d\n", start, end);
 	while (current && is_redir_arg(current) && start < end)
 	{
 		current = current->next;
 		start++;
 	}
-	printf("Skipped redir args, new sequence: %d-%d\n", start, end);
+//	printf("Skipped redir args, new sequence: %d-%d\n", start, end);
 	while (current && current->type == WHITESPACE && start < end)
 	{
 		current = current->next;
 		start++;
 	}
-	printf("Skipped spaces, new sequence: %d-%d\n", start, end);
+//	printf("Skipped spaces, new sequence: %d-%d\n", start, end);
 	if (current && is_redir_token(current->type))
 		return (is_lone_redir(list, start, end));
 	else if (current && is_arg_token(current->type))
 	{
-		printf("Following command found, returning 0, sequence: %d-%d\n", start, end);
+	//	printf("Following command found, returning 0, sequence: %d-%d\n", start, end);
 		return (0);
 	}
-	printf("Flagging lone redir, sequence: %d-%d\n", start, end);
+//	printf("Flagging lone redir, sequence: %d-%d\n", start, end);
 	return (1);
 }
 
