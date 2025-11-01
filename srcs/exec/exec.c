@@ -47,7 +47,6 @@ static int	run_cmd(t_ast *node)
 
 	status = -1;
 	expander(node, &node->cmd);
-	return (set_exit_status(node, 0));	// to remove
 	if (is_builtin(node->cmd))
 		return (exec_builtin(node, 0));
 	else if (make_redirs(node))
