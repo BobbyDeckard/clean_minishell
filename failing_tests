@@ -1,0 +1,4 @@
+cat < file | wc > outfile && < outfile cat|| echo fail
+	=> no space between cat and OR is the failing point
+unset ECHO && ($ECHO fail || echo ok)
+	=> should try 'fail' for command, tries ' ' instead...
