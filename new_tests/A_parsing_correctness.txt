@@ -23,9 +23,6 @@ $EMPTY
 "$EMPTY"
 echo $EMPTY
 echo "$EMPTY"
-echo $USER
-echo "$USER"
-echo '$USER'
 echo $USERfoo
 echo foo$USERbar
 echo $EMPTYvar

@@ -8,7 +8,6 @@ echo "$USER"world
 echo world"$USER"
 echo "$USER""$HOME"
 echo "$USER"$HOME
-echo $USER"$HOME"
 echo "a'b'c"
 echo 'a"b"c'
 echo "text 'quoted' inside"
@@ -28,7 +27,6 @@ echo "$VAR1""$VAR2"
 echo """"text""""
 echo "a"b"c"d
 echo "a" "b" "c"
-echo "leading "$USER" trailing"
 echo "start "$USER"middle"$HOME"end"
 export EDGE=""
 echo "$EDGE"

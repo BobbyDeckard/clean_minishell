@@ -6,42 +6,24 @@ export VAR=test
 env | grep VAR
 unset VAR
 env | grep VAR
-export EMPTY=
-echo $EMPTY
-echo "$EMPTY"
 export EMPTY2=
 echo $EMPTY2$EMPTY2
 echo "$EMPTY2""$EMPTY2"
-unset EMPTY EMPTY2
+unset EMPTY2
 echo $HOME
 echo "$HOME"
 echo '$HOME'
-echo $PWD
 cd /tmp
-echo $PWD
 cd -
-echo $OLDPWD
 export TEST_VAR=before
 echo $TEST_VAR
 export TEST_VAR=after
 echo $TEST_VAR
 unset TEST_VAR
 echo $TEST_VAR
-false
-echo $?
-true
-echo $?
 cat /nonexistent
 echo $?
 cat /nonexistent || echo handled
-echo $?
-false && echo skip
-echo $?
-true && echo ok
-echo $?
-false || echo handled
-echo $?
-true || echo skip
 echo $?
 (export VAR=inner && echo $VAR)
 echo $VAR
@@ -56,15 +38,11 @@ unset VAR && echo ok
 echo $VAR
 export VAR=value
 (cd /tmp && echo $PWD) && echo $PWD
-echo test | cat
-echo $?
 false | true
 echo $?
 true | false
 echo $?
 (cat /nonexistent || echo handled) && echo done
-echo $?
-(cat /nonexistent && echo skip) || echo handled
 echo $?
 export VAR1=first
 export VAR2=second

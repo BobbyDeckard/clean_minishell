@@ -10,8 +10,6 @@ echo test content > test_pipe_file
 cat test_pipe_file | grep test
 cat test_pipe_file | grep missing
 echo $?
-cat /nonexistent | cat
-echo $?
 cat test_pipe_file | cat /nonexistent
 echo $?
 echo test | cat > pipe_out

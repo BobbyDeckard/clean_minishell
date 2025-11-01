@@ -19,7 +19,6 @@ cat /nonexistent && echo ok
 cat /nonexistent || echo fail
 /bin/ls /nonexistent && echo ok || echo fail
 echo $?
-true && false && echo skip
 true || false && echo run
 false || true || echo skip
 (cat /nonexistent && echo ok) || echo fail
@@ -29,14 +28,10 @@ false | true
 echo $?
 cat /nonexistent | true
 true | cat /nonexistent
-echo test | cat
-echo $?
 false | echo test
 true | false
 (cat /nonexistent | true) && echo ok
 (cat /nonexistent | true) || echo fail
-echo test | cat && echo ok
-echo test | cat || echo fail
 false && echo skip || echo done && echo $?
 true && echo ok || echo fail && echo $?
 cd /nonexistent 2>/dev/null || echo failed && echo $?

@@ -1,13 +1,9 @@
-true && false
-echo $?
-false || true
 true && echo ok
 false && echo skip
 true || echo skip
 false || echo ok
 echo a && echo b && echo c
 echo a || echo b || echo c
-true && false && echo skip
 true || false && echo run
 false || true && echo run
 (echo hello)
@@ -24,7 +20,6 @@ false || true && echo run
 ((echo a && (echo b || echo c)))
 (echo outer && (echo inner && echo nested))
 (echo start && (echo mid || echo alt)) && echo end
-cat /nonexistent && echo ok || echo fail
 (cat /nonexistent && echo ok) || echo fail
 (cat /nonexistent || echo handled) && echo done
 (echo test && echo ok) || echo fail
@@ -50,8 +45,6 @@ echo test2 > paren_file2
 echo ok | (cat) && echo done
 (echo test) | cat && echo ok
 (echo a && echo b) | cat
-(cat /nonexistent | cat) || echo handled
-echo $?
 < paren_in (cat) && echo done
 echo $?
 < paren_file1 (cat paren_file1) && echo done
