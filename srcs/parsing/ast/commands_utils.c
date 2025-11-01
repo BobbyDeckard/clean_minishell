@@ -39,6 +39,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 		if (!node->cmd.args[i])
 			return (1);
 		ft_strlcpy(node->cmd.args[i], current->content, len);
+		printf("Just parsed arg[%d]: '%s'\n", i, node->cmd.args[i]);
 	}
 	return (0);
 }

@@ -95,6 +95,7 @@ t_ast	*parse(char *command, t_shell *shell)
 	if (err)
 		return (invalid_syntax(list, err));
 	shell->tokens = list;
+	print_token_list(list);
 	ast = create_ast(shell, list);
 	return (ast);
 }

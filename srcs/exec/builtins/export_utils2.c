@@ -51,10 +51,8 @@ static int	calc_len(t_ast *node, char **envp, const char *arg)
 	int		i;
 	int		j;
 
-//	name = get_name(node, arg);
+	name = get_name(node, arg);
 	len = 0;
-	name = NULL;	// to remove
-	(void) arg;
 	if (!name)
 		return (calc_exit_status_len(node));
 	i = -1;
