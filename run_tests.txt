@@ -72,6 +72,8 @@ cat<file|wc>>outfile&&<outfile cat||echo fail
 cat<file>out|cat && echo cat'ed || echo catn't
 cat<file>out|cat && echo "cat'ed" || echo "catn't"
 < file && echo ok
+< file < nonexistent < file
+echo $?
 < nonexistent || echo fail
 > testfile && echo ok || echo fail
 > fi"le"1>file$USER>>append"_"file && ls || echo fail
