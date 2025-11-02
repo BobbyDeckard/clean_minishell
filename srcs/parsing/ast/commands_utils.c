@@ -46,8 +46,11 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 
 static int	parse_args_error(t_ast *node)
 {
-	if (!node->cmd.args[0])
+	if (node->cmd.args && !node->cmd.args[0])
+	{
 		free(node->cmd.args);
+		node->cmd.args = NULL;
+	}
 	clean_ast(node);
 	return (1);
 }

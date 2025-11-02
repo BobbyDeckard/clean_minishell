@@ -18,11 +18,11 @@ t_n_type		convert_types(t_t_type type);
 t_ast			*create_node(t_shell *shell, t_n_type type);
 char			*make_arg(t_shell *shell, t_ast *node, t_token *current);
 void			alloc_redir_args(t_shell *shell, t_ast *node, int count);
-void			parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int				count_redir_args(t_token *current);
 int				count_redirs(t_token **list, int start, int end);
 int				is_redir_arg(t_token *token);
 int				is_redir_token(t_t_type type);
+int				parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 
 static void	init_lone_redir_child(t_shell *shell, t_ast *node, t_n_type type)
 {
@@ -104,6 +104,9 @@ t_ast	*parse_lone_redirs(t_shell *shell, t_token**list, int start, int end)
 
 	count = count_redirs(list, start, end) + 1;
 	node = create_solo_redir_node(shell, count);
-	parse_redirs(shell, node, start, end);
+	if (!node)
+		return (NULL);
+	if (parse_redirs(shell, node, start, end))
+		return (NULL);
 	return (node);
 }

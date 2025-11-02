@@ -35,7 +35,10 @@ static t_ast	*create_cmd_node(t_shell *shell, int redirs)
 		return (node);
 	node->children = (t_ast **) malloc(redirs * sizeof(t_ast *));
 	if (!node->children)
-		malloc_error(shell->root, shell, shell->tokens);
+	{
+		free(node);
+		return (NULL);
+	}
 	i = -1;
 	while (++i < redirs)
 		node->children[i] = NULL;
@@ -115,7 +118,7 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	count = count_args(list, start, end);
 	if (init_cmd(node, count))
 		return (NULL);
-	else if (parse_args(shell, node, start, end))
+	if (parse_args(shell, node, start, end))
 		return (NULL);
 	return (node);
 }

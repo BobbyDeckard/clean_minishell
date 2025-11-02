@@ -15,12 +15,15 @@
 t_ast	*create_node(t_shell *shell, t_n_type type);
 void	clean_ast(t_ast *ast);
 
-t_token	*parse_redir_error(t_ast *node, int i)
+int	parse_redir_error(t_ast *node, int i)
 {
-	if (!node->children[i]->rdr.args[0])
+	if (node->children[i]->rdr.args && !node->children[i]->rdr.args[0])
+	{
 		free(node->children[i]->rdr.args);
+		node->children[i]->rdr.args = NULL;
+	}
 	clean_ast(node);
-	return (NULL);
+	return (1);
 }
 
 char	*extract_content(t_token *token)
@@ -50,19 +53,17 @@ char	*extract_content(t_token *token)
 	return (str);
 }
 
-static void	alloc_redir_args(t_shell *shell, t_ast *node, int count, int i)
+static int	alloc_redir_args(t_ast *node, int count, int i)
 {
 	char	**args;
 
 	args = (char **) malloc(count * sizeof(char *));
 	if (!args)
-	{
-		clean_ast(node);
-		malloc_error(shell->root, shell, shell->tokens);
-	}
+		return (1);
 	while (--count >= 0)
 		args[count] = NULL;
 	node->children[i]->rdr.args = args;
+	return (0);
 }
 
 static t_r_type	convert_rdr_type(t_n_type type)
@@ -88,12 +89,14 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 	node->children[i] = create_node(shell, type);
 	if (!node->children[i])
 	{
-		if (!i)
-			free(node->children);
 		clean_ast(node);
 		return (-1);
 	}
 	node->children[i]->rdr.type = convert_rdr_type(type);
-	alloc_redir_args(shell, node, count, i);
+	if (alloc_redir_args(node, count, i))
+	{
+		clean_ast(node);
+		return (-1);
+	}
 	return (i);
 }

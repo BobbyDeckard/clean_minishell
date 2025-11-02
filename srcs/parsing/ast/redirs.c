@@ -13,11 +13,11 @@
 #include "../../../incl/minishell.h"
 
 t_n_type	convert_types(t_t_type type);
-t_token		*parse_redir_error(t_ast *node, int i);
 t_token		*skip_spaces(t_token **list, int *start, int end);
 char		*extract_content(t_token *token);
 int			create_redir_node(t_shell *shell, t_ast *node, t_n_type type,
 				int count);
+int			parse_redir_error(t_ast *node, int i);
 
 int	is_redir_arg(t_token *token)
 {
@@ -60,7 +60,7 @@ int	count_redir_args(t_token *current)
 	return (count);
 }
 
-static t_token	*parse_redir(t_shell *shell, t_ast *node, t_token *current,
+static int	parse_redir(t_shell *shell, t_ast *node, t_token *current,
 int *start)
 {
 	t_t_type	type;
@@ -69,7 +69,7 @@ int *start)
 	int			j;
 
 	if (!current)
-		return (NULL);
+		return (1);
 	type = current->type;
 	current = current->next;
 	(*start)++;
@@ -77,7 +77,7 @@ int *start)
 	count = count_redir_args(current) + 1;
 	i = create_redir_node(shell, node, convert_types(type), count);
 	if (i == -1)
-		return (NULL);
+		return (1);
 	j = -1;
 	while (current && is_redir_arg(current))
 	{
@@ -87,7 +87,7 @@ int *start)
 		current = current->next;
 		(*start)++;
 	}
-	return (current);
+	return (0);
 }
 
 int	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
@@ -101,9 +101,9 @@ int	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 	{
 		if (is_redir_token(current->type))
 		{
-			current = parse_redir(shell, node, current, &start);
-			if (!current)
+			if (parse_redir(shell, node, current, &start))
 				return (1);
+			current = get_token_at_index(shell->tokens, start);
 		}
 		else
 		{

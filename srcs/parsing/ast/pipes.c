@@ -60,8 +60,6 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 		end++;
 	}
 	node->children[i] = parse_command(shell, shell->tokens, start, end);
-	if (!node->children[i])
-		return (-1);
 	while (current && !is_command_token(current->type))
 	{
 		current = current->next;
@@ -72,10 +70,7 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 
 static t_ast	*parse_pipe_error(t_ast *node)
 {
-	if (!node->children[0])
-		free(node->children);
 	clean_ast(node);
-	ft_putstr_fd("Unexpected error while parsing pipe\n", 2);
 	return (NULL);
 }
 
