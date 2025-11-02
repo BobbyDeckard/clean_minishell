@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 12:33:26 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:48:00 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:14:31 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	check_between_paren(t_token **list, int start, int end)
 	int		lvl;
 
 	lvl = 0;
-	//	Check start end condition
 	while (start <= end)
 	{
 		current = get_token_at_index(list, start);

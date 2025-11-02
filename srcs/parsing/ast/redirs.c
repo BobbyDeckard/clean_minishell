@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:45:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/20 16:40:05 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:15:07 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 	if (!node->children)
 		return ;
 	current = get_token_at_index(shell->tokens, start);
-	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))

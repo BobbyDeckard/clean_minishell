@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:22:30 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:49:40 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:14:49 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 	node = create_pipe_node(shell, count);
 	set_root(shell, node);
 	i = -1;
-	//	Make sure we really want start <= end and not start < end
 	while (++i + 1 < count && start <= end)
 	{
 		start = parse_pipe_command(shell, node, i, start);

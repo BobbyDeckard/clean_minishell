@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 13:58:32 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:59:43 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:14:19 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	find_op_precedence(t_token **list, int start, int end)
 	res = -1;
 	prec = 2147483647;
 	lvl = 0;
-	//	Check start end condition
 	while (start <= end)
 	{
 		current = get_token_at_index(list, start);

@@ -72,6 +72,7 @@ XPDR_FILES = args_parsing.c \
 			 expand_double.c \
 			 expander.c \
 			 expander_utils.c \
+			 get_len.c \
 			 get_name.c \
 			 spaces.c \
 			 spaces_utils.c
@@ -96,6 +97,7 @@ RDRS_FILES = redirs.c \
 			 redirs_expand_double.c \
 			 redirs_expander.c \
 			 redirs_expander_utils.c \
+			 redirs_get_len.c \
 			 redirs_utils.c
 
 XUTL = $(addprefix utils/, $(XUTL_FILES))

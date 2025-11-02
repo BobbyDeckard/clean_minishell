@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 16:30:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/28 16:30:49 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:15:15 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	count_redirs(t_token **list, int start, int end)
 
 	count = 0;
 	current = get_token_at_index(list, start);
-	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 16:05:58 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/30 16:48:22 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:04:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	count_args(t_cmd *cmd)
 	while (cmd->args[i])
 	{
 		if (is_whitespace(cmd->args[i]))
-	  		i = skip_whitespaces(cmd, i);
+			i = skip_whitespaces(cmd, i);
 		else
 		{
 			count++;

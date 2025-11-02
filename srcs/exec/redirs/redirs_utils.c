@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 16:39:49 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 23:54:33 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:12:59 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	make_file_name(t_ast *node)
 		ft_strlcat(file, node->rdr.args[i], len);
 	node->rdr.file = file;
 }
-
 
 void	close_redirs(t_cmd *cmd)
 {

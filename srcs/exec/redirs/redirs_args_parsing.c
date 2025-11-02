@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 22:29:18 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 22:50:15 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:08:30 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,7 @@
 
 void	free_char_array(char **arr);
 void	free_char_array_size(char **arr, int i);
-
-static int	get_double_len(t_rdr *rdr, int i, int *ptr)
-{
-	int	len;
-
-	len = *ptr;
-	while (rdr->args[i] && ft_strncmp(rdr->args[i], "\"", 2))
-		len += ft_strlen(rdr->args[i++]);
-	if (rdr->args[i])
-		i++;
-	*ptr = len;
-	return (i);
-}
-
-static int	get_single_len(t_rdr *rdr, int i, int *ptr)
-{
-	int	len;
-
-	len = *ptr;
-	while (rdr->args[i] && ft_strncmp(rdr->args[i], "'", 2))
-		len += ft_strlen(rdr->args[i++]);
-	if (rdr->args[i])
-		i++;
-	*ptr = len;
-	return (i);
-}
-
-static int	get_len(t_rdr *rdr, int i)
-{
-	int	len;
-
-	len = 0;
-	while (rdr->args[i])
-	{
-		if (!ft_strncmp(rdr->args[i], "\"", 2))
-			i = get_double_len(rdr, ++i, &len);
-		else if (!ft_strncmp(rdr->args[i], "'", 2))
-			i = get_single_len(rdr, ++i, &len);
-		else
-			len += ft_strlen(rdr->args[i++]);
-	}
-	return (len);
-}
+int		rdr_get_len(t_rdr *rdr, int i);
 
 static int	cat_double(t_rdr *rdr, int i, char *arg, int len)
 {
@@ -83,7 +41,7 @@ static char	*cat_arg(t_rdr *rdr, int *index)
 	int		i;
 
 	i = *index;
-	len = get_len(rdr, i) + 1;
+	len = rdr_get_len(rdr, i) + 1;
 	arg = (char *) ft_calloc(len, sizeof(char));
 	if (!arg)
 		return (NULL);

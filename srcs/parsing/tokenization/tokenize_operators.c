@@ -6,13 +6,12 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:09:35 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 18:12:25 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:15:56 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../incl/tokenization.h"
 
-#include <stdio.h>
 t_token	*tokenize_or(char **command, t_token *token)
 {
 	token->type = OR;

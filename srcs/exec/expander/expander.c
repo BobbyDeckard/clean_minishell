@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/30 12:12:02 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/31 22:22:56 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:06:01 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,20 +122,8 @@ void	expander(t_ast *node, t_cmd *cmd)
 	char	**args;
 	int		count;
 
-//	printf("\nArgs before expansion:\n");
-//	int j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	expand(node, cmd);
-//	printf("\nArgs after expansion:\n");
-//	j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 	count = count_args(cmd);
 	args = init_args(node, count + 1);
 	make_args(node, cmd, args, count);
-//	printf("\nArgs after cat:\n");
-//	j = -1;
-//	while (cmd->args[++j])
-//		printf("arg[%d]: '%s'\n", j, cmd->args[j]);
 }

@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 07:50:48 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/16 11:44:57 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:14:06 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int end)
 	alloc_redir_args(shell, node, count);
 	i = -1;
 	current = current->next;
-	//	Check start end condition
 	while (current && is_redir_arg(current) && start <= end)
 	{
 		node->rdr.args[++i] = make_arg(shell, node, current);

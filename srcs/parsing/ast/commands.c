@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:21:28 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:57:06 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:04:45 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ static int	count_args(t_token **list, int start, int end)
 
 	count = 0;
 	current = get_token_at_index(list, start);
-	//	Check start end condition
 	while (current && current->type == WHITESPACE && start <= end)
 	{
 		current = current->next;
 		start++;
 	}
-	//	Check start end condition
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
@@ -100,7 +98,6 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	t_ast	*node;
 	int		count;
 
-//	printf("\nIn parse command for sequence %d-%d\n", start, end);
 	if (is_lone_redir(list, start, end))
 		return (parse_lone_redirs(shell, list, start, end));
 	count = count_redirs(list, start, end) + 1;
