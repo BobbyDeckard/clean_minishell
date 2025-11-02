@@ -14,6 +14,7 @@
 
 t_ast	*create_node(t_shell *shell, t_n_type type);
 t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end);
+void	clean_ast(t_ast *ast);
 void	parse_args(t_shell *shell, t_ast *node, int start, int end);
 void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int		count_redirs(t_token **list, int start, int end);
@@ -87,7 +88,10 @@ static void	init_cmd(t_shell *shell, t_ast *node, int count)
 		return ;
 	node->cmd.args = (char **) malloc((count + 1) * sizeof(char *));
 	if (!node->cmd.args)
+	{
+		clean_ast(node);
 		malloc_error(shell->root, shell, shell->tokens);
+	}
 	i = -1;
 	while (++i <= count)
 		node->cmd.args[i] = NULL;
