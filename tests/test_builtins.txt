@@ -4,6 +4,7 @@ cd ..
 cd subdir/
 pwd
 cd ".."
+rm -r subdir && echo subdir removed && pwd
 export MINISHELL_DIR=$PWD
 cd $HOME
 pwd
@@ -13,12 +14,13 @@ cd -
 pwd
 cd .
 pwd
-cd dir1 dir2 && echo ok || echo fail
+cd dir1 dir2 && echo ok || echo fail
 cd && pwd $PWD
 cd /usr/bin
 pwd
 cd $MINISHELL_DIR
 pwd
+export PATH_BACKUP=$PATH
 unset PATH && cd /usr/bin && echo ok || echo fail
 cd $MINISHELL_DIR && pwd
 unset OLDPWD
@@ -26,6 +28,7 @@ cd -
 echo $?
 unset HOME
 cd
+export PATH=$PATH_BACKUP && unset PATH_BACKUP
 echo
 echo -n nonewline
 echo -nnnnnnnnnnnnnnnnn nonewline
