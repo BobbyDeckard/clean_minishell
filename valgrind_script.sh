@@ -7,6 +7,7 @@ echo "	5. Quotes"
 echo "	6. Syntax"
 echo "	7. Parsing"
 echo "	8. Mix"
+echo "	9. New tests"
 echo -n "Please select what you want to test: "
 read option
 echo -n "Do you want to check diff with bash ? (y/n): "
@@ -36,6 +37,9 @@ elif [ $option = "7" ]; then
 elif [ $option = "8" ]; then
 	filename+=mix.txt
 	test=mix
+elif [ $option = "9" ]; then
+	filename+=new_tests.txt
+	test=new
 fi
 echo
 echo Starting tests.
