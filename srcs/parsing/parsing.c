@@ -99,6 +99,6 @@ t_ast	*parse(char *command, t_shell *shell)
 	shell->tokens = list;
 //	print_token_list(list);
 	ast = create_ast(shell, list);
-///	print_tree(ast);
+//	print_tree(ast);
 	return (ast);
 }
