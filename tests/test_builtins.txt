@@ -1,24 +1,66 @@
-echo hello
-echo hello world
-echo -n hello
-echo world
+mkdir subdir && cd subdir
 pwd
-cd /
 cd ..
-cd
-cd /doesnotexist
+cd subdir/
+pwd
+cd ".."
+export MINISHELL_DIR=$PWD
+cd $HOME
+pwd
+cd $MINISHELL_DIR
+pwd
 cd -
+pwd
+cd .
+pwd
+cd dir1 dir2 && echo ok || echo fail
+cd && pwd $PWD
+cd /usr/bin
+pwd
+cd $MINISHELL_DIR
+pwd
+unset PATH && cd /usr/bin && echo ok || echo fail
+cd $MINISHELL_DIR && pwd
 unset OLDPWD
 cd -
-export OLDPWD
-cd ..
+echo $?
 unset HOME
 cd
-export VAR=42
-export
-echo $VAR
-unset VAR
-echo $VAR
-env
-exit hello
+echo
+echo -n nonewline
+echo -nnnnnnnnnnnnnnnnn nonewline
+echo -newline
+echo -n ""
+echo "-n" hello
+echo '-n' hello
+echo '-n'nnnnnn hello
+minishell
+exit
+echo $?
+minishell
 exit 42
+echo $?
+minishell
+exit hello
+echo $?
+minishell
+exit hello there
+echo $?
+exit 123 123 || echo fail
+minishell
+exit 256
+echo $?
+export
+export TEST
+env | grep TEST || echo no TEST in env
+export TEST=test
+export | grep TEST
+unset
+echo $?
+unset NONEXISTENT
+echo $?
+unset TEST
+echo $?
+export TEST1=1 TEST2=2
+export | grep TEST
+unset TEST1 TEST2
