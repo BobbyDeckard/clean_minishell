@@ -46,9 +46,11 @@ static void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
+	{
+		if (spaces)
+			free(entry);
 		malloc_error(node, node->shell, NULL);
-	//	BEWARE, calling malloc_error here would not free everything...
-	//	args would leak
+	}
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);

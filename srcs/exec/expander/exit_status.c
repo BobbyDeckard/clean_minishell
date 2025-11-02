@@ -40,7 +40,6 @@ void	expand_exit_status(t_ast *node, t_cmd *cmd, int index)
 	{
 		free(status);
 		malloc_error(node, node->shell, NULL);
-		//	Better protection...
 	}
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, status, len);
@@ -69,7 +68,6 @@ void	rdr_expand_exit_status(t_ast *node, t_rdr *rdr, int index)
 	{
 		free(status);
 		malloc_error(node, node->shell, NULL);
-		//	Need better protection...
 	}
 	ft_strlcpy(new, rdr->args[index], i + 1);
 	ft_strlcat(new, status, len);
