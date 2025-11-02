@@ -82,23 +82,35 @@ void	clean_ast(t_ast *ast)
 	{
 		i = -1;
 		while (ast->children[++i])
+		{
 			clean_ast(ast->children[i]);
+			ast->children[i] = NULL;
+		}
 		free(ast->children);
+		ast->children = NULL;
 	}
 	if (ast->cmd.args)
 	{
 		clean_args(ast->cmd.args);
 		free(ast->cmd.args);
+		ast->cmd.args = NULL;
 	}
 	if (ast->cmd.path)
+	{
 		free(ast->cmd.path);
+		ast->cmd.path = NULL;
+	}
 	if (ast->rdr.args)
 	{
 		clean_args(ast->rdr.args);
 		free(ast->rdr.args);
+		ast->rdr.args = NULL;
 	}
 	if (ast->rdr.file)
+	{
 		free(ast->rdr.file);
+		ast->rdr.file = NULL;
+	}
 	free(ast);
 }
 

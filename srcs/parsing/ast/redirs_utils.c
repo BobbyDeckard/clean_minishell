@@ -15,12 +15,12 @@
 t_ast	*create_node(t_shell *shell, t_n_type type);
 void	clean_ast(t_ast *ast);
 
-void	parse_redir_error(t_shell *shell, t_ast *node, int i)
+t_token	*parse_redir_error(t_shell *shell, t_ast *node, int i)
 {
 	if (!node->children[i]->rdr.args[0])
 		free(node->children[i]->rdr.args);
 	clean_ast(node);
-	malloc_error(shell->root, shell, shell->tokens);
+	return (NULL);
 }
 
 char	*extract_content(t_token *token)
@@ -91,7 +91,7 @@ int	create_redir_node(t_shell *shell, t_ast *node, t_n_type type, int count)
 		if (!i)
 			free(node->children);
 		clean_ast(node);
-		malloc_error(shell->root, shell, shell->tokens);
+		return (-1);
 	}
 	node->children[i]->rdr.type = convert_rdr_type(type);
 	alloc_redir_args(shell, node, count, i);

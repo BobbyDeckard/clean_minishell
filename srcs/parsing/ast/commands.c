@@ -15,12 +15,12 @@
 t_ast	*create_node(t_shell *shell, t_n_type type);
 t_ast	*parse_lone_redirs(t_shell *shell, t_token **list, int start, int end);
 void	clean_ast(t_ast *ast);
-void	parse_args(t_shell *shell, t_ast *node, int start, int end);
-void	parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 int		count_redirs(t_token **list, int start, int end);
 int		is_lone_redir(t_token **list, int start, int end);
 int		is_redir_arg(t_token *token);
 int		is_redir_token(t_t_type type);
+int		parse_args(t_shell *shell, t_ast *node, int start, int end);
+int		parse_redirs(t_shell *shell, t_ast *node, int start, int end);
 
 static t_ast	*create_cmd_node(t_shell *shell, int redirs)
 {
@@ -29,7 +29,7 @@ static t_ast	*create_cmd_node(t_shell *shell, int redirs)
 
 	node = create_node(shell, NODE_CMD);
 	if (!node)
-		malloc_error(shell->root, shell, shell->tokens);
+		return (NULL);
 	set_root(shell, node);
 	if (redirs == 1)
 		return (node);
@@ -80,21 +80,22 @@ static int	count_args(t_token **list, int start, int end)
 	return (count);
 }
 
-static void	init_cmd(t_shell *shell, t_ast *node, int count)
+static int	init_cmd(t_shell *shell, t_ast *node, int count)
 {
 	int	i;
 
 	if (!count)
-		return ;
+		return (1);
 	node->cmd.args = (char **) malloc((count + 1) * sizeof(char *));
 	if (!node->cmd.args)
 	{
 		clean_ast(node);
-		malloc_error(shell->root, shell, shell->tokens);
+		return (1);
 	}
 	i = -1;
 	while (++i <= count)
 		node->cmd.args[i] = NULL;
+	return (0);
 }
 
 t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
@@ -106,10 +107,15 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 		return (parse_lone_redirs(shell, list, start, end));
 	count = count_redirs(list, start, end) + 1;
 	node = create_cmd_node(shell, count);
+	if (!node)
+		return (NULL);
 	set_root(shell, node);
-	parse_redirs(shell, node, start, end);
+	if (parse_redirs(shell, node, start, end))
+		return (NULL);
 	count = count_args(list, start, end);
-	init_cmd(shell, node, count);
-	parse_args(shell, node, start, end);
+	if (init_cmd(shell, node, count))
+		return (NULL);
+	else if (parse_args(shell, node, start, end))
+		return (NULL);
 	return (node);
 }

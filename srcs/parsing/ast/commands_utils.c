@@ -43,11 +43,12 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 	return (0);
 }
 
-static void	parse_args_error(t_shell *shell, t_ast *node)
+static int	parse_args_error(t_shell *shell, t_ast *node)
 {
 	if (!node->cmd.args[0])
 		free(node->cmd.args);
-	malloc_error(shell->root, shell, shell->tokens);
+	clean_ast(node);
+	return (1);
 }
 
 t_token	*skip_spaces(t_token **list, int *start, int end)
@@ -63,7 +64,7 @@ t_token	*skip_spaces(t_token **list, int *start, int end)
 	return (current);
 }
 
-void	parse_args(t_shell *shell, t_ast *node, int start, int end)
+int	parse_args(t_shell *shell, t_ast *node, int start, int end)
 {
 	t_token	*current;
 	int		i;
@@ -77,7 +78,7 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 		else if (is_arg_token(current->type))
 		{
 			if (parse_arg(node, current, ++i))
-				parse_args_error(shell, node);
+				return (parse_args_error(shell, node));
 			current = current->next;
 			start++;
 		}
@@ -87,4 +88,5 @@ void	parse_args(t_shell *shell, t_ast *node, int start, int end)
 			start++;
 		}
 	}
+	return (0);
 }

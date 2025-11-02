@@ -72,11 +72,14 @@ static t_ast	*create_op_node(t_shell *shell, t_n_type type)
 
 	node = create_node(shell, type);
 	if (!node)
-		malloc_error(shell->root, shell, shell->tokens);
+		return (NULL);
 	set_root(shell, node);
 	node->children = (t_ast **) malloc(3 * sizeof(t_ast *));
 	if (!node->children)
-		malloc_error(shell->root, shell, shell->tokens);
+	{
+		free(node);
+		return (NULL);
+	}
 	node->children[0] = NULL;
 	node->children[1] = NULL;
 	node->children[2] = NULL;
@@ -96,9 +99,21 @@ t_ast	*parse_operator(t_shell *shell, int start, int end, int operator)
 		return (parse_pipe(shell, shell->tokens, start, end));
 	type = convert_types(current->type);
 	node = create_op_node(shell, type);
+	if (!node)
+		return (NULL);
 	set_root(shell, node);
 	node->children[0] = parse_sequence(shell, shell->tokens, start,
 			operator - 1);
+	if (!node->children[0])
+	{
+		clean_ast(node);
+		return (NULL);
+	}
 	node->children[1] = parse_sequence(shell, shell->tokens, operator + 1, end);
+	if (!node->children[1])
+	{
+		clean_ast(node);
+		return (NULL);
+	}
 	return (node);
 }

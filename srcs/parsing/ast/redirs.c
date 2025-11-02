@@ -76,33 +76,40 @@ int *start)
 	current = skip_spaces(shell->tokens, start, 2147483647);
 	count = count_redir_args(current) + 1;
 	i = create_redir_node(shell, node, convert_types(type), count);
+	if (i == -1)
+		return (NULL);
 	j = -1;
 	while (current && is_redir_arg(current))
 	{
 		node->children[i]->rdr.args[++j] = extract_content(current);
 		if (!node->children[i]->rdr.args[j])
-			parse_redir_error(shell, node, i);
+			return (parse_redir_error(shell, node, i));
 		current = current->next;
 		(*start)++;
 	}
 	return (current);
 }
 
-void	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
+int	parse_redirs(t_shell *shell, t_ast *node, int start, int end)
 {
 	t_token	*current;
 
 	if (!node->children)
-		return ;
+		return (0);
 	current = get_token_at_index(shell->tokens, start);
 	while (current && start <= end)
 	{
 		if (is_redir_token(current->type))
+		{
 			current = parse_redir(shell, node, current, &start);
+			if (!current)
+				return (1);
+		}
 		else
 		{
 			current = current->next;
 			start++;
 		}
 	}
+	return (0);
 }
