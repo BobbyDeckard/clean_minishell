@@ -26,11 +26,14 @@ static t_ast	*create_pipe_node(t_shell *shell, int count)
 
 	node = create_node(shell, NODE_PIPE);
 	if (!node)
-		malloc_error(shell->root, shell, shell->tokens);
+		return (NULL);
 	set_root(shell, node);
 	node->children = (t_ast **) malloc(count * sizeof(t_ast *));
 	if (!node->children)
-		malloc_error(shell->root, shell, shell->tokens);
+	{
+		free(node);
+		return (NULL);
+	}
 	i = -1;
 	while (++i < count)
 		node->children[i] = NULL;
@@ -57,6 +60,8 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 		end++;
 	}
 	node->children[i] = parse_command(shell, shell->tokens, start, end);
+	if (!node->children[i])
+		return (-1);
 	while (current && !is_command_token(current->type))
 	{
 		current = current->next;
@@ -65,13 +70,13 @@ static int	parse_pipe_command(t_shell *shell, t_ast *node, int i, int start)
 	return (end - 1);
 }
 
-static void	parse_pipe_error(t_shell *shell, t_ast *node)
+static t_ast	*parse_pipe_error(t_ast *node)
 {
 	if (!node->children[0])
 		free(node->children);
 	clean_ast(node);
 	ft_putstr_fd("Unexpected error while parsing pipe\n", 2);
-	cleanup(shell->root);
+	return (NULL);
 }
 
 t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
@@ -84,13 +89,15 @@ t_ast	*parse_pipe(t_shell *shell, t_token **list, int start, int end)
 	if (!count)
 		return (NULL);
 	node = create_pipe_node(shell, count);
+	if (!node)
+		return (NULL);
 	set_root(shell, node);
 	i = -1;
 	while (++i + 1 < count && start <= end)
 	{
 		start = parse_pipe_command(shell, node, i, start);
 		if (start == -1)
-			parse_pipe_error(shell, node);
+			return (parse_pipe_error(node));
 	}
 	return (node);
 }

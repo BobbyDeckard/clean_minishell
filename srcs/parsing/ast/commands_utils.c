@@ -13,6 +13,7 @@
 #include "../../../incl/minishell.h"
 
 t_token	*skip_redir(t_token **list, int *start, int end);
+void	clean_ast(t_ast *ast);
 int		is_redir_token(t_t_type type);
 
 int	is_arg_token(t_t_type type)
@@ -43,7 +44,7 @@ static int	parse_arg(t_ast *node, t_token *current, int i)
 	return (0);
 }
 
-static int	parse_args_error(t_shell *shell, t_ast *node)
+static int	parse_args_error(t_ast *node)
 {
 	if (!node->cmd.args[0])
 		free(node->cmd.args);
@@ -78,7 +79,7 @@ int	parse_args(t_shell *shell, t_ast *node, int start, int end)
 		else if (is_arg_token(current->type))
 		{
 			if (parse_arg(node, current, ++i))
-				return (parse_args_error(shell, node));
+				return (parse_args_error(node));
 			current = current->next;
 			start++;
 		}

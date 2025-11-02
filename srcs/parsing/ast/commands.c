@@ -80,7 +80,7 @@ static int	count_args(t_token **list, int start, int end)
 	return (count);
 }
 
-static int	init_cmd(t_shell *shell, t_ast *node, int count)
+static int	init_cmd(t_ast *node, int count)
 {
 	int	i;
 
@@ -113,7 +113,7 @@ t_ast	*parse_command(t_shell *shell, t_token **list, int start, int end)
 	if (parse_redirs(shell, node, start, end))
 		return (NULL);
 	count = count_args(list, start, end);
-	if (init_cmd(shell, node, count))
+	if (init_cmd(node, count))
 		return (NULL);
 	else if (parse_args(shell, node, start, end))
 		return (NULL);

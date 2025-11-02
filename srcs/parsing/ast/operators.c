@@ -17,6 +17,7 @@ t_ast		*create_node(t_shell *shell, t_n_type type);
 t_ast		*parse_command(t_shell *shell, t_token **list, int start, int end);
 t_ast		*parse_pipe(t_shell *shell, t_token **list, int start, int end);
 t_ast		*parse_sequence(t_shell *shell, t_token **list, int start, int end);
+void		clean_ast(t_ast *ast);
 
 static int	get_op_precedence(t_t_type type)
 {
