@@ -42,3 +42,14 @@ void	env_cpy_malloc_error(char **env_cpy, int i)
 	free(env_cpy);
 	malloc_error(NULL, NULL, NULL);
 }
+
+void	level_error(char **env_cpy)
+{
+	int	i;
+
+	i = -1;
+	while (env_cpy[++i])
+		free(env_cpy[i]);
+	free(env_cpy);
+	malloc_error(NULL, NULL, NULL);
+}

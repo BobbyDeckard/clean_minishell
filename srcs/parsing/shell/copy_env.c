@@ -14,6 +14,7 @@
 
 char	**create_env_cpy(void);
 void	env_cpy_malloc_error(char **env_cpy, int i);
+void	level_error(char **env_cpy);
 void	set_shlvl_malloc_error(char **env_cpy, int i);
 
 static int	count_digits(int lvl)
@@ -49,6 +50,8 @@ static void	set_shlvl(char **env_cpy)
 				set_shlvl_malloc_error(env_cpy, i);
 			ft_strlcpy(env_cpy[i], "SHLVL=", len);
 			level = ft_itoa(lvl);
+			if (!level)
+				level_error(env_cpy);
 			ft_strlcat(env_cpy[i], level, len);
 			free(level);
 		}
@@ -72,9 +75,11 @@ static char	**init_env_cpy(char **envp, int entries)
 	int		len;
 	int		i;
 
-	env_cpy = (char **) malloc((entries + 1) * sizeof(char *));
+	env_cpy = (char **) malloc(++entries * sizeof(char *));
 	if (!env_cpy)
 		malloc_error(NULL, NULL, NULL);
+	while (--entries >= 0)
+		env_cpy[entries] = NULL;
 	i = -1;
 	while (envp[++i])
 	{

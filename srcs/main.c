@@ -6,7 +6,7 @@
 /*   By: imeulema <imeulema@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 18:31:12 by imeulema          #+#    #+#             */
-/*   Updated: 2025/10/21 17:47:30 by imeulema         ###   ########.fr       */
+/*   Updated: 2025/11/02 15:46:21 by imeulema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ int	main(int ac, char **av, char **envp)
 	t_shell	shell;
 	char	*command;
 
-	if (ac != 1)
+	if (ac != 1 || !av)
 	{
 		ft_putstr_fd("Minishell doesn't take any argument.\n", 2);
 		return (1);
 	}
-	(void) av;
 	shell = init_shell(envp);
 	while (1)
 	{
@@ -78,5 +77,6 @@ int	main(int ac, char **av, char **envp)
 		free(command);
 		shell.command = NULL;
 	}
+	rl_clear_history();
 	return (clean_shell(&shell));
 }

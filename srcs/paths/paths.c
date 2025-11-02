@@ -13,6 +13,7 @@
 #include "../../incl/minishell.h"
 
 char	**ft_split_paths(t_shell *shell, const char *s, char c);
+int		clean_shell(t_shell *shell);
 
 void	update_paths(t_ast *node, t_shell *shell, const char *arg)
 {
@@ -41,6 +42,12 @@ char	**get_paths(t_shell *shell)
 	char	*all_paths;
 
 	all_paths = getenv("PATH");
+	if (!all_paths)
+	{
+		perror("getenv");
+		clean_shell(shell);
+		return (NULL);
+	}
 	paths = ft_split_paths(shell, all_paths, ':');
 	return (paths);
 }
