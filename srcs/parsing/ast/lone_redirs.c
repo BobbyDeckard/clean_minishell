@@ -79,7 +79,6 @@ int start, int end)
 static t_ast	*create_solo_redir_node(t_shell *shell, int redirs)
 {
 	t_ast	*node;
-	int		i;
 
 	node = create_node(shell, NODE_SOLO_REDIR);
 	if (!node)
@@ -89,10 +88,12 @@ static t_ast	*create_solo_redir_node(t_shell *shell, int redirs)
 		return (node);
 	node->children = (t_ast **) malloc(redirs * sizeof(t_ast *));
 	if (!node->children)
+	{
+		free(node);
 		malloc_error(shell->root, shell, shell->tokens);
-	i = -1;
-	while (++i < redirs)
-		node->children[i] = NULL;
+	}
+	while (--redirs >= 0)
+		node->children[redirs] = NULL;
 	return (node);
 }
 
@@ -103,7 +104,6 @@ t_ast	*parse_lone_redirs(t_shell *shell, t_token**list, int start, int end)
 
 	count = count_redirs(list, start, end) + 1;
 	node = create_solo_redir_node(shell, count);
-	set_root(shell, node);
 	parse_redirs(shell, node, start, end);
 	return (node);
 }
