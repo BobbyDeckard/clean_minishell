@@ -166,6 +166,7 @@ SIGS_FILES = setup_execution.c \
 UTLS = $(addprefix utils/, $(UTLS_FILES))
 UTLS_FILES = char_arr.c \
 			 cleanup.c \
+			 clean_children.c \
 			 errors.c \
 			 read_command.c \
 			 utils.c

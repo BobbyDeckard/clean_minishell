@@ -106,15 +106,9 @@ t_ast	*parse_operator(t_shell *shell, int start, int end, int operator)
 	node->children[0] = parse_sequence(shell, shell->tokens, start,
 			operator - 1);
 	if (!node->children[0])
-	{
-		clean_ast(node);
-		return (NULL);
-	}
+		return (clean_ast(node), NULL);
 	node->children[1] = parse_sequence(shell, shell->tokens, operator + 1, end);
 	if (!node->children[1])
-	{
-		clean_ast(node);
-		return (NULL);
-	}
+		return (clean_ast(node), NULL);
 	return (node);
 }

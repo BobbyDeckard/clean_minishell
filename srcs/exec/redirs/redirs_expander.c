@@ -15,14 +15,15 @@
 char	**init_args(t_ast *node, int count);
 char	*filter_spaces(t_ast *node, char *entry);
 char	*get_name(t_ast *node, const char *str);
+void	handle_var_error(t_ast *node, char *entry, int spaces);
 void	rdr_expand_exit_status(t_ast *node, t_rdr *rdr, int index);
-int		rdr_expand_in_double(t_ast *node, t_rdr *rdr, int i);
 void	rdr_make_args(t_ast *node, t_rdr *rdr, char **args, int count);
 int		contains_contig_spaces(const char *str);
 int		contains_dol(const char *str);
 int		get_name_len(const char *str);
 int		is_exit_status(const char *str);
 int		rdr_count_args(t_rdr *rdr);
+int		rdr_expand_in_double(t_ast *node, t_rdr *rdr, int i);
 int		rdr_skip_single(t_rdr *rdr, int i);
 
 static void	handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
@@ -43,8 +44,7 @@ static void	handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 	len = ft_strlen(rdr->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
-		malloc_error(node, node->shell, NULL);
-	//	Need to protect this malloc more efficiently
+		handle_var_error(node, entry, spaces);
 	ft_strlcpy(new, rdr->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, rdr->args[index] + i + name_len, len);

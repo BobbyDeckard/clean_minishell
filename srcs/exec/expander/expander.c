@@ -17,6 +17,7 @@ char	*filter_spaces(t_ast *node, char *entry);
 char	*get_name(t_ast *node, const char *str);
 void	expand_exit_status(t_ast *node, t_cmd *cmd, int index);
 void	free_char_array(char **arr);
+void	handle_var_error(t_ast *node, char *entry, int spaces);
 void	make_args(t_ast *node, t_cmd *cmd, char **args, int count);
 int		contains_contig_spaces(const char *str);
 int		contains_dol(const char *str);
@@ -46,11 +47,7 @@ static void	handle_var(t_ast *node, t_cmd *cmd, char *entry, int index)
 	len = ft_strlen(cmd->args[index]) + ft_strlen(entry) - name_len + 1;
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
-	{
-		if (spaces)
-			free(entry);
-		malloc_error(node, node->shell, NULL);
-	}
+		handle_var_error(node, entry, spaces);
 	ft_strlcpy(new, cmd->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, cmd->args[index] + i + name_len, len);

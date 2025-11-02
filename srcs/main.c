@@ -66,7 +66,6 @@ int	main(int ac, char **av, char **envp)
 	{
 		setup_interactive_signals(&shell);
 		command = read_command(&shell);
-//		command = readline("minishell$ ");
 		if (!command)
 		{
 			ft_putstr_fd("exit\n", 1);

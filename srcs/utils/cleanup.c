@@ -12,6 +12,8 @@
 
 #include "../../incl/minishell.h"
 
+void	clean_children(t_ast *ast);
+void	clean_redirs(t_ast *ast);
 void	close_all_redirs(t_ast *node);
 
 void	clean_tokens(t_token **list)
@@ -61,7 +63,7 @@ int	clean_shell(t_shell *shell)
 	return (shell->exit_status);
 }
 
-static void	clean_args(char **args)
+void	clean_args(char **args)
 {
 	int	i;
 
@@ -75,20 +77,9 @@ static void	clean_args(char **args)
 
 void	clean_ast(t_ast *ast)
 {
-	int	i;
-
 	close_all_redirs(ast);
 	if (ast->children)
-	{
-		i = -1;
-		while (ast->children[++i])
-		{
-			clean_ast(ast->children[i]);
-			ast->children[i] = NULL;
-		}
-		free(ast->children);
-		ast->children = NULL;
-	}
+		clean_children(ast);
 	if (ast->cmd.args)
 	{
 		clean_args(ast->cmd.args);
@@ -100,17 +91,7 @@ void	clean_ast(t_ast *ast)
 		free(ast->cmd.path);
 		ast->cmd.path = NULL;
 	}
-	if (ast->rdr.args)
-	{
-		clean_args(ast->rdr.args);
-		free(ast->rdr.args);
-		ast->rdr.args = NULL;
-	}
-	if (ast->rdr.file)
-	{
-		free(ast->rdr.file);
-		ast->rdr.file = NULL;
-	}
+	clean_redirs(ast);
 	free(ast);
 }
 

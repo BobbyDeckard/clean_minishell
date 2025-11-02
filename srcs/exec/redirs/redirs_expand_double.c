@@ -33,7 +33,6 @@ static void	handle_var(t_ast *node, t_rdr *rdr, char *entry, int index)
 	new = (char *) ft_calloc(len, sizeof(char));
 	if (!new)
 		malloc_error(node, node->shell, NULL);
-	//	Better protection needed....
 	ft_strlcpy(new, rdr->args[index], i + 1);
 	ft_strlcat(new, entry, len);
 	ft_strlcat(new, rdr->args[index] + i + name_len, len);
@@ -67,7 +66,7 @@ static void	expand_var(t_ast *node, t_rdr *rdr, char *name, int index)
 static void	expand_arg(t_ast *node, t_rdr *rdr, int i)
 {
 	char	*name;
-	
+
 	while (contains_dol(rdr->args[i]))
 	{
 		if (is_exit_status(rdr->args[i]))

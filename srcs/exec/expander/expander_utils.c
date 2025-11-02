@@ -35,3 +35,10 @@ int	is_whitespace(const char *str)
 		return (1);
 	return (0);
 }
+
+void	handle_var_error(t_ast *node, char *entry, int spaces)
+{
+	if (spaces)
+		free(entry);
+	malloc_error(node, node->shell, NULL);
+}
